@@ -1,0 +1,138 @@
+﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Đăng Nhập" Height="580" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+    <Window.Resources>
+        <!-- Style cho TextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="5" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho PasswordBox -->
+        <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border CornerRadius="5" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,20"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#0078D4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005EA6"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#004080"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   Text="Hệ Thống Quản Lý Y Tế Học Đường" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center"
+                   Margin="0,20,0,40"/>
+
+        <!-- Form Đăng Nhập -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                CornerRadius="10"
+                Width="300"
+                Padding="20"
+                VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Đăng Nhập" 
+                           FontSize="20" 
+                           FontWeight="SemiBold" 
+                           Margin="0,0,0,20"/>
+
+                <TextBlock Text="Tên Người Dùng" 
+                           FontSize="12" 
+                           Margin="0,0,0,5"/>
+                <TextBox Style="{StaticResource ModernTextBox}"
+                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Text="Mật Khẩu" 
+                           FontSize="12" 
+                           Margin="0,10,0,5"/>
+                <PasswordBox x:Name="PasswordBox"
+                             Style="{StaticResource ModernPasswordBox}"
+                             PasswordChanged="PasswordBox_PasswordChanged"/>
+
+                <TextBlock Text="{Binding ErrorMessage}" 
+                           Foreground="Red" 
+                           FontSize="12" 
+                           Margin="0,10,0,0"/>
+
+                <Button Content="Đăng Nhập" 
+                        Style="{StaticResource ModernButton}"
+                        Command="{Binding LoginCommand}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
