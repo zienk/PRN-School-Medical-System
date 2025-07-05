@@ -1,0 +1,49 @@
+﻿<Page x:Class="WPF.SchoolMedicalManagementSystem.Pages.Nurse.UserManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converters="clr-namespace:WPF.SchoolMedicalManagementSystem.Pages.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="Quản lý tài khoản người dùng">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Quản lý Tài khoản Người dùng" FontSize="22" FontWeight="Bold" Margin="10"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="10,0">
+            <Button Content="Thêm người dùng mới" Margin="5,0" Click="AddUser_Click"/>
+            <Button Content="Tìm kiếm" Margin="5,0" Click="SearchUser_Click"/>
+            <TextBox Width="200" Margin="5,0" x:Name="txtSearchUser"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" x:Name="dgUsers" AutoGenerateColumns="False" IsReadOnly="True" 
+                  Margin="10" SelectionChanged="DgUsers_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding Username}" Width="150"/>
+                <DataGridTextColumn Header="Họ và tên" Binding="{Binding FullName}" Width="*"/>
+                <DataGridTextColumn Header="Vai trò" Binding="{Binding Role.RoleName}" Width="100"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}" Width="120"/>
+                <DataGridTextColumn Header="Trạng thái" Binding="{Binding IsActive, Converter={StaticResource BoolToStatusConverter}}" Width="80"/>
+                <DataGridTemplateColumn Header="Thao tác">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Sửa" Margin="2" Click="EditUser_Click"/>
+                                <Button Content="Vô hiệu hóa/Kích hoạt" Margin="2" Click="ToggleUserStatus_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    <Page.Resources>
+        <converters:BoolToStatusConverter x:Key="BoolToStatusConverter"/>
+    </Page.Resources>
+</Page>

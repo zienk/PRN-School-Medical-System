@@ -22,4 +22,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Nurse\" />
+  </ItemGroup>
+
 </Project>

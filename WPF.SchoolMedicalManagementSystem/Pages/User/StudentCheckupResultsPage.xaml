@@ -1,0 +1,37 @@
+﻿<Page x:Class="WPF.SchoolMedicalManagementSystem.Pages.User.StudentCheckupResultsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Kết quả Khám Sức khỏe">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Kết quả Khám Sức khỏe Định kỳ của Học sinh" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <DataGrid Grid.Row="1" x:Name="dgCheckupResults" AutoGenerateColumns="False" IsReadOnly="True"
+                  CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã Record" Binding="{Binding ResultID}" Width="80"/>
+                <DataGridTextColumn Header="Tên Đợt Khám" Binding="{Binding CheckupName}" Width="*"/>
+                <DataGridTextColumn Header="Ngày khám" Binding="{Binding CheckupTime, StringFormat='dd/MM/yyyy'}" Width="120"/>
+                <DataGridTextColumn Header="Chiều cao (cm)" Binding="{Binding Height}" Width="100"/>
+                <DataGridTextColumn Header="Cân nặng (kg)" Binding="{Binding Weight}" Width="100"/>
+                <DataGridTextColumn Header="BMI" Binding="{Binding BMI}" Width="60"/>
+                <DataGridTextColumn Header="Tình trạng chung" Binding="{Binding GeneralCondition}" Width="*"/>
+                <DataGridTemplateColumn Header="Thao tác">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Xem chi tiết" Tag="{Binding ResultID}" Click="ViewCheckupDetails_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

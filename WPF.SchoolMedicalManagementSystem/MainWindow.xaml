@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Hệ thống quản lý y tế học đường" Height="700" Width="1200">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <Border Grid.Column="0" Background="#F0F0F0" BorderBrush="#CCCCCC" BorderThickness="0,0,1,0">
+            <StackPanel Margin="10">
+                <TextBlock Text="Menu" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                <Button Content="Quản lý hồ sơ học sinh" Style="{StaticResource NavButton}" Click="ManageStudentRecords_Click" x:Name="btnManageStudentRecords" Visibility="Collapsed"/>
+                <Button Content="Quản lý tài khoản" Style="{StaticResource NavButton}" Click="ManageAccounts_Click" x:Name="btnManageAccounts" Visibility="Collapsed"/>
+                <Button Content="Tạo chiến dịch tiêm chủng" Style="{StaticResource NavButton}" Click="CreateVaccinationCampaign_Click" x:Name="btnCreateVaccinationCampaign" Visibility="Collapsed"/>
+                <Button Content="Tạo chiến dịch khám sức khỏe" Style="{StaticResource NavButton}" Click="CreateHealthCheckupCampaign_Click" x:Name="btnCreateHealthCheckupCampaign" Visibility="Collapsed"/>
+                <Button Content="Báo cáo và thống kê" Style="{StaticResource NavButton}" Click="ReportsAndStatistics_Click" x:Name="btnReportsAndStatistics" Visibility="Collapsed"/>
+
+                <Button Content="Hồ sơ sức khỏe của tôi" Style="{StaticResource NavButton}" Click="NavigateToHealthProfile" x:Name="btnHealthProfile" Visibility="Collapsed"/>
+                <Button Content="Sự cố y tế của tôi" Style="{StaticResource NavButton}" Click="NavigateToIncidents" x:Name="btnIncidents" Visibility="Collapsed"/>
+                <Button Content="Kết quả tiêm vaccine" Style="{StaticResource NavButton}" Click="NavigateToVaccinationResults" x:Name="btnVaccinationResults" Visibility="Collapsed"/>
+                <Button Content="Kết quả khám sức khỏe" Style="{StaticResource NavButton}" Click="NavigateToCheckupResults" x:Name="btnCheckupResults" Visibility="Collapsed"/>
+
+                <Button Content="Đăng xuất" Style="{StaticResource NavButton}" Click="Logout_Click"/>
+            </StackPanel>
+        </Border>
+
+        <Frame Grid.Column="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
+    <Window.Resources>
+        <Style x:Key="NavButton" TargetType="Button">
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 </Window>

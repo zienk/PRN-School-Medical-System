@@ -1,0 +1,45 @@
+﻿<Page x:Class="WPF.SchoolMedicalManagementSystem.Pages.Nurse.StudentHealthRecordPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="Quản lý hồ sơ sức khỏe học sinh">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Quản lý Hồ sơ Sức khỏe Học sinh" FontSize="22" FontWeight="Bold" Margin="10"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="10,0">
+            <Button Content="Thêm hồ sơ mới" Margin="5,0" Click="AddRecord_Click"/>
+            <Button Content="Tìm kiếm" Margin="5,0" Click="SearchRecord_Click"/>
+            <TextBox Width="200" Margin="5,0" x:Name="txtSearchStudent"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" x:Name="dgStudents" AutoGenerateColumns="False" IsReadOnly="True" 
+                  Margin="10" SelectionChanged="DgStudents_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã HS" Binding="{Binding StudentID}" Width="80"/>
+                <DataGridTextColumn Header="Họ và tên" Binding="{Binding FullName}" Width="*"/>
+                <DataGridTextColumn Header="Ngày sinh" Binding="{Binding DateOfBirth, StringFormat='dd/MM/yyyy'}" Width="100"/>
+                <DataGridTextColumn Header="Lớp" Binding="{Binding Class}" Width="80"/>
+                <DataGridTemplateColumn Header="Thao tác">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Xem chi tiết" Margin="2" Click="ViewDetails_Click"/>
+                                <Button Content="Sửa" Margin="2" Click="EditRecord_Click"/>
+                                <Button Content="Xóa" Margin="2" Click="DeleteRecord_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

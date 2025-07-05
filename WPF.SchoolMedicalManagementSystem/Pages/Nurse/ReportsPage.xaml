@@ -1,0 +1,34 @@
+﻿<Page x:Class="WPF.SchoolMedicalManagementSystem.Pages.Nurse.ReportsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.Pages.Nurse"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="Báo cáo và thống kê">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Báo cáo và Thống kê" FontSize="22" FontWeight="Bold" Margin="10"/>
+
+        <StackPanel Grid.Row="0" Margin="10,0">
+            <TextBlock Text="Chọn loại báo cáo:" Margin="0,0,0,5"/>
+            <ComboBox x:Name="cmbReportType" Width="200" HorizontalAlignment="Left" SelectionChanged="CmbReportType_SelectionChanged">
+                <ComboBoxItem Content="Thống kê sức khỏe học sinh"/>
+                <ComboBoxItem Content="Thống kê tiêm chủng"/>
+                <ComboBoxItem Content="Thống kê sự cố y tế"/>
+            </ComboBox>
+            <Button Content="Tạo báo cáo" Margin="0,10,0,0" HorizontalAlignment="Left" Click="GenerateReport_Click"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Margin="10">
+            <StackPanel x:Name="ReportContentPanel">
+                <TextBlock Text="Nội dung báo cáo sẽ hiển thị tại đây..." FontSize="16" FontStyle="Italic" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

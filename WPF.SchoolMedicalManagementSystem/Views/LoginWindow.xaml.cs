@@ -49,22 +49,30 @@ namespace WPF.SchoolMedicalManagementSystem.Views
                     {
                         if (viewModel.Roleid == 1)
                         {
-                            //var adminWindow = new AdminDashboardWindow();
-                            //adminWindow.Show();
                             MessageBox.Show("Đăng nhập thành công với quyền quản trị viên!");
+                            MainWindow mainWindow = new MainWindow(viewModel);
+                            // Truyền vai trò hoặc thông tin người dùng vào MainWindow nếu cần
+                            // Ví dụ: mainWindow.CurrentUserRole = "Admin";
+                            
+                            mainWindow.Show();
                             this.Close();
 
                         }
                         else if (viewModel.Roleid == 2)
                         {
-                            //var nurseWindow = new NurseDashboardWindow();
-                            //nurseWindow.Show();
+                            MainWindow mainWindow = new MainWindow(viewModel);
+                            // Truyền vai trò hoặc thông tin người dùng vào MainWindow nếu cần
+                            // Ví dụ: mainWindow.CurrentUserRole = "Admin";
+                            mainWindow.Show();
                             this.Close();
                         }
                         else if (viewModel.Roleid == 3)
                         {
-                            //var parentWindow = new ParentDashboardWindow();
-                           // parentWindow.Show();
+                            MessageBox.Show("Đăng nhập thành công với quyền User!");
+                            MainWindow mainWindow = new MainWindow(viewModel);
+                            // Truyền vai trò hoặc thông tin người dùng vào MainWindow nếu cần
+                            // Ví dụ: mainWindow.CurrentUserRole = "Admin";
+                            mainWindow.Show();
                             this.Close();
                         }
                     }
