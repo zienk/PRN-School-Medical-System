@@ -5,8 +5,138 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="NurseDashboard" Height="450" Width="800">
-    <Grid>
-        
+        Title="Nurse Dashboard - School Medical System" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F7FA">
+    <Window.Resources>
+        <!-- Card Style for Stats -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderBrush" Value="#E0E0E0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="8" Opacity="0.15" Color="#000000" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style for Buttons -->
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="15,10" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Background" Value="#0078D4" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="6" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#005EA6" />
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="2" BlurRadius="8" Opacity="0.3" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#004080" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style for TextBoxes (Stats Display) -->
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#0078D4" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <!-- Style for Labels -->
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+        <!-- Style for Header -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#0078D4" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,10,0,20" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" 
+                   Text="Nurse Dashboard" 
+                   Style="{StaticResource HeaderStyle}" />
+
+        <!-- Statistics Section -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!-- Health Checkups Card -->
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <Label Content="Health Checkups" />
+                    <TextBox x:Name="txtHealthCheckups" Text="{Binding TotalHealthCheckups}" />
+                </StackPanel>
+            </Border>
+            <!-- Vaccination Campaigns Card -->
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <Label Content="Vaccination Campaigns" />
+                    <TextBox x:Name="txtVaccinationCampaigns" Text="{Binding TotalVaccinationCampaigns}" />
+                </StackPanel>
+            </Border>
+            <!-- Medical Incidents Card -->
+            <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <Label Content="Medical Incidents" />
+                    <TextBox x:Name="txtMedicalIncidents" Text="{Binding TotalMedicalIncidents}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Navigation Section -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnManageHealthCheckups" Content="Manage Health Checkups" Width="200" Click="btnManageHealthCheckups_Click" />
+                <Button x:Name="btnManageVaccinations" Content="Manage Vaccinations" Width="200" Click="btnManageVaccinations_Click" />
+                <Button x:Name="btnManageIncidents" Content="Manage Incidents" Width="200" Click="btnManageIncidents_Click" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
