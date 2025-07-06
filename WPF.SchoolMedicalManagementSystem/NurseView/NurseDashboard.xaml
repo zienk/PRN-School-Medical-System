@@ -23,9 +23,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!-- Style for Buttons -->
+        <!-- Style for Sidebar Buttons -->
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="10" />
+            <Setter Property="Margin" Value="10,5" />
             <Setter Property="Padding" Value="15,10" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="Medium" />
@@ -33,6 +33,7 @@
             <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -40,7 +41,9 @@
                                 Background="{TemplateBinding Background}" 
                                 CornerRadius="6" 
                                 BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                             VerticalAlignment="Center" 
+                                             Margin="{TemplateBinding Padding}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -88,55 +91,69 @@
         </Style>
     </Window.Resources>
     <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*" />
+            <!-- Main Content -->
+        </Grid.ColumnDefinitions>
 
-        <!-- Header -->
-        <TextBlock Grid.Row="0" 
-                   Text="Nurse Dashboard" 
-                   Style="{StaticResource HeaderStyle}" />
-
-        <!-- Statistics Section -->
-        <Grid Grid.Row="1" Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <!-- Health Checkups Card -->
-            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
-                <StackPanel>
-                    <Label Content="Health Checkups" />
-                    <TextBox x:Name="txtHealthCheckups" Text="{Binding TotalHealthCheckups}" />
-                </StackPanel>
-            </Border>
-            <!-- Vaccination Campaigns Card -->
-            <Border Grid.Column="1" Style="{StaticResource CardStyle}">
-                <StackPanel>
-                    <Label Content="Vaccination Campaigns" />
-                    <TextBox x:Name="txtVaccinationCampaigns" Text="{Binding TotalVaccinationCampaigns}" />
-                </StackPanel>
-            </Border>
-            <!-- Medical Incidents Card -->
-            <Border Grid.Column="2" Style="{StaticResource CardStyle}">
-                <StackPanel>
-                    <Label Content="Medical Incidents" />
-                    <TextBox x:Name="txtMedicalIncidents" Text="{Binding TotalMedicalIncidents}" />
-                </StackPanel>
-            </Border>
-        </Grid>
-
-        <!-- Navigation Section -->
-        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnManageHealthCheckups" Content="Manage Health Checkups" Width="200" Click="btnManageHealthCheckups_Click" />
-                <Button x:Name="btnManageVaccinations" Content="Manage Vaccinations" Width="200" Click="btnManageVaccinations_Click" />
-                <Button x:Name="btnManageIncidents" Content="Manage Incidents" Width="200" Click="btnManageIncidents_Click" />
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="White" CornerRadius="8" BorderBrush="#E0E0E0" BorderThickness="1" Margin="0,0,10,0">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="Navigation" 
+                           FontSize="20" 
+                           FontWeight="SemiBold" 
+                           Foreground="#333333" 
+                           Margin="0,0,0,15" />
+                <Button x:Name="btnManageHealthCheckups" Content="Manage Health Checkups" Click="btnManageHealthCheckups_Click" />
+                <Button x:Name="btnManageVaccinations" Content="Manage Vaccinations" Click="btnManageVaccinations_Click" />
+                <Button x:Name="btnManageIncidents" Content="Manage Incidents" Click="btnManageIncidents_Click" />
             </StackPanel>
         </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <TextBlock Grid.Row="0" 
+                       Text="Nurse Dashboard" 
+                       Style="{StaticResource HeaderStyle}" />
+
+            <!-- Statistics Section -->
+            <Grid Grid.Row="1" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!-- Health Checkups Card -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Label Content="Health Checkups" />
+                        <TextBox x:Name="txtHealthCheckups" Text="{Binding TotalHealthCheckups}" />
+                    </StackPanel>
+                </Border>
+                <!-- Vaccination Campaigns Card -->
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Label Content="Vaccination Campaigns" />
+                        <TextBox x:Name="txtVaccinationCampaigns" Text="{Binding TotalVaccinationCampaigns}" />
+                    </StackPanel>
+                </Border>
+                <!-- Medical Incidents Card -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Label Content="Medical Incidents" />
+                        <TextBox x:Name="txtMedicalIncidents" Text="{Binding TotalMedicalIncidents}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
