@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36127.28 d17.14
+VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{4030DD8D-567B-4815-A936-5B19A0AC6BA6}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{AC7509D6-24E3-48F5-A6B2-04BE45552237}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.SchoolMedicalManagementSystem", "WPF.SchoolMedicalManagementSystem\WPF.SchoolMedicalManagementSystem.csproj", "{55C98A85-CD12-46C6-B345-C73017CB33ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjects", "BusinessObjects\BusinessObjects.csproj", "{0821820C-05FB-4CDD-98CE-AF43C103F718}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{55C98A85-CD12-46C6-B345-C73017CB33ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55C98A85-CD12-46C6-B345-C73017CB33ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55C98A85-CD12-46C6-B345-C73017CB33ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0821820C-05FB-4CDD-98CE-AF43C103F718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0821820C-05FB-4CDD-98CE-AF43C103F718}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0821820C-05FB-4CDD-98CE-AF43C103F718}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0821820C-05FB-4CDD-98CE-AF43C103F718}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

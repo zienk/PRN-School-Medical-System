@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DataAccessLayer.Entities;
+
 using Services.Implementations;
 using Services.Interfaces;
 
@@ -21,8 +21,6 @@ namespace WPF.SchoolMedicalManagementSystem.ViewModels
             ErrorMessage = string.Empty;
         }
 
-
-
         [ObservableProperty]
         private string username;
 
@@ -31,6 +29,7 @@ namespace WPF.SchoolMedicalManagementSystem.ViewModels
 
         [ObservableProperty]
         private int roleid;
+
         [ObservableProperty]
         private string errorMessage;
 
@@ -38,7 +37,7 @@ namespace WPF.SchoolMedicalManagementSystem.ViewModels
         private bool isLoginSuccessful;
 
         [RelayCommand]
-        private void Login()
+        private async Task LoginAsync()
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
@@ -46,7 +45,9 @@ namespace WPF.SchoolMedicalManagementSystem.ViewModels
                 return;
             }
 
-            var user = _userService.GetUser(Username, Password);
+            var userTask = _userService.GetUserAsync(Username, Password);
+            var user = await userTask; // await the task to get the user
+
             if (user != null)
             {
                 Roleid = user.RoleId;
