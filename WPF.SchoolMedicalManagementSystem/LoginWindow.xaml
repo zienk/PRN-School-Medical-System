@@ -4,135 +4,257 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Đăng Nhập" Height="580" Width="800"
+        Title="Đăng Nhập" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
-        Background="#F5F5F5">
+        Background="White">
 
     <Window.Resources>
-        <!-- Style cho TextBox -->
+        <!-- Modern Card Style -->
+        <Style x:Key="ModernCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="BorderBrush" Value="#E8F0FE" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Padding" Value="30" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.1" Color="#4285F4" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern TextBox Style -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Margin" Value="0,10"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="Padding" Value="15"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#CCCCCC"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#E8EAED"/>
+            <Setter Property="Background" Value="#F8F9FA"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border CornerRadius="5" 
+                        <Border x:Name="border"
+                                CornerRadius="8" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Style cho PasswordBox -->
-        <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Margin" Value="0,10"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#CCCCCC"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border CornerRadius="5" 
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Style cho Button -->
-        <Style x:Key="ModernButton" TargetType="Button">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Margin" Value="0,20"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="#0078D4"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5" 
-                                Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center"/>
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Margin="0" 
+                                          VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005EA6"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
+                                <Setter TargetName="border" Property="Background" Value="White"/>
                             </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004080"/>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
+                                <Setter TargetName="border" Property="Background" Value="White"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Modern PasswordBox Style -->
+        <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#E8EAED"/>
+            <Setter Property="Background" Value="#F8F9FA"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="border"
+                                CornerRadius="8" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Margin="0" 
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
+                                <Setter TargetName="border" Property="Background" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
+                                <Setter TargetName="border" Property="Background" Value="White"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#1A73E8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                CornerRadius="8" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1557B0"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#0F4C75"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E8EAED"/>
+                                <Setter Property="Foreground" Value="#9AA0A6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Label Style -->
+        <Style x:Key="ModernLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="#5F6368"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="Foreground" Value="#202124"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <!-- Subtitle Style -->
+        <Style x:Key="SubtitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="#5F6368"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,30"/>
+        </Style>
+
+        <!-- Error Message Style -->
+        <Style x:Key="ErrorMessageStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="#EA4335"/>
+            <Setter Property="Margin" Value="0,5,0,10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
     </Window.Resources>
 
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid Margin="0,0,-49,-255">
+        <!-- Background Gradient -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FAFBFC" Offset="0"/>
+                <GradientStop Color="#F8F9FA" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-        <!-- Tiêu đề -->
-        <TextBlock Grid.Row="0" 
-                   Text="Hệ Thống Quản Lý Y Tế Học Đường" 
-                   FontSize="24" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center"
-                   Margin="0,20,0,40"/>
+        <!-- Main Content -->
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Form Đăng Nhập -->
-        <Border Grid.Row="1" 
-                Background="White" 
-                CornerRadius="10"
-                Width="300"
-                Padding="20"
-                VerticalAlignment="Top">
-            <StackPanel>
-                <TextBlock Text="Đăng Nhập" 
-                           FontSize="20" 
-                           FontWeight="SemiBold" 
-                           Margin="0,0,0,20"/>
-
-                <TextBlock Text="Tên Người Dùng" 
-                           FontSize="12" 
-                           Margin="0,0,0,5"/>
-                <TextBox x:Name="txtUsername"
-                         Style="{StaticResource ModernTextBox}"/>
-
-                <TextBlock Text="Mật Khẩu" 
-                           FontSize="12" 
-                           Margin="0,10,0,5"/>
-                <PasswordBox x:Name="txtPassword"
-                             Style="{StaticResource ModernPasswordBox}"/>
-
-                <TextBlock x:Name="ErrorMessage" 
-                           Foreground="Red" 
-                           FontSize="12" 
-                           Margin="0,10,0,0"/>
-
-                <Button x:Name="btnLogin" Content="Đăng Nhập" 
-                        Style="{StaticResource ModernButton}"
-                        Click="LoginButton_Click"/>
+            <!-- Header Section -->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,40">
+                <TextBlock Text="🏥" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                <TextBlock Text="Hệ Thống Quản Lý Y Tế Học Đường" 
+                           Style="{StaticResource HeaderStyle}"/>
+                <TextBlock Text="Chào mừng bạn trở lại! Vui lòng đăng nhập để tiếp tục." 
+                           Style="{StaticResource SubtitleStyle}"/>
             </StackPanel>
-        </Border>
+
+            <!-- Login Form -->
+            <Border Grid.Row="1" 
+                    Style="{StaticResource ModernCardStyle}"
+                    Width="400"
+                    HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Đăng Nhập" 
+                               FontSize="24" 
+                               FontWeight="SemiBold" 
+                               Foreground="#202124"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,30"/>
+
+                    <TextBlock Text="Tên Người Dùng" 
+                               Style="{StaticResource ModernLabel}"/>
+                    <TextBox x:Name="txtUsername"
+                             Style="{StaticResource ModernTextBox}"
+                             Text=""/>
+
+                    <TextBlock Text="Mật Khẩu" 
+                               Style="{StaticResource ModernLabel}"/>
+                    <PasswordBox x:Name="txtPassword"
+                                 Style="{StaticResource ModernPasswordBox}"/>
+
+                    <TextBlock x:Name="ErrorMessage" 
+                               Style="{StaticResource ErrorMessageStyle}"
+                               Text=""/>
+
+                    <Button x:Name="btnLogin" 
+                            Content="Đăng Nhập" 
+                            Style="{StaticResource ModernButton}"
+                            Click="LoginButton_Click"/>
+
+                    <!-- Additional Options -->
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,20,0,0">
+                        <TextBlock Text="Quên mật khẩu?" 
+                                   FontSize="12" 
+                                   Foreground="#1A73E8" 
+                                   Cursor="Hand" 
+                                   TextDecorations="Underline"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Footer -->
+        <StackPanel VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,0,0,30">
+            <TextBlock Text="© 2024 School Medical Management System" 
+                       FontSize="12" 
+                       Foreground="#9AA0A6" 
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Phiên bản 1.0" 
+                       FontSize="10" 
+                       Foreground="#9AA0A6" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,5,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>
