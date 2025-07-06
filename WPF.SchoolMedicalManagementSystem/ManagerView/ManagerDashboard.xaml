@@ -126,7 +126,7 @@
 
         <!-- Sidebar -->
         <Border Grid.Column="0" Background="White" CornerRadius="0,20,20,0" 
-                BorderBrush="#E8EAED" BorderThickness="0,0,1,0" Margin="0">
+                BorderBrush="#E8EAED" BorderThickness="0,0,1,0">
             <StackPanel Orientation="Vertical" Margin="20">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,20,0,40">
