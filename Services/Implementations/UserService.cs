@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Services.Implementations
 {
@@ -19,7 +19,7 @@ namespace Services.Implementations
             _userRepository = new UserRepository();
         }
 
-        public async Task AddUserAsync(User user)
+        public void AddUser(User user)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
@@ -30,57 +30,58 @@ namespace Services.Implementations
             if (string.IsNullOrWhiteSpace(user.Password))
                 throw new ArgumentException("Password không được để trống.");
 
-            if (await _userRepository.IsUserExistsAsync(user.Username))
+            if (_userRepository.IsUserExists(user.Username))
                 throw new InvalidOperationException("Tên người dùng đã tồn tại.");
 
             user.UserId = Guid.NewGuid(); 
             user.IsActive = true; 
             user.IsFirstLogin ??= true;
             
-            await _userRepository.AddUserAsync(user);
+            _userRepository.AddUser(user);
         }
 
-        public async Task DeleteUserAsync(Guid userId)
+        public void DeleteUser(Guid userId)
         {
             if (userId == Guid.Empty)
                 throw new ArgumentException("UserId không hợp lệ.");
 
-            var user = await _userRepository.GetUserByIdAsync(userId);
+            var user = _userRepository.GetUserById(userId);
             if (user == null)
                 throw new InvalidOperationException("Không tìm thấy người dùng để xóa!!");
 
-            await _userRepository.DeleteUserAsync(userId);
+            _userRepository.DeleteUser(userId);
         }
 
-        public Task<List<User>> GetAllUsersAsync()
-            => _userRepository.GetAllUsersAsync();
+        public List<User> GetAllUsers()
+            => _userRepository.GetAllUsers();
 
-        public Task<User?> GetUserAsync(string username, string password)
+        public User? GetUser(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("Username và password không được để trống.");
 
-            return _userRepository.GetUserAsync(username, password);
+            return _userRepository.GetUser(username, password);
         }
             
-        public Task<User?> GetUserByIdAsync(Guid userId)
+        public User? GetUserById(Guid userId)
         {
             if (userId == Guid.Empty)
                 throw new ArgumentException("UserId không được để trống.");
             
-            return _userRepository.GetUserByIdAsync(userId);
+            return _userRepository.GetUserById(userId);
         }
             
 
-        public Task<List<User>> SearchUsersAsync(string searchText)
-            => _userRepository.SearchUsersAsync(searchText ?? "");
+        public List<User> SearchUsers(string searchText)
+            => _userRepository.SearchUsers(searchText ?? "");
 
-        public async Task UpdateUserAsync(User user)
+
+        public void UpdateUser(User user)
         {
             if (user == null || user.UserId == Guid.Empty)
                 throw new ArgumentException("Thông tin người dùng không hợp lệ.");
 
-            var existing = await _userRepository.GetUserByIdAsync(user.UserId);
+            var existing = _userRepository.GetUserById(user.UserId);
             if (existing == null)
                 throw new InvalidOperationException("Không tìm thấy người dùng để cập nhật!!");
 
@@ -90,7 +91,7 @@ namespace Services.Implementations
             existing.Address = user.Address;
             existing.RoleId = user.RoleId;
 
-            await _userRepository.UpdateUserAsync(existing);
+            _userRepository.UpdateUser(existing);
         }
     }
 }

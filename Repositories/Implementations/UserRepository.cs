@@ -1,4 +1,4 @@
-﻿    using DataAccessLayer;
+﻿using DataAccessLayer;
 using BusinessObjects.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interfaces;
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Repositories.Implementations
 {
@@ -19,42 +19,42 @@ namespace Repositories.Implementations
             _context = new PrnEduHealthContext();
         }
 
-        public async Task AddUserAsync(User user)
+        public void AddUser(User user)
         {
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+            _context.Users.AddAsync(user);
+            _context.SaveChangesAsync();
         }
 
-        public async Task DeleteUserAsync(Guid userId)
+        public void DeleteUser(Guid userId)
         {
-            var user = await GetUserByIdAsync(userId);
+            var user = GetUserById(userId);
 
             if (user != null)
             {
                 user.IsActive = false;
                 _context.Users.Update(user);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
 
-        public Task<List<User>> GetAllUsersAsync()
+        public List<User> GetAllUsers()
             => _context.Users
                 .Include(u => u.Role)
                 .Where(u => u.IsActive == true)
-                .ToListAsync();
+                .ToList();
 
-        public Task<User?> GetUserAsync(string username, string password)
+        public User? GetUser(string username, string password)
             => _context.Users
                 .Include(u => u.Role)
-                .FirstOrDefaultAsync(u => u.Username == username && u.Password == password && u.IsActive == true);
+                .FirstOrDefault(u => u.Username == username && u.Password == password && u.IsActive == true);
         
 
-        public Task<User?> GetUserByIdAsync(Guid userId)
+        public User? GetUserById(Guid userId)
             => _context.Users
                 .Include(u => u.Role)
-                .FirstOrDefaultAsync(u => u.UserId == userId && u.IsActive == true);
+                .FirstOrDefault(u => u.UserId == userId && u.IsActive == true);
 
-        public Task<List<User>> SearchUsersAsync(string searchText)
+        public List<User> SearchUsers(string searchText)
         {
             searchText = searchText.ToLower();
 
@@ -66,18 +66,18 @@ namespace Repositories.Implementations
                              u.Address.ToLower().Contains(searchText) ||
                              u.FullName.ToLower().Contains(searchText)) &&
                              u.IsActive == true)
-                .ToListAsync();
+                .ToList();
         }
             
 
-        public async Task UpdateUserAsync(User user)
+        public void UpdateUser(User user)
         {
             _context.Users.Update(user);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public Task<bool> IsUserExistsAsync(string username)
-            => _context.Users.AnyAsync(u => u.Username == username && u.IsActive == true);
+        public bool IsUserExists(string username)
+            => _context.Users.Any(u => u.Username == username && u.IsActive == true);
 
     }
 }

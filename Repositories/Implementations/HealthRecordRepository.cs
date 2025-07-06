@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using BusinessObjects.Entities;
 using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +19,10 @@ namespace Repositories.Implementations
         {
             _contetxt = new();
         }
-        public async Task<List<HealthRecord>> GetAllHealthRecordsAsync()
+        public List<HealthRecord> GetAllHealthRecords()
         {
-            return await _contetxt.HealthRecords.Include(e=>e.Student).Where(e => e.IsActive == true)
-                .ToListAsync();
+            return _contetxt.HealthRecords.Include(e=>e.Student).Where(e => e.IsActive == true)
+                .ToList();
         }
     }
 }

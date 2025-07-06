@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using BusinessObjects.Entities;
 using Repositories.Implementations;
 using Repositories.Interfaces;
@@ -19,9 +19,9 @@ namespace Services.Implementations
             _healthRecordRepository = new HealthRecordRepository();
         }
 
-        public async Task<List<HealthRecord>> GetAllHealthRecords()
+        public List<HealthRecord> GetAllHealthRecords()
         {
-            return  await _healthRecordRepository.GetAllHealthRecordsAsync();
+            return  _healthRecordRepository.GetAllHealthRecords();
         }
     }
 }

@@ -30,13 +30,13 @@ namespace WPF.SchoolMedicalManagementSystem
             _userService = new UserService();
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
 
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Password.Trim();
 
-            var user = await _userService.GetUserAsync(username, password);
+            var user = _userService.GetUser(username, password);
 
             if (user != null)
             {
