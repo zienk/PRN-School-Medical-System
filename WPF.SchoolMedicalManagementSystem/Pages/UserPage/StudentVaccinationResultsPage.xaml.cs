@@ -1,10 +1,10 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 
-namespace WPF.SchoolMedicalManagementSystem.Pages.User // ĐÃ THAY ĐỔI
+namespace WPF.SchoolMedicalManagementSystem.Pages.UserPage
 {
     /// <summary>
-    /// Interaction summary for StudentVaccinationResultsPage.xaml
+    /// Interaction logic for StudentVaccinationResultsPage.xaml
     /// </summary>
     public partial class StudentVaccinationResultsPage : Page
     {
