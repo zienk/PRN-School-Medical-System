@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.Pages"
+      xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.Pages.Nurse"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="Quản lý chiến dịch khám sức khỏe">
@@ -15,14 +15,14 @@
 
         <TextBlock Text="Quản lý Chiến dịch Khám sức khỏe định kỳ" FontSize="22" FontWeight="Bold" Margin="10"/>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="10,0">
-            <Button Content="Tạo chiến dịch mới" Margin="5,0" Click="CreateCampaign_Click"/>
-            <Button Content="Tìm kiếm" Margin="5,0" Click="SearchCampaign_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0"  HorizontalAlignment="Right" Margin="10,0">
+            <Button Content="Tạo chiến dịch mới" Margin="5,0" Command="{Binding AddCampaignCommand}"/>
+            <Button Content="Tìm kiếm" Margin="5,0" />
             <TextBox Width="200" Margin="5,0" x:Name="txtSearchCampaign"/>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" x:Name="dgHealthCheckupCampaigns" AutoGenerateColumns="False" IsReadOnly="True" 
-                  Margin="10" SelectionChanged="DgHealthCheckupCampaigns_SelectionChanged">
+        <DataGrid Grid.Row="1" x:Name="dgHealthCheckupCampaigns" ItemsSource="{Binding Campaigns}" AutoGenerateColumns="False" IsReadOnly="True" 
+                  Margin="10" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Mã chiến dịch" Binding="{Binding CheckupID}" Width="100"/>
                 <DataGridTextColumn Header="Tên chiến dịch" Binding="{Binding CheckupName}" Width="*"/>
@@ -32,9 +32,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Ghi nhận kết quả" Margin="2" Click="RecordResult_Click"/>
-                                <Button Content="Sửa" Margin="2" Click="EditCampaign_Click"/>
-                                <Button Content="Xóa" Margin="2" Click="DeleteCampaign_Click"/>
+                                <Button Content="Ghi nhận kết quả" Margin="2" />
+                                <Button Content="Sửa" Margin="2" />
+                                <Button Content="Xóa" Margin="2" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

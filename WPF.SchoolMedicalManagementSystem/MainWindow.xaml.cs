@@ -13,18 +13,24 @@ namespace WPF.SchoolMedicalManagementSystem
     public partial class MainWindow : Window
     {
         public int UserRoleID { get; private set; }
+        private string currentUserId; // Thêm biến currentUserId
 
         public MainWindow(LoginWindowViewModels currentUserViewModel)
         {
             InitializeComponent();
+            this.currentUserId = currentUserViewModel.UserId;
+            System.Diagnostics.Debug.WriteLine($"UserId trong MainWindow: {this.currentUserId}");
+            // ...
 
             if (currentUserViewModel != null)
             {
                 this.UserRoleID = currentUserViewModel.Roleid;
+                this.currentUserId = currentUserViewModel.UserId; // Lấy UserId từ ViewModel
             }
             else
             {
                 this.UserRoleID = 0;
+                this.currentUserId = "7a7bfd47-4218-4cad-85d5-a505da2dd7ea"; // Gán giá trị mặc định
             }
 
             ApplyUserRoleVisibility();
@@ -103,8 +109,8 @@ namespace WPF.SchoolMedicalManagementSystem
 
         private void CreateHealthCheckupCampaign_Click(object sender, RoutedEventArgs e)
         {
-            // Đường dẫn mới
-            MainFrame.Navigate(new Uri("Pages/Nurse/HealthCheckupCampaignPage.xaml", UriKind.Relative));
+            // Đường dẫn mới với tham số currentUserId
+            MainFrame.Navigate(new HealthCheckupCampaignPage(currentUserId));
         }
 
         private void ReportsAndStatistics_Click(object sender, RoutedEventArgs e)
@@ -131,7 +137,7 @@ namespace WPF.SchoolMedicalManagementSystem
 
         private void NavigateToCheckupResults(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new Uri("Pages/UserPage/StudentCheckupResultsPage.xaml", UriKind.Relative));
+            MainFrame.Navigate(new Uri("Pages/User/StudentCheckupResultsPage.xaml", UriKind.Relative));
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
