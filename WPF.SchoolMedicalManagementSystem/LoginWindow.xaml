@@ -7,6 +7,7 @@
         Title="Đăng Nhập" Height="580" Width="800"
         WindowStartupLocation="CenterScreen"
         Background="#F5F5F5">
+
     <Window.Resources>
         <!-- Style cho TextBox -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
@@ -114,24 +115,23 @@
                 <TextBlock Text="Tên Người Dùng" 
                            FontSize="12" 
                            Margin="0,0,0,5"/>
-                <TextBox Style="{StaticResource ModernTextBox}"
-                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="txtUsername"
+                         Style="{StaticResource ModernTextBox}"/>
 
                 <TextBlock Text="Mật Khẩu" 
                            FontSize="12" 
                            Margin="0,10,0,5"/>
-                <PasswordBox x:Name="PasswordBox"
-                             Style="{StaticResource ModernPasswordBox}"
-                             PasswordChanged="PasswordBox_PasswordChanged"/>
+                <PasswordBox x:Name="txtPassword"
+                             Style="{StaticResource ModernPasswordBox}"/>
 
-                <TextBlock Text="{Binding ErrorMessage}" 
+                <TextBlock x:Name="ErrorMessage" 
                            Foreground="Red" 
                            FontSize="12" 
                            Margin="0,10,0,0"/>
 
-                <Button Content="Đăng Nhập" 
+                <Button x:Name="btnLogin" Content="Đăng Nhập" 
                         Style="{StaticResource ModernButton}"
-                        Command="{Binding LoginCommand}"/>
+                        Click="LoginButton_Click"/>
             </StackPanel>
         </Border>
     </Grid>
