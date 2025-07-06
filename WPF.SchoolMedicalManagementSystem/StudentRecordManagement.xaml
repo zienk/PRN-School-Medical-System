@@ -1,0 +1,177 @@
+﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.StudentRecordManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem"
+        mc:Ignorable="d"
+        Title="Quản Lý Hồ Sơ Sức Khỏe Học Sinh" Height="700" Width="1200"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho TextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="3" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#EEEEEE"/>
+            <Setter Property="AlternatingRowBackground" Value="#F9F9F9"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+
+        <!-- Style cho DataGridColumnHeader -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   Text="QUẢN LÝ HỒ SƠ SỨC KHỎE HỌC SINH" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"
+                   Foreground="#0078D4"/>
+
+        <!-- Thanh công cụ -->
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Tìm kiếm -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Tìm kiếm:" FontSize="12" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox x:Name="SearchTextBox" 
+                         Style="{StaticResource ModernTextBox}"
+                         Width="200" 
+                         
+                         KeyUp="SearchTextBox_KeyUp"/>
+                <Button Content="🔍" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                        Click="SearchButton_Click"
+                        Width="40"/>
+                <Button Content="Làm mới" 
+                        Background="#6C757D" 
+                        Style="{StaticResource ModernButton}"
+                        Click="RefreshButton_Click"/>
+            </StackPanel>
+
+            <!-- Các nút thao tác -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Thêm mới" 
+                        Background="#28A745" 
+                        Style="{StaticResource ModernButton}"
+                        Click="AddButton_Click"/>
+                <Button Content="Sửa" 
+                        Background="#FFC107" 
+                        Style="{StaticResource ModernButton}"
+                        Click="EditButton_Click"/>
+                <Button Content="Xóa" 
+                        Background="#DC3545" 
+                        Style="{StaticResource ModernButton}"
+                        Click="DeleteButton_Click"/>
+                <Button Content="Xuất Excel" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                         /> 
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="2" x:Name="dgHealthRecord">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding HealthRecordId}" Width="60"/>
+                <DataGridTextColumn Header="Mã học sinh" Binding="{Binding Student.StudentId}" Width="100"/>
+                <DataGridTextColumn Header="Họ và tên" Binding="{Binding Student.FullName}" Width="150"/>
+                <DataGridTextColumn Header="Lớp" Binding="{Binding Student.Class}" Width="80"/>
+                <DataGridTextColumn Header="Chiều cao (cm)" Binding="{Binding Height}" Width="100"/>
+                <DataGridTextColumn Header="Cân nặng (kg)" Binding="{Binding Weight}" Width="100"/>
+                <DataGridTextColumn Header="Bệnh mãn tính" Binding="{Binding ChronicDiseases}" Width="150"/>
+                <DataGridTextColumn Header="Dị ứng" Binding="{Binding Allergies}" Width="150"/>
+                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Notes}" Width="200"/>
+                <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedDate, StringFormat=dd/MM/yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Cập nhật cuối" Binding="{Binding LastUpdatedDate, StringFormat=dd/MM/yyyy}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Status bar -->
+        <StatusBar Grid.Row="2" VerticalAlignment="Bottom" Background="#F8F9FA" Height="25">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusLabel" Text="Sẵn sàng" FontSize="11"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="RecordCountLabel" Text="Tổng: 0 bản ghi" FontSize="11"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

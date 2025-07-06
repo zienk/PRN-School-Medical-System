@@ -42,7 +42,9 @@ namespace WPF.SchoolMedicalManagementSystem
             {
                 if (user.Role.RoleId == 1)
                 {
-                    ///
+                    StudentRecordManagement studentRecordManagement = new StudentRecordManagement();
+                    studentRecordManagement.Show();
+                    this.Close(); // Close the login window after successful login
                     MessageBox.Show($"Welcome {user.FullName} with {user.Role.RoleName}", "Login Successful", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 if (user.Role.RoleId == 2)
