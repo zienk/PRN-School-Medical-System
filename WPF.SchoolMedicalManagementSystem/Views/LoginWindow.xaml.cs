@@ -45,24 +45,19 @@ namespace WPF.SchoolMedicalManagementSystem.Views
             {
                 viewModel.PropertyChanged += (s, args) =>
                 {
-                    if (args.PropertyName == nameof(viewModel.Roleid))
+                    if (args.PropertyName == nameof(viewModel.IsLoginSuccessful) && viewModel.IsLoginSuccessful)
                     {
+                        // Điều hướng theo Roleid
                         if (viewModel.Roleid == 1)
                         {
                             MessageBox.Show("Đăng nhập thành công với quyền quản trị viên!");
                             MainWindow mainWindow = new MainWindow(viewModel);
-                            // Truyền vai trò hoặc thông tin người dùng vào MainWindow nếu cần
-                            // Ví dụ: mainWindow.CurrentUserRole = "Admin";
-                            
                             mainWindow.Show();
                             this.Close();
-
                         }
                         else if (viewModel.Roleid == 2)
                         {
                             MainWindow mainWindow = new MainWindow(viewModel);
-                            // Truyền vai trò hoặc thông tin người dùng vào MainWindow nếu cần
-                            // Ví dụ: mainWindow.CurrentUserRole = "Admin";
                             mainWindow.Show();
                             this.Close();
                         }
@@ -70,8 +65,6 @@ namespace WPF.SchoolMedicalManagementSystem.Views
                         {
                             MessageBox.Show("Đăng nhập thành công với quyền User!");
                             MainWindow mainWindow = new MainWindow(viewModel);
-                            // Truyền vai trò hoặc thông tin người dùng vào MainWindow nếu cần
-                            // Ví dụ: mainWindow.CurrentUserRole = "Admin";
                             mainWindow.Show();
                             this.Close();
                         }

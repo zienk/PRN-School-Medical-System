@@ -22,6 +22,9 @@ namespace WPF.SchoolMedicalManagementSystem.ViewModels
         }
 
         [ObservableProperty]
+        private string userId;
+
+        [ObservableProperty]
         private string username;
 
         [ObservableProperty]
