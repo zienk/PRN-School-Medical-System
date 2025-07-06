@@ -5,7 +5,7 @@ using WPF.SchoolMedicalManagementSystem.ViewModels;
 using WPF.SchoolMedicalManagementSystem.Views;
 // Các namespace cho các trang của bạn
 using WPF.SchoolMedicalManagementSystem.Pages; // Giữ lại nếu bạn có HomePage.xaml gốc hoặc các Page khác không thuộc thư mục con nào
-using WPF.SchoolMedicalManagementSystem.Pages.User; // Cho các trang StudentHealthProfilePage, StudentIncidentListPage, v.v.
+using WPF.SchoolMedicalManagementSystem.Pages.UserPage; // Cho các trang StudentHealthProfilePage, StudentIncidentListPage, v.v.
 using WPF.SchoolMedicalManagementSystem.Pages.Nurse; // Namespace MỚI cho các trang đã di chuyển
 
 namespace WPF.SchoolMedicalManagementSystem
@@ -131,7 +131,7 @@ namespace WPF.SchoolMedicalManagementSystem
 
         private void NavigateToCheckupResults(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new Uri("Pages/User/StudentCheckupResultsPage.xaml", UriKind.Relative));
+            MainFrame.Navigate(new Uri("Pages/UserPage/StudentCheckupResultsPage.xaml", UriKind.Relative));
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)

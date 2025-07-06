@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Entities;
+﻿using BusinessObjects.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;

@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace WPF.SchoolMedicalManagementSystem.Pages.User // ĐÃ THAY ĐỔI
+namespace WPF.SchoolMedicalManagementSystem.Pages.UserPage
 {
     /// <summary>
     /// Interaction logic for StudentHealthProfilePage.xaml
