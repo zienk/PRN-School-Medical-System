@@ -287,7 +287,7 @@
 
                     <DataGrid Grid.Row="0" x:Name="dgUsers">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding UserID}" Width="150"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding UserId}" Width="150"/>
                             <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="120"/>
                             <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="150"/>
                             <DataGridTextColumn Header="Role" Binding="{Binding Role.RoleName}" Width="100"/>
