@@ -256,17 +256,20 @@
                                Style="{StaticResource ModernLabel}"/>
                     <TextBox x:Name="txtUsername"
                              Style="{StaticResource ModernTextBox}"
-                             Text="admin"
+                             Text=""
                              FontSize="16"
                              VerticalAlignment="Center"
-                             TabIndex="1" Height="56"/>
+                             TabIndex="1" 
+                             Height="56"/>
 
                     <!-- Password Field -->
                     <TextBlock Text="Mật Khẩu" 
                                Style="{StaticResource ModernLabel}"/>
                     <PasswordBox x:Name="txtPassword"
                                  Style="{StaticResource ModernPasswordBox}"
-                                 TabIndex="2" Height="48"/>
+                                 KeyDown="OnEnterPressed"
+                                 TabIndex="2" 
+                                 Height="56"/>
 
                     <!-- Error Message -->
                     <TextBlock x:Name="ErrorMessage" 

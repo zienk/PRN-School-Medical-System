@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Services.Interfaces;
 using BusinessObjects.Entities;
 using Services.Implementations;
+using WPF.SchoolMedicalManagementSystem.ManagerView;
 
 namespace WPF.SchoolMedicalManagementSystem
 {
@@ -52,12 +53,13 @@ namespace WPF.SchoolMedicalManagementSystem
                 switch (user.Role.RoleId)
                 {
                     case ADMIN_ROLE_ID:
-                        
+                        ManagerDashboard managerDashboard = new ManagerDashboard();
+                        managerDashboard.Show();
+                        this.Close();
                         MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
 
                     case TEACHER_ROLE_ID:
-
                         StudentRecordManagement studentRecordManagement = new StudentRecordManagement();
                         studentRecordManagement.Show();
                         this.Close();
@@ -77,6 +79,14 @@ namespace WPF.SchoolMedicalManagementSystem
             else
             {
                 MessageBox.Show("Invalid username or password.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void OnEnterPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginButton_Click(sender, e);
             }
         }
     }
