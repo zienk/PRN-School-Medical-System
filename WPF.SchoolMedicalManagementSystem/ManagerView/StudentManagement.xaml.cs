@@ -15,28 +15,13 @@ using System.Windows.Shapes;
 namespace WPF.SchoolMedicalManagementSystem.ManagerView
 {
     /// <summary>
-    /// Interaction logic for ManagerDashboard.xaml
+    /// Interaction logic for StudentManagement.xaml
     /// </summary>
-    public partial class ManagerDashboard : Window
+    public partial class StudentManagement : Window
     {
-        public ManagerDashboard()
+        public StudentManagement()
         {
             InitializeComponent();
-        }
-
-        private void btnManageUsers_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnManageStudents_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
