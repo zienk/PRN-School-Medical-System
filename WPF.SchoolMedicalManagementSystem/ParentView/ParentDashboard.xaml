@@ -277,7 +277,7 @@
                 <!-- My Children Section -->
                 <Border Grid.Column="0" Style="{StaticResource ModernCardStyle}" Margin="0,0,15,0">
                     <StackPanel>
-                        <TextBlock Text="👨‍��‍👧‍👦 My Children" 
+                        <TextBlock Text="My Children" 
                                    FontSize="22" 
                                    FontWeight="SemiBold" 
                                    Foreground="#202124" 

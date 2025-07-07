@@ -26,7 +26,9 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void btnManageUsers_Click(object sender, RoutedEventArgs e)
         {
-
+            UserManagement userManagement = new UserManagement();
+            userManagement.Show();
+            this.Close();
         }
 
         private void btnManageStudents_Click(object sender, RoutedEventArgs e)

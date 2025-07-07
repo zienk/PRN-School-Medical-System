@@ -3,32 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ManagerView"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem"
         mc:Ignorable="d"
         Title="Quản Lý Người Dùng" Height="700" Width="1200"
-        WindowStartupLocation="CenterScreen"
-        Background="White">
-    <Window.Resources>
-        <!-- Modern Card Style -->
-        <Style x:Key="ModernCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="BorderBrush" Value="#E8F0FE" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Margin" Value="8" />
-            <Setter Property="Padding" Value="20" />
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.1" Color="#4285F4" />
-                </Setter.Value>
-            </Setter>
-        </Style>
+        WindowState="Maximized">
 
-        <!-- Toolbar Button Style -->
-        <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+    <Window.Resources>
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
             <Setter Property="Height" Value="40"/>
-            <Setter Property="MinWidth" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="Foreground" Value="White"/>
@@ -37,8 +22,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="8" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0"/>
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -53,72 +38,36 @@
             </Setter>
         </Style>
 
-        <!-- Sidebar Navigation Button Style -->
-        <Style x:Key="SidebarButtonStyle" TargetType="Button">
-            <Setter Property="Margin" Value="8,4" />
-            <Setter Property="Padding" Value="20,15" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="#5F6368" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBorder" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                             VerticalAlignment="Center" 
-                                             Margin="{TemplateBinding Padding}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="#F8F9FA" />
-                                <Setter Property="Foreground" Value="#1A73E8" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E8F0FE" />
-                                <Setter Property="Foreground" Value="#1557B0" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- TextBox Style -->
+        <!-- Style cho TextBox -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
             <Setter Property="Height" Value="40"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#E8EAED"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border CornerRadius="8" 
+                        <Border CornerRadius="4" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- DataGrid Style -->
+        <!-- Style cho DataGrid -->
         <Style TargetType="DataGrid">
-            <Setter Property="BorderBrush" Value="#E8EAED"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="GridLinesVisibility" Value="Horizontal"/>
-            <Setter Property="HorizontalGridLinesBrush" Value="#F1F3F4"/>
-            <Setter Property="AlternatingRowBackground" Value="#F8F9FA"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#EEEEEE"/>
+            <Setter Property="AlternatingRowBackground" Value="#F9F9F9"/>
             <Setter Property="RowBackground" Value="White"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="CanUserAddRows" Value="False"/>
@@ -126,190 +75,170 @@
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="RowHeight" Value="48"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="0,10,0,0"/>
         </Style>
 
-        <!-- DataGridColumnHeader Style -->
+        <!-- Style cho DataGridColumnHeader -->
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#F8F9FA"/>
-            <Setter Property="Foreground" Value="#202124"/>
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="48"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="BorderBrush" Value="#E8EAED"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Padding" Value="12,0"/>
+        </Style>
+
+        <!-- Style cho DataGridCell -->
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Padding="{TemplateBinding Padding}" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho DataGridRow -->
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Height" Value="36"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#D0D0D0"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- Header Style -->
         <Style x:Key="HeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="36" />
-            <Setter Property="FontWeight" Value="Light" />
-            <Setter Property="Foreground" Value="#202124" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Margin" Value="0,20,0,10" />
-        </Style>
-
-        <!-- Welcome Text Style -->
-        <Style x:Key="WelcomeStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="Foreground" Value="#5F6368" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Margin" Value="0,0,0,20" />
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <!-- Background Gradient -->
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#FAFBFC" Offset="0"/>
-                <GradientStop Color="#F8F9FA" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="240" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   Text="QUẢN LÝ NGƯỜI DÙNG" 
+                   Style="{StaticResource HeaderStyle}"/>
 
-        <!-- Sidebar -->
-        <Border Grid.Column="0" Background="White" CornerRadius="0,20,20,0" 
-                BorderBrush="#E8EAED" BorderThickness="0,0,1,0" Margin="0">
-            <StackPanel Orientation="Vertical" Margin="20">
-                <!-- Logo/Title Section -->
-                <StackPanel Margin="0,20,0,40">
-                    <TextBlock Text="🏫" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="School Management" 
-                               FontSize="18" 
-                               FontWeight="SemiBold" 
-                               Foreground="#202124" 
-                               HorizontalAlignment="Center" />
-                    <TextBlock Text="Manager Portal" 
-                               FontSize="14" 
-                               Foreground="#5F6368" 
-                               HorizontalAlignment="Center" />
-                </StackPanel>
+        <!-- Thanh công cụ -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-                <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
-                           FontSize="12" 
-                           FontWeight="SemiBold" 
-                           Foreground="#9AA0A6" 
-                           Margin="20,0,0,15" />
-
-                <Button x:Name="btnBackToDashboard" 
-                        Content="🏠 Dashboard" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnBackToDashboard_Click" />
-                <Button x:Name="btnManageUsers" 
-                        Content="👥 Manage Users" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageUsers_Click" />
-                <Button x:Name="btnManageStudents" 
-                        Content="👨‍🎓 Manage Students" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageStudents_Click" />
-                <Button x:Name="btnManageHealthRecords" 
-                        Content="📋 Health Records" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageHealthRecords_Click" />
+            <!-- Tìm kiếm -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Tìm kiếm:" 
+                           FontSize="14" 
+                           FontWeight="Medium" 
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,0"
+                           Foreground="#333333"/>
+                <TextBox x:Name="SearchTextBox" 
+                         Padding="0"
+                         Style="{StaticResource ModernTextBox}"
+                         VerticalContentAlignment="Center"
+                         FontSize="15"
+                         Width="250"
+                         KeyUp="SearchTextBox_KeyUp" Text="" />
+                <Button Content="🔍" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                        Click="SearchButton_Click"
+                        Width="48"/>
+                <Button Content="Làm mới" 
+                        Background="#6C757D" 
+                        Style="{StaticResource ModernButton}"
+                        Click="RefreshButton_Click"/>
             </StackPanel>
+
+            <!-- Các nút thao tác -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Thêm mới" 
+                        Background="#28A745" 
+                        Style="{StaticResource ModernButton}"
+                        Click="AddButton_Click"/>
+                <Button Content="Sửa" 
+                        Background="#FFC107" 
+                        Style="{StaticResource ModernButton}"
+                        Click="EditButton_Click"/>
+                <Button Content="Xóa" 
+                        Background="#DC3545" 
+                        Style="{StaticResource ModernButton}"
+                        Click="DeleteButton_Click"/>
+                <Button Content="Đặt lại mật khẩu" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                        Click="ResetPasswordButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid -->
+        <Border Grid.Row="2" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="8">
+            <DataGrid x:Name="dgUsers">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding Username}" Width="auto"/>
+                    <DataGridTextColumn Header="Họ và tên" Binding="{Binding FullName}" Width="auto"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Phone}" Width="120"/>
+                    <DataGridTextColumn Header="Vai trò" Binding="{Binding Role.RoleName}" Width="100"/>
+                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Border>
 
-        <!-- Main Content -->
-        <Grid Grid.Column="1" Margin="30,30,30,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!-- Header Section -->
-            <StackPanel Grid.Row="0">
-                <TextBlock Text="Quản Lý Người Dùng" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="Manage user accounts, roles, and permissions in the school system." 
-                           Style="{StaticResource WelcomeStyle}" />
-            </StackPanel>
-
-            <!-- Toolbar -->
-            <Grid Grid.Row="1" Margin="0,0,0,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Search Section -->
-                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Search Users:" 
-                               FontSize="14" 
-                               FontWeight="Medium" 
-                               Foreground="#5F6368" 
-                               VerticalAlignment="Center" 
-                               Margin="0,0,10,0"/>
-                    <TextBox x:Name="SearchTextBox" 
-                             Style="{StaticResource ModernTextBox}"
-                             Width="250" 
-                             KeyUp="SearchTextBox_KeyUp"/>
-                    <Button Content="🔍 Search" 
-                            Background="#4285F4" 
-                            Style="{StaticResource ToolbarButtonStyle}"
-                            Click="SearchButton_Click"
-                            Margin="10,5"/>
-                </StackPanel>
-
-                <!-- Action Buttons -->
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button Content="Add New" 
-                            Background="#34A853" 
-                            Style="{StaticResource ToolbarButtonStyle}"
-                            Click="AddButton_Click"/>
-                    <Button Content="Edit" 
-                            Background="#FF6D01" 
-                            Style="{StaticResource ToolbarButtonStyle}"
-                            Click="EditButton_Click"/>
-                    <Button Content="Delete" 
-                            Background="#EA4335" 
-                            Style="{StaticResource ToolbarButtonStyle}"
-                            Click="DeleteButton_Click"/>
-                </StackPanel>
-            </Grid>
-
-            <!-- DataGrid -->
-            <Border Grid.Row="2" Style="{StaticResource ModernCardStyle}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <DataGrid Grid.Row="0" x:Name="dgUsers">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding UserID}" Width="150"/>
-                            <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="120"/>
-                            <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="150"/>
-                            <DataGridTextColumn Header="Role" Binding="{Binding Role.RoleName}" Width="100"/>
-                            <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="120"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
-                            <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <!-- Status Bar -->
-                    <Border Grid.Row="1" Background="#F8F9FA" BorderBrush="#E8EAED" BorderThickness="0,1,0,0" Padding="10,5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="StatusLabel" Text="Ready" FontSize="12" Foreground="#5F6368"/>
-                            <TextBlock Grid.Column="1" x:Name="RecordCountLabel" Text="Total: 0 records" FontSize="12" Foreground="#5F6368"/>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
-        </Grid>
+        <!-- Status bar -->
+        <StatusBar Grid.Row="2" 
+                   VerticalAlignment="Bottom" 
+                   Background="#F8F9FA" 
+                   Height="32"
+                   Padding="8,0">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusLabel" 
+                           Text="Sẵn sàng" 
+                           FontSize="12"
+                           Foreground="#333333"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="RecordCountLabel" 
+                           Text="Tổng: 0 người dùng" 
+                           FontSize="12"
+                           Foreground="#333333"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
