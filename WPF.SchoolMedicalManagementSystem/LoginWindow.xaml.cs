@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Services.Interfaces;
 using BusinessObjects.Entities;
 using Services.Implementations;
+
 namespace WPF.SchoolMedicalManagementSystem
 {
     /// <summary>
@@ -21,8 +22,16 @@ namespace WPF.SchoolMedicalManagementSystem
     /// </summary>
     public partial class LoginWindow : Window
     {
-
         private readonly IUserService _userService;
+
+        // Constants for Role IDs
+        private const int ADMIN_ROLE_ID = 1;
+        private const int TEACHER_ROLE_ID = 2;
+        private const int STUDENT_ROLE_ID = 3;
+
+        // Constants for Message Box titles
+        private const string LOGIN_SUCCESS_TITLE = "Login Successful";
+        private const string LOGIN_FAILED_TITLE = "Login Failed";
 
         public LoginWindow()
         {
@@ -32,35 +41,42 @@ namespace WPF.SchoolMedicalManagementSystem
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Password.Trim();
-
             var user = _userService.GetUser(username, password);
 
             if (user != null)
             {
-                if (user.Role.RoleId == 1)
+                string welcomeMessage = $"Welcome {user.FullName} with {user.Role.RoleName}";
+
+                switch (user.Role.RoleId)
                 {
-                    StudentRecordManagement studentRecordManagement = new StudentRecordManagement();
-                    studentRecordManagement.Show();
-                    this.Close(); // Close the login window after successful login
-                    MessageBox.Show($"Welcome {user.FullName} with {user.Role.RoleName}", "Login Successful", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                if (user.Role.RoleId == 2)
-                {
-                    ///
-                    MessageBox.Show($"Welcome {user.FullName} with {user.Role.RoleName} ", "Login Successful", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                if (user.Role.RoleId == 3)
-                {
-                    ///
-                    MessageBox.Show($"Welcome {user.FullName} with {user.Role.RoleName}", "Login Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                    case ADMIN_ROLE_ID:
+                        
+                        MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+
+                    case TEACHER_ROLE_ID:
+
+                        StudentRecordManagement studentRecordManagement = new StudentRecordManagement();
+                        studentRecordManagement.Show();
+                        this.Close();
+
+                        MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+
+                    case STUDENT_ROLE_ID:
+                        MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+
+                    default:
+                        MessageBox.Show("Unknown role type.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
                 }
             }
             else
             {
-                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Invalid username or password.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
