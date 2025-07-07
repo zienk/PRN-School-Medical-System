@@ -188,7 +188,7 @@
 
                 <Button x:Name="btnIncidents" 
                         Content="🚨 Medical Incidents" 
-                        Style="{StaticResource ParentSidebarButtonStyle}"/>
+                        Style="{StaticResource ParentSidebarButtonStyle}" Click="btnIncidents_Click"/>
             </StackPanel>
         </Border>
 
