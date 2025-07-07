@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Services.Implementations;
+using Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,64 +24,67 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
     /// </summary>
     public partial class UserManagement : Window
     {
-        private IUserService _usersive;
+        private readonly IUserService _userService;
+
         public UserManagement()
         {
             InitializeComponent();
-            LoadData();
+            _userService = new UserService();
+            LoadUserData();
         }
 
-
-        public void LoadData()
+        private void LoadUserData()
         {
-            _usersive = new UserService();
-            dgUsers.ItemsSource = null;
-            dgUsers.ItemsSource = _usersive.GetAllUsers();
-        }
-        private void btnBackToDashboard_Click(object sender, RoutedEventArgs e)
-        {
-            ManagerDashboard dashborhd = new ManagerDashboard();
-            dashborhd.Show();
-            this.Close();
-        }
-
-        private void btnManageUsers_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Implement manage users logic
-        }
-
-        private void btnManageStudents_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Implement manage students logic
-        }
-
-        private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Implement manage health records logic
-        }
-
-        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            // TODO: Implement search logic on key up
+            dgUsers.ItemsSource = _userService.GetAllUsers();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement search logic on button click
+            string searchText = SearchTextBox.Text.Trim();
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                dgUsers.ItemsSource = _userService.SearchUsers(searchText);
+            }
+            else
+            {
+                LoadUserData();
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement add new user logic
+
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement edit user logic
+
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void ResetPasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBackToDashboard_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+
+      
             var selectedUser = dgUsers.SelectedItem as User;
             if (selectedUser != null)
             {
