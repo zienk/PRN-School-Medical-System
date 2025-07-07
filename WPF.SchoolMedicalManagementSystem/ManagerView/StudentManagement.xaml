@@ -207,11 +207,11 @@
                 <Button x:Name="btnManageUsers" 
                         Content="👥 Manage Users" 
                         Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageUsers_Click" />
+                        Click="btnManageUsers_Click"/>
                 <Button x:Name="btnManageStudents" 
                         Content="👨‍🎓 Manage Students" 
                         Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageStudents_Click" />
+                         Click="btnManageStudents_Click" />
                 <Button x:Name="btnManageHealthRecords" 
                         Content="📋 Health Records" 
                         Style="{StaticResource SidebarButtonStyle}"

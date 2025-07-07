@@ -23,5 +23,10 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         {
             InitializeComponent();
         }
+
+        private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement health record navigation logic
+        }
     }
 }

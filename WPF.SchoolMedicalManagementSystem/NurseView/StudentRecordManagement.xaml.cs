@@ -30,10 +30,10 @@ namespace WPF.SchoolMedicalManagementSystem
             LoadData();
         }
 
-        public async Task LoadData()
+        public void LoadData()
         {
             dgHealthRecord.ItemsSource = null;
-            dgHealthRecord.ItemsSource = await _healthRecordService.GetAllHealthRecords();
+            dgHealthRecord.ItemsSource = _healthRecordService.GetAllHealthRecords();
         }
 
         private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)

@@ -23,5 +23,20 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         {
             InitializeComponent();
         }
+
+        private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement health checkups management logic
+        }
+
+        private void btnManageVaccinations_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement vaccinations management logic
+        }
+
+        private void btnManageIncidents_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement medical incidents management logic
+        }
     }
 }

@@ -172,28 +172,23 @@
 
                 <Button x:Name="btnAccountInfo" 
                         Content="👤 Account Info" 
-                        Style="{StaticResource ParentSidebarButtonStyle}"
-                        Click="btnAccountInfo_Click" />
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
 
                 <Button x:Name="btnStudentInfo" 
                         Content="🎓 Student Info" 
-                        Style="{StaticResource ParentSidebarButtonStyle}"
-                        Click="btnStudentInfo_Click" />
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
 
                 <Button x:Name="btnHealthCheckups" 
                         Content="🩺 Health Checkups" 
-                        Style="{StaticResource ParentSidebarButtonStyle}"
-                        Click="btnHealthCheckups_Click" />
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
 
                 <Button x:Name="btnVaccinations" 
                         Content="💉 Vaccinations" 
-                        Style="{StaticResource ParentSidebarButtonStyle}"
-                        Click="btnVaccinations_Click" />
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
 
                 <Button x:Name="btnIncidents" 
                         Content="🚨 Medical Incidents" 
-                        Style="{StaticResource ParentSidebarButtonStyle}"
-                        Click="btnIncidents_Click" />
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
             </StackPanel>
         </Border>
 
@@ -282,7 +277,7 @@
                 <!-- My Children Section -->
                 <Border Grid.Column="0" Style="{StaticResource ModernCardStyle}" Margin="0,0,15,0">
                     <StackPanel>
-                        <TextBlock Text="👨‍👩‍👧‍👦 My Children" 
+                        <TextBlock Text="👨‍��‍👧‍👦 My Children" 
                                    FontSize="22" 
                                    FontWeight="SemiBold" 
                                    Foreground="#202124" 
