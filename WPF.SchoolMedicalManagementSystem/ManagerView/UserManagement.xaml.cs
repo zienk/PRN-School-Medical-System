@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BusinessObjects.Entities;
 using Services.Implementations;
 using Services.Interfaces;
 
@@ -37,7 +38,9 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         }
         private void btnBackToDashboard_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement navigation to dashboard
+            ManagerDashboard dashborhd = new ManagerDashboard();
+            dashborhd.Show();
+            this.Close();
         }
 
         private void btnManageUsers_Click(object sender, RoutedEventArgs e)
@@ -77,7 +80,34 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement delete user logic
+            var selectedUser = dgUsers.SelectedItem as User;
+            if (selectedUser != null)
+            {
+                var result = MessageBox.Show(
+                    $"Bạn có chắc chắn muốn xóa người dùng '{selectedUser.FullName}' không?",
+                    "Xác nhận xóa",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        _usersive.DeleteUser(selectedUser.UserId);  
+                        LoadData(); 
+                        MessageBox.Show("Xóa người dùng thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Đã xảy ra lỗi khi xóa: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn người dùng cần xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
     }
 }

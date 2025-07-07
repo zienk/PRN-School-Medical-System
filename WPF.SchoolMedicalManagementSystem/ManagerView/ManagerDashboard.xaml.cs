@@ -33,7 +33,9 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void btnManageStudents_Click(object sender, RoutedEventArgs e)
         {
-
+            StudentManagement student = new StudentManagement();
+            student.Show();
+            this.Close();
         }
 
         private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)

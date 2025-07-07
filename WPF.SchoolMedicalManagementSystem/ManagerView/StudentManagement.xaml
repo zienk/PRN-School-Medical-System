@@ -288,7 +288,7 @@
 
                     <DataGrid Grid.Row="0" x:Name="dgStudents">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Student ID" Binding="{Binding StudentID}" Width="120"/>
+                            <DataGridTextColumn Header="Student ID" Binding="{Binding StudentId}" Width="120"/>
                             <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="150"/>
                             <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" Width="120"/>
                             <DataGridTextColumn Header="Gender" Binding="{Binding Gender.GenderName}" Width="100"/>
