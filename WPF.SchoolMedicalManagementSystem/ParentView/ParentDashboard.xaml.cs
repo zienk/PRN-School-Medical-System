@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF.SchoolMedicalManagementSystem.ParentView;
+
 
 namespace WPF.SchoolMedicalManagementSystem.ParentView
 {
@@ -19,14 +22,23 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
     /// </summary>
     public partial class ParentDashboard : Window
     {
-        public ParentDashboard()
+        private User user;
+        public ParentDashboard(User currentUser)
         {
             InitializeComponent();
+            user = currentUser;
         }
 
         private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Implement health record navigation logic
+        }
+
+        private void btnIncidents_Click(object sender, RoutedEventArgs e)
+        {
+            MedicalIncidentsManagement medicalIncidentsManagement = new MedicalIncidentsManagement(user);
+            medicalIncidentsManagement.Show();
+            this.Close();
         }
     }
 }
