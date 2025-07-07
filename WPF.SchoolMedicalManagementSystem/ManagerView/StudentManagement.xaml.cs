@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Services.Implementations;
+using Services.Interfaces;
 
 namespace WPF.SchoolMedicalManagementSystem.ManagerView
 {
@@ -19,14 +21,26 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
     /// </summary>
     public partial class StudentManagement : Window
     {
+
+        private IStudentService _studentService;
         public StudentManagement()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        public void LoadData()
+        {
+            _studentService = new StudentService();
+            dgStudents.ItemsSource = null;
+            dgStudents.ItemsSource = _studentService.GetAllStudents();
         }
 
         private void btnBackToDashboard_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement navigation to dashboard
+            ManagerDashboard managerDashboard = new ManagerDashboard();
+            managerDashboard.Show();
+            this.Close();
         }
 
         private void btnManageUsers_Click(object sender, RoutedEventArgs e)

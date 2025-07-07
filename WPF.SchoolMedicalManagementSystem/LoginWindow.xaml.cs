@@ -15,6 +15,7 @@ using Services.Interfaces;
 using BusinessObjects.Entities;
 using Services.Implementations;
 using WPF.SchoolMedicalManagementSystem.ManagerView;
+using WPF.SchoolMedicalManagementSystem.ParentView;
 
 namespace WPF.SchoolMedicalManagementSystem
 {
@@ -68,6 +69,9 @@ namespace WPF.SchoolMedicalManagementSystem
                         break;
 
                     case STUDENT_ROLE_ID:
+                        ParentDashboard parentDashboard = new ParentDashboard(user);
+                        parentDashboard.Show();
+                        this.Close();
                         MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
 

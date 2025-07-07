@@ -1,0 +1,322 @@
+﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.ParentView.IncidentDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Incident Details" Height="650" Width="800" 
+        WindowStartupLocation="CenterOwner"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <!-- Main Card Style -->
+        <Style x:Key="MainCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="BorderBrush" Value="#E8F0FE" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="30" Opacity="0.15" Color="#4285F4" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+
+        <!-- Subtitle Style -->
+        <Style x:Key="SubtitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="Margin" Value="0,0,0,25" />
+        </Style>
+
+        <!-- Label Style -->
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="Margin" Value="0,0,0,5" />
+        </Style>
+
+        <!-- Value Style -->
+        <Style x:Key="ValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="Margin" Value="0,0,0,20" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <!-- Info Card Style -->
+        <Style x:Key="InfoCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#F8F9FA" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="Margin" Value="0,0,0,15" />
+        </Style>
+
+        <!-- Action Button Style -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="MinWidth" Value="100" />
+            <Setter Property="Padding" Value="20,0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Background" Value="#1A73E8" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" 
+                                             Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#1557B0" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#0D47A1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Close Button Style -->
+        <Style x:Key="CloseButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="16" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#F1F3F4" />
+                                <Setter Property="Foreground" Value="#202124" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E8EAED" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Severity Badge Style -->
+        <Style x:Key="SeverityBadgeStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,0,0,20" />
+        </Style>
+    </Window.Resources>
+
+    <!-- Background Overlay -->
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.5" />
+        </Grid.Background>
+
+        <!-- Main Content Card -->
+        <Border Style="{StaticResource MainCardStyle}" 
+                MaxWidth="760" 
+                MaxHeight="610" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center">
+            <Grid Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Header Section -->
+                <Grid Grid.Row="0" Margin="0,0,0,25">
+                    <StackPanel HorizontalAlignment="Left">
+                        <TextBlock Text="🚨 Medical Incident Details" Style="{StaticResource HeaderStyle}" />
+                        <TextBlock Text="Detailed information about the medical incident" Style="{StaticResource SubtitleStyle}" />
+                    </StackPanel>
+                    <Button x:Name="btnClose" 
+                            Content="✕" 
+                            Style="{StaticResource CloseButtonStyle}" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Top"
+                            Click="Close_Click" />
+                </Grid>
+
+                <!-- Content Section -->
+                <ScrollViewer Grid.Row="1" 
+                              VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <!-- Incident ID and Status -->
+                        <!--<Border Style="{StaticResource InfoCardStyle}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Incident ID" Style="{StaticResource LabelStyle}" />
+                                    <TextBlock Text="{Binding IncidentId}" Style="{StaticResource ValueStyle}" Margin="0,0,0,0" />
+                                </StackPanel>
+                                <Border x:Name="SeverityBadge" 
+                                        Grid.Column="1" 
+                                        Style="{StaticResource SeverityBadgeStyle}" 
+                                        Margin="0">
+                                    <TextBlock Text="{Binding Severity.SeverityName}" 
+                                               FontSize="13" 
+                                               FontWeight="Medium" 
+                                               Foreground="White" 
+                                               HorizontalAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </Border>
+-->
+                        <!-- Main Information Grid -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left Column -->
+                            <StackPanel Grid.Column="0" Margin="0,0,15,0">
+                                <!-- Student Information -->
+                                <TextBlock Text="Student Information" Style="{StaticResource LabelStyle}" />
+                                <TextBlock Text="{Binding Student.FullName}" Style="{StaticResource ValueStyle}" />
+
+                                <!-- Date -->
+                                <TextBlock Text="Incident Date" Style="{StaticResource LabelStyle}" />
+                                <TextBlock Text="{Binding IncidentDate, StringFormat=dd/MM/yyyy}" Style="{StaticResource ValueStyle}" />
+
+                                <!-- Location -->
+                                <TextBlock Text="Location" Style="{StaticResource LabelStyle}" />
+                                <TextBlock Text="{Binding Location}" Style="{StaticResource ValueStyle}" />
+
+                                
+                            </StackPanel>
+
+                            <!-- Right Column -->
+                            <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                                <!-- Reported By -->
+                                <TextBlock Text="Reported By" Style="{StaticResource LabelStyle}" />
+                                <TextBlock Text="{Binding ReportedByNavigation.FullName}" Style="{StaticResource ValueStyle}" />
+                                
+                                <!-- Contact Information -->
+                                <TextBlock Text="Contact Information" Style="{StaticResource LabelStyle}" />
+                                <TextBlock Text="{Binding ReportedByNavigation.Phone, StringFormat=Phone: {0}}" Style="{StaticResource ValueStyle}" />
+
+                                <!-- Time (if available) -->
+                                <TextBlock Text="Time" Style="{StaticResource LabelStyle}" />
+                                <TextBlock Text="{Binding IncidentDate, StringFormat=HH:mm}" Style="{StaticResource ValueStyle}" />
+
+                                <!-- Status -->
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Description Section -->
+                        <Border Style="{StaticResource InfoCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="📝 Description" Style="{StaticResource LabelStyle}" FontSize="15" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding Description}" 
+                                           Style="{StaticResource ValueStyle}" 
+                                           TextWrapping="Wrap" 
+                                           LineHeight="20"
+                                           Margin="0,5,0,0" />
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Action Taken Section -->
+                        <Border Style="{StaticResource InfoCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="🏥 Action Taken" Style="{StaticResource LabelStyle}" FontSize="15" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding ActionsTaken}" 
+                                           Style="{StaticResource ValueStyle}" 
+                                           TextWrapping="Wrap" 
+                                           LineHeight="20"
+                                           Margin="0,5,0,0" />
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Additional Information -->
+                        <Border Background="#E8F0FE" 
+                                CornerRadius="8" 
+                                Padding="16" 
+                                Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="ℹ️ Additional Information" 
+                                           FontSize="15" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#1A73E8" 
+                                           Margin="0,0,0,10" />
+                                <TextBlock Text="This incident has been documented and the appropriate medical staff have been notified. If you have any concerns, please contact the school medical office." 
+                                           FontSize="13" 
+                                           Foreground="#5F6368" 
+                                           TextWrapping="Wrap" 
+                                           LineHeight="18" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Footer Section -->
+                <StackPanel Grid.Row="2" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            Margin="0,25,0,0">
+                    <Button Content="Print Report" 
+                            Style="{StaticResource ActionButtonStyle}" 
+                            Background="#34A853" 
+                            x:Name="btnPrint" />
+                    <Button Content="Close" 
+                            Style="{StaticResource ActionButtonStyle}" 
+                            Background="#5F6368" 
+                            Click="Close_Click" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+
+    <!-- Data Triggers for Severity Badge Colors -->
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+</Window>
