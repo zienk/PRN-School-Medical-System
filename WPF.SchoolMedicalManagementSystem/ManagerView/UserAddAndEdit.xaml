@@ -222,8 +222,12 @@
                     <!-- Vai trò -->
                     <StackPanel>
                         <Label Content="Vai trò:" Style="{StaticResource ModernLabel}"/>
-                        <ComboBox x:Name="cmbRole" 
-                                  Padding="0"/>
+                        <ComboBox x:Name="cmbRole"
+                                      Height="40"
+                                      FontSize="14"
+                                      BorderThickness="0"
+                                      VerticalContentAlignment="Center"
+                                      Padding="0" BorderBrush="#FFF7F7F7"/>
                     </StackPanel>
 
                     <!-- Email -->

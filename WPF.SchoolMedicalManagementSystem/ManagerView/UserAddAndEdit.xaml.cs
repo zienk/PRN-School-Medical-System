@@ -63,7 +63,6 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         private void LoadRoles()
         {
             var roles = _roleService.GetAllRoles();
-            MessageBox.Show($"test: {roles.Count()}"); // test
             cmbRole.ItemsSource = roles;
             cmbRole.DisplayMemberPath = "RoleName";
             cmbRole.SelectedValue = 1;
