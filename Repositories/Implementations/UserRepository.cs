@@ -40,6 +40,7 @@ namespace Repositories.Implementations
         public List<User> GetAllUsers()
             => _context.Users
                 .Include(u => u.Role)
+                .AsNoTracking()
                 .Where(u => u.IsActive == true)
                 .ToList();
 
