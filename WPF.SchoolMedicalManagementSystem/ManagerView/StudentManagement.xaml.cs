@@ -22,16 +22,18 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
     public partial class StudentManagement : Window
     {
 
-        private IStudentService _studentService;
+        private readonly IStudentService _studentService;
         public StudentManagement()
         {
             InitializeComponent();
+
+            _studentService = new StudentService();
+
             LoadData();
         }
 
         public void LoadData()
         {
-            _studentService = new StudentService();
             dgStudents.ItemsSource = null;
             dgStudents.ItemsSource = _studentService.GetAllStudents();
         }

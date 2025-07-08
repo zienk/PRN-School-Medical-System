@@ -98,8 +98,8 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                 {
                     try
                     {
-                        _usersive.DeleteUser(selectedUser.UserId);  
-                        LoadData(); 
+                        _userService.DeleteUser(selectedUser.UserId);  
+                        LoadUserData(); 
                         MessageBox.Show("Xóa người dùng thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception ex)
