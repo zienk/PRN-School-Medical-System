@@ -12,11 +12,11 @@ namespace Services.Implementations
 {
     public class IncidentService : IIncidentService
     {
-        private readonly IIncidenRepository _incidentRepository;
+        private readonly IIncidentRepository _incidentRepository;
 
         public IncidentService()
         {
-            _incidentRepository = new IncidenRepository();
+            _incidentRepository = new IncidentRepository();
         }
 
         //public List<Incident> GetAllIncidents(Guid userId)

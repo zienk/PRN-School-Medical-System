@@ -9,10 +9,10 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 namespace Repositories.Implementations
 {
-    public class IncidenRepository : IIncidenRepository
+    public class IncidentRepository : IIncidentRepository
     {
         private readonly PrnEduHealthContext _context;
-        public IncidenRepository()
+        public IncidentRepository()
         {
             _context = new PrnEduHealthContext();
         }

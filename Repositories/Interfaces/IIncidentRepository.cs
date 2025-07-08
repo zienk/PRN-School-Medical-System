@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.Interfaces
 {
-    public interface IIncidenRepository
+    public interface IIncidentRepository
     {
         //public List<Incident> GetAllIncidents(Guid userId);
         List<Incident> GetAllIncidentsbyUserId(List<Student> students);
