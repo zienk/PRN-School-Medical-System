@@ -17,6 +17,7 @@ namespace Services.Implementations
         public IncidentService()
         {
             _incidentRepository = new IncidentRepository();
+
         }
 
         //public List<Incident> GetAllIncidents(Guid userId)

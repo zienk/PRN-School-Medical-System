@@ -23,5 +23,16 @@ namespace Services.Implementations
         {
             return  _healthRecordRepository.GetAllHealthRecords();
         }
+
+        public List<HealthRecord> getAllMedicalRecordOfStudentByUserId(Guid userId)
+        {
+            return _healthRecordRepository.getAllMedicalRecordOfStudentByUserId(userId);
+        }
+
+        //Thien
+        public HealthRecord UpdateHealthRecord(HealthRecord healthRecord)
+        {
+            return _healthRecordRepository.UpdateHealthRecord(healthRecord);
+        }
     }
 }

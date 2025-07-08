@@ -44,6 +44,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         {
             // TODO: Load initial data
             List<Student> students = studentService.GetAllStudentsByUserId(user.UserId);
+
             //MessageBox.Show(user.UserId.ToString(), "User Email", MessageBoxButton.OK, MessageBoxImage.Information);
             incidents = incidentService.GetAllIncidentsByUserId(students);
 
@@ -382,6 +383,28 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             dpDateFilter.SelectedDate = null;
             dgMedicalIncidents.ItemsSource = incidents; // Reset to original data
             txtRecordCount.Text = incidents.Count.ToString();
+        }
+
+
+        private void btnVaccinations_Click_1(object sender, RoutedEventArgs e)
+        {
+            VaccineResultManagement vaccineResultManagement = new VaccineResultManagement(user);
+            vaccineResultManagement.Show();
+            this.Close();
+        }
+
+        private void btnHealthCheckups_Click_1(object sender, RoutedEventArgs e)
+        {
+            HealthCheckupResultManagement healthCheckupResultManagement = new HealthCheckupResultManagement(user);
+            healthCheckupResultManagement.Show();
+            this.Close();
+        }
+
+        private void btnHealthRecord_Click_1(object sender, RoutedEventArgs e)
+        {
+            HealthRecordManagement healthRecordManagement = new HealthRecordManagement(user);
+            healthRecordManagement.Show();
+            this.Close();
         }
     }
 }

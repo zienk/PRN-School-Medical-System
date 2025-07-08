@@ -10,5 +10,9 @@ namespace Repositories.Interfaces
     public interface IHealthRecordRepository
     {
         List<HealthRecord> GetAllHealthRecords();
+        List<HealthRecord> getAllMedicalRecordOfStudentByUserId(Guid userId);
+
+        //Thien
+        public HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
     }
 }

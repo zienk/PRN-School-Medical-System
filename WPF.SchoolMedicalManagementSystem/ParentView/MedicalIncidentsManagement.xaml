@@ -219,7 +219,7 @@
 
                 <Button x:Name="btnHealthRecord" 
                         Content="📋 Health Record" 
-                        Style="{StaticResource SidebarButtonStyle}" />
+                        Style="{StaticResource SidebarButtonStyle}" Click="btnHealthRecord_Click_1" />
 
                 <Button x:Name="btnAccountInfo" 
                         Content="👤 Account Info" 
@@ -231,11 +231,11 @@
 
                 <Button x:Name="btnHealthCheckups" 
                         Content="🏥 Health Checkups" 
-                        Style="{StaticResource SidebarButtonStyle}" />
+                        Style="{StaticResource SidebarButtonStyle}" Click="btnHealthCheckups_Click_1" />
 
                 <Button x:Name="btnVaccinations" 
                         Content="💉 Vaccinations" 
-                        Style="{StaticResource SidebarButtonStyle}" />
+                        Style="{StaticResource SidebarButtonStyle}" Click="btnVaccinations_Click_1" />
 
                 <Button x:Name="btnMedicalIncidents" 
                         Content="🚨 Medical Incidents" 
@@ -342,7 +342,7 @@
                               RowStyle="{StaticResource DataGridRowStyle}"
                               CellStyle="{StaticResource DataGridCellStyle}">
                         <DataGrid.Columns>
-                            
+
 
                             <!-- Student Name -->
                             <DataGridTextColumn Header="Student" 
@@ -353,13 +353,13 @@
                             <DataGridTextColumn Header="Mô tả ngắn" 
                                                 Binding="{Binding IncidentType.EventTypeName, StringFormat=dd/MM/yyyy}" 
                                                 Width="150" />
-                            
+
                             <!-- Incident Date -->
                             <DataGridTextColumn Header="Ngày" 
                                                 Binding="{Binding IncidentDate, StringFormat=dd/MM/yyyy}" 
                                                 Width="120" />
 
-                            
+
                             <!-- Reported By -->
                             <DataGridTextColumn Header="Y tá tiếp nhận" 
                                                 Binding="{Binding ReportedByNavigation.FullName}" 

@@ -1,0 +1,356 @@
+﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.ParentView.HealthCheckupResultManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ParentView"
+        mc:Ignorable="d"
+        Title="Health Checkup Results - School Medical System" Height="800" Width="1400"
+        WindowStartupLocation="CenterScreen"
+        Background="White">
+    <Window.Resources>
+        <!-- Modern Card Style -->
+        <Style x:Key="ModernCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="BorderBrush" Value="#E8F0FE" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="25" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="25" Opacity="0.12" Color="#4285F4" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Sidebar Navigation Button Style -->
+        <Style x:Key="ParentSidebarButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="8,5" />
+            <Setter Property="Padding" Value="18,12" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="10" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                             VerticalAlignment="Center" 
+                                             Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FEF7E0" />
+                                <Setter Property="Foreground" Value="#F57C00" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FFF3E0" />
+                                <Setter Property="Foreground" Value="#E65100" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Active Sidebar Button Style -->
+        <Style x:Key="ActiveSidebarButtonStyle" TargetType="Button" BasedOn="{StaticResource ParentSidebarButtonStyle}">
+            <Setter Property="Background" Value="#FEF7E0" />
+            <Setter Property="Foreground" Value="#F57C00" />
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="38" />
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,25,0,10" />
+        </Style>
+
+        <!-- Welcome Text Style -->
+        <Style x:Key="WelcomeStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,0,0,35" />
+        </Style>
+
+        <!-- Student Selection ComboBox Style -->
+        <Style x:Key="StudentComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#E8EAED" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Border x:Name="MainBorder" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter x:Name="ContentSite"
+                                                Grid.Column="0"
+                                                IsHitTestVisible="False"
+                                                Content="{TemplateBinding SelectionBoxItem}"
+                                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                Margin="{TemplateBinding Padding}"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Left" />
+
+                                <ToggleButton x:Name="ToggleButton"
+                                            Grid.Column="1"
+                                            Focusable="false"
+                                            IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            ClickMode="Press"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Width="30">
+                                    <Path x:Name="Arrow"
+                                          Fill="#5F6368"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                </ToggleButton>
+
+                                <Popup x:Name="Popup"
+                                       Placement="Bottom"
+                                       IsOpen="{TemplateBinding IsDropDownOpen}"
+                                       AllowsTransparency="True"
+                                       Focusable="False"
+                                       PopupAnimation="Slide">
+                                    <Grid x:Name="DropDown"
+                                          SnapsToDevicePixels="True"
+                                          MinWidth="{TemplateBinding ActualWidth}"
+                                          MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                        <Border x:Name="DropDownBorder"
+                                                Background="White"
+                                                BorderThickness="1"
+                                                BorderBrush="#E8EAED"
+                                                CornerRadius="8">
+                                            <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                            </ScrollViewer>
+                                        </Border>
+                                    </Grid>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="#4285F4" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="#4285F4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Checkup Item Style -->
+        <Style x:Key="CheckupItemStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="BorderBrush" Value="#E8EAED" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="0,0,0,15" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="8" Opacity="0.08" Color="#000000" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Detail Card Style -->
+        <Style x:Key="DetailCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#F8F9FA" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderBrush" Value="#E8EAED" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="15" />
+        </Style>
+
+        <!-- Label Style -->
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="Margin" Value="0,0,0,5" />
+        </Style>
+
+        <!-- Value Style -->
+        <Style x:Key="ValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <!-- Status Style -->
+        <Style x:Key="StatusStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Background Gradient -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FFF8E1" Offset="0"/>
+                <GradientStop Color="#FFFDE7" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="White" CornerRadius="0,25,25,0" 
+                BorderBrush="#E8EAED" BorderThickness="0,0,1,0" Margin="0">
+            <StackPanel Orientation="Vertical" Margin="25">
+                <!-- Logo/Title Section -->
+                <StackPanel Margin="0,25,0,40">
+                    <TextBlock Text="👨‍👩‍👧‍👦" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                    <TextBlock Text="Parent Portal" 
+                               FontSize="20" 
+                               FontWeight="SemiBold" 
+                               Foreground="#202124" 
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="School Medical System" 
+                               FontSize="14" 
+                               Foreground="#5F6368" 
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+
+                <!-- Navigation Section -->
+                <TextBlock Text="NAVIGATION" 
+                           FontSize="12" 
+                           FontWeight="SemiBold" 
+                           Foreground="#9AA0A6" 
+                           Margin="20,0,0,20" />
+
+                <Button x:Name="btnHealthRecord" 
+                        Content="📋 Health Record" 
+                        Style="{StaticResource ParentSidebarButtonStyle}"
+                        Click="btnHealthRecord_Click" />
+
+                <Button x:Name="btnAccountInfo" 
+                        Content="👤 Account Info" 
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
+
+                <Button x:Name="btnStudentInfo" 
+                        Content="🎓 Student Info" 
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
+
+                <Button x:Name="btnHealthCheckups" 
+                        Content="🩺 Health Checkups" 
+                        Style="{StaticResource ActiveSidebarButtonStyle}"/>
+
+                <Button x:Name="btnVaccinations" 
+                        Content="💉 Vaccinations" 
+                        Style="{StaticResource ParentSidebarButtonStyle}" Click="btnVaccinations_Click"/>
+
+                <Button x:Name="btnIncidents" 
+                        Content="🚨 Medical Incidents" 
+                        Style="{StaticResource ParentSidebarButtonStyle}" Click="btnIncidents_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1" Margin="35">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Health Checkup Results" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="View detailed health checkup results for your children." 
+                           Style="{StaticResource WelcomeStyle}" />
+            </StackPanel>
+
+            <!-- Student Selection -->
+            <Grid Grid.Row="1" Margin="0,0,0,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" 
+                           Text="Select Student:" 
+                           FontSize="16" 
+                           FontWeight="SemiBold" 
+                           Foreground="#202124" 
+                           VerticalAlignment="Center" 
+                           Margin="0,0,15,0" />
+
+                <ComboBox Grid.Column="1" 
+                          x:Name="cmbStudents" 
+                          Style="{StaticResource StudentComboBoxStyle}"
+                          Height="60"
+                          SelectionChanged="cmbStudents_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Border Background="#FFE0B2" CornerRadius="15" Width="30" Height="30" Margin="0,0,10,0">
+                                    <TextBlock Text="{Binding Avatar}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="SemiBold" Foreground="#202124"/>
+                                    <TextBlock Text="{Binding GradeAge}" FontSize="12" Foreground="#5F6368"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+
+            <!-- Checkup Results -->
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="stackCheckupResults" Margin="0,0,20,0">
+                    <!-- This will be populated with checkup results -->
+                    <TextBlock x:Name="txtNoResults" 
+                               Text="Please select a student to view their health checkup results." 
+                               FontSize="16" 
+                               Foreground="#9AA0A6" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               Margin="0,50,0,0" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

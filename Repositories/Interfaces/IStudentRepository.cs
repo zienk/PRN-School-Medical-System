@@ -21,6 +21,7 @@ namespace Repositories.Interfaces
         void UpdateStudent(Student student);
         void DeleteStudent(Guid studentId);
 
+        //Thien
         public List<Student> GetAllStudentsByUserId(Guid userId);
 
     }

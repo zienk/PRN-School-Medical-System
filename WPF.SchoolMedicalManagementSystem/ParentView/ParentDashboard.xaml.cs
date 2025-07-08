@@ -32,6 +32,9 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Implement health record navigation logic
+            HealthRecordManagement healthRecordManagement = new HealthRecordManagement(user);
+            healthRecordManagement.Show();
+            this.Close();
         }
 
         private void btnIncidents_Click(object sender, RoutedEventArgs e)
@@ -40,5 +43,21 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             medicalIncidentsManagement.Show();
             this.Close();
         }
+
+        private void btnHealthCheckups_Click(object sender, RoutedEventArgs e)
+        {
+            HealthCheckupResultManagement healthCheckupManagement = new HealthCheckupResultManagement(user);
+            healthCheckupManagement.Show();
+            this.Close();
+        }
+
+        private void btnVaccinations_Click(object sender, RoutedEventArgs e)
+        {
+            VaccineResultManagement vaccineResultManagement = new VaccineResultManagement(user);
+            vaccineResultManagement.Show();
+            this.Close();
+        }
+
+        
     }
 }

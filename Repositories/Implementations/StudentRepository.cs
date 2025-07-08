@@ -56,13 +56,15 @@ namespace Repositories.Implementations
             _context.Students.Update(student);
             _context.SaveChanges();
         }
+
+        //Thien
         public List<Student> GetAllStudentsByUserId(Guid userId)
         {
             return _context.Students
                 .Include(s => s.Parent)
+                .Include(s => s.Gender)
                 .Where(s => s.Parent.UserId == userId && s.IsActive == true)
                 .ToList();
         }
-
     }
 }

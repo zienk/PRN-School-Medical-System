@@ -23,7 +23,9 @@ namespace Services.Interfaces
         void UpdateStudent(Student student);
         void DeleteStudent(Guid studentId);
 
-        public List<Student> GetAllStudentsByUserId(Guid userId);
 
+
+        //Thien
+        public List<Student> GetAllStudentsByUserId(Guid userId);
     }
 }

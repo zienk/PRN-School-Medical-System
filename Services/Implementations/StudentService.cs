@@ -53,10 +53,11 @@ namespace Services.Implementations
             _studentRepository.UpdateStudent(student);
         }
 
+
+        //Thien
         public List<Student> GetAllStudentsByUserId(Guid userId)
         {
             return _studentRepository.GetAllStudentsByUserId(userId);
-
         }
     }
 }

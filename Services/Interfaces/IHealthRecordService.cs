@@ -10,5 +10,9 @@ namespace Services.Interfaces
     public interface IHealthRecordService
     {
         List<HealthRecord> GetAllHealthRecords();
+        List<HealthRecord> getAllMedicalRecordOfStudentByUserId(Guid userId);
+
+        //Thien
+        HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
     }
 }
