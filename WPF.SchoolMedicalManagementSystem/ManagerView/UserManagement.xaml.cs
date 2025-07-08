@@ -14,8 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BusinessObjects.Entities;
-using Services.Implementations;
-using Services.Interfaces;
+
 
 namespace WPF.SchoolMedicalManagementSystem.ManagerView
 {
@@ -63,28 +62,6 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void ResetPasswordButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnBackToDashboard_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-
-      
             var selectedUser = dgUsers.SelectedItem as User;
             if (selectedUser != null)
             {
@@ -98,8 +75,8 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                 {
                     try
                     {
-                        _userService.DeleteUser(selectedUser.UserId);  
-                        LoadUserData(); 
+                        _userService.DeleteUser(selectedUser.UserId);
+                        LoadUserData();
                         MessageBox.Show("Xóa người dùng thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception ex)
@@ -112,6 +89,11 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             {
                 MessageBox.Show("Vui lòng chọn người dùng cần xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+       
         }
 
     }

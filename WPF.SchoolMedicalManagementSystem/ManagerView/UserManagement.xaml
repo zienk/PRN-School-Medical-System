@@ -175,10 +175,6 @@
                         Style="{StaticResource ModernButton}"
                         Click="SearchButton_Click"
                         Width="48"/>
-                <Button Content="Làm mới" 
-                        Background="#6C757D" 
-                        Style="{StaticResource ModernButton}"
-                        Click="RefreshButton_Click"/>
             </StackPanel>
 
             <!-- Các nút thao tác -->
@@ -195,10 +191,6 @@
                         Background="#DC3545" 
                         Style="{StaticResource ModernButton}"
                         Click="DeleteButton_Click"/>
-                <Button Content="Đặt lại mật khẩu" 
-                        Background="#17A2B8" 
-                        Style="{StaticResource ModernButton}"
-                        Click="ResetPasswordButton_Click"/>
             </StackPanel>
         </Grid>
 
