@@ -38,8 +38,8 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
             isEditMode = isEdit;
             currentUser = user;
-            
-            
+            LoadRoles();
+
 
             if (isEditMode)
             {
@@ -57,13 +57,17 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                 HeaderTitle.Text = "THÊM NGƯỜI DÙNG MỚI";
                 btnSave.Content = "Thêm mới";
             }
-            LoadRoles();
+           
         }
 
         private void LoadRoles()
         {
             var roles = _roleService.GetAllRoles();
+            MessageBox.Show($"test: {roles.Count()}"); // test
             cmbRole.ItemsSource = roles;
+            cmbRole.DisplayMemberPath = "RoleName";
+            cmbRole.SelectedValue = 1;
+            cmbRole.SelectedValuePath = "RoleId";
         }
 
         private void LoadUserData()

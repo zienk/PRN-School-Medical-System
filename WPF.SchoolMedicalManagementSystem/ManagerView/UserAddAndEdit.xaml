@@ -223,9 +223,6 @@
                     <StackPanel>
                         <Label Content="Vai trò:" Style="{StaticResource ModernLabel}"/>
                         <ComboBox x:Name="cmbRole" 
-                                  Style="{StaticResource ModernComboBox}"
-                                  DisplayMemberPath="RoleName"
-                                  SelectedValuePath="RoleId"
                                   Padding="0"/>
                     </StackPanel>
 
