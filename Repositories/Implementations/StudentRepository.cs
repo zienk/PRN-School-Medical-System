@@ -1,39 +1,32 @@
-<<<<<<< Updated upstream
+
 ﻿using System;
-=======
+
 ﻿using DataAccessLayer;
 using Repositories.Interfaces;
 using System;
->>>>>>> Stashed changes
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects.Entities;
-<<<<<<< Updated upstream
-using DataAccessLayer;
-using Microsoft.EntityFrameworkCore;
-using Repositories.Interfaces;
-
-=======
 
 using Microsoft.EntityFrameworkCore;
->>>>>>> Stashed changes
+
+using Microsoft.EntityFrameworkCore;
+
 namespace Repositories.Implementations
 {
     public class StudentRepository : IStudentRepository
     {
-<<<<<<< Updated upstream
-        PrnEduHealthContext _context;
 
-=======
         private readonly PrnEduHealthContext _context;
->>>>>>> Stashed changes
+
         public StudentRepository()
         {
             _context = new PrnEduHealthContext();
         }
-<<<<<<< Updated upstream
+
         public void AddStudent(Student student)
         {
             _context.Students.Add(student);
@@ -63,7 +56,6 @@ namespace Repositories.Implementations
             _context.Students.Update(student);
             _context.SaveChanges();
         }
-=======
         public List<Student> GetAllStudentsByUserId(Guid userId)
         {
             return _context.Students
@@ -71,6 +63,6 @@ namespace Repositories.Implementations
                 .Where(s => s.Parent.UserId == userId && s.IsActive == true)
                 .ToList();
         }
->>>>>>> Stashed changes
+
     }
 }
