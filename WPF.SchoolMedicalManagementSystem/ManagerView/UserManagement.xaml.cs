@@ -34,6 +34,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void LoadUserData()
         {
+            dgUsers.ItemsSource = null;
             dgUsers.ItemsSource = _userService.GetAllUsers();
         }
 
@@ -52,12 +53,67 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Mở dialog ở chế độ thêm mới
+                var userDialog = new UserAddAndEdit(isEdit: false, user: null);
+                userDialog.Owner = this; // Đặt window cha
 
+                var result = userDialog.ShowDialog();
+
+                // Nếu user đã lưu thành công, refresh lại danh sách
+                if (result == true)
+                {
+                    LoadUserData();
+                    StatusLabel.Text = "Thêm người dùng thành công!";
+                    UpdateRecordCount();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi mở form thêm người dùng: {ex.Message}",
+                               "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateRecordCount()
+        {
+            var userCount = dgUsers.Items.Count;
+            RecordCountLabel.Text = $"Tổng: {userCount} người dùng";
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Lấy user được chọn từ DataGrid
+                var selectedUser = dgUsers.SelectedItem as User;
 
+                if (selectedUser == null)
+                {
+                    MessageBox.Show("Vui lòng chọn người dùng cần sửa!",
+                                   "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Mở dialog ở chế độ chỉnh sửa với user đã chọn
+                var userDialog = new UserAddAndEdit(isEdit: true, user: selectedUser);
+                userDialog.Owner = this; // Đặt window cha
+
+                var result = userDialog.ShowDialog();
+
+                // Nếu user đã cập nhật thành công, refresh lại danh sách
+                if (result == true)
+                {
+                    LoadUserData();
+                    StatusLabel.Text = "Cập nhật người dùng thành công!";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi mở form sửa người dùng: {ex.Message}",
+                               "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
