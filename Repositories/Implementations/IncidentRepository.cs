@@ -19,74 +19,139 @@ namespace Repositories.Implementations
             _context = new PrnEduHealthContext();
         }
 
-        public async Task AddIncidentAsync(Incident incident)
+        public bool AddIncident(Incident incident)
         {
-            await _context.Incidents.AddAsync(incident);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteIncidentAsync(int incidentId)
-        {
-            var incident = await GetIncidentByIdAsync(incidentId);
-
-            if (incident != null)
+            try
             {
-                incident.IsActive = false;
-                _context.Incidents.Update(incident);
-                await _context.SaveChangesAsync();
+                _context.Incidents.Add(incident);
+                return _context.SaveChanges() > 0;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public Task<List<Incident>> GetAllIncidentsAsync()
-            => _context.Incidents
-                .Include(i => i.Student)
-                .Include(i => i.IncidentType)
-                .Include(i => i.ReportedByNavigation)
-                .Include(i => i.Severity)
-                .Where(i => i.IsActive == true)
-                .ToListAsync();
-
-        public Task<Incident?> GetIncidentByIdAsync(int incidentId)
-            => _context.Incidents
-                .Include(i => i.Student)
-                .Include(i => i.IncidentType)
-                .Include(i => i.ReportedByNavigation)
-                .Include(i => i.Severity)
-                .FirstOrDefaultAsync(i => i.IncidentId == incidentId && i.IsActive == true);
-
-        public Task<List<Incident>> GetIncidentsByStudentIdAsync(int studentId)
-            => _context.Incidents
-                .Include(i => i.Student)
-                .Include(i => i.IncidentType)
-                .Include(i => i.ReportedByNavigation)
-                .Include(i => i.Severity)
-                .Where(i => i.StudentId == studentId && i.IsActive == true)
-                .ToListAsync();
-
-        public Task<List<Incident>> SearchIncidentsAsync(string searchText)
+        public bool DeleteIncident(int incidentId)
         {
-            searchText = searchText.ToLower();
+            try
+            {
+                var incident = GetIncidentById(incidentId);
 
-            return _context.Incidents
-                .Include(i => i.Student)
-                .Include(i => i.IncidentType)
-                .Include(i => i.ReportedByNavigation)
-                .Include(i => i.Severity)
-                .Where(i => ((i.Description != null && i.Description.ToLower().Contains(searchText)) ||
-                             (i.Location != null && i.Location.ToLower().Contains(searchText)) ||
-                             (i.ActionsTaken != null && i.ActionsTaken.ToLower().Contains(searchText)) ||
-                             (i.Student.FullName != null && i.Student.FullName.ToLower().Contains(searchText))) &&
-                             i.IsActive == true)
-                .ToListAsync();
+                if (incident != null)
+                {
+                    incident.IsActive = false;
+                    _context.Incidents.Update(incident);
+                    return _context.SaveChanges() > 0;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public async Task UpdateIncidentAsync(Incident incident)
+        public List<Incident> GetAllIncidents()
         {
-            _context.Incidents.Update(incident);
-            await _context.SaveChangesAsync();
+            try
+            {
+                return _context.Incidents
+                    .Include(i => i.Student)
+                    .Include(i => i.IncidentType)
+                    .Include(i => i.ReportedByNavigation)
+                    .Include(i => i.Severity)
+                    .Where(i => i.IsActive == true)
+                    .ToList();
+            }
+            catch
+            {
+                return new List<Incident>();
+            }
         }
 
-        public Task<bool> IsIncidentExistsAsync(int incidentId)
-            => _context.Incidents.AnyAsync(i => i.IncidentId == incidentId && i.IsActive == true);
+        public Incident? GetIncidentById(int incidentId)
+        {
+            try
+            {
+                return _context.Incidents
+                    .Include(i => i.Student)
+                    .Include(i => i.IncidentType)
+                    .Include(i => i.ReportedByNavigation)
+                    .Include(i => i.Severity)
+                    .FirstOrDefault(i => i.IncidentId == incidentId && i.IsActive == true);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public List<Incident> GetIncidentsByStudentId(int studentId)
+        {
+            try
+            {
+                return _context.Incidents
+                    .Include(i => i.Student)
+                    .Include(i => i.IncidentType)
+                    .Include(i => i.ReportedByNavigation)
+                    .Include(i => i.Severity)
+                    .Where(i => i.StudentId == studentId && i.IsActive == true)
+                    .ToList();
+            }
+            catch
+            {
+                return new List<Incident>();
+            }
+        }
+
+        public List<Incident> SearchIncidents(string searchText)
+        {
+            try
+            {
+                searchText = searchText.ToLower();
+
+                return _context.Incidents
+                    .Include(i => i.Student)
+                    .Include(i => i.IncidentType)
+                    .Include(i => i.ReportedByNavigation)
+                    .Include(i => i.Severity)
+                    .Where(i => ((i.Description != null && i.Description.ToLower().Contains(searchText)) ||
+                                 (i.Location != null && i.Location.ToLower().Contains(searchText)) ||
+                                 (i.ActionsTaken != null && i.ActionsTaken.ToLower().Contains(searchText)) ||
+                                 (i.Student.FullName != null && i.Student.FullName.ToLower().Contains(searchText))) &&
+                                 i.IsActive == true)
+                    .ToList();
+            }
+            catch
+            {
+                return new List<Incident>();
+            }
+        }
+
+        public bool UpdateIncident(Incident incident)
+        {
+            try
+            {
+                _context.Incidents.Update(incident);
+                return _context.SaveChanges() > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool IsIncidentExists(int incidentId)
+        {
+            try
+            {
+                return _context.Incidents.Any(i => i.IncidentId == incidentId && i.IsActive == true);
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

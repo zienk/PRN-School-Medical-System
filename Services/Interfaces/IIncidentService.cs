@@ -9,12 +9,12 @@ namespace Services.Interfaces
 {
     public interface IIncidentService
     {
-        Task<Incident?> GetIncidentByIdAsync(int incidentId);
-        Task<List<Incident>> GetAllIncidentsAsync();
-        Task<List<Incident>> GetIncidentsByStudentIdAsync(int studentId);
-        Task<List<Incident>> SearchIncidentsAsync(string searchText);
-        Task AddIncidentAsync(Incident incident);
-        Task UpdateIncidentAsync(Incident incident);
-        Task DeleteIncidentAsync(int incidentId);
+        Incident? GetIncidentById(int incidentId);
+        List<Incident> GetAllIncidents();
+        List<Incident> GetIncidentsByStudentId(int studentId);
+        List<Incident> SearchIncidents(string searchText);
+        bool AddIncident(Incident incident);
+        bool UpdateIncident(Incident incident);
+        bool DeleteIncident(int incidentId);
     }
 }

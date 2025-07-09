@@ -19,72 +19,76 @@ namespace Services.Implementations
             _incidentRepository = new IncidentRepository();
         }
 
-        public async Task AddIncidentAsync(Incident incident)
+        public bool AddIncident(Incident incident)
         {
             if (incident == null)
-                throw new ArgumentNullException(nameof(incident));
+                return false;
 
             if (incident.StudentId <= 0)
-                throw new ArgumentException("StudentId không hợp lệ.");
+                return false;
 
             if (incident.IncidentTypeId <= 0)
-                throw new ArgumentException("IncidentTypeId không hợp lệ.");
+                return false;
 
             if (incident.IncidentDate == default(DateTime))
-                throw new ArgumentException("IncidentDate không được để trống.");
+                return false;
 
             incident.IsActive = true;
 
-            await _incidentRepository.AddIncidentAsync(incident);
+            return _incidentRepository.AddIncident(incident);
         }
 
-        public async Task DeleteIncidentAsync(int incidentId)
+        public bool DeleteIncident(int incidentId)
         {
             if (incidentId <= 0)
-                throw new ArgumentException("IncidentId không hợp lệ.");
+                return false;
 
-            var incident = await _incidentRepository.GetIncidentByIdAsync(incidentId);
+            var incident = _incidentRepository.GetIncidentById(incidentId);
             if (incident == null)
-                throw new InvalidOperationException("Không tìm thấy sự cố để xóa!");
+                return false;
 
-            await _incidentRepository.DeleteIncidentAsync(incidentId);
+            return _incidentRepository.DeleteIncident(incidentId);
         }
 
-        public Task<List<Incident>> GetAllIncidentsAsync()
-            => _incidentRepository.GetAllIncidentsAsync();
+        public List<Incident> GetAllIncidents()
+        {
+            return _incidentRepository.GetAllIncidents();
+        }
 
-        public Task<Incident?> GetIncidentByIdAsync(int incidentId)
+        public Incident? GetIncidentById(int incidentId)
         {
             if (incidentId <= 0)
-                throw new ArgumentException("IncidentId không hợp lệ.");
+                return null;
 
-            return _incidentRepository.GetIncidentByIdAsync(incidentId);
+            return _incidentRepository.GetIncidentById(incidentId);
         }
 
-        public Task<List<Incident>> GetIncidentsByStudentIdAsync(int studentId)
+        public List<Incident> GetIncidentsByStudentId(int studentId)
         {
             if (studentId <= 0)
-                throw new ArgumentException("StudentId không hợp lệ.");
+                return new List<Incident>();
 
-            return _incidentRepository.GetIncidentsByStudentIdAsync(studentId);
+            return _incidentRepository.GetIncidentsByStudentId(studentId);
         }
 
-        public Task<List<Incident>> SearchIncidentsAsync(string searchText)
-            => _incidentRepository.SearchIncidentsAsync(searchText ?? "");
+        public List<Incident> SearchIncidents(string searchText)
+        {
+            return _incidentRepository.SearchIncidents(searchText ?? "");
+        }
 
-        public async Task UpdateIncidentAsync(Incident incident)
+        public bool UpdateIncident(Incident incident)
         {
             if (incident == null)
-                throw new ArgumentNullException(nameof(incident));
+                return false;
 
             if (incident.IncidentId <= 0)
-                throw new ArgumentException("IncidentId không hợp lệ.");
+                return false;
 
-            var existingIncident = await _incidentRepository.GetIncidentByIdAsync(incident.IncidentId);
+            var existingIncident = _incidentRepository.GetIncidentById(incident.IncidentId);
             if (existingIncident == null)
-                throw new InvalidOperationException("Không tìm thấy sự cố để cập nhật!");
+                return false;
 
-            await _incidentRepository.UpdateIncidentAsync(incident);
+            return _incidentRepository.UpdateIncident(incident);
         }
     }
 }
