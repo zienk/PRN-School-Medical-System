@@ -1,0 +1,396 @@
+﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.ParentView.ParentDashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ParentView"
+        mc:Ignorable="d"
+        Title="Parent Dashboard - School Medical System" Height="750" Width="1300"
+        WindowStartupLocation="CenterScreen"
+        Background="White">
+    <Window.Resources>
+        <!-- Modern Card Style -->
+        <Style x:Key="ModernCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="BorderBrush" Value="#E8F0FE" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="25" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="25" Opacity="0.12" Color="#4285F4" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Gradient Card Style for Stats -->
+        <Style x:Key="ParentStatCardStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="Margin" Value="12" />
+            <Setter Property="Padding" Value="28" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="20" Opacity="0.15" Color="#000000" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Sidebar Navigation Button Style -->
+        <Style x:Key="ParentSidebarButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="8,5" />
+            <Setter Property="Padding" Value="18,12" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="10" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                             VerticalAlignment="Center" 
+                                             Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FEF7E0" />
+                                <Setter Property="Foreground" Value="#F57C00" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FFF3E0" />
+                                <Setter Property="Foreground" Value="#E65100" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Stat Number Style -->
+        <Style x:Key="StatNumberStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+        </Style>
+
+        <!-- Stat Label Style -->
+        <Style x:Key="StatLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Opacity" Value="0.95" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="38" />
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,25,0,10" />
+        </Style>
+
+        <!-- Welcome Text Style -->
+        <Style x:Key="WelcomeStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,0,0,35" />
+        </Style>
+
+        <!-- Child Info Card Style -->
+        <Style x:Key="ChildCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="BorderBrush" Value="#E8EAED" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="8" Opacity="0.08" Color="#000000" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Background Gradient -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FFF8E1" Offset="0"/>
+                <GradientStop Color="#FFFDE7" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="White" CornerRadius="0,25,25,0" 
+                BorderBrush="#E8EAED" BorderThickness="0,0,1,0" Margin="0">
+            <StackPanel Orientation="Vertical" Margin="25">
+                <!-- Logo/Title Section -->
+                <StackPanel Margin="0,25,0,40">
+                    <TextBlock Text="👨‍👩‍👧‍👦" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                    <TextBlock Text="Parent Portal" 
+                               FontSize="20" 
+                               FontWeight="SemiBold" 
+                               Foreground="#202124" 
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="School Medical System" 
+                               FontSize="14" 
+                               Foreground="#5F6368" 
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+
+                <!-- Navigation Section -->
+                <TextBlock Text="NAVIGATION" 
+                           FontSize="12" 
+                           FontWeight="SemiBold" 
+                           Foreground="#9AA0A6" 
+                           Margin="20,0,0,20" />
+
+                <Button x:Name="btnHealthRecord" 
+                        Content="📋 Health Record" 
+                        Style="{StaticResource ParentSidebarButtonStyle}"
+                        Click="btnHealthRecord_Click" />
+
+                <Button x:Name="btnAccountInfo" 
+                        Content="👤 Account Info" 
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
+
+                <Button x:Name="btnStudentInfo" 
+                        Content="🎓 Student Info" 
+                        Style="{StaticResource ParentSidebarButtonStyle}"/>
+
+                <Button x:Name="btnHealthCheckups" 
+                        Content="🩺 Health Checkups" 
+                        Style="{StaticResource ParentSidebarButtonStyle}" Click="btnHealthCheckups_Click"/>
+
+                <Button x:Name="btnVaccinations" 
+                        Content="💉 Vaccinations" 
+                        Style="{StaticResource ParentSidebarButtonStyle}" Click="btnVaccinations_Click"/>
+
+                <Button x:Name="btnIncidents" 
+                        Content="🚨 Medical Incidents" 
+                        Style="{StaticResource ParentSidebarButtonStyle}" Click="btnIncidents_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1" Margin="35">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="My Children's Health" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Monitor your children's health records and stay updated on their medical care." 
+                           Style="{StaticResource WelcomeStyle}" />
+            </StackPanel>
+
+            <!-- Statistics Cards -->
+            <Grid Grid.Row="1" Margin="0,0,0,35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Linked Students Card -->
+                <Border Grid.Column="0" Style="{StaticResource ParentStatCardStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FF7043" Offset="0"/>
+                            <GradientStop Color="#D84315" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Text="👧👦" FontSize="28" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                        <TextBlock x:Name="txtLinkedStudents" 
+                                   Text="{Binding LinkedStudents, FallbackValue=2}" 
+                                   Style="{StaticResource StatNumberStyle}" />
+                        <TextBlock Text="My Children" Style="{StaticResource StatLabelStyle}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Health Checkups Attended Card -->
+                <Border Grid.Column="1" Style="{StaticResource ParentStatCardStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#66BB6A" Offset="0"/>
+                            <GradientStop Color="#2E7D32" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Text="🩺" FontSize="28" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                        <TextBlock x:Name="txtHealthCheckups" 
+                                   Text="{Binding HealthCheckupsAttended, FallbackValue=12}" 
+                                   Style="{StaticResource StatNumberStyle}" />
+                        <TextBlock Text="Health Checkups" Style="{StaticResource StatLabelStyle}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Vaccinations Completed Card -->
+                <Border Grid.Column="2" Style="{StaticResource ParentStatCardStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#42A5F5" Offset="0"/>
+                            <GradientStop Color="#1565C0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Text="💉" FontSize="28" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                        <TextBlock x:Name="txtVaccinations" 
+                                   Text="{Binding VaccinationsCompleted, FallbackValue=18}" 
+                                   Style="{StaticResource StatNumberStyle}" />
+                        <TextBlock Text="Vaccinations" Style="{StaticResource StatLabelStyle}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Children Overview Section -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- My Children Section -->
+                <Border Grid.Column="0" Style="{StaticResource ModernCardStyle}" Margin="0,0,15,0">
+                    <StackPanel>
+                        <TextBlock Text="My Children" 
+                                   FontSize="22" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#202124" 
+                                   Margin="0,0,0,25" />
+
+                        <!-- Child 1 -->
+                        <Border Style="{StaticResource ChildCardStyle}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Background="#FFE0B2" CornerRadius="20" Width="40" Height="40" Margin="0,0,15,0">
+                                    <TextBlock Text="👧" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Emma Johnson" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
+                                    <TextBlock Text="Grade 5 • Age 10" FontSize="12" Foreground="#5F6368"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Ellipse Width="8" Height="8" Fill="#4CAF50" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Healthy" FontSize="12" Foreground="#4CAF50" FontWeight="Medium"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Child 2 -->
+                        <Border Style="{StaticResource ChildCardStyle}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Background="#E1F5FE" CornerRadius="20" Width="40" Height="40" Margin="0,0,15,0">
+                                    <TextBlock Text="👦" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Michael Johnson" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
+                                    <TextBlock Text="Grade 3 • Age 8" FontSize="12" Foreground="#5F6368"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Ellipse Width="8" Height="8" Fill="#4CAF50" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Healthy" FontSize="12" Foreground="#4CAF50" FontWeight="Medium"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Recent Updates Section -->
+                <Border Grid.Column="1" Style="{StaticResource ModernCardStyle}" Margin="15,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="📢 Recent Updates" 
+                                   FontSize="22" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#202124" 
+                                   Margin="0,0,0,25" />
+
+                        <!-- Update 1 -->
+                        <Border Background="#E8F5E8" CornerRadius="10" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                    <TextBlock Text="✅" FontSize="14" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Vaccination Complete" FontSize="14" FontWeight="SemiBold" Foreground="#2E7D32"/>
+                                </StackPanel>
+                                <TextBlock Text="Emma completed her annual flu vaccination." 
+                                           FontSize="12" 
+                                           Foreground="#5F6368" 
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="2 days ago" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Update 2 -->
+                        <Border Background="#E3F2FD" CornerRadius="10" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                    <TextBlock Text="🩺" FontSize="14" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Health Checkup Scheduled" FontSize="14" FontWeight="SemiBold" Foreground="#1565C0"/>
+                                </StackPanel>
+                                <TextBlock Text="Michael's annual health checkup is scheduled for next week." 
+                                           FontSize="12" 
+                                           Foreground="#5F6368" 
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="5 days ago" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Update 3 -->
+                        <Border Background="#FFF3E0" CornerRadius="10" Padding="15">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                    <TextBlock Text="📋" FontSize="14" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Health Record Updated" FontSize="14" FontWeight="SemiBold" Foreground="#E65100"/>
+                                </StackPanel>
+                                <TextBlock Text="New allergy information added to Emma's health record." 
+                                           FontSize="12" 
+                                           Foreground="#5F6368" 
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="1 week ago" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

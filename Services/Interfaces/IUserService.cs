@@ -3,18 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Services.Interfaces
 {
     public interface IUserService
     {
-        Task<User?> GetUserAsync(string username, string password);
-        Task<List<User>> GetAllUsersAsync();
-        Task<List<User>> SearchUsersAsync(string searchText);
-        Task<User?> GetUserByIdAsync(Guid userId);
-        Task AddUserAsync(User user);
-        Task UpdateUserAsync(User user);
-        Task DeleteUserAsync(Guid userId);
+        User? GetUser(string username, string password);
+        List<User> GetAllUsers();
+        List<User> SearchUsers(string searchText);
+        User? GetUserById(Guid userId);
+        void AddUser(User user);
+        void UpdateUser(User user);
+        void DeleteUser(Guid userId);
     }
 }

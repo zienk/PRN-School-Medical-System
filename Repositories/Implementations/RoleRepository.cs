@@ -3,7 +3,7 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interfaces;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+
 
 namespace Repositories.Implementations
 {
@@ -16,9 +16,9 @@ namespace Repositories.Implementations
             _context = new PrnEduHealthContext();
         }
 
-        public async Task<List<Role>> GetAllRolesAsync()
+        public List<Role> GetAllRoles()
         {
-            return await _context.Roles.ToListAsync();
+            return _context.Roles.ToList();
         }
     }
 }
