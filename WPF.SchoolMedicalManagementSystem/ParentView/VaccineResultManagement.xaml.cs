@@ -88,7 +88,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
                 vaccinationRecords = vaccinationRecordService.GetAllVaccinationRecordsByStudentId(selectedStudent.StudentId);
                 dgVaccinationRecords.ItemsSource = vaccinationRecords;
             }
-            txtVaccinationSummary.Text = vaccinationRecords.Count.ToString();
+            txtVaccinationSummary.Text = $"Total Vaccinations: {vaccinationRecords.Count}";
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
