@@ -30,6 +30,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             InitializeComponent();
             _userService = new UserService();
             LoadUserData();
+            UpdateRecordCount();
         }
 
         private void LoadUserData()
