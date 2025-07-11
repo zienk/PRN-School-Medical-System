@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interfaces
+namespace Services.Interfaces
 {
-    public interface IGenderTypeRepository
+    public interface IGenderTypeService
     {
-        // Lấy danh sách gender types để show trong dropdown, combobox
         List<GenderType> GetAllGenderTypes();
     }
 }
