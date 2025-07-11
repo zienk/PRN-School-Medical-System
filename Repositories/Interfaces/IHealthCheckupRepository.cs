@@ -20,7 +20,7 @@ namespace Repositories.Interfaces
         // Lấy thông tin đợt kiểm tra sức khỏe định kỳ theo ID
         HealthCheckup? GetHealthCheckupById(int healthCheckupId);
         // Xóa đợt kiểm tra sức khỏe định kỳ theo ID
-        bool DeleteHealthCheckup(int healthCheckupId); // Hàm này nên trả về object HealthCheckup
+        bool DeleteHealthCheckup(int healthCheckupId); // Hàm này nên trả về bool
         // Search đợt kiểm tra sức khỏe định kỳ theo tên CheckupName, có thể theo Description nữa
         List<HealthCheckup> SearchHealthCheckups(string searchText);
 

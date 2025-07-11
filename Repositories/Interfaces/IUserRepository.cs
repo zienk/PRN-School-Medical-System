@@ -15,7 +15,7 @@ namespace Repositories.Interfaces
         User? GetUserById(Guid userId);
         void AddUser(User user); // Hàm này nên trả về object User
         void UpdateUser(User user); // Hàm này nên trả về object User
-        void DeleteUser(Guid userId); // Hàm này nên trả về object User
+        void DeleteUser(Guid userId); // Hàm này nên trả về bool
         
         // Hàm check duplicate username này hổ trợ hàm tạo mới user
         bool IsUserExists(string username);
