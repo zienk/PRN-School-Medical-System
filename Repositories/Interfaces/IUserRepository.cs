@@ -13,10 +13,12 @@ namespace Repositories.Interfaces
         List<User> GetAllUsers();
         List<User> SearchUsers(string searchText);
         User? GetUserById(Guid userId);
-        void AddUser(User user);
-        void UpdateUser(User user);
-        void DeleteUser(Guid userId);
-        bool IsUserExists(string username);    
+        void AddUser(User user); // Hàm này nên trả về object User
+        void UpdateUser(User user); // Hàm này nên trả về object User
+        void DeleteUser(Guid userId); // Hàm này nên trả về object User
+        
+        // Hàm check duplicate username này hổ trợ hàm tạo mới user
+        bool IsUserExists(string username);
 
     }
 }
