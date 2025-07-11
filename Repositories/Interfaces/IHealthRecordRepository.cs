@@ -13,6 +13,6 @@ namespace Repositories.Interfaces
         List<HealthRecord> getAllMedicalRecordOfStudentByUserId(Guid userId);
 
         //Thien
-        public HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
+        HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
     }
 }

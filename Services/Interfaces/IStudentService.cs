@@ -26,6 +26,6 @@ namespace Services.Interfaces
 
 
         //Thien
-        public List<Student> GetAllStudentsByUserId(Guid userId);
+        List<Student> GetAllStudentsByUserId(Guid userId);
     }
 }

@@ -22,7 +22,7 @@ namespace Repositories.Interfaces
         void DeleteStudent(Guid studentId);
 
         //Thien
-        public List<Student> GetAllStudentsByUserId(Guid userId);
+        List<Student> GetAllStudentsByUserId(Guid userId);
 
     }
 }

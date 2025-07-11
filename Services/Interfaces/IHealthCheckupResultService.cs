@@ -9,6 +9,6 @@ namespace Services.Interfaces
     public interface IHealthCheckupResultService
     {
         //Thien
-        public List<HealthCheckupResult> getAllHealthCheckupResultByStudentId(int studentId);
+        List<HealthCheckupResult> getAllHealthCheckupResultByStudentId(int studentId);
     }
 }

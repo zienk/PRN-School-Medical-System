@@ -10,6 +10,6 @@ namespace Repositories.Interfaces
     public interface IVaccinationRecordRepository
     {
         //Thien
-        public List<VaccinationRecord> GetAllVaccinationRecordsByStudentId(int studentId);
+        List<VaccinationRecord> GetAllVaccinationRecordsByStudentId(int studentId);
     }
 }
