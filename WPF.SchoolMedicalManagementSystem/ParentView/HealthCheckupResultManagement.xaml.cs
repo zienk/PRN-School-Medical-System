@@ -6,123 +6,69 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using BusinessObjects.Entities;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using Services.Implementations;
 
 namespace WPF.SchoolMedicalManagementSystem.ParentView
 {
     public partial class HealthCheckupResultManagement : Window
     {
-        private ObservableCollection<StudentModel> students;
-        private ObservableCollection<HealthCheckupModel> checkupResults;
+        private List<Student> students;
+        private List<HealthCheckupResult> healthCheckupResults;
+
         private User currentUser;
+        private StudentService _studentService = new StudentService();
+        private HealthCheckupResultService _healthCheckupResultService = new HealthCheckupResultService();
 
         public HealthCheckupResultManagement(User user)
         {
             InitializeComponent();
-            LoadStudents();
-            LoadSampleData();
             currentUser = user;
+            LoadStudents();
         }
 
         private void LoadStudents()
         {
-            students = new ObservableCollection<StudentModel>
-            {
-                new StudentModel { Id = 1, Name = "Emma Johnson", GradeAge = "Grade 5 • Age 10", Avatar = "👧" },
-                new StudentModel { Id = 2, Name = "Michael Johnson", GradeAge = "Grade 3 • Age 8", Avatar = "👦" }
-            };
+            students = _studentService.GetAllStudentsByUserId(currentUser.UserId);
 
-            cmbStudents.ItemsSource = students;
-        }
-
-        private void LoadSampleData()
-        {
-            checkupResults = new ObservableCollection<HealthCheckupModel>
+            foreach (Student student in students)
             {
-                new HealthCheckupModel
+                //student.Gender.GenderName = student.GenderId == 1 ? "1" : "2";
+                if (student.GenderId == 1)
                 {
-                    StudentId = 1,
-                    CheckupName = "Annual Health Checkup",
-                    CheckupTime = DateTime.Now.AddDays(-30),
-                    Height = "140 cm",
-                    Weight = "35 kg",
-                    BMI = "17.9 (Normal)",
-                    Vision = "20/20 (Excellent)",
-                    DentalStatus = "Good - No cavities",
-                    BloodPressure = "95/60 mmHg",
-                    HeartRate = "85 bpm",
-                    GeneralCondition = "Excellent",
-                    Notes = "Student is in excellent health. Continue regular exercise and balanced diet.",
-                    Status = "Completed"
-                },
-                new HealthCheckupModel
-                {
-                    StudentId = 1,
-                    CheckupName = "Mid-Year Health Screening",
-                    CheckupTime = DateTime.Now.AddDays(-120),
-                    Height = "138 cm",
-                    Weight = "33 kg",
-                    BMI = "17.3 (Normal)",
-                    Vision = "20/20 (Excellent)",
-                    DentalStatus = "Good - Regular cleaning recommended",
-                    BloodPressure = "92/58 mmHg",
-                    HeartRate = "82 bpm",
-                    GeneralCondition = "Good",
-                    Notes = "Overall health is good. Minor recommendation for dental hygiene improvement.",
-                    Status = "Completed"
-                },
-                new HealthCheckupModel
-                {
-                    StudentId = 2,
-                    CheckupName = "Annual Health Checkup",
-                    CheckupTime = DateTime.Now.AddDays(-25),
-                    Height = "125 cm",
-                    Weight = "28 kg",
-                    BMI = "17.9 (Normal)",
-                    Vision = "20/25 (Good)",
-                    DentalStatus = "Good - One filling needed",
-                    BloodPressure = "88/55 mmHg",
-                    HeartRate = "90 bpm",
-                    GeneralCondition = "Good",
-                    Notes = "Student shows good overall health. Dental appointment scheduled for filling.",
-                    Status = "Completed"
-                },
-                new HealthCheckupModel
-                {
-                    StudentId = 2,
-                    CheckupName = "Sports Physical Exam",
-                    CheckupTime = DateTime.Now.AddDays(-90),
-                    Height = "123 cm",
-                    Weight = "26 kg",
-                    BMI = "17.2 (Normal)",
-                    Vision = "20/25 (Good)",
-                    DentalStatus = "Good",
-                    BloodPressure = "85/52 mmHg",
-                    HeartRate = "88 bpm",
-                    GeneralCondition = "Excellent",
-                    Notes = "Cleared for all sports activities. Excellent cardiovascular health.",
-                    Status = "Completed"
+                    student.Gender.GenderName = "👦";
                 }
-            };
+                else
+                {
+                    student.Gender.GenderName = "👧";
+                }
+                cmbStudents.Items.Add(student);
+            }
         }
+
 
         private void cmbStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbStudents.SelectedItem is StudentModel selectedStudent)
+            if (cmbStudents.SelectedItem is Student selectedStudent)
             {
-                DisplayCheckupResults(selectedStudent.Id);
+                //MessageBox.Show($"Selected Student: {selectedStudent.FullName}");
+                healthCheckupResults = _healthCheckupResultService.getAllHealthCheckupResultByStudentId(selectedStudent.StudentId);
+                DisplayCheckupResults(healthCheckupResults);
+
                 txtNoResults.Visibility = Visibility.Collapsed;
             }
         }
 
-        private void DisplayCheckupResults(int studentId)
+        private void DisplayCheckupResults(List<HealthCheckupResult> healthCheckupResults)
         {
             stackCheckupResults.Children.Clear();
 
-            var studentCheckups = checkupResults.Where(c => c.StudentId == studentId).OrderByDescending(c => c.CheckupTime).ToList();
+            //healthCheckupResults = _healthCheckupResultService.getAllHealthCheckupResultByStudentId(studentId);
 
-            if (studentCheckups.Any())
+            if (healthCheckupResults.Any())
             {
-                foreach (var checkup in studentCheckups)
+                foreach (var checkup in healthCheckupResults)
                 {
                     var checkupCard = CreateCheckupCard(checkup);
                     stackCheckupResults.Children.Add(checkupCard);
@@ -136,7 +82,20 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             }
         }
 
-        private Border CreateCheckupCard(HealthCheckupModel checkup)
+        private void btnFilter_Click(object sender, RoutedEventArgs e)
+        {
+            string filterText = txtTenChuongTrinh.Text.Trim().ToLower();
+            if(!string.IsNullOrEmpty(filterText))
+            {
+                // If filter is empty, show all results
+                healthCheckupResults = healthCheckupResults.Where(x => x.Checkup.CheckupName.ToLower().Contains(filterText)).ToList();
+                DisplayCheckupResults(healthCheckupResults);
+                return;
+            }
+            //DisplayCheckupResults(healthCheckupResults);
+        }
+
+        private Border CreateCheckupCard(HealthCheckupResult checkup)
         {
             var card = new Border
             {
@@ -156,7 +115,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             var titleStack = new StackPanel();
             var titleText = new TextBlock
             {
-                Text = $"🩺 {checkup.CheckupName}",
+                Text = $"🩺 {checkup.Checkup.CheckupName}",
                 FontSize = 18,
                 FontWeight = FontWeights.SemiBold,
                 Foreground = new SolidColorBrush(Color.FromRgb(32, 33, 36)),
@@ -165,7 +124,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
             var dateText = new TextBlock
             {
-                Text = checkup.CheckupTime.ToString("MMMM dd, yyyy"),
+                Text = checkup.CheckupTime?.ToString("MMMM-dd-yyyy"),
                 FontSize = 14,
                 Foreground = new SolidColorBrush(Color.FromRgb(95, 99, 104))
             };
@@ -181,15 +140,15 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
                 //Padding = new Thickness(12, 6)
             };
 
-            var statusText = new TextBlock
-            {
-                Text = "✅ " + checkup.Status,
-                FontSize = 12,
-                FontWeight = FontWeights.SemiBold,
-                Foreground = new SolidColorBrush(Color.FromRgb(46, 125, 50))
-            };
+            //var statusText = new TextBlock
+            //{
+            //    Text = "✅ " + checkup.IsActive,
+            //    FontSize = 12,
+            //    FontWeight = FontWeights.SemiBold,
+            //    Foreground = new SolidColorBrush(Color.FromRgb(46, 125, 50))
+            //};
 
-            statusBorder.Child = statusText;
+            //statusBorder.Child = statusText;
 
             Grid.SetColumn(titleStack, 0);
             Grid.SetColumn(statusBorder, 1);
@@ -212,15 +171,15 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
             // Column 1
             var column1 = new StackPanel { Margin = new Thickness(0, 0, 15, 0) };
-            column1.Children.Add(CreateDetailCard("📏 Height", checkup.Height));
-            column1.Children.Add(CreateDetailCard("⚖️ Weight", checkup.Weight));
-            column1.Children.Add(CreateDetailCard("📊 BMI", checkup.BMI));
+            column1.Children.Add(CreateDetailCard("📏 Height", checkup.Height.ToString()));
+            column1.Children.Add(CreateDetailCard("⚖️ Weight", checkup.Weight.ToString()));
+            column1.Children.Add(CreateDetailCard("📊 BMI", checkup.Bmi.ToString()));
 
             // Column 2
             var column2 = new StackPanel { Margin = new Thickness(0, 0, 15, 0) };
             column2.Children.Add(CreateDetailCard("👁️ Vision", checkup.Vision));
             column2.Children.Add(CreateDetailCard("🦷 Dental Status", checkup.DentalStatus));
-            column2.Children.Add(CreateDetailCard("💗 Heart Rate", checkup.HeartRate));
+            column2.Children.Add(CreateDetailCard("💗 Heart Rate", checkup.HeartRate.ToString()));
 
             // Column 3
             var column3 = new StackPanel();
@@ -337,31 +296,10 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             healthCheckupManagement.Show();
             this.Close();
         }
+
+        
     }
 
-    // Data Models
-    public class StudentModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string GradeAge { get; set; }
-        public string Avatar { get; set; }
-    }
+   
 
-    public class HealthCheckupModel
-    {
-        public int StudentId { get; set; }
-        public string CheckupName { get; set; }
-        public DateTime CheckupTime { get; set; }
-        public string Height { get; set; }
-        public string Weight { get; set; }
-        public string BMI { get; set; }
-        public string Vision { get; set; }
-        public string DentalStatus { get; set; }
-        public string BloodPressure { get; set; }
-        public string HeartRate { get; set; }
-        public string GeneralCondition { get; set; }
-        public string Notes { get; set; }
-        public string Status { get; set; }
-    }
 }
