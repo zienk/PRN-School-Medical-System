@@ -17,6 +17,8 @@ public partial class PrnEduHealthContext : DbContext
     {
     }
 
+    public virtual DbSet<CampaignStatus> CampaignStatuses { get; set; }
+
     public virtual DbSet<GenderType> GenderTypes { get; set; }
 
     public virtual DbSet<HealthCheckup> HealthCheckups { get; set; }
@@ -43,8 +45,7 @@ public partial class PrnEduHealthContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(GetConnectionString());
-    
-    //Using ConfigurationBuilder to init Configuration object  for reading appsettings.json file
+
     private string GetConnectionString()
     {
         IConfiguration config = new ConfigurationBuilder()
@@ -56,12 +57,23 @@ public partial class PrnEduHealthContext : DbContext
         return strConn;
     }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<CampaignStatus>(entity =>
+        {
+            entity.HasKey(e => e.StatusId).HasName("PK__Campaign__C8EE2043A2F722EE");
+
+            entity.ToTable("CampaignStatus");
+
+            entity.Property(e => e.StatusId)
+                .ValueGeneratedNever()
+                .HasColumnName("StatusID");
+            entity.Property(e => e.StatusName).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<GenderType>(entity =>
         {
-            entity.HasKey(e => e.GenderId).HasName("PK__GenderTy__4E24E8175894AB7C");
+            entity.HasKey(e => e.GenderId).HasName("PK__GenderTy__4E24E81771760E60");
 
             entity.ToTable("GenderType");
 
@@ -73,21 +85,28 @@ public partial class PrnEduHealthContext : DbContext
 
         modelBuilder.Entity<HealthCheckup>(entity =>
         {
-            entity.HasKey(e => e.CheckupId).HasName("PK__HealthCh__626E853113D10785");
+            entity.HasKey(e => e.CheckupId).HasName("PK__HealthCh__626E8531267A8211");
 
             entity.ToTable("HealthCheckup");
 
             entity.Property(e => e.CheckupId).HasColumnName("CheckupID");
             entity.Property(e => e.CheckupName).HasMaxLength(100);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.StatusId).HasColumnName("StatusID");
 
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.HealthCheckups)
                 .HasForeignKey(d => d.CreatedBy)
-                .HasConstraintName("FK__HealthChe__Creat__70DDC3D8");
+                .HasConstraintName("FK__HealthChe__Creat__75A278F5");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.HealthCheckups)
+                .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__HealthChe__Statu__76969D2E");
         });
 
         modelBuilder.Entity<HealthCheckupResult>(entity =>
         {
-            entity.HasKey(e => e.ResultId).HasName("PK__HealthCh__97690228340EF048");
+            entity.HasKey(e => e.ResultId).HasName("PK__HealthCh__97690228F6D3A60E");
 
             entity.ToTable("HealthCheckupResult");
 
@@ -111,21 +130,21 @@ public partial class PrnEduHealthContext : DbContext
             entity.HasOne(d => d.Checkup).WithMany(p => p.HealthCheckupResults)
                 .HasForeignKey(d => d.CheckupId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HealthChe__Check__76969D2E");
+                .HasConstraintName("FK__HealthChe__Check__7C4F7684");
 
             entity.HasOne(d => d.Student).WithMany(p => p.HealthCheckupResults)
                 .HasForeignKey(d => d.StudentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HealthChe__Stude__75A278F5");
+                .HasConstraintName("FK__HealthChe__Stude__7B5B524B");
         });
 
         modelBuilder.Entity<HealthRecord>(entity =>
         {
-            entity.HasKey(e => e.HealthRecordId).HasName("PK__HealthRe__3BE0B89D771C4F59");
+            entity.HasKey(e => e.HealthRecordId).HasName("PK__HealthRe__3BE0B89D37C70DD3");
 
             entity.ToTable("HealthRecord");
 
-            entity.HasIndex(e => e.StudentId, "UQ__HealthRe__32C52A781014DD7B").IsUnique();
+            entity.HasIndex(e => e.StudentId, "UQ__HealthRe__32C52A787220BB85").IsUnique();
 
             entity.Property(e => e.HealthRecordId).HasColumnName("HealthRecordID");
             entity.Property(e => e.CreatedDate)
@@ -139,12 +158,12 @@ public partial class PrnEduHealthContext : DbContext
 
             entity.HasOne(d => d.Student).WithOne(p => p.HealthRecord)
                 .HasForeignKey<HealthRecord>(d => d.StudentId)
-                .HasConstraintName("FK__HealthRec__Stude__5FB337D6");
+                .HasConstraintName("FK__HealthRec__Stude__619B8048");
         });
 
         modelBuilder.Entity<Incident>(entity =>
         {
-            entity.HasKey(e => e.IncidentId).HasName("PK__Incident__3D80539204AF0B7B");
+            entity.HasKey(e => e.IncidentId).HasName("PK__Incident__3D80539229E39875");
 
             entity.ToTable("Incident");
 
@@ -159,25 +178,25 @@ public partial class PrnEduHealthContext : DbContext
             entity.HasOne(d => d.IncidentType).WithMany(p => p.Incidents)
                 .HasForeignKey(d => d.IncidentTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Incident__Incide__6477ECF3");
+                .HasConstraintName("FK__Incident__Incide__66603565");
 
             entity.HasOne(d => d.ReportedByNavigation).WithMany(p => p.Incidents)
                 .HasForeignKey(d => d.ReportedBy)
-                .HasConstraintName("FK__Incident__Report__656C112C");
+                .HasConstraintName("FK__Incident__Report__6754599E");
 
             entity.HasOne(d => d.Severity).WithMany(p => p.Incidents)
                 .HasForeignKey(d => d.SeverityId)
-                .HasConstraintName("FK__Incident__Severi__66603565");
+                .HasConstraintName("FK__Incident__Severi__68487DD7");
 
             entity.HasOne(d => d.Student).WithMany(p => p.Incidents)
                 .HasForeignKey(d => d.StudentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Incident__Studen__6383C8BA");
+                .HasConstraintName("FK__Incident__Studen__656C112C");
         });
 
         modelBuilder.Entity<MedicalEventType>(entity =>
         {
-            entity.HasKey(e => e.EventTypeId).HasName("PK__MedicalE__A9216B1FF077FA72");
+            entity.HasKey(e => e.EventTypeId).HasName("PK__MedicalE__A9216B1FD7598B52");
 
             entity.ToTable("MedicalEventType");
 
@@ -189,7 +208,7 @@ public partial class PrnEduHealthContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A6235C0C1");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A0D216F49");
 
             entity.ToTable("Role");
 
@@ -201,7 +220,7 @@ public partial class PrnEduHealthContext : DbContext
 
         modelBuilder.Entity<SeverityLevel>(entity =>
         {
-            entity.HasKey(e => e.SeverityId).HasName("PK__Severity__C618A951CE4EC9D6");
+            entity.HasKey(e => e.SeverityId).HasName("PK__Severity__C618A95133FD1E79");
 
             entity.ToTable("SeverityLevel");
 
@@ -213,7 +232,7 @@ public partial class PrnEduHealthContext : DbContext
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.StudentId).HasName("PK__Student__32C52A79B5F8E24F");
+            entity.HasKey(e => e.StudentId).HasName("PK__Student__32C52A79CEE92FEB");
 
             entity.ToTable("Student");
 
@@ -227,18 +246,18 @@ public partial class PrnEduHealthContext : DbContext
             entity.HasOne(d => d.Gender).WithMany(p => p.Students)
                 .HasForeignKey(d => d.GenderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Student__GenderI__59063A47");
+                .HasConstraintName("FK__Student__GenderI__5AEE82B9");
 
             entity.HasOne(d => d.Parent).WithMany(p => p.Students)
                 .HasForeignKey(d => d.ParentId)
-                .HasConstraintName("FK__Student__ParentI__59FA5E80");
+                .HasConstraintName("FK__Student__ParentI__5BE2A6F2");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACE4435058");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACEEFF40BD");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4FE5158B4").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E46467E75B").IsUnique();
 
             entity.Property(e => e.UserId)
                 .HasDefaultValueSql("(newsequentialid())")
@@ -263,26 +282,33 @@ public partial class PrnEduHealthContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__RoleID__5535A963");
+                .HasConstraintName("FK__Users__RoleID__571DF1D5");
         });
 
         modelBuilder.Entity<VaccinationCampaign>(entity =>
         {
-            entity.HasKey(e => e.CampaignId).HasName("PK__Vaccinat__3F5E8D79C11B4DEA");
+            entity.HasKey(e => e.CampaignId).HasName("PK__Vaccinat__3F5E8D79E20F71DF");
 
             entity.ToTable("VaccinationCampaign");
 
             entity.Property(e => e.CampaignId).HasColumnName("CampaignID");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.StatusId).HasColumnName("StatusID");
             entity.Property(e => e.VaccineName).HasMaxLength(100);
 
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.VaccinationCampaigns)
                 .HasForeignKey(d => d.CreatedBy)
-                .HasConstraintName("FK__Vaccinati__Creat__693CA210");
+                .HasConstraintName("FK__Vaccinati__Creat__6C190EBB");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.VaccinationCampaigns)
+                .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Vaccinati__Statu__6D0D32F4");
         });
 
         modelBuilder.Entity<VaccinationRecord>(entity =>
         {
-            entity.HasKey(e => e.VaccinationRecordId).HasName("PK__Vaccinat__AEF2975C938166A2");
+            entity.HasKey(e => e.VaccinationRecordId).HasName("PK__Vaccinat__AEF2975C0B20399D");
 
             entity.ToTable("VaccinationRecord");
 
@@ -294,11 +320,11 @@ public partial class PrnEduHealthContext : DbContext
 
             entity.HasOne(d => d.Campaign).WithMany(p => p.VaccinationRecords)
                 .HasForeignKey(d => d.CampaignId)
-                .HasConstraintName("FK__Vaccinati__Campa__6E01572D");
+                .HasConstraintName("FK__Vaccinati__Campa__71D1E811");
 
             entity.HasOne(d => d.Student).WithMany(p => p.VaccinationRecords)
                 .HasForeignKey(d => d.StudentId)
-                .HasConstraintName("FK__Vaccinati__Stude__6D0D32F4");
+                .HasConstraintName("FK__Vaccinati__Stude__70DDC3D8");
         });
 
         OnModelCreatingPartial(modelBuilder);
