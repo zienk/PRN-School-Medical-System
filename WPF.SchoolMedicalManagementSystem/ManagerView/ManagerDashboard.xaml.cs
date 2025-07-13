@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,17 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
     /// </summary>
     public partial class ManagerDashboard : Window
     {
+        private User currentUser;
+        public ManagerDashboard(User user)
+        {
+            InitializeComponent();
+            currentUser = user;
+        }
         public ManagerDashboard()
         {
             InitializeComponent();
+            
         }
-
         private void btnManageUsers_Click(object sender, RoutedEventArgs e)
         {
             UserManagement userManagement = new UserManagement();
@@ -41,6 +48,13 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnManageHealthCheckup_Click(object sender, RoutedEventArgs e)
+        {
+            HealthCheckupManagement healthCheckupManagement = new HealthCheckupManagement(currentUser);
+            healthCheckupManagement.Show();
+            this.Close();
         }
     }
 }

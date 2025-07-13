@@ -1,0 +1,634 @@
+﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.ManagerView.HealthCheckupManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ManagerView"
+        mc:Ignorable="d"
+        Title="Health Checkups Management - School Medical System" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="White">
+    <Window.Resources>
+        <!-- Modern Card Style -->
+        <Style x:Key="ModernCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="BorderBrush" Value="#E8F0FE" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.1" Color="#4285F4" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Action Button Style -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="15,8" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="6" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" 
+                                             Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.6" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Primary Button Style -->
+        <Style x:Key="PrimaryButtonStyle" BasedOn="{StaticResource ActionButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#1A73E8" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <!-- Success Button Style -->
+        <Style x:Key="SuccessButtonStyle" BasedOn="{StaticResource ActionButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#34A853" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <!-- Warning Button Style -->
+        <Style x:Key="WarningButtonStyle" BasedOn="{StaticResource ActionButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#FBBC04" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <!-- Danger Button Style -->
+        <Style x:Key="DangerButtonStyle" BasedOn="{StaticResource ActionButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#EA4335" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <!-- Sidebar Navigation Button Style -->
+        <Style x:Key="SidebarButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="8,4" />
+            <Setter Property="Padding" Value="20,15" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                             VerticalAlignment="Center" 
+                                             Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#F8F9FA" />
+                                <Setter Property="Foreground" Value="#1A73E8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E8F0FE" />
+                                <Setter Property="Foreground" Value="#1557B0" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,20,0,10" />
+        </Style>
+
+        <!-- Welcome Text Style -->
+        <Style x:Key="WelcomeStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,0,0,30" />
+        </Style>
+
+        <!-- Input Field Style -->
+        <Style x:Key="InputFieldStyle" TargetType="TextBox">
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="BorderBrush" Value="#DADCE0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#202124" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Focusable="false" 
+                                          HorizontalScrollBarVisibility="Hidden" 
+                                          VerticalScrollBarVisibility="Hidden" 
+                                          Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#1A73E8"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#1A73E8"/>
+                                <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Tab Style -->
+        <Style x:Key="CustomTabStyle" TargetType="TabItem">
+            <Setter Property="Padding" Value="20,12" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="#5F6368" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}" 
+                                BorderThickness="0,0,0,2" 
+                                BorderBrush="Transparent" 
+                                CornerRadius="0">
+                            <ContentPresenter x:Name="ContentSite" 
+                                              VerticalAlignment="Center" 
+                                              HorizontalAlignment="Center" 
+                                              ContentSource="Header" 
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="#1A73E8" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#1A73E8" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#1A73E8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Background Gradient -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FAFBFC" Offset="0"/>
+                <GradientStop Color="#F8F9FA" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="White" CornerRadius="0,20,20,0" 
+                BorderBrush="#E8EAED" BorderThickness="0,0,1,0">
+            <StackPanel Orientation="Vertical" Margin="20">
+                <!-- Logo/Title Section -->
+                <StackPanel Margin="0,20,0,40">
+                    <TextBlock Text="🏫" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="School Management" 
+                               FontSize="18" 
+                               FontWeight="SemiBold" 
+                               Foreground="#202124" 
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="Manager Portal" 
+                               FontSize="14" 
+                               Foreground="#5F6368" 
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+
+                <!-- Navigation Section -->
+                <TextBlock Text="NAVIGATION" 
+                           FontSize="12" 
+                           FontWeight="SemiBold" 
+                           Foreground="#9AA0A6" 
+                           Margin="20,0,0,15" />
+
+                <Button x:Name="btnDashboard" 
+                        Content="🏠 Dashboard" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnDashboard_Click" />
+
+                <Button x:Name="btnManageUsers" 
+                        Content="👥 Manage Users" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageUsers_Click" />
+
+                <Button x:Name="btnManageStudents" 
+                        Content="👨‍🎓 Manage Students" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageStudents_Click" />
+
+                <Button x:Name="btnManageHealthRecords" 
+                        Content="📋 Health Records" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageHealthRecords_Click" />
+
+                <Button x:Name="btnHealthCheckups" 
+                        Content="🔍 Health Checkups" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Background="#E8F0FE"
+                        Foreground="#1A73E8" />
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1" Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Health Checkups Management" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Manage periodic health checkup programs and student results." 
+                           Style="{StaticResource WelcomeStyle}" />
+            </StackPanel>
+
+            <!-- Tab Control -->
+            <TabControl Grid.Row="1" x:Name="tabControl" BorderThickness="0" Background="Transparent">
+                <TabControl.Style>
+                    <Style TargetType="TabControl">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabControl">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Row="0" BorderBrush="#E8EAED" BorderThickness="0,0,0,1" Background="White" CornerRadius="8,8,0,0">
+                                            <TabPanel IsItemsHost="True" Background="Transparent" />
+                                        </Border>
+                                        <Border Grid.Row="1" Background="White" CornerRadius="0,0,8,8" BorderBrush="#E8EAED" BorderThickness="1,0,1,1">
+                                            <ContentPresenter ContentSource="SelectedContent" />
+                                        </Border>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Style>
+
+                <!-- Checkup Programs Tab -->
+                <TabItem Header="📋 Checkup Programs" Style="{StaticResource CustomTabStyle}">
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Action Buttons -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                            <Button x:Name="btnAddCheckup" 
+                                    Content="➕ Add New Checkup Program" 
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Click="btnAddCheckup_Click" />
+                            <Button x:Name="btnRefreshPrograms" 
+                                    Content="🔄 Refresh" 
+                                    Style="{StaticResource SuccessButtonStyle}"
+                                    Click="btnRefreshPrograms_Click" />
+                        </StackPanel>
+
+                        <!-- Checkup Programs DataGrid -->
+                        <DataGrid Grid.Row="1" 
+                                  x:Name="dgCheckupPrograms" 
+                                  AutoGenerateColumns="False" 
+                                  CanUserAddRows="False" 
+                                  GridLinesVisibility="None" 
+                                  HeadersVisibility="Column" 
+                                  Background="White" 
+                                  BorderThickness="0" 
+                                  RowHeight="50"
+                                  AlternatingRowBackground="#F8F9FA">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Program Name" Binding="{Binding CheckupName}" Width="*" />
+                                <DataGridTextColumn Header="Date" Binding="{Binding CheckupDate, StringFormat=dd/MM/yyyy}" Width="120" />
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+                                <DataGridTemplateColumn Header="Actions" Width="430">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Content="✏️ Edit Result"  
+                                                        Click="btnEditResultCheckup_Click"
+                                                        Tag="{Binding .}">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding StatusId}" Value="3">
+                                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                                    <Setter Property="Background" Value="#FFC107"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                                <Button Content="✏️ Create Result" 
+                                                        Click="btnCreateResultCheckup_Click" 
+                                                        Tag="{Binding .}">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button" BasedOn="{StaticResource SuccessButtonStyle}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsActive}" Value="False">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                    <Setter Property="Background" Value="Gray"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding StatusId}" Value="3">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                    <Setter Property="Background" Value="Gray"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                                <Button Content="✏️ Edit" 
+                                                        Click="btnEditCheckup_Click" 
+                                                        Tag="{Binding .}">
+                                                        <Button.Style>
+                                                        <Style TargetType="Button" BasedOn="{StaticResource WarningButtonStyle}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsActive}" Value="False">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                    <Setter Property="Background" Value="Gray"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding StatusId}" Value="3">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                    <Setter Property="Background" Value="Gray"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                                <Button Content="🗑️ Delete"
+                                                    Click="btnDeleteCheckup_Click"
+                                                    Tag="{Binding .}">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button" BasedOn="{StaticResource DangerButtonStyle}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsActive}" Value="False">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                    <Setter Property="Background" Value="Gray"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding StatusId}" Value="3">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                    <Setter Property="Background" Value="Gray"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+
+                <!-- Create Results Tab -->
+                <TabItem Header="📝 Create Results" Style="{StaticResource CustomTabStyle}" x:Name="tabCreateResults">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="125*"/>
+                            <ColumnDefinition Width="773*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" x:Name="txtSearchHealthResults"
+             Text="Tìm kiếm học sinh theo tên, mã học sinh"
+             Foreground="Gray"
+             Margin="5,5,618,5"
+             TextChanged="TxtSearchHealthResults_TextChanged" Grid.ColumnSpan="2" DataContextChanged="txtSearchHealthResults_DataContextChanged"/>
+
+                        <DataGrid Grid.Row="1" x:Name="dgHealthResults"
+                                    AutoGenerateColumns="False"
+                                    IsReadOnly="False"
+                                    Grid.ColumnSpan="2"
+                                    Margin="5,5,5,0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã số HS" Binding="{Binding StudentId}" Width="Auto" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Chiều cao (cm)" Binding="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                                <DataGridTextColumn Header="Cân nặng (kg)" Binding="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                                <DataGridTextColumn Header="Thị lực" Binding="{Binding Vision, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                                <DataGridTextColumn Header="Tình trạng răng miệng" Binding="{Binding DentalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                                <DataGridTextColumn Header="Huyết áp" Binding="{Binding BloodPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                                <DataGridTextColumn Header="Nhịp tim" Binding="{Binding HeartRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                                <DataGridTextColumn Header="Tình trạng chung" Binding="{Binding GeneralCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Grid.Row="2"
+        Grid.ColumnSpan="2"
+        Content="💾 Save"
+        HorizontalAlignment="Right"
+        Margin="0,10,10,10"
+        Width="120"
+        Height="40"
+        Style="{StaticResource PrimaryButtonStyle}" 
+        Click="btnSaveResult_Click"/>
+
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <!-- Popup for Add/Edit Checkup Program -->
+        <Grid x:Name="popupOverlay" 
+              Grid.ColumnSpan="2" 
+              Background="#80000000" 
+              Visibility="Collapsed"
+              >
+            <Border Background="White" 
+                    CornerRadius="12" 
+                    Width="500" 
+                    Height="550" 
+                    BorderBrush="#E8EAED" 
+                    BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="30" Opacity="0.3" Color="#000000" />
+                </Border.Effect>
+
+                <Grid Margin="30" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBlock x:Name="popupTitle" 
+                                   Text="Add Checkup Program" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#202124" />
+                        <Button x:Name="btnClosePopup" 
+                                Content="✕" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Top" 
+                                Background="Transparent" 
+                                BorderThickness="0" 
+                                FontSize="16" 
+                                Foreground="#5F6368" 
+                                Cursor="Hand"
+                                Click="btnClosePopup_Click" 
+                                Margin="0,-10,-220,0" />
+                    </StackPanel>
+
+                    <!-- Form Fields -->
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="Program Name" FontWeight="Medium" Margin="0,0,0,5" />
+                        <TextBox x:Name="txtPopupCheckupName" 
+                                 Style="{StaticResource InputFieldStyle}"
+                                 Height="75"
+                                 TextWrapping="Wrap" 
+                                 Margin="0,0,0,15" />
+
+                        <TextBlock Text="Checkup Date" FontWeight="Medium" Margin="0,0,0,5" />
+                        <DatePicker x:Name="dpPopupCheckupDate" 
+                                    Height="35" 
+                                    FontSize="14" 
+                                    Margin="0,0,0,15" />
+
+                        <TextBlock Text="Description" FontWeight="Medium" Margin="0,0,0,5" />
+                        <TextBox x:Name="txtPopupDescription" 
+                                 Style="{StaticResource InputFieldStyle}" 
+                                 Height="170" 
+                                 TextWrapping="Wrap" 
+                                 AcceptsReturn="True" 
+                                 VerticalScrollBarVisibility="Auto" />
+                    </StackPanel>
+
+                    <!-- Action Buttons -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                        <Button x:Name="btnPopupSave" 
+                                Content="💾 Save" 
+                                Style="{StaticResource SuccessButtonStyle}"
+                                Click="btnPopupSave_Click" />
+                        <Button x:Name="btnPopupCancel" 
+                                Content="❌ Cancel" 
+                                Style="{StaticResource DangerButtonStyle}"
+                                Click="btnPopupCancel_Click" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Student Selection Popup -->
+        <Grid x:Name="studentPopupOverlay" 
+              Grid.ColumnSpan="2" 
+              Background="#80000000" 
+              Visibility="Collapsed">
+            <Border Background="White" 
+                    CornerRadius="12" 
+                    Width="600" 
+                    Height="500" 
+                    BorderBrush="#E8EAED" 
+                    BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="30" Opacity="0.3" Color="#000000" />
+                </Border.Effect>
+
+                <Grid Margin="30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    
+
+                    <!-- Search Box -->
+                    <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                        <TextBlock Text="Search Student" FontWeight="Medium" Margin="0,0,0,5" />
+                        <TextBox x:Name="txtSearchStudent" 
+                                 Style="{StaticResource InputFieldStyle}" 
+                                 TextChanged="txtSearchStudent_TextChanged" 
+                                 />
+                    </StackPanel>
+
+                    <!-- Students DataGrid -->
+                    <DataGrid Grid.Row="2" 
+                              x:Name="dgStudents" 
+                              AutoGenerateColumns="False" 
+                              CanUserAddRows="False" 
+                              GridLinesVisibility="None" 
+                              HeadersVisibility="Column" 
+                              Background="White" 
+                              BorderThickness="0" 
+                              RowHeight="40"
+                              AlternatingRowBackground="#F8F9FA"
+                              SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Student ID" Binding="{Binding StudentId}" Width="100" />
+                            <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="*" />
+                            <DataGridTextColumn Header="Class" Binding="{Binding Class}" Width="100" />
+                            <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="60" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <!-- Action Buttons -->
+                    
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

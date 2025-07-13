@@ -10,5 +10,11 @@ namespace Services.Interfaces
     {
         //Thien
         public List<HealthCheckupResult> getAllHealthCheckupResultByStudentId(int studentId);
+
+        //Thien -Admin
+        List<HealthCheckupResult> CreateHealthCheckupResultByHealthCheckupId(List<HealthCheckupResult> healthCheckupResults);
+
+        public List<HealthCheckupResult> getAllHealthCheckupResultByHealthCheckupId(HealthCheckup healthCheckup);
+        void UpdateHealthCheckupResult(HealthCheckupResult item);
     }
 }

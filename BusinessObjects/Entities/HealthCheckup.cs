@@ -15,7 +15,13 @@ public partial class HealthCheckup
 
     public Guid? CreatedBy { get; set; }
 
+    public int StatusId { get; set; }
+
+    public bool? IsActive { get; set; }
+
     public virtual User? CreatedByNavigation { get; set; }
 
     public virtual ICollection<HealthCheckupResult> HealthCheckupResults { get; set; } = new List<HealthCheckupResult>();
+
+    public virtual CampaignStatus Status { get; set; } = null!;
 }

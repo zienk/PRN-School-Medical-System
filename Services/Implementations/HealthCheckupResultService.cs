@@ -16,9 +16,28 @@ namespace Services.Implementations
         {
             _healthCheckupResultRepository = new HealthCheckupResultRepository();
         }
+
+        public List<HealthCheckupResult> CreateHealthCheckupResultByHealthCheckupId(List<HealthCheckupResult> healthCheckupResults)
+        {
+            return _healthCheckupResultRepository.CreateHealthCheckupResultByHealthCheckupId(healthCheckupResults);
+        }
+
+        //Thien
+        public List<HealthCheckupResult> getAllHealthCheckupResultByHealthCheckupId(HealthCheckup healthCheckup)
+        {
+            return _healthCheckupResultRepository.getAllHealthCheckupResultByHealthCheckupId(healthCheckup);
+        }
+
+        //Thien
         public List<HealthCheckupResult> getAllHealthCheckupResultByStudentId(int studentId)
         {
             return _healthCheckupResultRepository.GetAllHealthCheckupResultsByStudentId(studentId);
+        }
+
+        //Thien
+        public void UpdateHealthCheckupResult(HealthCheckupResult item)
+        {
+            _healthCheckupResultRepository.UpdateHealthCheckupResult(item);
         }
     }
 }

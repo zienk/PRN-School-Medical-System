@@ -24,5 +24,12 @@ namespace Repositories.Interfaces
         // Search đợt kiểm tra sức khỏe định kỳ theo tên CheckupName, có thể theo Description nữa
         public List<HealthCheckup> SearchHealthCheckups(string searchText);
 
+        //Thien
+        bool RemoveHealthCheckup(HealthCheckup checkupProgram);
+        //Thien
+        public int GetStatus(HealthCheckup checkupProgram);
+
+        //Thien
+        bool UpdateStatus(HealthCheckup checkupProgram);
     }
 }
