@@ -23,5 +23,13 @@ namespace Services.Interfaces
         bool DeleteHealthCheckup(int healthCheckupId);
         // Search đợt kiểm tra sức khỏe định kỳ theo tên CheckupName, có thể theo Description nữa
         List<HealthCheckup> SearchHealthCheckups(string searchText);
+
+        //Thien: Remove health checkup by setting IsActive to false
+        bool RemoveHealthCheckup(HealthCheckup checkupProgram);
+        //Thien: Get the status of a health checkup
+        int GetStatus(HealthCheckup checkupProgram);
+        //Thien: Update the status of a health checkup
+        bool UpdateStatus(HealthCheckup checkupProgram);
+
     }
 }

@@ -54,7 +54,7 @@ namespace WPF.SchoolMedicalManagementSystem
                 switch (user.Role.RoleId)
                 {
                     case ADMIN_ROLE_ID:
-                        ManagerDashboard managerDashboard = new ManagerDashboard();
+                        ManagerDashboard managerDashboard = new ManagerDashboard(user);
                         managerDashboard.Show();
                         this.Close();
                         MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);

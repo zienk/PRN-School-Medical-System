@@ -48,6 +48,7 @@ namespace Services.Implementations
         public List<HealthCheckup> GetHealthCheckupsByCreatorId(Guid creatorId)
         => _healthCheckupRepository.GetHealthCheckupsByCreatorId(creatorId);
 
+
         public List<HealthCheckup> SearchHealthCheckups(string searchText)
         => _healthCheckupRepository.SearchHealthCheckups(searchText ?? "");
 
@@ -66,6 +67,23 @@ namespace Services.Implementations
             existingCheckup.Description = healthCheckup.Description;
 
             return _healthCheckupRepository.UpdateHealthCheckup(existingCheckup);
+        }
+
+        //Thien : Get the status of a health checkup
+        public int GetStatus(HealthCheckup checkupProgram)
+        {
+            return _healthCheckupRepository.GetStatus(checkupProgram);
+        }
+
+        //Thien: Remove health checkup by setting IsActive to false
+        public bool RemoveHealthCheckup(HealthCheckup checkupProgram)
+        {
+            return _healthCheckupRepository.RemoveHealthCheckup(checkupProgram);
+        }
+
+        public bool UpdateStatus(HealthCheckup checkupProgram)
+        {
+            return _healthCheckupRepository.UpdateStatus(checkupProgram);
         }
     }
 }

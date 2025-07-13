@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 namespace BusinessObjects.Entities;
-
 public partial class SeverityLevel
 {
     public int SeverityId { get; set; }

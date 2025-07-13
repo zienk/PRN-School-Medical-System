@@ -9,9 +9,15 @@ namespace Repositories.Interfaces
 {
     public interface IHealthCheckupResultRepository
     {
+
+        List<HealthCheckupResult> CreateHealthCheckupResultByHealthCheckupId(List<HealthCheckupResult> healthCheckups);
+        List<HealthCheckupResult> getAllHealthCheckupResultByHealthCheckupId(HealthCheckup healthCheckup);
+        void UpdateHealthCheckupResult(HealthCheckupResult item);
+
         // Lấy danh sách kết quả khám sức khỏe theo ID học sinh (để show cho parent)
         List<HealthCheckupResult> GetAllHealthCheckupResultsByStudentId(int studentId);
         // Tạo kết quả khám sức khỏe mới
          
+
     }
 }

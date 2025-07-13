@@ -163,6 +163,11 @@
                         Content="📋 Health Records" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageHealthRecords_Click" />
+
+                <Button x:Name="btnManageHealthCheckup" 
+                        Content="📋 HealthCheckup" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageHealthCheckup_Click" />
             </StackPanel>
         </Border>
 
