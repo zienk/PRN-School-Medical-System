@@ -51,8 +51,18 @@ namespace Repositories.Implementations
         {
             var existingItem = _context.HealthCheckupResults
                 .FirstOrDefault(h => h.ResultId == item.ResultId);
-            _context.HealthCheckupResults.Update(existingItem);
-            _context.SaveChanges();
+            if (existingItem != null)
+            {
+                // Apply changes from item to existingItem
+                existingItem.CheckupId = item.CheckupId;
+                existingItem.StudentId = item.StudentId;
+                existingItem.ResultDetails = item.ResultDetails;
+                existingItem.ResultDate = item.ResultDate;
+                // Add other properties as needed
+
+                _context.HealthCheckupResults.Update(existingItem);
+                _context.SaveChanges();
+            }
         }
     }
 }
