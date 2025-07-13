@@ -114,7 +114,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         // Navigation Events (giữ nguyên)
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            var dashboard = new ManagerDashboard();
+            var dashboard = new ManagerDashboard(currentUser);
             dashboard.Show();
             this.Close();
         }
