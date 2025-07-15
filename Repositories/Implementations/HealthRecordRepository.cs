@@ -72,5 +72,20 @@ namespace Repositories.Implementations
             _contetxt.SaveChanges();
             return record;
         }
+
+        public HealthRecord AddHealthRecord(HealthRecord healthRecord)
+        {
+            throw new NotImplementedException();
+        }
+
+        public HealthRecord GetHealthRecordById(int healthRecordId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public HealthRecord GetHealthRecordByStudentId(int studentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

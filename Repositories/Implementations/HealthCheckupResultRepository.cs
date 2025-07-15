@@ -18,6 +18,11 @@ namespace Repositories.Implementations
             _context = new PrnEduHealthContext();
         }
 
+        public HealthCheckupResult AddHealthCheckupResult(HealthCheckupResult healthCheckupResult)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<HealthCheckupResult> CreateHealthCheckupResultByHealthCheckupId(List<HealthCheckupResult> healthCheckupResults)
         {
             _context.HealthCheckupResults.AddRange(healthCheckupResults);
@@ -47,6 +52,11 @@ namespace Repositories.Implementations
                                     .ToList();
         }
 
+        public HealthCheckupResult? GetHealthCheckupResultById(int resultId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateHealthCheckupResult(HealthCheckupResult item)
         {
             var existingItem = _context.HealthCheckupResults
@@ -56,8 +66,8 @@ namespace Repositories.Implementations
                 // Apply changes from item to existingItem
                 existingItem.CheckupId = item.CheckupId;
                 existingItem.StudentId = item.StudentId;
-                existingItem.ResultDetails = item.ResultDetails;
-                existingItem.ResultDate = item.ResultDate;
+                //existingItem.ResultDetails = item.ResultDetails;
+                //existingItem.ResultDate = item.ResultDate;
                 // Add other properties as needed
 
                 _context.HealthCheckupResults.Update(existingItem);
