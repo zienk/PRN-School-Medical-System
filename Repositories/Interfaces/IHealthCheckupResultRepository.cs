@@ -17,7 +17,11 @@ namespace Repositories.Interfaces
         // Lấy danh sách kết quả khám sức khỏe theo ID học sinh (để show cho parent)
         List<HealthCheckupResult> GetAllHealthCheckupResultsByStudentId(int studentId);
         // Tạo kết quả khám sức khỏe mới
-         
+        HealthCheckupResult AddHealthCheckupResult(HealthCheckupResult healthCheckupResult);
+        // Cập nhật kết quả khám sức khỏe
+
+        // Lấy chi tiết kết quả khám sức khỏe theo result ID
+        HealthCheckupResult? GetHealthCheckupResultById(int resultId);
 
     }
 }

@@ -14,5 +14,14 @@ namespace Repositories.Interfaces
 
         //Thien
         HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
+
+        //Khai báo hồ sức khỏe của học sinh
+        HealthRecord AddHealthRecord(HealthRecord healthRecord);
+        //Lấy thông tin hồ sơ sức khỏe của học sinh theo id hồ sơ
+        HealthRecord GetHealthRecordById(int healthRecordId);
+        //Lấy thông tin hồ sơ sức khỏe của học sinh theo id học sinh
+        HealthRecord GetHealthRecordByStudentId(int studentId);
+
+
     }
 }
