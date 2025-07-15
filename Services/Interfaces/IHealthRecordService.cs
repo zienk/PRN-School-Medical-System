@@ -14,5 +14,7 @@ namespace Services.Interfaces
 
         //Thien
         HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
+
+        List<HealthRecord> GetAllHealthRecord();
     }
 }

@@ -22,6 +22,8 @@ namespace Repositories.Interfaces
         //Lấy thông tin hồ sơ sức khỏe của học sinh theo id học sinh
         HealthRecord GetHealthRecordByStudentId(int studentId);
 
+        List<HealthRecord> GetAllHealthRecord();
+
 
     }
 }

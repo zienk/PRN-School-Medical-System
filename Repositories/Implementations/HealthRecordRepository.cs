@@ -21,7 +21,7 @@ namespace Repositories.Implementations
         }
         public List<HealthRecord> GetAllHealthRecords()
         {
-            return _contetxt.HealthRecords.Include(e=>e.Student).Where(e => e.IsActive == true)
+            return _contetxt.HealthRecords.Include(e => e.Student).Where(e => e.IsActive == true)
                 .ToList();
         }
 
@@ -86,6 +86,16 @@ namespace Repositories.Implementations
         public HealthRecord GetHealthRecordByStudentId(int studentId)
         {
             throw new NotImplementedException();
+        }
+
+
+        public List<HealthRecord> GetAllHealthRecord()
+        {
+            return _contetxt.HealthRecords
+                .Include(e => e.Student)
+                .ThenInclude(g=> g.Gender)
+                .Where(e => e.IsActive == true)
+                .ToList();
         }
     }
 }

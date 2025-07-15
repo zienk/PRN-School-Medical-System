@@ -21,7 +21,7 @@ namespace WPF.SchoolMedicalManagementSystem
     /// </summary>
     public partial class StudentRecordManagement : Window
     {
-        private readonly IHealthRecordService _healthRecordService = new HealthRecordService();
+        private IHealthRecordService _healthRecordService;
 
         public StudentRecordManagement()
         {
@@ -32,8 +32,9 @@ namespace WPF.SchoolMedicalManagementSystem
 
         public void LoadData()
         {
-            dgHealthRecord.ItemsSource = null;
-            dgHealthRecord.ItemsSource = _healthRecordService.GetAllHealthRecords();
+            _healthRecordService = new HealthRecordService();
+            dgListStudent.ItemsSource = null;
+            dgListStudent.ItemsSource = _healthRecordService.GetAllHealthRecord();
         }
 
         private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
