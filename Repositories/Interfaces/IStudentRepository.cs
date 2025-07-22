@@ -25,6 +25,6 @@ namespace Repositories.Interfaces
         List<Student> GetAllStudentsByUserId(Guid userId);
 
         // TODO: Implement soft delete to set IsActive=false instead of removing
-        void SoftDeleteStudent(int studentId); // Returns bool for success
+        bool SoftDeleteStudent(int studentId); // Returns bool for success
     }
 }
