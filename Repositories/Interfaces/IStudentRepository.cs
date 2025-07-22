@@ -19,10 +19,12 @@ namespace Repositories.Interfaces
         List<Student> SearchStudents(string searchTerm);
         void AddStudent(Student student); // Hàm này nên trả về object Student
         void UpdateStudent(Student student); // Hàm này nên trả về object Student
-        void DeleteStudent(Guid studentId); // Hàm này nên trả về bool
+        void DeleteStudent(int studentId); // Hàm này nên trả về bool
 
         //Thien
         List<Student> GetAllStudentsByUserId(Guid userId);
 
+        // TODO: Implement soft delete to set IsActive=false instead of removing
+        void SoftDeleteStudent(int studentId); // Returns bool for success
     }
 }

@@ -300,17 +300,25 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <!-- Status Bar -->
-                    <Border Grid.Row="1" Background="#F8F9FA" BorderBrush="#E8EAED" BorderThickness="0,1,0,0" Padding="10,5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="StatusLabel" Text="Ready" FontSize="12" Foreground="#5F6368"/>
-                            <TextBlock Grid.Column="1" x:Name="RecordCountLabel" Text="Total: 0 records" FontSize="12" Foreground="#5F6368"/>
-                        </Grid>
-                    </Border>
+                    <!-- Add Status Bar mimicking User -->
+                    <StatusBar Grid.Row="1" 
+                               VerticalAlignment="Bottom" 
+                               Background="#F8F9FA" 
+                               Height="32"
+                               Padding="8,0">
+                        <StatusBarItem>
+                            <TextBlock x:Name="StatusLabel" 
+                                       Text="Sẵn sàng" 
+                                       FontSize="12"
+                                       Foreground="#333333"/>
+                        </StatusBarItem>
+                        <StatusBarItem HorizontalAlignment="Right">
+                            <TextBlock x:Name="RecordCountLabel" 
+                                       Text="Tổng: 0 học sinh" 
+                                       FontSize="12"
+                                       Foreground="#333333"/>
+                        </StatusBarItem>
+                    </StatusBar>
                 </Grid>
             </Border>
         </Grid>

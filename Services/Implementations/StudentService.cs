@@ -33,7 +33,7 @@ namespace Services.Implementations
             _studentRepository.AddStudent(student);
         }
 
-        public void DeleteStudent(Guid studentId)
+        public void DeleteStudent(int studentId)
         {
             _studentRepository.DeleteStudent(studentId);
         }
@@ -59,5 +59,11 @@ namespace Services.Implementations
         {
             return _studentRepository.GetAllStudentsByUserId(userId);
         }
+
+        public bool SoftDeleteStudent(int studentId)
+        {
+            // TODO: Thêm logging cho audit trail
+            return _studentRepository.SoftDeleteStudent(studentId);
+        } // Lưu ý: Các truy vấn đã được lọc ở tầng repository
     }
 }
