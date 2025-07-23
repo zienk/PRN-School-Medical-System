@@ -24,8 +24,8 @@ namespace Repositories.Implementations
             return _context.VaccinationRecords
                 .Include(v => v.Student)
                 .Include(v => v.Campaign)
-                .Where(v => v.StudentId == studentId)
+                .Where(v => v.StudentId == studentId && v.IsActive == true) // Added filter
                 .ToList();
-        }
+        } // TODO: Thêm sắp xếp theo VaccinationDate để UX tốt hơn"
     }
 }

@@ -40,15 +40,16 @@ namespace Repositories.Implementations
         public List<HealthCheckupResult> getAllHealthCheckupResultByHealthCheckupId(HealthCheckup healthCheckup)
         {
             return _context.HealthCheckupResults
-                                    .Where(c => c.CheckupId == healthCheckup.CheckupId)
+                                    .Where(c => c.CheckupId == healthCheckup.CheckupId && c.IsActive == true) // Added filter
                                     .ToList();
         }
 
+        // TODO: Xem xét tải eager chỉ các trường cần thiết để hiệu quả
         public List<HealthCheckupResult> GetAllHealthCheckupResultsByStudentId(int studentId)
         {
             return _context.HealthCheckupResults
                                     .Include(h => h.Checkup)
-                                    .Where(c => c.StudentId == studentId)
+                                    .Where(c => c.StudentId == studentId && c.IsActive == true) // Added filter
                                     .ToList();
         }
 

@@ -43,46 +43,53 @@ namespace WPF.SchoolMedicalManagementSystem
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUsername.Text.Trim();
-            string password = txtPassword.Password.Trim();
-            var user = _userService.GetUser(username, password);
-
-            if (user != null)
+            try
             {
-                string welcomeMessage = $"Welcome {user.FullName} with {user.Role.RoleName}";
+                string username = txtUsername.Text.Trim();
+                string password = txtPassword.Password.Trim();
+                var user = _userService.GetUser(username, password);
 
-                switch (user.Role.RoleId)
+                if (user != null)
                 {
-                    case ADMIN_ROLE_ID:
-                        ManagerDashboard managerDashboard = new ManagerDashboard(user);
-                        managerDashboard.Show();
-                        this.Close();
-                        MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
-                        break;
+                    string welcomeMessage = $"Welcome {user.FullName} with {user.Role.RoleName}";
 
-                    case TEACHER_ROLE_ID:
-                        StudentRecordManagement studentRecordManagement = new StudentRecordManagement();
-                        studentRecordManagement.Show();
-                        this.Close();
+                    switch (user.Role.RoleId)
+                    {
+                        case ADMIN_ROLE_ID:
+                            ManagerDashboard managerDashboard = new ManagerDashboard(user);
+                            managerDashboard.Show();
+                            this.Close();
+                            MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
 
-                        MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
-                        break;
+                        case TEACHER_ROLE_ID:
+                            StudentRecordManagement studentRecordManagement = new StudentRecordManagement();
+                            studentRecordManagement.Show();
+                            this.Close();
 
-                    case STUDENT_ROLE_ID:
-                        ParentDashboard parentDashboard = new ParentDashboard(user);
-                        parentDashboard.Show();
-                        this.Close();
-                        MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
-                        break;
+                            MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
 
-                    default:
-                        MessageBox.Show("Unknown role type.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
+                        case STUDENT_ROLE_ID:
+                            ParentDashboard parentDashboard = new ParentDashboard(user);
+                            parentDashboard.Show();
+                            this.Close();
+                            MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
+
+                        default:
+                            MessageBox.Show("Unknown role type.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Warning);
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username or password.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Invalid username or password.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"An error occurred at login: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
