@@ -21,7 +21,7 @@ namespace Services.Implementations
 
         public List<GenderType> GetAllGenderTypes()
         {
-            throw new NotImplementedException();
+            return _genderTypeRepository.GetAllGenderTypes();
         }
     }
 }

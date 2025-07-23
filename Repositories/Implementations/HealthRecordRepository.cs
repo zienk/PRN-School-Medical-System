@@ -31,8 +31,9 @@ namespace Repositories.Implementations
             return _contetxt.HealthRecords
                 .Include(e => e.Student)
                 .Include(e => e.Student.Gender)
-                .Where(e => e.Student.ParentId == userId).ToList();
-        }
+                .Where(e => e.Student.ParentId == userId && e.IsActive == true) // Added filter
+                .ToList();
+        } // TODO: Tối ưu hóa các include nếu gặp vấn đề hiệu suất
 
         //Thien
         public HealthRecord CreateHealthRecord(HealthRecord healthRecord)

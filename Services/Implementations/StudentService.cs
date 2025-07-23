@@ -33,7 +33,7 @@ namespace Services.Implementations
             _studentRepository.AddStudent(student);
         }
 
-        public void DeleteStudent(Guid studentId)
+        public void DeleteStudent(int studentId)
         {
             _studentRepository.DeleteStudent(studentId);
         }
@@ -50,7 +50,21 @@ namespace Services.Implementations
 
         public void UpdateStudent(Student student)
         {
-            _studentRepository.UpdateStudent(student);
+            if (student == null)
+                throw new ArgumentNullException(nameof(student), "Học sinh bị null");
+
+            var existing = _studentRepository.GetStudentActiveById(student.StudentId);
+            if (existing == null)
+                throw new InvalidOperationException("Không tìm thấy học sinh để cập nhật.");
+
+            existing.FullName = student.FullName;
+            existing.DateOfBirth = student.DateOfBirth;
+            existing.GenderId = student.GenderId;
+            existing.ParentId = student.ParentId;
+            existing.Class = student.Class;
+            existing.IsActive = student.IsActive;
+
+            _studentRepository.UpdateStudent(existing);
         }
 
 
@@ -59,5 +73,11 @@ namespace Services.Implementations
         {
             return _studentRepository.GetAllStudentsByUserId(userId);
         }
+
+        public bool SoftDeleteStudent(int studentId)
+        {
+            // TODO: Thêm logging cho audit trail
+            return _studentRepository.SoftDeleteStudent(studentId);
+        } // Lưu ý: Các truy vấn đã được lọc ở tầng repository
     }
 }

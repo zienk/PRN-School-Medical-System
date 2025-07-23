@@ -242,7 +242,6 @@ public partial class PrnEduHealthContext : DbContext
             entity.Property(e => e.GenderId).HasColumnName("GenderID");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.ParentId).HasColumnName("ParentID");
-
             entity.HasOne(d => d.Gender).WithMany(p => p.Students)
                 .HasForeignKey(d => d.GenderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
