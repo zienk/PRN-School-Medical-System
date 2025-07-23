@@ -1,0 +1,165 @@
+﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.HealthRecordAddAndEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
+        mc:Ignorable="d"
+        Title="HealthRecordAddAndEdit" SizeToContent="Height" Width="600">
+    <!-- Dialog thêm/cập nhật HealthRecord -->
+    <Window.Resources>
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style cho TextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#222"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="4" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style cho Label -->
+        <Style x:Key="ModernLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <!-- Style cho TextBlock (readonly info) -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#333333"/>
+        </Style>
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   x:Name="HeaderTitle"
+                   Text="THÊM HỒ SƠ SỨC KHỎE MỚI" 
+                   Style="{StaticResource HeaderStyle}"/>
+        <!-- Form nhập liệu -->
+        <Border Grid.Row="1" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Chọn học sinh (chỉ cho thêm mới) -->
+                    <StackPanel>
+                        <Label Content="Chọn học sinh:" Style="{StaticResource ModernLabel}"/>
+                        <ComboBox x:Name="cbStudent" DisplayMemberPath="FullName" SelectedValuePath="StudentId"/>
+                    </StackPanel>
+                    <!-- Thông tin học sinh -->
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label Content="Họ tên:" Style="{StaticResource ModernLabel}" Width="80"/>
+                        <TextBlock x:Name="txtStudentFullName" Width="150" VerticalAlignment="Center"/>
+                        <Label Content="Ngày sinh:" Style="{StaticResource ModernLabel}" Width="80"/>
+                        <TextBlock x:Name="txtStudentDOB" Width="100" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Content="Giới tính:" Style="{StaticResource ModernLabel}" Width="80"/>
+                        <TextBlock x:Name="txtStudentGender" Width="100" VerticalAlignment="Center"/>
+                        <Label Content="Lớp:" Style="{StaticResource ModernLabel}" Width="40"/>
+                        <TextBlock x:Name="txtStudentClass" Width="80" VerticalAlignment="Center"/>
+                        <Label Content="Phụ huynh:" Style="{StaticResource ModernLabel}" Width="70"/>
+                        <TextBlock x:Name="txtParentName" Width="120" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <!-- Height -->
+                    <StackPanel>
+                        <Label Content="Chiều cao (cm):" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtHeight" Style="{StaticResource ModernTextBox}"/>
+                    </StackPanel>
+                    <!-- Weight -->
+                    <StackPanel>
+                        <Label Content="Cân nặng (kg):" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtWeight" Style="{StaticResource ModernTextBox}"/>
+                    </StackPanel>
+                    <!-- ChronicDiseases -->
+                    <StackPanel>
+                        <Label Content="Bệnh mãn tính:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtChronicDiseases" Style="{StaticResource ModernTextBox}"/>
+                    </StackPanel>
+                    <!-- Allergies -->
+                    <StackPanel>
+                        <Label Content="Dị ứng:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtAllergies" Style="{StaticResource ModernTextBox}"/>
+                    </StackPanel>
+                    <!-- Notes -->
+                    <StackPanel>
+                        <Label Content="Ghi chú:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtNotes" Style="{StaticResource ModernTextBox}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <!-- Nút thao tác -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
+            <Button x:Name="btnSave"
+                    Content="Lưu" 
+                    Background="#28A745" 
+                    Style="{StaticResource ModernButton}"/>
+            <Button x:Name="btnCancel" Content="Hủy" 
+                    Background="#6C757D" 
+                    Style="{StaticResource ModernButton}"/>
+        </StackPanel>
+    </Grid>
+</Window>
