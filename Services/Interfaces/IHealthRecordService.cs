@@ -13,6 +13,9 @@ namespace Services.Interfaces
         List<HealthRecord> getAllMedicalRecordOfStudentByUserId(Guid userId);
 
         //Thien
+        HealthRecord CreateHealthRecord(HealthRecord healthRecord);
         HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
+
+        List<HealthRecord> GetAllHealthRecord();
     }
 }

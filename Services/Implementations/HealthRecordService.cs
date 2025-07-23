@@ -34,5 +34,15 @@ namespace Services.Implementations
         {
             return _healthRecordRepository.UpdateHealthRecord(healthRecord);
         }
+
+        public HealthRecord CreateHealthRecord(HealthRecord healthRecord)
+        {
+            return _healthRecordRepository.CreateHealthRecord(healthRecord);
+        }
+
+        public List<HealthRecord> GetAllHealthRecord()
+        {
+            return _healthRecordRepository.GetAllHealthRecord();
+        }
     }
 }

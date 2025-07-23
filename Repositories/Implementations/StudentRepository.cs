@@ -48,6 +48,7 @@ namespace Repositories.Implementations
             return _context.Students
                 .Include(u => u.Parent)
                 .Include(g => g.Gender)
+                .Include(s => s.HealthRecord)
                 .AsNoTracking()
                 .Where(s => s.IsActive == true)
                 .ToList();
