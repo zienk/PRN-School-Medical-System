@@ -41,7 +41,11 @@ namespace Repositories.Implementations
 
         public List<Student> GetAllStudents()
         {
-            return _context.Students.Include(u => u.Parent).Include(g=>g.Gender).ToList();
+            return _context.Students
+                .Include(u => u.Parent)
+                .Include(g => g.Gender)
+                .Include(s => s.HealthRecord)
+                .ToList();
         }
 
         public List<Student> SearchStudents(string searchTerm)

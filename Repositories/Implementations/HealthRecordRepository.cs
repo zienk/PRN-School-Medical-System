@@ -35,12 +35,11 @@ namespace Repositories.Implementations
         }
 
         //Thien
-        public HealthRecord AddRecord(HealthRecord healthRecord)
+        public HealthRecord CreateHealthRecord(HealthRecord healthRecord)
         {
             healthRecord.CreatedDate = DateTime.Now;
             healthRecord.LastUpdatedDate = DateTime.Now;
             healthRecord.IsActive = true;
-
             _contetxt.HealthRecords.Add(healthRecord);
             _contetxt.SaveChanges();
             return healthRecord;
@@ -53,7 +52,7 @@ namespace Repositories.Implementations
             if (record == null)
             {
                 // Nếu không tìm thấy bản ghi, tạo mới
-                HealthRecord newHealthRecord = AddRecord(healthRecord);
+                HealthRecord newHealthRecord = CreateHealthRecord(healthRecord);
                 if (newHealthRecord == null)
                 {
                     throw new Exception("Có lỗi trong quá trình thêm!");
@@ -73,11 +72,6 @@ namespace Repositories.Implementations
             return record;
         }
 
-        public HealthRecord AddHealthRecord(HealthRecord healthRecord)
-        {
-            throw new NotImplementedException();
-        }
-
         public HealthRecord GetHealthRecordById(int healthRecordId)
         {
             throw new NotImplementedException();
@@ -92,8 +86,8 @@ namespace Repositories.Implementations
         public List<HealthRecord> GetAllHealthRecord()
         {
             return _contetxt.HealthRecords
-                .Include(e => e.Student)
-                .ThenInclude(g=> g.Gender)
+                .Include(e => e.Student).ThenInclude(g => g.Gender)
+                .Include(e => e.Student).ThenInclude(p=> p.Parent)
                 .Where(e => e.IsActive == true)
                 .ToList();
         }

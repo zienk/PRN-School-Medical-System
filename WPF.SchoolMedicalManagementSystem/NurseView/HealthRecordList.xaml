@@ -152,16 +152,18 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="StudentID" Binding="{Binding Student.StudentId}" Width="60"/>
                 <DataGridTextColumn Header="FullName" Binding="{Binding Student.FullName}" Width="100"/>
+                <DataGridTextColumn Header="ParentName" Binding="{Binding Student.Parent.FullName}" Width="100"/>
                 <DataGridTextColumn Header="DateOfBirth" Binding="{Binding Student.DateOfBirth}" Width="150"/>
-                <DataGridTextColumn Header="GenderID" Binding="{Binding Student.Gender.GenderName}" Width="80"/>
+                <DataGridTextColumn Header="GenderName" Binding="{Binding Student.Gender.GenderName}" Width="80"/>
                 <DataGridTextColumn Header="Class" Binding="{Binding Student.Class}" Width="100"/>
                 <DataGridTextColumn Header="Height" Binding="{Binding Height}" Width="100"/>
                 <DataGridTextColumn Header="Weight" Binding="{Binding Weight}" Width="100"/>
                 <DataGridTextColumn Header="ChronicDiseases" Binding="{Binding ChronicDiseases}" Width="100"/>
-                <DataGridTextColumn Header="Allergies" Binding="{Binding Allergies}" Width="100"/>
-                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="100"/>
+                <DataGridTextColumn Header="Allergies" Binding="{Binding Allergies}" Width="*"/>
+                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="*"/>
                 <DataGridTextColumn Header="CreatedDate" Binding="{Binding CreatedDate}" Width="100"/>
                 <DataGridTextColumn Header="LastUpdatedDate" Binding="{Binding LastUpdatedDate}" Width="100"/>
+                
             </DataGrid.Columns>
         </DataGrid>
 

@@ -16,7 +16,7 @@ namespace Repositories.Interfaces
         HealthRecord UpdateHealthRecord(HealthRecord healthRecord);
 
         //Khai báo hồ sức khỏe của học sinh
-        HealthRecord AddHealthRecord(HealthRecord healthRecord);
+        HealthRecord CreateHealthRecord(HealthRecord healthRecord);
         //Lấy thông tin hồ sơ sức khỏe của học sinh theo id hồ sơ
         HealthRecord GetHealthRecordById(int healthRecordId);
         //Lấy thông tin hồ sơ sức khỏe của học sinh theo id học sinh
