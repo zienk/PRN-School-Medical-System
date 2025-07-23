@@ -226,10 +226,6 @@
                     Background="#6C757D" 
                     Style="{StaticResource ModernButton}"
                     Click="CancelButton_Click"/>
-            <Button Content="Quay về Dashboard" 
-                    Background="#17A2B8" 
-                    Style="{StaticResource ModernButton}"
-                    Click="BackToDashboard_Click"/>
         </StackPanel>
     </Grid>
 </Window> 

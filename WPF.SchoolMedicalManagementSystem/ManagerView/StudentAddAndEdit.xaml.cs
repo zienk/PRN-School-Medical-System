@@ -156,12 +156,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             this.Close();
         }
 
-        private void BackToDashboard_Click(object sender, RoutedEventArgs e)
-        {
-            ManagerDashboard dashboard = new ManagerDashboard();
-            dashboard.Show();
-            this.Close();
-        }
+        
 
     }
 } 
