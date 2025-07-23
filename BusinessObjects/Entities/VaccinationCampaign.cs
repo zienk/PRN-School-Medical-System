@@ -15,7 +15,13 @@ public partial class VaccinationCampaign
 
     public Guid? CreatedBy { get; set; }
 
+    public int StatusId { get; set; }
+
+    public bool? IsActive { get; set; }
+
     public virtual User? CreatedByNavigation { get; set; }
+
+    public virtual CampaignStatus Status { get; set; } = null!;
 
     public virtual ICollection<VaccinationRecord> VaccinationRecords { get; set; } = new List<VaccinationRecord>();
 }

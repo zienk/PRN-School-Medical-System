@@ -248,7 +248,7 @@
                                             <!-- Info -->
                                             <StackPanel Grid.Column="1">
                                                 <TextBlock Text="{Binding FullName}" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
-                                                <TextBlock Text="{Binding GradeAndAge}" FontSize="12" Foreground="#5F6368"/>
+                                                <TextBlock Text="{Binding Class}" FontSize="12" Foreground="#5F6368"/>
                                                 <TextBlock Text="{Binding StudentId, StringFormat='Student ID: {0}'}" FontSize="11" Foreground="#9AA0A6"/>
                                             </StackPanel>
 

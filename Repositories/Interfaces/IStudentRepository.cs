@@ -15,14 +15,17 @@ namespace Repositories.Interfaces
 {
     public interface IStudentRepository
     {
+        Student? GetStudentActiveById(int studentId);
         List<Student> GetAllStudents();
         List<Student> SearchStudents(string searchTerm);
-        void AddStudent(Student student);
-        void UpdateStudent(Student student);
-        void DeleteStudent(Guid studentId);
+        void AddStudent(Student student); // Hàm này nên trả về object Student
+        void UpdateStudent(Student student); // Hàm này nên trả về object Student
+        void DeleteStudent(int studentId); // Hàm này nên trả về bool
 
         //Thien
-        public List<Student> GetAllStudentsByUserId(Guid userId);
+        List<Student> GetAllStudentsByUserId(Guid userId);
 
+        // TODO: Implement soft delete to set IsActive=false instead of removing
+        bool SoftDeleteStudent(int studentId); // Returns bool for success
     }
 }

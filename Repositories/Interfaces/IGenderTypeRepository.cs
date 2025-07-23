@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Repositories.Interfaces
 {
-    public interface IIncidenRepository
+    public interface IGenderTypeRepository
     {
-        //public List<Incident> GetAllIncidents(Guid userId);
-        List<Incident> GetAllIncidentsbyUserId(List<Student> students);
+        // Lấy danh sách gender types để show trong dropdown, combobox
+        List<GenderType> GetAllGenderTypes();
     }
 }

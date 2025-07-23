@@ -21,11 +21,12 @@ namespace Services.Interfaces
         List<Student> SearchStudents(string searchTerm);
         void AddStudent(Student student);
         void UpdateStudent(Student student);
-        void DeleteStudent(Guid studentId);
-
+        void DeleteStudent(int studentId);
 
 
         //Thien
-        public List<Student> GetAllStudentsByUserId(Guid userId);
+        List<Student> GetAllStudentsByUserId(Guid userId);
+        // TODO: Ensure this method handles cascade soft delete
+        bool SoftDeleteStudent(int studentId);
     }
 }

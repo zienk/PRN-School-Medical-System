@@ -30,6 +30,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             InitializeComponent();
             _userService = new UserService();
             LoadUserData();
+            UpdateRecordCount();
         }
 
         private void LoadUserData()
@@ -150,6 +151,13 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
         {
        
+        }
+
+        private void BackToDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerDashboard managerDashboard = new ManagerDashboard();
+            managerDashboard.Show();
+            this.Close();
         }
 
     }
