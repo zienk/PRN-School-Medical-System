@@ -153,5 +153,12 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
        
         }
 
+        private void BackToDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerDashboard managerDashboard = new ManagerDashboard();
+            managerDashboard.Show();
+            this.Close();
+        }
+
     }
 }

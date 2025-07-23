@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem"
         mc:Ignorable="d"
         Title="Quản Lý Người Dùng" Height="700" Width="1200"
-        WindowState="Maximized"
+
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -192,6 +192,10 @@
                         Background="#DC3545" 
                         Style="{StaticResource ModernButton}"
                         Click="DeleteButton_Click"/>
+                <Button Content="Quay lại" 
+                        Background="#6C757D" 
+                        Style="{StaticResource ModernButton}"
+                        Click="BackToDashboard_Click"/>
             </StackPanel>
         </Grid>
 

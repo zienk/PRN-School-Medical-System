@@ -15,6 +15,7 @@ namespace Repositories.Interfaces
 {
     public interface IStudentRepository
     {
+        Student? GetStudentActiveById(int studentId);
         List<Student> GetAllStudents();
         List<Student> SearchStudents(string searchTerm);
         void AddStudent(Student student); // Hàm này nên trả về object Student

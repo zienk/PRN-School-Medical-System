@@ -88,7 +88,11 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                     currentStudent.IsActive = chkIsActive.IsChecked.Value;
 
                     _studentService.UpdateStudent(currentStudent);
-                    MessageBox.Show("Cập nhật học sinh thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(
+                        "Cập nhật học sinh thành công!", 
+                        "Thông báo", 
+                        MessageBoxButton.OK, 
+                        MessageBoxImage.Information);
                 }
                 else
                 {
@@ -151,5 +155,13 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         {
             this.Close();
         }
+
+        private void BackToDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerDashboard dashboard = new ManagerDashboard();
+            dashboard.Show();
+            this.Close();
+        }
+
     }
 } 

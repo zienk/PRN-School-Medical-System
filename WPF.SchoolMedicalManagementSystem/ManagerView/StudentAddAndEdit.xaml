@@ -130,6 +130,15 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
     </Window.Resources>
 
     <Grid Margin="24">
@@ -172,7 +181,9 @@
                     <StackPanel>
                         <Label Content="Giới tính:" Style="{StaticResource ModernLabel}"/>
                         <ComboBox x:Name="cmbGender"
-                                  Style="{StaticResource ModernComboBox}"/>
+                                  Height="40"
+                                  Padding="10"
+                                  FontSize="14"/>
                     </StackPanel>
 
                     <StackPanel>
@@ -186,7 +197,9 @@
                     <StackPanel>
                         <Label Content="Phụ huynh:" Style="{StaticResource ModernLabel}"/>
                         <ComboBox x:Name="cmbParent"
-                                  Style="{StaticResource ModernComboBox}"/>
+                                  Height="40"
+                                  Padding="10"
+                                  FontSize="14"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -213,6 +226,10 @@
                     Background="#6C757D" 
                     Style="{StaticResource ModernButton}"
                     Click="CancelButton_Click"/>
+            <Button Content="Quay về Dashboard" 
+                    Background="#17A2B8" 
+                    Style="{StaticResource ModernButton}"
+                    Click="BackToDashboard_Click"/>
         </StackPanel>
     </Grid>
 </Window> 

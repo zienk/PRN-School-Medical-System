@@ -163,22 +163,5 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             managerDashboard.Show();
             this.Close();
         }
-
-        private void btnManageUsers_Click(object sender, RoutedEventArgs e)
-        {
-            UserManagement userManagement = new UserManagement();
-            userManagement.Show();
-            this.Close();
-        }
-
-        private void btnManageStudents_Click(object sender, RoutedEventArgs e)
-        {
-            // Already here
-        }
-
-        private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Implement if needed
-        }
     }
 }
