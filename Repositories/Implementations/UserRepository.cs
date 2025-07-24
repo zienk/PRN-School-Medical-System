@@ -21,8 +21,8 @@ namespace Repositories.Implementations
 
         public void AddUser(User user)
         {
-            _context.Users.AddAsync(user);
-            _context.SaveChangesAsync();
+            _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
         public void DeleteUser(Guid userId)

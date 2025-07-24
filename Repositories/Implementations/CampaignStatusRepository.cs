@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementations
 {
-    public class MedicalEventTypeRepository : IMedicalEventTypeRepository
+    public class CampaignStatusRepository : ICampaignStatusRepository
     {
         private readonly PrnEduHealthContext _context;
 
-        public MedicalEventTypeRepository()
+        public CampaignStatusRepository()
         {
             _context = new PrnEduHealthContext();
         }
 
-        public List<MedicalEventType> GetAllMedicalEventTypes()
+        public List<CampaignStatus> GetAllCampaignStatuses()
         {
-            return _context.MedicalEventTypes
-                .ToList();
+            return _context.CampaignStatuses.ToList();
         }
     }
 }

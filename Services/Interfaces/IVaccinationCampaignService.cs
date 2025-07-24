@@ -17,7 +17,7 @@ namespace Services.Interfaces
         // (nên suy nghĩ lại vì xóa chiến dịch này đồng nghĩa với việc xóa tất cả các bản ghi tiêm chủng liên quan)
         bool DeleteVaccinationCampaign(int campaignId);
         // Lấy 1 chiến dịch tiêm chủng theo ID
-        VaccinationCampaign GetVaccinationCampaignById(int campaignId);
+        VaccinationCampaign? GetVaccinationCampaignById(int campaignId);
         // Lấy tất cả các chiến dịch tiêm chủng
         List<VaccinationCampaign> GetAllVaccinationCampaigns();
         // Lấy tất cả chiến dịch tiêm chủng theo người tạo
