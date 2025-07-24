@@ -8,5 +8,6 @@ namespace Repositories.Implementations
 {
     public class SeverityLevelRepository
     {
+
     }
 }
