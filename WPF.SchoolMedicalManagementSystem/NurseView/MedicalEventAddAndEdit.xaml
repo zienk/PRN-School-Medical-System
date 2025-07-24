@@ -1,0 +1,37 @@
+<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.MedicalEventAddAndEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sự kiện y tế" Height="500" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Thông tin sự kiện y tế" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" >
+            <Label Content="Học sinh"/>
+            <ComboBox x:Name="cbStudent" DisplayMemberPath="FullName" SelectedValuePath="StudentId"/>
+            <Label Content="Loại sự kiện"/>
+            <ComboBox x:Name="cbEventType" DisplayMemberPath="EventTypeName" SelectedValuePath="EventTypeId"/>
+            <Label Content="Ngày sự kiện"/>
+            <DatePicker x:Name="dpIncidentDate"/>
+            <Label Content="Mô tả"/>
+            <TextBox x:Name="txtDescription" Height="60" AcceptsReturn="True"/>
+            <Label Content="Mức độ"/>
+            <ComboBox x:Name="cbSeverity" DisplayMemberPath="SeverityName" SelectedValuePath="SeverityId"/>
+            <Label Content="Người báo cáo"/>
+            <ComboBox x:Name="cbReportedBy" DisplayMemberPath="FullName" SelectedValuePath="UserId"/>
+            <Label Content="Địa điểm"/>
+            <TextBox x:Name="txtLocation"/>
+            <Label Content="Hành động xử lý"/>
+            <TextBox x:Name="txtActionsTaken" Height="40" AcceptsReturn="True"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="btnSave" Content="Lưu" Width="80" Margin="0,0,10,0"/>
+            <Button x:Name="btnCancel" Content="Hủy" Width="80"/>
+        </StackPanel>
+    </Grid>
+</Window> 

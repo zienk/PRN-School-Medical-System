@@ -36,7 +36,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void btnManageIncidents_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement medical incidents management logic
+            
         }
     }
 }
