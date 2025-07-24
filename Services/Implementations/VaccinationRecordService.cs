@@ -19,11 +19,68 @@ namespace Services.Implementations
             this.vaccinationRecordRepository = new VaccinationRecordRepository();
         }
 
+        public VaccinationRecord AddVaccinationRecord(VaccinationRecord vaccinationRecord)
+        {
+            if (vaccinationRecord == null)
+            {
+                throw new ArgumentNullException(nameof(vaccinationRecord), "Dữ liệu bản ghi không được để trống");
+            }
+            if (vaccinationRecord.StudentId <= 0 || vaccinationRecord.CampaignId <= 0)
+            {
+                throw new ArgumentException("Dữ liệu bản ghi không hợp lệ");
+            }
+
+            return vaccinationRecordRepository.AddVaccinationRecord(vaccinationRecord);
+        }
+
+        public bool DeleteVaccinationRecord(int vaccinationRecordId)
+        {
+            var existingRecord = vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecordId);
+            if (existingRecord == null)
+            {
+                throw new InvalidOperationException("Không tìm thấy bản ghi tiêm chủng để xóa.");
+            }
+
+            return vaccinationRecordRepository.DeleteVaccinationRecord(vaccinationRecordId);
+        }
+
 
         //Thien
         public List<VaccinationRecord> GetAllVaccinationRecordsByStudentId(int studentId)
         {
             return vaccinationRecordRepository.GetAllVaccinationRecordsByStudentId(studentId);
+        }
+
+        public VaccinationRecord? GetVaccinationRecordById(int vaccinationRecordId)
+        {
+            return vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecordId);
+        }
+
+        public List<VaccinationRecord> GetVaccinationRecordsByCampaignId(int campaignId)
+        {
+            return vaccinationRecordRepository.GetVaccinationRecordsByCampaignId(campaignId);
+        }
+
+        public List<VaccinationRecord> SearchVaccinationRecords(string searchText)
+        {
+            return vaccinationRecordRepository.SearchVaccinationRecords(searchText);
+        }
+
+        public VaccinationRecord? UpdateVaccinationRecord(VaccinationRecord vaccinationRecord)
+        {
+            if (vaccinationRecord == null || vaccinationRecord.VaccinationRecordId <= 0)
+            {
+                throw new ArgumentException("Dữ liệu bản ghi không hợp lệ");
+            }
+
+            var existingRecord = vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecord.VaccinationRecordId);
+
+            if (existingRecord == null)
+            {
+                throw new InvalidOperationException("Không tìm thấy bản ghi tiêm chủng để cập nhật.");
+            }
+
+            return vaccinationRecordRepository.UpdateVaccinationRecord(vaccinationRecord);
         }
     }
 }

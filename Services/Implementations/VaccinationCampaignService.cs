@@ -33,7 +33,7 @@ namespace Services.Implementations
             return _vaccinationCampaignRepository.GetAllVaccinationCampaigns();
         }
 
-        public VaccinationCampaign GetVaccinationCampaignById(int campaignId)
+        public VaccinationCampaign? GetVaccinationCampaignById(int campaignId)
         {
             return _vaccinationCampaignRepository.GetVaccinationCampaignById(campaignId);
         }
