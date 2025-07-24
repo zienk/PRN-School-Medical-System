@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Entities;
+using Repositories.Implementations;
 using Repositories.Interfaces;
 using Services.Interfaces;
 using System;
@@ -13,9 +14,9 @@ namespace Services.Implementations
     {
         private readonly IVaccinationCampaignRepository _vaccinationCampaignRepository;
 
-        public VaccinationCampaignService(IVaccinationCampaignRepository vaccinationCampaignRepository)
+        public VaccinationCampaignService()
         {
-            _vaccinationCampaignRepository = vaccinationCampaignRepository;
+            _vaccinationCampaignRepository = new VaccinationCampaignRepository();
         }
 
         public VaccinationCampaign AddVaccinationCampaign(VaccinationCampaign campaign)

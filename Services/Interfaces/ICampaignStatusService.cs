@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Services.Interfaces
 {
-    public interface ISeverityLevelService
+    public interface ICampaignStatusService
     {
-        List<SeverityLevel> GetAllSeverityLevels();
+        List<CampaignStatus> GetAllCampaignStatuses();
     }
 }

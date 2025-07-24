@@ -12,11 +12,11 @@ namespace Services.Implementations
 {
     public class VaccinationRecordService : IVaccinationRecordService
     {
-        private readonly IVaccinationRecordRepository vaccinationRecordRepository;
+        private readonly IVaccinationRecordRepository _vaccinationRecordRepository;
 
         public VaccinationRecordService()
         {
-            this.vaccinationRecordRepository = new VaccinationRecordRepository();
+            _vaccinationRecordRepository = new VaccinationRecordRepository();
         }
 
         public VaccinationRecord AddVaccinationRecord(VaccinationRecord vaccinationRecord)
@@ -30,40 +30,40 @@ namespace Services.Implementations
                 throw new ArgumentException("Dữ liệu bản ghi không hợp lệ");
             }
 
-            return vaccinationRecordRepository.AddVaccinationRecord(vaccinationRecord);
+            return _vaccinationRecordRepository.AddVaccinationRecord(vaccinationRecord);
         }
 
         public bool DeleteVaccinationRecord(int vaccinationRecordId)
         {
-            var existingRecord = vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecordId);
+            var existingRecord = _vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecordId);
             if (existingRecord == null)
             {
                 throw new InvalidOperationException("Không tìm thấy bản ghi tiêm chủng để xóa.");
             }
 
-            return vaccinationRecordRepository.DeleteVaccinationRecord(vaccinationRecordId);
+            return _vaccinationRecordRepository.DeleteVaccinationRecord(vaccinationRecordId);
         }
 
 
         //Thien
         public List<VaccinationRecord> GetAllVaccinationRecordsByStudentId(int studentId)
         {
-            return vaccinationRecordRepository.GetAllVaccinationRecordsByStudentId(studentId);
+            return _vaccinationRecordRepository.GetAllVaccinationRecordsByStudentId(studentId);
         }
 
         public VaccinationRecord? GetVaccinationRecordById(int vaccinationRecordId)
         {
-            return vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecordId);
+            return _vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecordId);
         }
 
         public List<VaccinationRecord> GetVaccinationRecordsByCampaignId(int campaignId)
         {
-            return vaccinationRecordRepository.GetVaccinationRecordsByCampaignId(campaignId);
+            return _vaccinationRecordRepository.GetVaccinationRecordsByCampaignId(campaignId);
         }
 
         public List<VaccinationRecord> SearchVaccinationRecords(string searchText)
         {
-            return vaccinationRecordRepository.SearchVaccinationRecords(searchText);
+            return _vaccinationRecordRepository.SearchVaccinationRecords(searchText);
         }
 
         public VaccinationRecord? UpdateVaccinationRecord(VaccinationRecord vaccinationRecord)
@@ -73,14 +73,14 @@ namespace Services.Implementations
                 throw new ArgumentException("Dữ liệu bản ghi không hợp lệ");
             }
 
-            var existingRecord = vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecord.VaccinationRecordId);
+            var existingRecord = _vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecord.VaccinationRecordId);
 
             if (existingRecord == null)
             {
                 throw new InvalidOperationException("Không tìm thấy bản ghi tiêm chủng để cập nhật.");
             }
 
-            return vaccinationRecordRepository.UpdateVaccinationRecord(vaccinationRecord);
+            return _vaccinationRecordRepository.UpdateVaccinationRecord(vaccinationRecord);
         }
     }
 }

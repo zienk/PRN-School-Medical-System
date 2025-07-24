@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Interfaces
+namespace Repositories.Interfaces
 {
-    public interface ISeverityLevelService
+    public interface ICampaignStatusRepository
     {
-        List<SeverityLevel> GetAllSeverityLevels();
+        List<CampaignStatus> GetAllCampaignStatuses();
     }
 }
