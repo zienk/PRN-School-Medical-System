@@ -175,6 +175,7 @@
                         Content="🎓 Student Info" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnStudentInfo_Click"/>
 
+
                 <Button x:Name="btnHealthCheckups" 
                         Content="🩺 Health Checkups" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnHealthCheckups_Click"/>
