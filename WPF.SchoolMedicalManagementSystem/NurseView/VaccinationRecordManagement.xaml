@@ -1,11 +1,11 @@
-﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.Vaccination"
+<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.VaccinationRecordManagement"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Quản Lý Tiêm Chủng" Height="700" Width="1200"
+        Title="Quản Lý Ghi Nhận Tiêm Chủng" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -59,6 +59,17 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <!-- Style cho ComboBox -->
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
 
         <!-- Style cho DataGrid -->
@@ -140,16 +151,40 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Tiêu đề -->
         <TextBlock Grid.Row="0" 
-                   Text="QUẢN LÝ TIÊM CHỦNG" 
+                   Text="QUẢN LÝ GHI NHẬN TIÊM CHỦNG" 
                    Style="{StaticResource HeaderStyle}"/>
 
-        <!-- Thanh công cụ -->
+        <!-- Bộ lọc chiến dịch -->
         <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" 
+                       Text="Chiến dịch:" 
+                       FontSize="14" 
+                       FontWeight="Medium" 
+                       VerticalAlignment="Center" 
+                       Margin="0,0,10,0"
+                       Foreground="#333333"/>
+            <ComboBox Grid.Column="1" 
+                      x:Name="cmbCampaigns" 
+                      Style="{StaticResource ModernComboBox}"
+                      DisplayMemberPath="VaccineName"
+                      SelectedValuePath="CampaignId"
+                      SelectionChanged="CmbCampaigns_SelectionChanged"/>
+        </Grid>
+
+        <!-- Thanh công cụ -->
+        <Grid Grid.Row="2" Margin="0,0,0,16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -165,34 +200,34 @@
                            Foreground="#333333"/>
                 <TextBox x:Name="txtSearch" 
                          Style="{StaticResource ModernTextBox}"
-                         Width="250" />
-                <Button x:Name="btnSearch" 
-                        Content="🔍" 
+                         Width="250" 
+                         KeyUp="TxtSearch_KeyUp"/>
+                <Button Content="🔍" 
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
+                        Click="SearchButton_Click"
                         Width="48"/>
                 
             </StackPanel>
 
             <!-- Các nút thao tác -->
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button x:Name="btnAddNew" 
-                        Content="Thêm mới" 
-                        Background="#28A745" 
-                        Style="{StaticResource ModernButton}"/>
-                <Button Content="Sửa" 
-                        Background="#FFC107" 
-                        Style="{StaticResource ModernButton}"/>
-                <Button Content="Xóa" 
-                        Background="#DC3545" 
-                        Style="{StaticResource ModernButton}"/>
                 <Button Content="Ghi nhận tiêm" 
+                        Background="#28A745" 
+                        Style="{StaticResource ModernButton}"
+                        Click="AddButton_Click"/>
+                <Button Content="Xem chi tiết" 
                         Background="#007BFF" 
                         Style="{StaticResource ModernButton}"
-                        Click="btnManageRecords_Click"/>
-                <Button Content="Xuất Excel" 
-                        Background="#17A2B8" 
-                        Style="{StaticResource ModernButton}"/>
+                        Click="ViewDetailButton_Click"/>
+                <Button Content="Sửa" 
+                        Background="#FFC107" 
+                        Style="{StaticResource ModernButton}"
+                        Click="EditButton_Click"/>
+                <Button Content="Xóa" 
+                        Background="#DC3545" 
+                        Style="{StaticResource ModernButton}"
+                        Click="DeleteButton_Click"/>
                 <Button Content="Quay lại" 
                         Background="#6C757D" 
                         Style="{StaticResource ModernButton}"
@@ -201,64 +236,27 @@
         </Grid>
 
         <!-- DataGrid -->
-        <Border Grid.Row="2" 
+        <Border Grid.Row="3" 
                 Background="White"
                 CornerRadius="8"
                 BorderBrush="#CCCCCC"
                 BorderThickness="1"
                 Padding="8">
-            <DataGrid Grid.Row="2" x:Name="dgVaccinations" 
-                      AutoGenerateColumns="False" 
-                      CanUserAddRows="False" 
-                      CanUserDeleteRows="False" 
-                      GridLinesVisibility="Horizontal" 
-                      BorderThickness="0" 
-                      Background="Transparent">
+            <DataGrid x:Name="dgVaccinationRecords" MouseDoubleClick="DgVaccinationRecords_MouseDoubleClick">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Campaign Name" 
-                                        Binding="{Binding VaccineName}" 
-                                        Width="180" />
-                    <DataGridTextColumn Header="Date" 
-                                        Binding="{Binding Date, StringFormat=dd/MM/yyyy}" 
-                                        Width="100" />
-                    <DataGridTextColumn Header="Description" 
-                                        Binding="{Binding Description}" 
-                                        Width="*" />
-                    <DataGridTextColumn Header="Status" 
-                                        Binding="{Binding Status.StatusName}" 
-                                        Width="100" />
-                    <DataGridTemplateColumn Header="Actions" Width="120">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="✏️" 
-                                            Margin="2" 
-                                            Padding="8,4" 
-                                            Background="#4285F4" 
-                                            Foreground="White" 
-                                            BorderThickness="0" 
-                                            ToolTip="Edit"
-                                            Click="EditButton_Click"
-                                            DataContext="{Binding}" />
-                                    <Button Content="🗑️" 
-                                            Margin="2" 
-                                            Padding="8,4" 
-                                            Background="#EA4335" 
-                                            Foreground="White" 
-                                            BorderThickness="0" 
-                                            ToolTip="Delete"
-                                            Click="DeleteButton_Click"
-                                            DataContext="{Binding}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="ID" Binding="{Binding VaccinationRecordId}" Width="60"/>
+                    <DataGridTextColumn Header="Tên học sinh" Binding="{Binding Student.FullName}" Width="150"/>
+                    <DataGridTextColumn Header="Lớp" Binding="{Binding Student.Class}" Width="80"/>
+                    <DataGridTextColumn Header="Chiến dịch" Binding="{Binding Campaign.VaccineName}" Width="200"/>
+                    <DataGridTextColumn Header="Ngày tiêm" Binding="{Binding VaccinationDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
+                    <DataGridTextColumn Header="Ghi chú" Binding="{Binding Notes}" Width="*"/>
+                    <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding IsActive}" Width="80"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
 
         <!-- Status bar -->
-        <StatusBar Grid.Row="2" 
+        <StatusBar Grid.Row="3" 
                    VerticalAlignment="Bottom" 
                    Background="#F8F9FA" 
                    Height="32"
@@ -269,9 +267,16 @@
                            FontSize="12"
                            Foreground="#333333"/>
             </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="💡 Mẹo: Double-click vào bản ghi để xem chi tiết" 
+                           FontSize="11" 
+                           Foreground="#007BFF" 
+                           FontStyle="Italic"
+                           Margin="20,0,0,0"/>
+            </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <TextBlock x:Name="RecordCountLabel" 
-                           Text="Tổng: 0 chiến dịch" 
+                           Text="Tổng: 0 bản ghi" 
                            FontSize="12"
                            Foreground="#333333"/>
             </StatusBarItem>

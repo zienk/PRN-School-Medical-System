@@ -403,3 +403,6 @@ TODO.md
 WPF.SchoolMedicalManagementSystem/appsettings.json
 
 .vscode/settings.json
+.kiro/specs/vaccination-record-management/design.md
+.kiro/specs/vaccination-record-management/requirements.md
+.kiro/specs/vaccination-record-management/tasks.md

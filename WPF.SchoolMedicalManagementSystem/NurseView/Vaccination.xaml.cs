@@ -150,5 +150,19 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             dashboard.Show();
             this.Close();
         }
+
+        private void btnManageRecords_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                VaccinationRecordManagement recordsWindow = new VaccinationRecordManagement(_currentUser);
+                recordsWindow.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở quản lý ghi nhận tiêm chủng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

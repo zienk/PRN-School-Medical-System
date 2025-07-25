@@ -160,6 +160,11 @@
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageVaccinations_Click" />
 
+                <Button x:Name="btnManageVaccinationRecords" 
+                        Content="📝 Vaccination Records" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageVaccinationRecords_Click" />
+
                 <Button x:Name="btnManageIncidents" 
                         Content="🚨 Medical Incidents" 
                         Style="{StaticResource SidebarButtonStyle}"

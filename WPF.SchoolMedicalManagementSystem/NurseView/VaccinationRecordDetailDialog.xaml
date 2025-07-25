@@ -1,0 +1,236 @@
+<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.VaccinationRecordDetailDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
+        mc:Ignorable="d"
+        Title="Chi tiết bản ghi tiêm chủng" SizeToContent="Height" Width="700"
+        WindowStartupLocation="CenterScreen"
+        Background="White"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <!-- Style cho TextBox readonly -->
+        <Style x:Key="ReadOnlyTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="#F8F9FA"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="4" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Style cho Label -->
+        <Style x:Key="ModernLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <!-- Section Header Style -->
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="Margin" Value="0,20,0,10"/>
+            <Setter Property="Padding" Value="0,0,0,5"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   Text="CHI TIẾT BẢN GHI TIÊM CHỦNG" 
+                   Style="{StaticResource HeaderStyle}"/>
+        
+        <!-- Nội dung chi tiết -->
+        <Border Grid.Row="1" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Thông tin bản ghi -->
+                    <TextBlock Text="📋 Thông tin bản ghi" Style="{StaticResource SectionHeaderStyle}"/>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0">
+                            <Label Content="Mã bản ghi:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtRecordId" Style="{StaticResource ReadOnlyTextBox}"/>
+                            
+                            <Label Content="Ngày tiêm:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtVaccinationDate" Style="{StaticResource ReadOnlyTextBox}"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="2">
+                            <Label Content="Trạng thái:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtStatus" Style="{StaticResource ReadOnlyTextBox}"/>
+                            
+                            <Label Content="Ngày tạo bản ghi:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtCreatedDate" Style="{StaticResource ReadOnlyTextBox}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Thông tin học sinh -->
+                    <TextBlock Text="👨‍🎓 Thông tin học sinh" Style="{StaticResource SectionHeaderStyle}"/>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0">
+                            <Label Content="Họ và tên:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtStudentName" Style="{StaticResource ReadOnlyTextBox}"/>
+                            
+                            <Label Content="Lớp:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtStudentClass" Style="{StaticResource ReadOnlyTextBox}"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="2">
+                            <Label Content="Ngày sinh:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtStudentDOB" Style="{StaticResource ReadOnlyTextBox}"/>
+                            
+                            <Label Content="Giới tính:" Style="{StaticResource ModernLabel}"/>
+                            <TextBox x:Name="txtStudentGender" Style="{StaticResource ReadOnlyTextBox}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Thông tin chiến dịch -->
+                    <TextBlock Text="💉 Thông tin chiến dịch tiêm chủng" Style="{StaticResource SectionHeaderStyle}"/>
+                    
+                    <StackPanel>
+                        <Label Content="Tên chiến dịch:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtCampaignName" Style="{StaticResource ReadOnlyTextBox}"/>
+                        
+                        <Label Content="Mô tả chiến dịch:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtCampaignDescription" 
+                                 Style="{StaticResource ReadOnlyTextBox}" 
+                                 Height="80" 
+                                 TextWrapping="Wrap" 
+                                 VerticalScrollBarVisibility="Auto"
+                                 VerticalContentAlignment="Top"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Column="0">
+                                <Label Content="Ngày chiến dịch:" Style="{StaticResource ModernLabel}"/>
+                                <TextBox x:Name="txtCampaignStartDate" Style="{StaticResource ReadOnlyTextBox}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="2">
+                                <Label Content="Trạng thái chiến dịch:" Style="{StaticResource ModernLabel}"/>
+                                <TextBox x:Name="txtCampaignEndDate" Style="{StaticResource ReadOnlyTextBox}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Ghi chú -->
+                    <TextBlock Text="📝 Ghi chú" Style="{StaticResource SectionHeaderStyle}"/>
+                    
+                    <StackPanel>
+                        <TextBox x:Name="txtNotes" 
+                                 Style="{StaticResource ReadOnlyTextBox}" 
+                                 Height="100" 
+                                 TextWrapping="Wrap" 
+                                 VerticalScrollBarVisibility="Auto"
+                                 VerticalContentAlignment="Top"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        
+        <!-- Nút thao tác -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
+            <Button x:Name="btnEdit"
+                    Content="✏️ Chỉnh sửa" 
+                    Background="#FFC107" 
+                    Style="{StaticResource ModernButton}"
+                    Click="BtnEdit_Click"/>
+            <Button x:Name="btnClose" 
+                    Content="❌ Đóng" 
+                    Background="#6C757D" 
+                    Style="{StaticResource ModernButton}"
+                    Click="BtnClose_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

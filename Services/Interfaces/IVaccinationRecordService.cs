@@ -27,6 +27,9 @@ namespace Services.Interfaces
         //Search bản ghi tiêm chủng theo nhiều tiêu chí
         List<VaccinationRecord> SearchVaccinationRecords(string searchText);
 
+        //Lấy tất cả bản ghi tiêm chủng
+        List<VaccinationRecord> GetAllVaccinationRecords();
+
         //Thống kê số lượng bản ghi tiêm chủng thành công | thất bại (Todo)
     }
 }

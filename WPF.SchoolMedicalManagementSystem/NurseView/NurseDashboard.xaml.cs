@@ -73,5 +73,12 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             healthCheckupWindow.Show();
             this.Close();
         }
+
+        private void btnManageVaccinationRecords_Click(object sender, RoutedEventArgs e)
+        {
+            var vaccinationRecordsWindow = new VaccinationRecordManagement(currentUser);
+            vaccinationRecordsWindow.Show();
+            this.Close();
+        }
     }
 }
