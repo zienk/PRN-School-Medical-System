@@ -13,11 +13,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using WPF.SchoolMedicalManagementSystem.ManagerView;
 
-// Thêm các namespace cần thiết cho BusinessObjects.Entities và Services
-// using BusinessObjects.Entities; 
-// using Services.Implementations;
-// using Services.Interfaces;
-
 namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
     public partial class HealthCheckupManagement : Window
@@ -28,17 +23,10 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         private IHealthCheckupService _healthCheckupService = new HealthCheckupService(); // Giả định bạn đã tạo Service để quản lý HealthCheckup
         private IStudentService _studentService = new StudentService(); // Giả định bạn đã tạo Service để quản lý Student
         private IHealthCheckupResultService _healthCheckupResultService = new HealthCheckupResultService(); // Giả định bạn đã tạo Service để quản lý HealthCheckupResult
-        //private CheckupProgram _selectedCheckupProgram;
-        private Student _selectedStudentForNewResult; // Đổi tên để rõ ràng hơn
 
         private bool _isEditMode = false;
         private HealthCheckup _editingCheckupProgram;
         private List<HealthCheckupResult> allHealthResults = new List<HealthCheckupResult>();
-
-        // Khởi tạo Service (giả định đã có hoặc bạn sẽ tạo)
-        // private IHealthCheckupResultService _healthCheckupResultService = new HealthCheckupResultService();
-        // private IStudentService _studentService = new StudentService(); // Để lấy thông tin FullName của Student
-
 
         public HealthCheckupManagement(User user)
         {
@@ -427,13 +415,4 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         }
 
     }
-
-
-
-
-
-
-
-
-
 }

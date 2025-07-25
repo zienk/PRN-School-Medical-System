@@ -5,332 +5,272 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Vaccination Management - School Medical System" Height="700" Width="1200"
-        WindowStartupLocation="CenterScreen"
-        Background="White">
+        Title="Quản Lý Tiêm Chủng" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
-        <!-- Modern Card Style (giống NurseDashboard) -->
-        <Style x:Key="ModernCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="BorderBrush" Value="#E8F0FE" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Margin" Value="8" />
-            <Setter Property="Padding" Value="20" />
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.1" Color="#4285F4" />
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <!-- Sidebar Navigation Button Style (giống NurseDashboard) -->
-        <Style x:Key="SidebarButtonStyle" TargetType="Button">
-            <Setter Property="Margin" Value="8,4" />
-            <Setter Property="Padding" Value="20,15" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="#5F6368" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBorder" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                             VerticalAlignment="Center" 
-                                             Margin="{TemplateBinding Padding}" />
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="#F8F9FA" />
-                                <Setter Property="Foreground" Value="#1A73E8" />
+                                <Setter Property="Opacity" Value="0.9"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E8F0FE" />
-                                <Setter Property="Foreground" Value="#1557B0" />
+                                <Setter Property="Opacity" Value="0.8"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <!-- Header Style (giống NurseDashboard) -->
-        <Style x:Key="HeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="36" />
-            <Setter Property="FontWeight" Value="Light" />
-            <Setter Property="Foreground" Value="#202124" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Margin" Value="0,20,0,10" />
-        </Style>
-        <!-- Welcome Text Style (giống NurseDashboard) -->
-        <Style x:Key="WelcomeStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="Foreground" Value="#5F6368" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Margin" Value="0,0,0,30" />
-        </Style>
-        <!-- Modern Input Style (dùng cho TextBox) -->
-        <Style x:Key="ModernInputStyle" TargetType="TextBox">
-            <Setter Property="Padding" Value="12,10" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="BorderBrush" Value="#DADCE0" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="#202124" />
+
+        <!-- Style cho TextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="border" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="8">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-                                         Focusable="false" 
-                                         HorizontalScrollBarVisibility="Hidden" 
-                                         VerticalScrollBarVisibility="Hidden"
-                                         Margin="{TemplateBinding Padding}"/>
+                        <Border CornerRadius="4" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="true">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
-                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <!-- Action Button Style (dùng cho các nút Save, Add, Delete,...) -->
-        <Style x:Key="ActionButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="20,12" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Margin" Value="8,4" />
+
+        <!-- Style cho DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#EEEEEE"/>
+            <Setter Property="AlternatingRowBackground" Value="#F9F9F9"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="RowHeight" Value="48"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+
+        <!-- Style cho DataGridColumnHeader -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="Padding" Value="12,0"/>
+        </Style>
+
+        <!-- Style cho DataGridCell -->
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#333333"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBorder" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                             VerticalAlignment="Center" 
-                                             Margin="{TemplateBinding Padding}" />
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Padding="{TemplateBinding Padding}" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.9" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.8" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <!-- Style cho DataGridRow -->
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Height" Value="36"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#D0D0D0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <!-- Background Gradient -->
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#FAFBFC" Offset="0"/>
-                <GradientStop Color="#F8F9FA" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="240" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   Text="QUẢN LÝ TIÊM CHỦNG" 
+                   Style="{StaticResource HeaderStyle}"/>
 
-        <!-- Sidebar -->
-        <Border Grid.Column="0" Background="White" CornerRadius="0,20,20,0" 
-                BorderBrush="#E8EAED" BorderThickness="0,0,1,0" Margin="0">
-            <StackPanel Orientation="Vertical" Margin="20">
-                <!-- Logo/Title Section -->
-                <StackPanel Margin="0,20,0,40">
-                    <TextBlock Text="🏥" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="Medical System" 
-                               FontSize="18" 
-                               FontWeight="SemiBold" 
-                               Foreground="#202124" 
-                               HorizontalAlignment="Center" />
-                    <TextBlock Text="Nurse Portal" 
-                               FontSize="14" 
-                               Foreground="#5F6368" 
-                               HorizontalAlignment="Center" />
-                </StackPanel>
+        <!-- Thanh công cụ -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-                <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
-                           FontSize="12" 
-                           FontWeight="SemiBold" 
-                           Foreground="#9AA0A6" 
-                           Margin="20,0,0,15" />
-
-                <Button x:Name="btnManageHealthCheckups" 
-                        Content="🩺 Health Checkups" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageHealthCheckups_Click" />
-
-                <Button x:Name="btnManageVaccinations" 
-                        Content="💉 Vaccinations" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageVaccinations_Click" />
-
-                <Button x:Name="btnManageIncidents" 
-                        Content="🚨 Medical Incidents" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageIncidents_Click" />
+            <!-- Tìm kiếm -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Tìm kiếm:" 
+                           FontSize="14" 
+                           FontWeight="Medium" 
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,0"
+                           Foreground="#333333"/>
+                <TextBox x:Name="txtSearch" 
+                         Style="{StaticResource ModernTextBox}"
+                         Width="250" />
+                <Button x:Name="btnSearch" 
+                        Content="🔍" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                        Width="48"/>
+                
             </StackPanel>
+
+            <!-- Các nút thao tác -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button x:Name="btnAddNew" 
+                        Content="Thêm mới" 
+                        Background="#28A745" 
+                        Style="{StaticResource ModernButton}"/>
+                <Button Content="Sửa" 
+                        Background="#FFC107" 
+                        Style="{StaticResource ModernButton}"/>
+                <Button Content="Xóa" 
+                        Background="#DC3545" 
+                        Style="{StaticResource ModernButton}"/>
+                <Button Content="Xuất Excel" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"/>
+                <Button Content="Quay lại" 
+                        Background="#6C757D" 
+                        Style="{StaticResource ModernButton}"
+                        Click="BackToDashboard_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid -->
+        <Border Grid.Row="2" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="8">
+            <DataGrid Grid.Row="2" x:Name="dgVaccinations" 
+                      AutoGenerateColumns="False" 
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      GridLinesVisibility="Horizontal" 
+                      BorderThickness="0" 
+                      Background="Transparent">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Campaign Name" 
+                                        Binding="{Binding VaccineName}" 
+                                        Width="180" />
+                    <DataGridTextColumn Header="Date" 
+                                        Binding="{Binding Date, StringFormat=dd/MM/yyyy}" 
+                                        Width="100" />
+                    <DataGridTextColumn Header="Description" 
+                                        Binding="{Binding Description}" 
+                                        Width="*" />
+                    <DataGridTextColumn Header="Status" 
+                                        Binding="{Binding Status.StatusName}" 
+                                        Width="100" />
+                    <DataGridTemplateColumn Header="Actions" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="✏️" 
+                                            Margin="2" 
+                                            Padding="8,4" 
+                                            Background="#4285F4" 
+                                            Foreground="White" 
+                                            BorderThickness="0" 
+                                            ToolTip="Edit"
+                                            Click="EditButton_Click"
+                                            DataContext="{Binding}" />
+                                    <Button Content="🗑️" 
+                                            Margin="2" 
+                                            Padding="8,4" 
+                                            Background="#EA4335" 
+                                            Foreground="White" 
+                                            BorderThickness="0" 
+                                            ToolTip="Delete"
+                                            Click="DeleteButton_Click"
+                                            DataContext="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Border>
 
-        <!-- Main Content -->
-        <Grid Grid.Column="1" Margin="30">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!-- Header Section -->
-            <StackPanel Grid.Row="0">
-                <TextBlock Text="Vaccination Management" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="Manage vaccination campaigns and track immunization records" 
-                           Style="{StaticResource WelcomeStyle}" />
-            </StackPanel>
-
-            <!-- Vaccination List Card -->
-            <Border Grid.Row="1" Style="{StaticResource ModernCardStyle}">
-                <StackPanel>
-                    <Grid Margin="0,0,0,20">
-                        <TextBlock Text="Vaccination Campaigns" 
-                                   FontSize="20" 
-                                   FontWeight="SemiBold" 
-                                   Foreground="#202124" 
-                                   HorizontalAlignment="Left" 
-                                   VerticalAlignment="Center" />
-
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBox x:Name="txtSearch" 
-                                     Style="{StaticResource ModernInputStyle}" 
-                                     Width="200" 
-                                     Margin="0,0,10,0" />
-                            <Button x:Name="btnRefresh" 
-                                    Content="🔄" 
-                                    Style="{StaticResource ActionButtonStyle}"
-                                    Padding="12,10">
-                                <Button.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#4285F4" Offset="0"/>
-                                        <GradientStop Color="#1A73E8" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                            </Button>
-                            <Button x:Name="btnAddNew" 
-                                    Content="➕ Add New Campaign" 
-                                     Style="{StaticResource ActionButtonStyle}">
-                                <Button.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#34A853" Offset="0"/>
-                                        <GradientStop Color="#137333" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-
-                    <!-- DataGrid for Vaccinations -->
-                    <DataGrid x:Name="dgVaccinations" 
-                              AutoGenerateColumns="False" 
-                              CanUserAddRows="False" 
-                              CanUserDeleteRows="False" 
-                              GridLinesVisibility="None" 
-                              HeadersVisibility="Column" 
-                              BorderThickness="0" 
-                              Background="Transparent"
-                              RowBackground="White" 
-                              AlternatingRowBackground="#F8F9FA">
-
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="Background" Value="#F1F3F4" />
-                                <Setter Property="Foreground" Value="#202124" />
-                                <Setter Property="FontWeight" Value="SemiBold" />
-                                <Setter Property="FontSize" Value="14" />
-                                <Setter Property="Padding" Value="15,12" />
-                                <Setter Property="BorderThickness" Value="0,0,0,2" />
-                                <Setter Property="BorderBrush" Value="#E8EAED" />
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
-
-                        <DataGrid.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="BorderThickness" Value="0" />
-                                <Setter Property="Padding" Value="15,8" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="14" />
-                                <Setter Property="Foreground" Value="#202124" />
-                            </Style>
-                        </DataGrid.CellStyle>
-
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Campaign Name" 
-                                                Binding="{Binding VaccineName}" 
-                                                Width="180" />
-                            <DataGridTextColumn Header="Date" 
-                                                Binding="{Binding Date, StringFormat=dd/MM/yyyy}" 
-                                                Width="100" />
-                            <DataGridTextColumn Header="Description" 
-                                                Binding="{Binding Description}" 
-                                                Width="*" />
-                            <DataGridTextColumn Header="Status" 
-                                                Binding="{Binding Status.StatusName}" 
-                                                Width="100" />
-                            <DataGridTemplateColumn Header="Actions" Width="120">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Content="✏️" 
-                                                    Margin="2" 
-                                                    Padding="8,4" 
-                                                    Background="#4285F4" 
-                                                    Foreground="White" 
-                                                    BorderThickness="0" 
-                                                    ToolTip="Edit"
-                                                    Click="EditButton_Click"
-                                                    DataContext="{Binding}" />
-                                            <Button Content="🗑️" 
-                                                    Margin="2" 
-                                                    Padding="8,4" 
-                                                    Background="#EA4335" 
-                                                    Foreground="White" 
-                                                    BorderThickness="0" 
-                                                    ToolTip="Delete"
-                                                    Click="DeleteButton_Click"
-                                                    DataContext="{Binding}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </Border>
-        </Grid>
+        <!-- Status bar -->
+        <StatusBar Grid.Row="2" 
+                   VerticalAlignment="Bottom" 
+                   Background="#F8F9FA" 
+                   Height="32"
+                   Padding="8,0">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusLabel" 
+                           Text="Sẵn sàng" 
+                           FontSize="12"
+                           Foreground="#333333"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="RecordCountLabel" 
+                           Text="Tổng: 0 chiến dịch" 
+                           FontSize="12"
+                           Foreground="#333333"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

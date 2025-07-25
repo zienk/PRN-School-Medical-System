@@ -22,11 +22,13 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
     /// </summary>
     public partial class MedicalEvent : Window
     {
-
         IIncidentService _incidentService;
-        public MedicalEvent()
+        private User currentUser;
+
+        public MedicalEvent(User user = null)
         {
             InitializeComponent();
+            currentUser = user;
             LoadData();
         }
 
@@ -89,7 +91,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-
+            LoadData();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -113,6 +115,13 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             dgMedicalEvents.ItemsSource = null;
             dgMedicalEvents.ItemsSource = filtered;
             RecordCountLabel.Text = $"Tổng: {filtered.Count} sự kiện";
+        }
+
+        private void BackToDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            NurseDashboard dashboard = new NurseDashboard(currentUser);
+            dashboard.Show();
+            this.Close();
         }
     }
 }

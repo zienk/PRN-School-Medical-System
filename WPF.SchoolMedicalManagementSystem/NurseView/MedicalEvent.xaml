@@ -6,26 +6,30 @@
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
         Title="Quản Lý Sự Kiện Y Tế" Height="700" Width="1200"
-        WindowState="Maximized">
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <!-- Style cho Button -->
         <Style x:Key="ModernButton" TargetType="Button">
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="MinWidth" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Opacity" Value="0.8"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -36,20 +40,21 @@
 
         <!-- Style cho TextBox -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Padding" Value="8"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border CornerRadius="3" 
+                        <Border CornerRadius="4" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -70,6 +75,9 @@
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="RowHeight" Value="48"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
         </Style>
 
         <!-- Style cho DataGridColumnHeader -->
@@ -77,14 +85,58 @@
             <Setter Property="Background" Value="#F0F0F0"/>
             <Setter Property="Foreground" Value="#333333"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="48"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="Padding" Value="12,0"/>
+        </Style>
+
+        <!-- Style cho DataGridCell -->
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Padding="{TemplateBinding Padding}" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho DataGridRow -->
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Height" Value="36"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#D0D0D0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
     </Window.Resources>
 
-    <Grid Margin="10">
+    <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -94,14 +146,10 @@
         <!-- Tiêu đề -->
         <TextBlock Grid.Row="0" 
                    Text="QUẢN LÝ SỰ KIỆN Y TẾ" 
-                   FontSize="20" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"
-                   Foreground="#0078D4"/>
+                   Style="{StaticResource HeaderStyle}"/>
 
         <!-- Thanh công cụ -->
-        <Grid Grid.Row="1" Margin="0,0,0,10">
+        <Grid Grid.Row="1" Margin="0,0,0,16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -109,20 +157,21 @@
 
             <!-- Tìm kiếm -->
             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Tìm kiếm:" FontSize="12" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock Text="Tìm kiếm:" 
+                           FontSize="14" 
+                           FontWeight="Medium" 
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,0"
+                           Foreground="#333333"/>
                 <TextBox x:Name="SearchTextBox" 
                          Style="{StaticResource ModernTextBox}"
-                         Width="200" 
-                         />
+                         Width="250"/>
                 <Button Content="🔍" 
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
                         Click="SearchButton_Click"
-                        Width="40"/>
-                <Button Content="Làm mới" 
-                        Background="#6C757D" 
-                        Style="{StaticResource ModernButton}"
-                        Click="RefreshButton_Click"/>
+                        Width="48"/>
+                
             </StackPanel>
 
             <!-- Các nút thao tác -->
@@ -143,32 +192,53 @@
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
                         Click="ExportButton_Click"/>
+                <Button Content="Quay lại" 
+                        Background="#6C757D" 
+                        Style="{StaticResource ModernButton}"
+                        Click="BackToDashboard_Click"/>
             </StackPanel>
         </Grid>
 
         <!-- DataGrid -->
-        <DataGrid Grid.Row="2" x:Name="dgMedicalEvents">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="IncidentId" Binding="{Binding IncidentId}" Width="60"/>
-                <DataGridTextColumn Header="FullName" Binding="{Binding Student.FullName}" Width="120"/>
-                <DataGridTextColumn Header="Class" Binding="{Binding Student.Class}" Width="80"/>
-                <DataGridTextColumn Header="EventType" Binding="{Binding IncidentType.EventTypeName}" Width="120"/>
-                <DataGridTextColumn Header="EventDate" Binding="{Binding IncidentDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
-                <DataGridTextColumn Header="ActionsTaken" Binding="{Binding ActionsTaken}" Width="*"/>
-                <DataGridTextColumn Header="ReportedBy" Binding="{Binding ReportedByNavigation.FullName}" Width="150"/>
-                <DataGridTextColumn Header="SeverityId" Binding="{Binding Severity.SeverityName}" Width="120"/>
-                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="120"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Border Grid.Row="2" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="8">
+            <DataGrid Grid.Row="2" x:Name="dgMedicalEvents">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="IncidentId" Binding="{Binding IncidentId}" Width="60"/>
+                    <DataGridTextColumn Header="FullName" Binding="{Binding Student.FullName}" Width="120"/>
+                    <DataGridTextColumn Header="Class" Binding="{Binding Student.Class}" Width="80"/>
+                    <DataGridTextColumn Header="EventType" Binding="{Binding IncidentType.EventTypeName}" Width="120"/>
+                    <DataGridTextColumn Header="EventDate" Binding="{Binding IncidentDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                    <DataGridTextColumn Header="ActionsTaken" Binding="{Binding ActionsTaken}" Width="*"/>
+                    <DataGridTextColumn Header="ReportedBy" Binding="{Binding ReportedByNavigation.FullName}" Width="150"/>
+                    <DataGridTextColumn Header="SeverityId" Binding="{Binding Severity.SeverityName}" Width="120"/>
+                    <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
         <!-- Status bar -->
-        <StatusBar Grid.Row="2" VerticalAlignment="Bottom" Background="#F8F9FA" Height="25">
+        <StatusBar Grid.Row="2" 
+                   VerticalAlignment="Bottom" 
+                   Background="#F8F9FA" 
+                   Height="32"
+                   Padding="8,0">
             <StatusBarItem>
-                <TextBlock x:Name="StatusLabel" Text="Sẵn sàng" FontSize="11"/>
+                <TextBlock x:Name="StatusLabel" 
+                           Text="Sẵn sàng" 
+                           FontSize="12"
+                           Foreground="#333333"/>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock x:Name="RecordCountLabel" Text="Tổng: 0 sự kiện" FontSize="11"/>
+                <TextBlock x:Name="RecordCountLabel" 
+                           Text="Tổng: 0 sự kiện" 
+                           FontSize="12"
+                           Foreground="#333333"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

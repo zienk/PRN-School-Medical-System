@@ -16,8 +16,9 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
     {
         private readonly IVaccinationCampaignService _campaignService;
         private readonly ICampaignStatusService _statusService;
-        private List<VaccinationCampaign> _campaigns;
+        private List<VaccinationCampaign> _campaigns = new List<VaccinationCampaign>();
         private Guid _currentUserId;
+        private User _currentUser;
 
         public Vaccination(Guid userId)
         {
@@ -25,6 +26,11 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             _currentUserId = userId;
             _campaignService = new VaccinationCampaignService();
             _statusService = new CampaignStatusService();
+            
+            // Get current user info
+            var userService = new UserService();
+            _currentUser = userService.GetUserById(_currentUserId);
+            
             LoadData();
             SetupEventHandlers();
         }
@@ -32,7 +38,6 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         private void SetupEventHandlers()
         {
             btnAddNew.Click += BtnAddNew_Click;
-            btnRefresh.Click += BtnRefresh_Click;
             txtSearch.TextChanged += TxtSearch_TextChanged;
         }
 
@@ -42,6 +47,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             {
                 _campaigns = _campaignService.GetAllVaccinationCampaigns();
                 dgVaccinations.ItemsSource = _campaigns;
+                RecordCountLabel.Text = $"Tổng: {_campaigns.Count} chiến dịch";
             }
             catch (Exception ex)
             {
@@ -76,11 +82,13 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
             {
                 dgVaccinations.ItemsSource = _campaigns;
+                RecordCountLabel.Text = $"Tổng: {_campaigns.Count} chiến dịch";
             }
             else
             {
                 var searchResults = _campaignService.SearchVaccinationCampaigns(txtSearch.Text);
                 dgVaccinations.ItemsSource = searchResults;
+                RecordCountLabel.Text = $"Tổng: {searchResults.Count} chiến dịch";
             }
         }
 
@@ -134,6 +142,13 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         private void btnManageIncidents_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Điều hướng sang MedicalIncidents nếu cần
+        }
+        
+        private void BackToDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            NurseDashboard dashboard = new NurseDashboard(_currentUser);
+            dashboard.Show();
+            this.Close();
         }
     }
 }

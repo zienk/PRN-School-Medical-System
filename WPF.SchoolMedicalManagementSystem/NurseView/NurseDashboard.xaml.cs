@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessObjects.Entities;
 
 namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
@@ -26,6 +25,19 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         {
             InitializeComponent();
             currentUser = user;
+            
+            // Initialize UI values
+            if (currentUser != null)
+            {
+                // Set welcome message if needed
+            }
+            
+            LoadData();
+        }
+        
+        private void LoadData()
+        {
+            // Load dashboard statistics if needed
         }
 
         private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
@@ -44,7 +56,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void btnManageIncidents_Click(object sender, RoutedEventArgs e)
         {
-            var medicalEventWindow = new MedicalEvent();
+            var medicalEventWindow = new MedicalEvent(currentUser);
             medicalEventWindow.Show();
             this.Close();
         }
