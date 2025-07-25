@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BusinessObjects.Entities;
 
 namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
@@ -19,9 +20,11 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
     /// </summary>
     public partial class NurseDashboard : Window
     {
-        public NurseDashboard()
+        private User currentUser;
+        public NurseDashboard(User user)
         {
             InitializeComponent();
+            currentUser = user;
         }
 
         private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
@@ -31,12 +34,16 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void btnManageVaccinations_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement vaccinations management logic
+            var vaccinationWindow = new Vaccination(currentUser.UserId);
+            vaccinationWindow.Show();
+            this.Close();
         }
 
         private void btnManageIncidents_Click(object sender, RoutedEventArgs e)
         {
-            
+            var medicalEventWindow = new MedicalEvent();
+            medicalEventWindow.Show();
+            this.Close();
         }
     }
 }
