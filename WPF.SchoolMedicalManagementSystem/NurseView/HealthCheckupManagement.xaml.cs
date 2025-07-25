@@ -324,6 +324,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         private void btnCreateResultCheckup_Click(object sender, RoutedEventArgs e)
         {
             tabControl.SelectedItem = tabCreateResults;
+            allHealthResults = new List<HealthCheckupResult>();
             var button = sender as Button;
             if (button?.Tag is HealthCheckup checkupProgram)
             {
@@ -392,6 +393,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
                     _healthCheckupResultService.UpdateHealthCheckupResult(item);
                 }
             }
+            MessageBox.Show("Health checkup results saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
@@ -408,20 +410,20 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void TxtSearchHealthResults_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //string searchText = txtSearchHealthResults.Text.Trim().ToLower();
+            string searchText = txtSearchHealthResults.Text.Trim().ToLower();
 
-            //if (string.IsNullOrEmpty(searchText) || searchText == "tìm kiếm học sinh theo tên, mã học sinh")
-            //{
-            //    dgHealthResults.ItemsSource = allHealthResults;
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(searchText) || searchText == "tìm kiếm học sinh theo tên, mã học sinh")
+            {
+                dgHealthResults.ItemsSource = allHealthResults;
+                return;
+            }
 
-            //var filtered = allHealthResults.Where(r =>
-            //    r.StudentId.ToString().ToLower().Contains(searchText) ||
-            //    (r.Student != null && !string.IsNullOrEmpty(r.Student.FullName) && r.Student.FullName.ToLower().Contains(searchText))
-            //).ToList();
+            var filtered = allHealthResults.Where(r =>
+                r.StudentId.ToString().ToLower().Contains(searchText) ||
+                (r.Student != null && !string.IsNullOrEmpty(r.Student.FullName) && r.Student.FullName.ToLower().Contains(searchText))
+            ).ToList();
 
-            //dgHealthResults.ItemsSource = filtered;
+            dgHealthResults.ItemsSource = filtered;
         }
 
     }
