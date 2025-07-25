@@ -81,20 +81,20 @@ namespace Repositories.Implementations
 
         public VaccinationRecord? UpdateVaccinationRecord(VaccinationRecord vaccinationRecord)
         {
-            var exstingRecord = _context.VaccinationRecords
+            var existingRecord = _context.VaccinationRecords
                 .FirstOrDefault(v => v.VaccinationRecordId == vaccinationRecord.VaccinationRecordId);
 
-            if (exstingRecord != null)
+            if (existingRecord != null)
             {
-                exstingRecord.StudentId = vaccinationRecord.StudentId;
-                exstingRecord.CampaignId = vaccinationRecord.CampaignId;
-                exstingRecord.VaccinationDate = vaccinationRecord.VaccinationDate;
-                exstingRecord.Result = vaccinationRecord.Result;
-                exstingRecord.Notes = vaccinationRecord.Notes;
-                exstingRecord.IsActive = vaccinationRecord.IsActive;
+                existingRecord.StudentId = vaccinationRecord.StudentId;
+                existingRecord.CampaignId = vaccinationRecord.CampaignId;
+                existingRecord.VaccinationDate = vaccinationRecord.VaccinationDate;
+                existingRecord.Result = vaccinationRecord.Result;
+                existingRecord.Notes = vaccinationRecord.Notes;
+                existingRecord.IsActive = vaccinationRecord.IsActive;
                 _context.SaveChanges();
             }
-            return exstingRecord;
+            return existingRecord;
         }
     }
 }
