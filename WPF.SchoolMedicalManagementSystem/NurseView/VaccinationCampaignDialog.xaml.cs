@@ -151,6 +151,11 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void SaveNewCampaign()
         {
+            if (cmbVaccineType.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a vaccine type!", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             var vaccineType = ((System.Windows.Controls.ComboBoxItem)cmbVaccineType.SelectedItem).Content.ToString();
             var campaign = new VaccinationCampaign
             {
