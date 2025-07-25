@@ -17,6 +17,7 @@ using Services.Implementations;
 using WPF.SchoolMedicalManagementSystem.ManagerView;
 using WPF.SchoolMedicalManagementSystem.ParentView;
 using System.IO;
+using WPF.SchoolMedicalManagementSystem.NurseView;
 
 namespace WPF.SchoolMedicalManagementSystem
 {
@@ -29,7 +30,7 @@ namespace WPF.SchoolMedicalManagementSystem
 
         // Constants for Role IDs
         private const int ADMIN_ROLE_ID = 1;
-        private const int TEACHER_ROLE_ID = 2;
+        private const int NURSE_ROLE_ID = 2;
         private const int PARENT_ROLE_ID = 3;
 
         // Constants for Message Box titles
@@ -68,8 +69,8 @@ namespace WPF.SchoolMedicalManagementSystem
                             MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
 
-                        case TEACHER_ROLE_ID:
-                            StudentRecordManagement studentRecordManagement = new StudentRecordManagement();
+                        case NURSE_ROLE_ID:
+                            NurseDashboard studentRecordManagement = new NurseDashboard(user);
                             studentRecordManagement.Show();
                             this.Close();
 

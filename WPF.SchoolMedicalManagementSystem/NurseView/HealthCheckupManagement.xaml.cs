@@ -11,13 +11,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using WPF.SchoolMedicalManagementSystem.ManagerView;
 
 // Thêm các namespace cần thiết cho BusinessObjects.Entities và Services
 // using BusinessObjects.Entities; 
 // using Services.Implementations;
 // using Services.Interfaces;
 
-namespace WPF.SchoolMedicalManagementSystem.ManagerView
+namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
     public partial class HealthCheckupManagement : Window
     {
