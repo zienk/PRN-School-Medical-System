@@ -9,6 +9,7 @@ namespace Repositories.Interfaces
 {
     public interface ISeverityLevelRepository
     {
+        // Lấy danh sách severity levels để show trong dropdown, combobox
         List<SeverityLevel> GetAllSeverityLevels();
     }
 }

@@ -276,6 +276,11 @@
                                Style="{StaticResource ErrorMessageStyle}"
                                Text="Tên đăng nhập hoặc mật khẩu không chính xác!"/>
 
+                    <!--Remember account checkbox-->
+                    <CheckBox x:Name="chkRememberMe" 
+                              Content="Ghi nhớ tài khoản" 
+                              Margin="0,10,0,0"/>
+
                     <!-- Login Button -->
                     <Button x:Name="btnLogin" 
                             Content="Đăng Nhập" 

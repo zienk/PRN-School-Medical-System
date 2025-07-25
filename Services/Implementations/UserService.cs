@@ -70,7 +70,11 @@ namespace Services.Implementations
             
             return _userRepository.GetUserById(userId);
         }
-            
+
+        public List<User> GetUsersByRole(int roleId)
+        {
+            return _userRepository.GetUsersByRole(roleId);
+        }
 
         public List<User> SearchUsers(string searchText)
             => _userRepository.SearchUsers(searchText ?? "");
