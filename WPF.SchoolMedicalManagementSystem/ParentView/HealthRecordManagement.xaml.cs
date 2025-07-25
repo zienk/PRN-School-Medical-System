@@ -33,7 +33,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             //Sample student data
             records = healthRecordService.getAllMedicalRecordOfStudentByUserId(user.UserId);
             students = studentService.GetAllStudentsByUserId(user.UserId);
-            MessageBox.Show(records.Count.ToString());
+            //MessageBox.Show(records.Count.ToString());
             // Sample health records
             
 
@@ -68,7 +68,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             if (sender is Border border && border.Tag is Student student)
             {
                 //int healthRecordId = int.Parse(border.Tag.ToString());
-                MessageBox.Show(border.Tag.ToString());
+                //MessageBox.Show(border.Tag.ToString());
                 SelectStudent(student);
             }
         }
@@ -169,7 +169,6 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            MessageBox.Show(selectedStudentId + "fffff");
 
             //// Validate required fields
             if (string.IsNullOrWhiteSpace(txtHeight.Text) || string.IsNullOrWhiteSpace(txtWeight.Text))

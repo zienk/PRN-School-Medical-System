@@ -80,5 +80,12 @@ namespace Repositories.Implementations
         public bool IsUserExists(string username)
             => _context.Users.Any(u => u.Username == username && u.IsActive == true);
 
+        public List<User> GetUsersByRole(int roleId)
+        {
+            return _context.Users
+                .Include(u => u.Role)
+                .Where(u => u.Role.RoleId == roleId && u.IsActive == true)
+                .ToList();
+        }
     }
 }
