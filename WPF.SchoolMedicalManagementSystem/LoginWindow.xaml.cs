@@ -16,7 +16,9 @@ using BusinessObjects.Entities;
 using Services.Implementations;
 using WPF.SchoolMedicalManagementSystem.ManagerView;
 using WPF.SchoolMedicalManagementSystem.ParentView;
+
 using System.IO;
+
 using WPF.SchoolMedicalManagementSystem.NurseView;
 
 namespace WPF.SchoolMedicalManagementSystem
@@ -69,9 +71,15 @@ namespace WPF.SchoolMedicalManagementSystem
                             MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
 
+                        case TEACHER_ROLE_ID:
+                            NurseDashboard nurseDashboard = new NurseDashboard(user);
+                            nurseDashboard.Show();
+                            break;
+
                         case NURSE_ROLE_ID:
                             NurseDashboard studentRecordManagement = new NurseDashboard(user);
                             studentRecordManagement.Show();
+
                             this.Close();
 
                             MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);

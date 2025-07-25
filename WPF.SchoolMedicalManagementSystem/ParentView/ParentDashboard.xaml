@@ -170,8 +170,6 @@
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnHealthRecord_Click" />
 
-                
-
 
                 <Button x:Name="btnStudentInfo" 
                         Content="🎓 Student Info" 
