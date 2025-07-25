@@ -115,6 +115,11 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             }
         }
 
-
+        private void btnHealthCheckups_Click(object sender, RoutedEventArgs e)
+        {
+            HealthCheckupResultManagement healthCheckupResultManagement = new HealthCheckupResultManagement(currentUser);
+            healthCheckupResultManagement.Show();
+            this.Close();
+        }
     }
 }

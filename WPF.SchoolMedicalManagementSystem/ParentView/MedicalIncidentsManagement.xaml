@@ -24,7 +24,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        
+        
         <!-- Sidebar Navigation Button Style -->
         <Style x:Key="SidebarButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="8,4" />
@@ -221,13 +222,6 @@
                         Content="📋 Health Record" 
                         Style="{StaticResource SidebarButtonStyle}" Click="btnHealthRecord_Click_1" />
 
-                <Button x:Name="btnAccountInfo" 
-                        Content="👤 Account Info" 
-                        Style="{StaticResource SidebarButtonStyle}" />
-
-                <Button x:Name="btnStudentInfo" 
-                        Content="👨‍🎓 Student Info" 
-                        Style="{StaticResource SidebarButtonStyle}" />
 
                 <Button x:Name="btnHealthCheckups" 
                         Content="🏥 Health Checkups" 
@@ -240,8 +234,10 @@
                 <Button x:Name="btnMedicalIncidents" 
                         Content="🚨 Medical Incidents" 
                         Style="{StaticResource SidebarButtonStyle}"
-                        Background="#E8F0FE" 
-                        Foreground="#1A73E8" />
+                        Background="#FEF7E0" 
+                        Foreground="#F57C00" />
+                
+
             </StackPanel>
         </Border>
 
