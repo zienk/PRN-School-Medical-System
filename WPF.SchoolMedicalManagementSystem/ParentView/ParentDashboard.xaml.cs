@@ -58,6 +58,20 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             this.Close();
         }
 
-        
+        private void btnStudentInfo_Click(object sender, RoutedEventArgs e)
+        {
+            var studentService = new Services.Implementations.StudentService();
+            var students = studentService.GetAllStudentsByUserId(user.UserId);
+
+            if (students == null || students.Count == 0)
+            {
+                MessageBox.Show("Phụ huynh này chưa có học sinh nào!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var studentInfoWindow = new StudentInfo(students, user);
+            studentInfoWindow.Show();
+            this.Close();
+        }
     }
 }
