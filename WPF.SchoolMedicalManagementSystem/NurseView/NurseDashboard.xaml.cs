@@ -40,11 +40,6 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             // Load dashboard statistics if needed
         }
 
-        private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
-        {
-            // Đang ở dashboard, không cần chuyển trang
-        }
-
         private void btnManageVaccinations_Click(object sender, RoutedEventArgs e)
         {
             var vaccinationWindow = new Vaccination(currentUser.UserId);
@@ -63,6 +58,19 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         {
             var healthRecordsWindow = new StudentRecordManagement(currentUser);
             healthRecordsWindow.Show();
+            this.Close();
+        }
+        private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
+        {
+            var healthCheckupWindow = new HealthCheckupManagement(currentUser);
+            healthCheckupWindow.Show();
+            this.Close();
+        }
+
+        private void btnManageHealthCheckups_Click_1(object sender, RoutedEventArgs e)
+        {
+            var healthCheckupWindow = new HealthCheckupManagement(currentUser);
+            healthCheckupWindow.Show();
             this.Close();
         }
     }
