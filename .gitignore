@@ -406,3 +406,6 @@ WPF.SchoolMedicalManagementSystem/appsettings.json
 .kiro/specs/vaccination-record-management/design.md
 .kiro/specs/vaccination-record-management/requirements.md
 .kiro/specs/vaccination-record-management/tasks.md
+build_fix_status.txt
+build_success_summary.txt
+test_detail_feature.txt
