@@ -28,8 +28,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         }
         public ManagerDashboard()
         {
-            InitializeComponent();
-            
+            InitializeComponent(); 
         }
         private void btnManageUsers_Click(object sender, RoutedEventArgs e)
         {
@@ -45,16 +44,5 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             this.Close();
         }
 
-        private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnManageHealthCheckup_Click(object sender, RoutedEventArgs e)
-        {
-            //HealthCheckupManagement healthCheckupManagement = new HealthCheckupManagement(currentUser);
-            //healthCheckupManagement.Show();
-            //this.Close();
-        }
     }
 }
