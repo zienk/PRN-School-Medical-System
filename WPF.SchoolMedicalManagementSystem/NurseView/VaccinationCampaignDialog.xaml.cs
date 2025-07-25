@@ -175,6 +175,11 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         {
             if (_campaign != null)
             {
+                if (cmbVaccineType.SelectedItem == null)
+                {
+                    MessageBox.Show("Vaccine type is not selected. Please select a vaccine type before updating.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 var vaccineType = ((System.Windows.Controls.ComboBoxItem)cmbVaccineType.SelectedItem).Content.ToString();
                 _campaign.VaccineName = $"{vaccineType} - {txtCampaignName.Text}";
                 _campaign.Date = DateOnly.FromDateTime(dpDate.SelectedDate.Value);
