@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Repositories.Interfaces
 {
     public interface IMedicalEventTypeRepository
     {
-        // Khởi tạo trước
+        // Lấy danh sách medical event types để show trong dropdown, combobox
+        List<MedicalEventType> GetAllMedicalEventTypes();
     }
 }

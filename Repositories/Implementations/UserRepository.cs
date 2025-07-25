@@ -21,8 +21,8 @@ namespace Repositories.Implementations
 
         public void AddUser(User user)
         {
-            _context.Users.AddAsync(user);
-            _context.SaveChangesAsync();
+            _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
         public void DeleteUser(Guid userId)
@@ -80,5 +80,12 @@ namespace Repositories.Implementations
         public bool IsUserExists(string username)
             => _context.Users.Any(u => u.Username == username && u.IsActive == true);
 
+        public List<User> GetUsersByRole(int roleId)
+        {
+            return _context.Users
+                .Include(u => u.Role)
+                .Where(u => u.Role.RoleId == roleId && u.IsActive == true)
+                .ToList();
+        }
     }
 }

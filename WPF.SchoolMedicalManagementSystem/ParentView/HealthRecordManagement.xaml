@@ -9,6 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Background="White">
     <Window.Resources>
+        <local:GenderToBackgroundConverter x:Key="GenderToBackgroundConverter"/>
         <!-- Modern Card Style -->
         <Style x:Key="ModernCardStyle" TargetType="Border">
             <Setter Property="Background" Value="White" />
@@ -51,7 +52,7 @@
             <Setter Property="Height" Value="40" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <!-- Không override Template -->
-        </Style>    
+        </Style>
 
         <!-- Form TextArea Style -->
         <Style x:Key="FormTextAreaStyle" TargetType="TextBox" BasedOn="{StaticResource FormInputStyle}">

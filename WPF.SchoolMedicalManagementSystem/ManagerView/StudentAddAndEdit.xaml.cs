@@ -15,6 +15,8 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         private IGenderTypeService _genderService;
         private IUserService _userService;
 
+        const int PARENT_ROLE_ID = 3;
+
         public StudentAddAndEdit(bool isEdit, Student student)
         {
             InitializeComponent();
@@ -53,7 +55,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void LoadParents()
         {
-            var parents = _userService.GetAllUsers().Where(u => u.Role.RoleName == "Parent").ToList();
+            var parents = _userService.GetUsersByRole(PARENT_ROLE_ID);
             cmbParent.ItemsSource = parents;
             cmbParent.DisplayMemberPath = "FullName";
             cmbParent.SelectedValuePath = "UserId";

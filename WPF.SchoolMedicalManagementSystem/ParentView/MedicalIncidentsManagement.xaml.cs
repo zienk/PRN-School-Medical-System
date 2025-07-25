@@ -46,7 +46,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             List<Student> students = studentService.GetAllStudentsByUserId(user.UserId);
 
             //MessageBox.Show(user.UserId.ToString(), "User Email", MessageBoxButton.OK, MessageBoxImage.Information);
-            incidents = incidentService.GetAllIncidentsByUserId(students);
+            incidents = incidentService.GetAllIncidentsbyUserId(students);
 
             LoadMedicalIncidents();
             LoadStudentFilter();

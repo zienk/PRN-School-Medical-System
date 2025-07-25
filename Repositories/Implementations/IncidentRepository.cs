@@ -17,22 +17,25 @@ namespace Repositories.Implementations
             _context = new PrnEduHealthContext();
         }
 
-        public Incident AddIncident(Incident incident)
+        public Incident? AddIncident(Incident incident)
         {
-            throw new NotImplementedException();
+            _context.Incidents.Add(incident);
+            _context.SaveChanges();
+            return incident;
         }
 
-        //public List<Incident> GetAllIncidents(Guid userId)
-        //{
-        //    return _context.Incidents
-        //        .Include(i => i.Student)
-        //        .Include(i => i.Severity)
-        //        .Include(i => i.ReportedByNavigation)
-        //            .ThenInclude(u => u.Role)
-        //        .Include(i => i.IncidentType) // Đúng tên property navigation
-        //        .Where(i => i.IsActive == true)
-        //        .ToList();
-        //}
+        public List<Incident> GetAllIncidents()
+        {
+            return _context.Incidents
+                .Include(i => i.Student)
+                .Include(i => i.Severity)
+                .Include(i => i.ReportedByNavigation)
+                    .ThenInclude(u => u.Role)
+                .Include(i => i.IncidentType) 
+                .Where(i => i.IsActive == true)
+                .ToList();
+        }
+
 
         public List<Incident> GetAllIncidentsbyUserId(List<Student> students)
         {
@@ -42,44 +45,120 @@ namespace Repositories.Implementations
                 .Include(i => i.Severity)
                 .Include(i => i.ReportedByNavigation)
                     .ThenInclude(u => u.Role)
-                .Include(i => i.IncidentType) // Đúng tên property navigation
+                .Include(i => i.IncidentType)
                 .Where(i => i.IsActive == true && studentIds.Contains(i.StudentId))
                 .ToList();
         }
 
-        public Incident GetIncidentById(int incidentId)
+        public Incident? GetIncidentById(int incidentId)
         {
-            throw new NotImplementedException();
+            return _context.Incidents
+                .Include(i => i.Student)
+                .Include(i => i.Severity)
+                .Include(i => i.ReportedByNavigation)
+                    .ThenInclude(u => u.Role)
+                .Include(i => i.IncidentType) 
+                .FirstOrDefault(i => i.IncidentId == incidentId && i.IsActive == true);
         }
 
         public List<Incident> GetIncidentsByIncidentTypeId(int incidentTypeId)
         {
-            throw new NotImplementedException();
+            return _context.Incidents
+                .Include(i => i.Student)
+                .Include(i => i.Severity)
+                .Include(i => i.ReportedByNavigation)
+                    .ThenInclude(u => u.Role)
+                .Include(i => i.IncidentType) 
+                .Where(i => i.IncidentTypeId == incidentTypeId && i.IsActive == true)
+                .ToList();
+        }
+
+        public List<Incident> GetIncidentsByParentId(Guid parentId)
+        {
+            return _context.Incidents
+                .Include(i => i.Student)
+                .Include(i => i.Severity)
+                .Include(i => i.ReportedByNavigation)
+                    .ThenInclude(u => u.Role)
+                .Include(i => i.IncidentType) 
+                .Where(i => i.Student.ParentId == parentId && i.IsActive == true)
+                .ToList();
         }
 
         public List<Incident> GetIncidentsByReportedBy(Guid reportedBy)
         {
-            throw new NotImplementedException();
+            return _context.Incidents
+                .Include(i => i.Student)
+                .Include(i => i.Severity)
+                .Include(i => i.ReportedByNavigation)
+                    .ThenInclude(u => u.Role)
+                .Include(i => i.IncidentType)
+                .Where(i => i.ReportedBy == reportedBy && i.IsActive == true)
+                .ToList();
         }
 
         public List<Incident> GetIncidentsBySeverityId(int severityId)
         {
-            throw new NotImplementedException();
+            return _context.Incidents
+                .Include(i => i.Student)
+                .Include(i => i.Severity)
+                .Include(i => i.ReportedByNavigation)
+                    .ThenInclude(u => u.Role)
+                .Include(i => i.IncidentType)
+                .Where(i => i.SeverityId == severityId && i.IsActive == true)
+                .ToList();
         }
 
         public List<Incident> GetIncidentsByStudentId(int studentId)
         {
-            throw new NotImplementedException();
+            return _context.Incidents
+                .Include(i => i.Student)
+                .Include(i => i.Severity)
+                .Include(i => i.ReportedByNavigation)
+                    .ThenInclude(u => u.Role)
+                .Include(i => i.IncidentType)
+                .Where(i => i.StudentId == studentId && i.IsActive == true)
+                .ToList();
+        }
+
+        public bool HardDeleteIncident(int incidentId)
+        {
+            var existingIncident = _context.Incidents.FirstOrDefault(i => i.IncidentId == incidentId);
+
+            if (existingIncident == null) return false;
+
+            _context.Incidents.Remove(existingIncident);
+            return _context.SaveChanges() > 0;
         }
 
         public bool SoftDeleteIncident(int incidentId)
         {
-            throw new NotImplementedException();
+            var existingIncident = _context.Incidents.FirstOrDefault(i => i.IncidentId == incidentId);
+
+            if (existingIncident == null) return false;
+            existingIncident.IsActive = false;
+
+            _context.Incidents.Update(existingIncident);
+            return _context.SaveChanges() > 0;
         }
 
-        public Incident UpdateIncident(Incident incident)
+        public Incident? UpdateIncident(Incident incident)
         {
-            throw new NotImplementedException();
+            var existingIncident = _context.Incidents.FirstOrDefault(i => i.IncidentId == incident.IncidentId);
+
+            if (existingIncident == null) return null;
+
+            existingIncident.IncidentTypeId = incident.IncidentTypeId;
+            existingIncident.IncidentDate = incident.IncidentDate;
+            existingIncident.Description = incident.Description;
+            existingIncident.ActionsTaken = incident.ActionsTaken;
+            existingIncident.SeverityId = incident.SeverityId;
+            existingIncident.Location = incident.Location;
+            existingIncident.IsActive = incident.IsActive;
+
+            _context.Incidents.Update(existingIncident);
+            _context.SaveChanges();
+            return existingIncident;
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Repositories.Interfaces
 {
-    public interface ISeverityLevelRepository
+    public interface ICampaignStatusRepository
     {
-        // Lấy danh sách severity levels để show trong dropdown, combobox
-        List<SeverityLevel> GetAllSeverityLevels();
+        // Lấy danh sách campaign statuses để show trong dropdown, combobox
+        List<CampaignStatus> GetAllCampaignStatuses();
     }
 }

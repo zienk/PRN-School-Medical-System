@@ -16,5 +16,8 @@ namespace Services.Interfaces
         void AddUser(User user);
         void UpdateUser(User user);
         void DeleteUser(Guid userId);
+
+        //Lấy danh sách người dùng theo role
+        List<User> GetUsersByRole(int roleId);
     }
 }
