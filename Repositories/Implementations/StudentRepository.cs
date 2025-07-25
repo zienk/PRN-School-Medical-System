@@ -23,6 +23,7 @@ namespace Repositories.Implementations
             return _context.Students
                 .Include(s => s.Parent)
                 .Include(s => s.Gender)
+                .Include(s => s.HealthRecord)
                 .FirstOrDefault(s => s.StudentId == studentId && 
                                      s.IsActive == true);
         }
@@ -59,6 +60,7 @@ namespace Repositories.Implementations
             return _context.Students
                 .Include(s => s.Parent)
                 .Include(s => s.Gender)
+                .Include(s => s.HealthRecord)
                 .Where(s => (s.FullName.Contains(searchTerm) || 
                              s.StudentId.ToString().Contains(searchTerm)) && 
                              s.IsActive == true)
@@ -77,6 +79,7 @@ namespace Repositories.Implementations
             return _context.Students
                 .Include(s => s.Parent)
                 .Include(s => s.Gender)
+                .Include(s => s.HealthRecord)
                 .Where(s => s.Parent.UserId == userId && 
                             s.IsActive == true)
                 .ToList();
