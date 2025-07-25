@@ -40,6 +40,8 @@ namespace Repositories.Implementations
         public List<HealthCheckupResult> getAllHealthCheckupResultByHealthCheckupId(HealthCheckup healthCheckup)
         {
             return _context.HealthCheckupResults
+                .Include(h => h.Checkup)
+                .Include(h => h.Student)
                                     .Where(c => c.CheckupId == healthCheckup.CheckupId && c.IsActive == true) // Added filter
                                     .ToList();
         }
@@ -49,6 +51,7 @@ namespace Repositories.Implementations
         {
             return _context.HealthCheckupResults
                                     .Include(h => h.Checkup)
+                                    
                                     .Where(c => c.StudentId == studentId && c.IsActive == true) // Added filter
                                     .ToList();
         }

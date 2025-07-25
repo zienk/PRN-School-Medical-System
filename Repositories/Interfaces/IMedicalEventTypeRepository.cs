@@ -9,6 +9,7 @@ namespace Repositories.Interfaces
 {
     public interface IMedicalEventTypeRepository
     {
+        // Lấy danh sách medical event types để show trong dropdown, combobox
         List<MedicalEventType> GetAllMedicalEventTypes();
     }
 }

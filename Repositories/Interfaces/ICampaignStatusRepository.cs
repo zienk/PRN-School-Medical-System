@@ -9,6 +9,7 @@ namespace Repositories.Interfaces
 {
     public interface ICampaignStatusRepository
     {
+        // Lấy danh sách campaign statuses để show trong dropdown, combobox
         List<CampaignStatus> GetAllCampaignStatuses();
     }
 }

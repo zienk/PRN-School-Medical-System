@@ -11,13 +11,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using WPF.SchoolMedicalManagementSystem.ManagerView;
 
 // Thêm các namespace cần thiết cho BusinessObjects.Entities và Services
 // using BusinessObjects.Entities; 
 // using Services.Implementations;
 // using Services.Interfaces;
 
-namespace WPF.SchoolMedicalManagementSystem.ManagerView
+namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
     public partial class HealthCheckupManagement : Window
     {
@@ -323,6 +324,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
         private void btnCreateResultCheckup_Click(object sender, RoutedEventArgs e)
         {
             tabControl.SelectedItem = tabCreateResults;
+            allHealthResults = new List<HealthCheckupResult>();
             var button = sender as Button;
             if (button?.Tag is HealthCheckup checkupProgram)
             {
@@ -391,6 +393,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                     _healthCheckupResultService.UpdateHealthCheckupResult(item);
                 }
             }
+            MessageBox.Show("Health checkup results saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
@@ -407,20 +410,20 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void TxtSearchHealthResults_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //string searchText = txtSearchHealthResults.Text.Trim().ToLower();
+            string searchText = txtSearchHealthResults.Text.Trim().ToLower();
 
-            //if (string.IsNullOrEmpty(searchText) || searchText == "tìm kiếm học sinh theo tên, mã học sinh")
-            //{
-            //    dgHealthResults.ItemsSource = allHealthResults;
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(searchText) || searchText == "tìm kiếm học sinh theo tên, mã học sinh")
+            {
+                dgHealthResults.ItemsSource = allHealthResults;
+                return;
+            }
 
-            //var filtered = allHealthResults.Where(r =>
-            //    r.StudentId.ToString().ToLower().Contains(searchText) ||
-            //    (r.Student != null && !string.IsNullOrEmpty(r.Student.FullName) && r.Student.FullName.ToLower().Contains(searchText))
-            //).ToList();
+            var filtered = allHealthResults.Where(r =>
+                r.StudentId.ToString().ToLower().Contains(searchText) ||
+                (r.Student != null && !string.IsNullOrEmpty(r.Student.FullName) && r.Student.FullName.ToLower().Contains(searchText))
+            ).ToList();
 
-            //dgHealthResults.ItemsSource = filtered;
+            dgHealthResults.ItemsSource = filtered;
         }
 
     }

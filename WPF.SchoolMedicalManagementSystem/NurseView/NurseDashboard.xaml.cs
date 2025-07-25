@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,18 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
     /// </summary>
     public partial class NurseDashboard : Window
     {
-        public NurseDashboard()
+        private User currentUser;
+        public NurseDashboard(User user)
         {
             InitializeComponent();
+            currentUser = user;
         }
 
         private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement health checkups management logic
+            HealthCheckupManagement healthCheckupManagement = new HealthCheckupManagement(currentUser);
+            healthCheckupManagement.Show();
+            this.Close();
         }
 
         private void btnManageVaccinations_Click(object sender, RoutedEventArgs e)

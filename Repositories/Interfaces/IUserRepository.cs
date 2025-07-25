@@ -20,5 +20,8 @@ namespace Repositories.Interfaces
         // Hàm check duplicate username này hổ trợ hàm tạo mới user
         bool IsUserExists(string username);
 
+        //Lấy danh sách người dùng theo role
+        List<User> GetUsersByRole(int roleId);
+
     }
 }

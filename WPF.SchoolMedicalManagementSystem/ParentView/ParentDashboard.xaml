@@ -170,13 +170,13 @@
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnHealthRecord_Click" />
 
-                <Button x:Name="btnAccountInfo" 
-                        Content="👤 Account Info" 
-                        Style="{StaticResource ParentSidebarButtonStyle}"/>
+                
+
 
                 <Button x:Name="btnStudentInfo" 
                         Content="🎓 Student Info" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnStudentInfo_Click"/>
+
 
                 <Button x:Name="btnHealthCheckups" 
                         Content="🩺 Health Checkups" 

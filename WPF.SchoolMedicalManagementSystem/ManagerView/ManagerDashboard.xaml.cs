@@ -52,9 +52,9 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
         private void btnManageHealthCheckup_Click(object sender, RoutedEventArgs e)
         {
-            HealthCheckupManagement healthCheckupManagement = new HealthCheckupManagement(currentUser);
-            healthCheckupManagement.Show();
-            this.Close();
+            //HealthCheckupManagement healthCheckupManagement = new HealthCheckupManagement(currentUser);
+            //healthCheckupManagement.Show();
+            //this.Close();
         }
     }
 }
