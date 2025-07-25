@@ -74,6 +74,7 @@ namespace WPF.SchoolMedicalManagementSystem
                         case TEACHER_ROLE_ID:
                             NurseDashboard nurseDashboard = new NurseDashboard(user);
                             nurseDashboard.Show();
+                            break;
 
                         case NURSE_ROLE_ID:
                             NurseDashboard studentRecordManagement = new NurseDashboard(user);
