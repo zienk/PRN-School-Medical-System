@@ -71,17 +71,10 @@ namespace WPF.SchoolMedicalManagementSystem
                             MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
 
-                        case TEACHER_ROLE_ID:
+                        case NURSE_ROLE_ID:
                             NurseDashboard nurseDashboard = new NurseDashboard(user);
                             nurseDashboard.Show();
-                            break;
-
-                        case NURSE_ROLE_ID:
-                            NurseDashboard studentRecordManagement = new NurseDashboard(user);
-                            studentRecordManagement.Show();
-
                             this.Close();
-
                             MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
 
