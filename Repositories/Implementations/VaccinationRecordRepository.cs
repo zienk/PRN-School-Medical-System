@@ -27,12 +27,12 @@ namespace Repositories.Implementations
 
         public bool DeleteVaccinationRecord(int vaccinationRecordId)
         {
-            var exsistingRecord = _context.VaccinationRecords
+            var existingRecord = _context.VaccinationRecords
                 .FirstOrDefault(v => v.VaccinationRecordId == vaccinationRecordId);
 
-            if (exsistingRecord == null) return false;
+            if (existingRecord == null) return false;
 
-            _context.VaccinationRecords.Remove(exsistingRecord);
+            _context.VaccinationRecords.Remove(existingRecord);
             return _context.SaveChanges() > 0;
         }
 
