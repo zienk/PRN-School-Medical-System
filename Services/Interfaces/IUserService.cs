@@ -19,5 +19,11 @@ namespace Services.Interfaces
 
         //Lấy danh sách người dùng theo role
         List<User> GetUsersByRole(int roleId);
+
+        // Kiểm tra mật khẩu của người dùng
+        bool ValidatePassword(string username, string password);
+        
+        // Lấy user chỉ dựa trên username, bao gồm cả tài khoản bị vô hiệu hóa
+        User? GetUserByUsername(string username);
     }
 }

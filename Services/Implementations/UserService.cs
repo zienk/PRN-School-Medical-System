@@ -70,6 +70,14 @@ namespace Services.Implementations
             
             return _userRepository.GetUserById(userId);
         }
+        
+        public User? GetUserByUsername(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                throw new ArgumentException("Username không được để trống.");
+                
+            return _userRepository.GetUserByUsername(username);
+        }
 
         public List<User> GetUsersByRole(int roleId)
         {
@@ -94,8 +102,20 @@ namespace Services.Implementations
             existing.Email = user.Email;
             existing.Address = user.Address;
             existing.RoleId = user.RoleId;
+            existing.Password = user.Password;
+            existing.IsFirstLogin = user.IsFirstLogin;
+            existing.IsActive = user.IsActive;
 
             _userRepository.UpdateUser(existing);
+        }
+
+        public bool ValidatePassword(string username, string password)
+        {
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                return false;
+
+            var user = _userRepository.GetUserByUsername(username);
+            return user != null && user.Password == password;
         }
     }
 }
