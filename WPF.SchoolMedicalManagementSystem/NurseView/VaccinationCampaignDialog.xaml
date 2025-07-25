@@ -5,194 +5,171 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Vaccination Campaign" Height="650" Width="500"
+        Title="Chiến dịch tiêm chủng" SizeToContent="Height" Width="600"
         WindowStartupLocation="CenterScreen"
         Background="White">
     <Window.Resources>
-        <!-- Modern Card Style -->
-        <Style x:Key="ModernCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="BorderBrush" Value="#E8F0FE" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Margin" Value="8" />
-            <Setter Property="Padding" Value="20" />
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.1" Color="#4285F4" />
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Action Button Style -->
-        <Style x:Key="ActionButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="20,12" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Margin" Value="8,4" />
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBorder" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                             VerticalAlignment="Center" 
-                                             Margin="{TemplateBinding Padding}" />
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.9" />
+                                <Setter Property="Opacity" Value="0.9"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.8" />
+                                <Setter Property="Opacity" Value="0.8"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <!-- Input Style -->
-        <Style x:Key="ModernInputStyle" TargetType="TextBox">
-            <Setter Property="Padding" Value="12,10" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="BorderBrush" Value="#DADCE0" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="#202124" />
+        
+        <!-- Style cho TextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#222"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="border" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="8">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-                                         Focusable="false" 
-                                         HorizontalScrollBarVisibility="Hidden" 
-                                         VerticalScrollBarVisibility="Hidden"
-                                         Margin="{TemplateBinding Padding}"/>
+                        <Border CornerRadius="4" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="true">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#1A73E8"/>
-                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <!-- ComboBox Style -->
-        <Style x:Key="ModernComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Padding" Value="12,10" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="BorderBrush" Value="#DADCE0" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="#202124" />
+        
+        <!-- Style cho Label -->
+        <Style x:Key="ModernLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-
-        <!-- Label Style -->
-        <Style x:Key="FormLabelStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Foreground" Value="#202124" />
-            <Setter Property="Margin" Value="0,0,0,8" />
+        
+        <!-- Style cho TextBlock (readonly info) -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#333333"/>
         </Style>
-
+        
         <!-- Header Style -->
         <Style x:Key="HeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="22" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="#202124" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Margin" Value="0,0,0,20" />
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
     </Window.Resources>
-
-    <Border Style="{StaticResource ModernCardStyle}" Margin="15">
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel>
-                <TextBlock x:Name="txtHeader" Text="Add New Vaccination Campaign" Style="{StaticResource HeaderStyle}" />
-
-                <!-- Form Fields -->
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Campaign Name" Style="{StaticResource FormLabelStyle}" />
-                    <TextBox x:Name="txtCampaignName" Style="{StaticResource ModernInputStyle}" />
+    
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   x:Name="txtHeader"
+                   Text="THÊM CHIẾN DỊCH TIÊM CHỦNG MỚI" 
+                   Style="{StaticResource HeaderStyle}"/>
+        
+        <!-- Form nhập liệu -->
+        <Border Grid.Row="1" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Tên chiến dịch -->
+                    <StackPanel>
+                        <Label Content="Tên chiến dịch:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtCampaignName" Style="{StaticResource ModernTextBox}"/>
+                    </StackPanel>
+                    
+                    <!-- Loại vaccine -->
+                    <StackPanel>
+                        <Label Content="Loại vaccine:" Style="{StaticResource ModernLabel}"/>
+                        <ComboBox x:Name="cmbVaccineType" Height="40" Padding="10">
+                            <ComboBoxItem Content="COVID-19"/>
+                            <ComboBoxItem Content="Hepatitis B"/>
+                            <ComboBoxItem Content="MMR (Measles, Mumps, Rubella)"/>
+                            <ComboBoxItem Content="Polio"/>
+                            <ComboBoxItem Content="DPT (Diphtheria, Pertussis, Tetanus)"/>
+                            <ComboBoxItem Content="Influenza"/>
+                            <ComboBoxItem Content="HPV"/>
+                            <ComboBoxItem Content="Other"/>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!-- Ngày -->
+                    <StackPanel>
+                        <Label Content="Ngày thực hiện:" Style="{StaticResource ModernLabel}"/>
+                        <DatePicker x:Name="dpDate" Height="40" Padding="10"/>
+                    </StackPanel>
+                    
+                    <!-- Trạng thái -->
+                    <StackPanel>
+                        <Label Content="Trạng thái:" Style="{StaticResource ModernLabel}"/>
+                        <ComboBox x:Name="cmbStatus" Height="40" Padding="10"/>
+                    </StackPanel>
+                    
+                    <!-- Mô tả -->
+                    <StackPanel>
+                        <Label Content="Mô tả:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtDescription" 
+                                 Style="{StaticResource ModernTextBox}" 
+                                 Height="100" 
+                                 TextWrapping="Wrap" 
+                                 AcceptsReturn="True" 
+                                 VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
                 </StackPanel>
-
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Vaccine Type" Style="{StaticResource FormLabelStyle}" />
-                    <ComboBox x:Name="cmbVaccineType" Style="{StaticResource ModernComboBoxStyle}">
-                        <ComboBoxItem Content="COVID-19"/>
-                        <ComboBoxItem Content="Hepatitis B"/>
-                        <ComboBoxItem Content="MMR (Measles, Mumps, Rubella)"/>
-                        <ComboBoxItem Content="Polio"/>
-                        <ComboBoxItem Content="DPT (Diphtheria, Pertussis, Tetanus)"/>
-                        <ComboBoxItem Content="Influenza"/>
-                        <ComboBoxItem Content="HPV"/>
-                        <ComboBoxItem Content="Other"/>
-                    </ComboBox>
-                </StackPanel>
-
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Date" Style="{StaticResource FormLabelStyle}" />
-                    <DatePicker x:Name="dpDate" FontSize="14" Padding="12,10" BorderBrush="#DADCE0" />
-                </StackPanel>
-
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Status" Style="{StaticResource FormLabelStyle}" />
-                    <ComboBox x:Name="cmbStatus" Style="{StaticResource ModernComboBoxStyle}" />
-                </StackPanel>
-
-                <StackPanel Margin="0,0,0,25">
-                    <TextBlock Text="Description" Style="{StaticResource FormLabelStyle}" />
-                    <TextBox x:Name="txtDescription" 
-                             Style="{StaticResource ModernInputStyle}" 
-                             Height="100" 
-                             TextWrapping="Wrap" 
-                             AcceptsReturn="True" 
-                             VerticalScrollBarVisibility="Auto" />
-                </StackPanel>
-
-                <!-- Action Buttons -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="btnSave" 
-                            Content="💾 Save" 
-                            Style="{StaticResource ActionButtonStyle}"
-                            Click="BtnSave_Click">
-                        <Button.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#34A853" Offset="0"/>
-                                <GradientStop Color="#137333" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
-
-                    <Button x:Name="btnCancel" 
-                            Content="❌ Cancel" 
-                            Style="{StaticResource ActionButtonStyle}"
-                            Click="BtnCancel_Click">
-                        <Button.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#5F6368" Offset="0"/>
-                                <GradientStop Color="#3C4043" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
-    </Border>
+            </ScrollViewer>
+        </Border>
+        
+        <!-- Nút thao tác -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
+            <Button x:Name="btnSave"
+                    Content="Lưu" 
+                    Background="#28A745" 
+                    Style="{StaticResource ModernButton}"
+                    Click="BtnSave_Click"/>
+            <Button x:Name="btnCancel" 
+                    Content="Hủy" 
+                    Background="#6C757D" 
+                    Style="{StaticResource ModernButton}"
+                    Click="BtnCancel_Click"/>
+        </StackPanel>
+    </Grid>
 </Window> 

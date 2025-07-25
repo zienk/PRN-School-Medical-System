@@ -1,37 +1,170 @@
 <Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.MedicalEventAddAndEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Sự kiện y tế" Height="500" Width="400">
-    <Grid Margin="10">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
+        mc:Ignorable="d"
+        Title="Sự kiện y tế" SizeToContent="Height" Width="600">
+    <Window.Resources>
+        <!-- Style cho Button -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style cho TextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#222"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="4" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style cho Label -->
+        <Style x:Key="ModernLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <!-- Style cho TextBlock (readonly info) -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#333333"/>
+        </Style>
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Thông tin sự kiện y tế" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" >
-            <Label Content="Học sinh"/>
-            <ComboBox x:Name="cbStudent" DisplayMemberPath="FullName" SelectedValuePath="StudentId"/>
-            <Label Content="Loại sự kiện"/>
-            <ComboBox x:Name="cbEventType" DisplayMemberPath="EventTypeName" SelectedValuePath="EventTypeId"/>
-            <Label Content="Ngày sự kiện"/>
-            <DatePicker x:Name="dpIncidentDate"/>
-            <Label Content="Mô tả"/>
-            <TextBox x:Name="txtDescription" Height="60" AcceptsReturn="True"/>
-            <Label Content="Mức độ"/>
-            <ComboBox x:Name="cbSeverity" DisplayMemberPath="SeverityName" SelectedValuePath="SeverityId"/>
-            <Label Content="Người báo cáo"/>
-            <ComboBox x:Name="cbReportedBy" DisplayMemberPath="FullName" SelectedValuePath="UserId"/>
-            <Label Content="Địa điểm"/>
-            <TextBox x:Name="txtLocation"/>
-            <Label Content="Hành động xử lý"/>
-            <TextBox x:Name="txtActionsTaken" Height="40" AcceptsReturn="True"/>
-        </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button x:Name="btnSave" Content="Lưu" Width="80" Margin="0,0,10,0"/>
-            <Button x:Name="btnCancel" Content="Hủy" Width="80"/>
+        
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" 
+                   x:Name="HeaderTitle"
+                   Text="THÔNG TIN SỰ KIỆN Y TẾ" 
+                   Style="{StaticResource HeaderStyle}"/>
+        
+        <!-- Form nhập liệu -->
+        <Border Grid.Row="1" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Chọn học sinh -->
+                    <StackPanel>
+                        <Label Content="Học sinh:" Style="{StaticResource ModernLabel}"/>
+                        <ComboBox x:Name="cbStudent" DisplayMemberPath="FullName" SelectedValuePath="StudentId" Height="40" Padding="10"/>
+                    </StackPanel>
+                    
+                    <!-- Loại sự kiện -->
+                    <StackPanel>
+                        <Label Content="Loại sự kiện:" Style="{StaticResource ModernLabel}"/>
+                        <ComboBox x:Name="cbEventType" DisplayMemberPath="EventTypeName" SelectedValuePath="EventTypeId" Height="40" Padding="10"/>
+                    </StackPanel>
+                    
+                    <!-- Ngày sự kiện -->
+                    <StackPanel>
+                        <Label Content="Ngày sự kiện:" Style="{StaticResource ModernLabel}"/>
+                        <DatePicker x:Name="dpIncidentDate" Height="40" Padding="10"/>
+                    </StackPanel>
+                    
+                    <!-- Mô tả -->
+                    <StackPanel>
+                        <Label Content="Mô tả:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtDescription" Style="{StaticResource ModernTextBox}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    </StackPanel>
+                    
+                    <!-- Mức độ -->
+                    <StackPanel>
+                        <Label Content="Mức độ:" Style="{StaticResource ModernLabel}"/>
+                        <ComboBox x:Name="cbSeverity" DisplayMemberPath="SeverityName" SelectedValuePath="SeverityId" Height="40" Padding="10"/>
+                    </StackPanel>
+                    
+                    <!-- Người báo cáo -->
+                    <StackPanel>
+                        <Label Content="Người báo cáo:" Style="{StaticResource ModernLabel}"/>
+                        <ComboBox x:Name="cbReportedBy" DisplayMemberPath="FullName" SelectedValuePath="UserId" Height="40" Padding="10"/>
+                    </StackPanel>
+                    
+                    <!-- Địa điểm -->
+                    <StackPanel>
+                        <Label Content="Địa điểm:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtLocation" Style="{StaticResource ModernTextBox}"/>
+                    </StackPanel>
+                    
+                    <!-- Hành động xử lý -->
+                    <StackPanel>
+                        <Label Content="Hành động xử lý:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtActionsTaken" Style="{StaticResource ModernTextBox}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        
+        <!-- Nút thao tác -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
+            <Button x:Name="btnSave"
+                    Content="Lưu" 
+                    Background="#28A745" 
+                    Style="{StaticResource ModernButton}"/>
+            <Button x:Name="btnCancel" 
+                    Content="Hủy" 
+                    Background="#6C757D" 
+                    Style="{StaticResource ModernButton}"/>
         </StackPanel>
     </Grid>
 </Window> 
