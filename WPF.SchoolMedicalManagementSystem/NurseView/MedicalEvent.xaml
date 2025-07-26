@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
         Title="Quản Lý Sự Kiện Y Tế" Height="700" Width="1200"
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>

@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Health Record Management - School Medical System" Height="800" Width="1400"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Background="White">
     <Window.Resources>
         <local:GenderToBackgroundConverter x:Key="GenderToBackgroundConverter"/>
@@ -219,7 +220,7 @@
                     <TextBlock Text="👨‍👩‍👧‍👦 Select Student" Style="{StaticResource SectionHeaderStyle}" />
 
                     <!-- Student List -->
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="600">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="900">
                         <ItemsControl x:Name="StudentListPanel" ItemsSource="{Binding Students}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -252,12 +253,7 @@
                                                 <TextBlock Text="{Binding StudentId, StringFormat='Student ID: {0}'}" FontSize="11" Foreground="#9AA0A6"/>
                                             </StackPanel>
 
-                                            <!-- Record Status -->
-                                            <StackPanel Grid.Column="2">
-                                                <Border Background="{Binding IsActive}" CornerRadius="12" Padding="8,4">
-                                                    <TextBlock Text="{Binding IsActive}" FontSize="11" FontWeight="Medium" Foreground="{Binding IsActive}"/>
-                                                </Border>
-                                            </StackPanel>
+                                            
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -293,12 +289,7 @@
                                     <TextBlock x:Name="SelectedStudentInfo_Details" Text="Student ID: ST001" FontSize="14" Foreground="#5F6368"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="2">
-                                    <TextBlock x:Name="RecordStatus" Text="Record Status" FontSize="12" Foreground="#5F6368"/>
-                                    <Border x:Name="RecordStatusBorder" Background="#E8F5E8" CornerRadius="12" Padding="8,4">
-                                        <TextBlock x:Name="RecordStatusText" Text="Has Record" FontSize="12" Foreground="#2E7D32" FontWeight="Medium"/>
-                                    </Border>
-                                </StackPanel>
+                                
                             </Grid>
                         </Border>
 

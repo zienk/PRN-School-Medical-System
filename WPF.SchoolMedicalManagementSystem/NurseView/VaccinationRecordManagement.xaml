@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="Quản Lý Ghi Nhận Tiêm Chủng" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen">
 

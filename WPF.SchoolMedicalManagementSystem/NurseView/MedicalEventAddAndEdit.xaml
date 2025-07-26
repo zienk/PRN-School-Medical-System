@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Sự kiện y tế" SizeToContent="Height" Width="600">
+        Title="Sự kiện y tế" SizeToContent="Height" Width="600"
+        WindowStartupLocation="CenterScreen"
+        >
     <Window.Resources>
         <!-- Style cho Button -->
         <Style x:Key="ModernButton" TargetType="Button">

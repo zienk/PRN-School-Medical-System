@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Health Checkups Management - School Medical System" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Background="White">
     <Window.Resources>
         <!-- Modern Card Style -->

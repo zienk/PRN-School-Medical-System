@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem"
         mc:Ignorable="d"
         Title="Quản Lý Hồ Sơ Sức Khỏe Học Sinh" Height="700" Width="1200"
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
