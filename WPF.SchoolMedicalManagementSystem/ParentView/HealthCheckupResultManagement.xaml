@@ -261,12 +261,18 @@
                            Foreground="#9AA0A6" 
                            Margin="20,0,0,20" />
 
+
+                <Button x:Name="btnParentDashboard" 
+        Content="🏠 Dashboard" 
+        Style="{StaticResource ParentSidebarButtonStyle}"
+        Click="btnParentDashboard_Click" />
+
                 <Button x:Name="btnHealthRecord" 
-                        Content="📋 Health Record" 
+                        Content="🎓 Student Info" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnHealthRecord_Click" />
 
-                
+
                 <Button x:Name="btnHealthCheckups" 
                         Content="🩺 Health Checkups" 
                         Style="{StaticResource ActiveSidebarButtonStyle}"/>

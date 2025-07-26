@@ -61,7 +61,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         private void LoadMedicalIncidents()
         {
             // TODO: Load medical incidents from database
-            
+
             dgMedicalIncidents.ItemsSource = incidents;
         }
 
@@ -109,18 +109,18 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             // TODO: Apply selected filters
             IEnumerable<Incident> filteredIncidents = incidents;
 
-            if(cmbStudentFilter.SelectedItem != null)
+            if (cmbStudentFilter.SelectedItem != null)
             {
                 string selectedStudent = cmbStudentFilter.SelectedItem.ToString();
                 filteredIncidents = filteredIncidents.Where(i => i.Student.FullName == selectedStudent);
             }
 
-            if(cmbSeverityFilter.SelectedItem != null)
+            if (cmbSeverityFilter.SelectedItem != null)
             {
                 filteredIncidents = filteredIncidents.Where(i => i.Severity.SeverityName == cmbSeverityFilter.SelectedItem.ToString());
             }
 
-            if(dpDateFilter.SelectedDate != null)
+            if (dpDateFilter.SelectedDate != null)
             {
                 DateTime selectedDate = dpDateFilter.SelectedDate.Value;
                 filteredIncidents = filteredIncidents.Where(i => i.IncidentDate.Date == selectedDate.Date);
@@ -402,8 +402,24 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
         private void btnHealthRecord_Click_1(object sender, RoutedEventArgs e)
         {
-            HealthRecordManagement healthRecordManagement = new HealthRecordManagement(user);
-            healthRecordManagement.Show();
+            var studentService = new Services.Implementations.StudentService();
+            var students = studentService.GetAllStudentsByUserId(user.UserId);
+
+            if (students == null || students.Count == 0)
+            {
+                MessageBox.Show("Phụ huynh này chưa có học sinh nào!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var studentInfoWindow = new StudentInfo(students, user);
+            studentInfoWindow.Show();
+            this.Close();
+        }
+
+        private void btnParentDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            ParentDashboard parentDashboard = new ParentDashboard(user);
+            parentDashboard.Show();
             this.Close();
         }
     }

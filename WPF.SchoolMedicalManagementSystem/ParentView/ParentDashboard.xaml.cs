@@ -31,9 +31,17 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
         private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement health record navigation logic
-            HealthRecordManagement healthRecordManagement = new HealthRecordManagement(user);
-            healthRecordManagement.Show();
+            var studentService = new Services.Implementations.StudentService();
+            var students = studentService.GetAllStudentsByUserId(user.UserId);
+
+            if (students == null || students.Count == 0)
+            {
+                MessageBox.Show("Phụ huynh này chưa có học sinh nào!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var studentInfoWindow = new StudentInfo(students, user);
+            studentInfoWindow.Show();
             this.Close();
         }
 

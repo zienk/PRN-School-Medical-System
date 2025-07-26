@@ -300,11 +300,11 @@
                         Click="btnDashboard_Click" />
 
                 <Button x:Name="btnHealthRecord" 
-                        Content="📋 Health Record" 
+                        Content="🎓 Student Info" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnHealthRecord_Click" />
 
-                
+
                 <Button x:Name="btnHealthCheckups" 
                         Content="🩺 Health Checkups" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnHealthCheckups_Click"/>
@@ -361,7 +361,7 @@
                               Tag="{Binding .}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                
+
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Border Background="{Binding GenderId}" 
                                             CornerRadius="15" 

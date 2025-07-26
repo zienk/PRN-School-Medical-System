@@ -225,7 +225,7 @@
                                 <TextBlock Text="Location" Style="{StaticResource LabelStyle}" />
                                 <TextBlock Text="{Binding Location}" Style="{StaticResource ValueStyle}" />
 
-                                
+
                             </StackPanel>
 
                             <!-- Right Column -->
@@ -233,14 +233,14 @@
                                 <!-- Reported By -->
                                 <TextBlock Text="Reported By" Style="{StaticResource LabelStyle}" />
                                 <TextBlock Text="{Binding ReportedByNavigation.FullName}" Style="{StaticResource ValueStyle}" />
-                                
+
                                 <!-- Contact Information -->
                                 <TextBlock Text="Contact Information" Style="{StaticResource LabelStyle}" />
                                 <TextBlock Text="{Binding ReportedByNavigation.Phone, StringFormat=Phone: {0}}" Style="{StaticResource ValueStyle}" />
 
                                 <!-- Time (if available) -->
                                 <TextBlock Text="Time" Style="{StaticResource LabelStyle}" />
-                                <TextBlock Text="{Binding IncidentDate, StringFormat=HH:mm}" Style="{StaticResource ValueStyle}" />
+                                <TextBlock Text="{Binding IncidentDate}" Style="{StaticResource ValueStyle}" />
 
                                 <!-- Status -->
                             </StackPanel>

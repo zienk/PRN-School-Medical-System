@@ -167,14 +167,11 @@
                            Margin="20,0,0,20" />
 
                 <Button x:Name="btnHealthRecord" 
-                        Content="📋 Health Record" 
+                        Content="🎓 Student Info" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnHealthRecord_Click" />
 
 
-                <Button x:Name="btnStudentInfo" 
-                        Content="🎓 Student Info" 
-                        Style="{StaticResource ParentSidebarButtonStyle}" Click="btnStudentInfo_Click"/>
 
 
                 <Button x:Name="btnHealthCheckups" 

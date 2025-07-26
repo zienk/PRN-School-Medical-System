@@ -35,7 +35,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             currentUser = user;
             LoadStudents();
 
-            
+
         }
 
         private void LoadStudents()
@@ -66,8 +66,17 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
         private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
         {
-            HealthRecordManagement healthRecordManagement = new HealthRecordManagement(currentUser);
-            healthRecordManagement.Show();
+            var studentService = new Services.Implementations.StudentService();
+            var students = studentService.GetAllStudentsByUserId(currentUser.UserId);
+
+            if (students == null || students.Count == 0)
+            {
+                MessageBox.Show("Phụ huynh này chưa có học sinh nào!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var studentInfoWindow = new StudentInfo(students, currentUser);
+            studentInfoWindow.Show();
             this.Close();
         }
 
@@ -83,7 +92,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             if (cmbStudents.SelectedItem is Student selectedStudent)
             {
                 // Load vaccination records for the selected student
-                
+
                 this.selectedStudent = selectedStudent;
                 vaccinationRecords = vaccinationRecordService.GetAllVaccinationRecordsByStudentId(selectedStudent.StudentId);
                 dgVaccinationRecords.ItemsSource = vaccinationRecords;

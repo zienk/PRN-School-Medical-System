@@ -253,7 +253,7 @@
                                                 <TextBlock Text="{Binding StudentId, StringFormat='Student ID: {0}'}" FontSize="11" Foreground="#9AA0A6"/>
                                             </StackPanel>
 
-                                            
+
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -289,7 +289,7 @@
                                     <TextBlock x:Name="SelectedStudentInfo_Details" Text="Student ID: ST001" FontSize="14" Foreground="#5F6368"/>
                                 </StackPanel>
 
-                                
+
                             </Grid>
                         </Border>
 

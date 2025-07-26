@@ -35,7 +35,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             students = studentService.GetAllStudentsByUserId(user.UserId);
             //MessageBox.Show(records.Count.ToString());
             // Sample health records
-            
+
 
             LoadLeftPanel();
         }
@@ -46,20 +46,20 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             //SelectedStudentAvatar.Background = record.Student.GenderId == 2 ?
             //    new SolidColorBrush(Color.FromRgb(255, 224, 178)) :
             //    new SolidColorBrush(Color.FromRgb(225, 245, 254));
-            foreach(Student student in students)
+            foreach (Student student in students)
             {
                 student.HealthRecord = records.Find(r => r.StudentId == student.StudentId);
-                    if (student.GenderId == 1)
-                    {
-                        student.Gender.GenderName = "👦";
-                    }
-                    else
-                    {
-                        student.Gender.GenderName = "👧";
-                    }
+                if (student.GenderId == 1)
+                {
+                    student.Gender.GenderName = "👦";
+                }
+                else
+                {
+                    student.Gender.GenderName = "👧";
+                }
                 StudentListPanel.Items.Add(student);
             }
-            
+
         }
 
         private void StudentCard_Click(object sender, MouseButtonEventArgs e)
@@ -78,12 +78,12 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             selectedStudentId = student.StudentId;
             var record = records.Find(s => s.StudentId == student.StudentId);
 
-                // Update visual selection
-                //UpdateStudentSelection(studentId);
+            // Update visual selection
+            //UpdateStudentSelection(studentId);
 
-                // Show the form panel
-                NoStudentSelectedMessage.Visibility = Visibility.Collapsed;
-                SelectedStudentInfo.Visibility = Visibility.Visible;
+            // Show the form panel
+            NoStudentSelectedMessage.Visibility = Visibility.Collapsed;
+            SelectedStudentInfo.Visibility = Visibility.Visible;
 
             // Update student info in the form
             UpdateSelectedStudentInfo(student);
@@ -217,10 +217,10 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
             HealthRecord recordUpdate = healthRecordService.UpdateHealthRecord(record);
             //records.Add(recordUpdate);
-            if(recordUpdate != null)
+            if (recordUpdate != null)
             {
-            records.Remove(record);
-            records.Add(recordUpdate);
+                records.Remove(record);
+                records.Add(recordUpdate);
                 MessageBox.Show("Health record saved successfully!", "Success",
                                 MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -257,8 +257,8 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             this.Close();
         }
 
-        
+
     }
 
-    
+
 }

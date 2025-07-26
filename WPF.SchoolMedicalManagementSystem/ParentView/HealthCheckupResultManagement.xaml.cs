@@ -85,7 +85,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
             string filterText = txtTenChuongTrinh.Text.Trim().ToLower();
-            if(!string.IsNullOrEmpty(filterText))
+            if (!string.IsNullOrEmpty(filterText))
             {
                 // If filter is empty, show all results
                 healthCheckupResults = healthCheckupResults.Where(x => x.Checkup.CheckupName.ToLower().Contains(filterText)).ToList();
@@ -276,9 +276,17 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
         private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate back to Parent Dashboard
-            HealthRecordManagement healthRecordManagement = new HealthRecordManagement(currentUser);
-            healthRecordManagement.Show();
+            var studentService = new Services.Implementations.StudentService();
+            var students = studentService.GetAllStudentsByUserId(currentUser.UserId);
+
+            if (students == null || students.Count == 0)
+            {
+                MessageBox.Show("Phụ huynh này chưa có học sinh nào!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var studentInfoWindow = new StudentInfo(students, currentUser);
+            studentInfoWindow.Show();
             this.Close();
 
         }
@@ -297,9 +305,14 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             this.Close();
         }
 
-        
+        private void btnParentDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            ParentDashboard parentDashboard = new ParentDashboard(currentUser);
+            parentDashboard.Show();
+            this.Close();
+        }
     }
 
-   
+
 
 }

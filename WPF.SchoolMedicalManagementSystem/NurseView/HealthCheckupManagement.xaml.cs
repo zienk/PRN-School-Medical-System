@@ -254,7 +254,8 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             var button = sender as Button;
             if (button?.Tag is HealthCheckup checkupProgram)
             {
-                dgHealthResults.ItemsSource = _healthCheckupResultService.getAllHealthCheckupResultByHealthCheckupId(checkupProgram);
+                allHealthResults = _healthCheckupResultService.getAllHealthCheckupResultByHealthCheckupId(checkupProgram).ToList();
+                dgHealthResults.ItemsSource = allHealthResults;
             }
             
             tabControl.SelectedItem = tabCreateResults;
@@ -279,29 +280,21 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         private void TxtSearchHealthResults_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = txtSearchHealthResults.Text.Trim().ToLower();
-            
-            if (dgHealthResults.ItemsSource == null) return;
-
+            //MessageBox.Show("bb" + allHealthResults.Count.ToString());
             if (string.IsNullOrEmpty(searchText))
             {
-                if (allHealthResults.Count > 0)
-                {
-                    dgHealthResults.ItemsSource = allHealthResults;
-                }
+                dgHealthResults.ItemsSource = allHealthResults;
                 return;
             }
 
-            var dataItems = dgHealthResults.ItemsSource as IEnumerable<HealthCheckupResult>;
-            if (dataItems != null)
-            {
-                var filtered = dataItems.Where(r =>
-                    r.StudentId.ToString().ToLower().Contains(searchText) ||
-                    (r.Student != null && !string.IsNullOrEmpty(r.Student.FullName) && 
-                     r.Student.FullName.ToLower().Contains(searchText))
-                ).ToList();
+            List<HealthCheckupResult> filtered = allHealthResults.Where(r =>
+                r.StudentId.ToString().ToLower().Contains(searchText) ||
+                 r.Student.FullName.ToLower().Contains(searchText)
+            ).ToList();
 
-                dgHealthResults.ItemsSource = filtered;
-            }
+            //MessageBox.Show("" + filtered.Count.ToString());
+            dgHealthResults.ItemsSource = null;
+            dgHealthResults.ItemsSource = filtered;
         }
     }
 }
