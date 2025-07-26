@@ -26,6 +26,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         private Student currentStudent;
         private int selectedIndex = 0;
         private StudentService studentService = new StudentService();
+        private HealthRecordService healthRecordService = new HealthRecordService();
 
         public StudentInfo(List<Student> students, User user)
         {
@@ -79,12 +80,15 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             {
                 txtFullName.Text = currentStudent.FullName ?? "";
                 dpDateOfBirth.SelectedDate = currentStudent.DateOfBirth?.ToDateTime(TimeOnly.MinValue);
+                txtClass.Text = currentStudent.Class ?? "";
+                
                 if (currentStudent.GenderId == 1)
                     cbGender.SelectedIndex = 1; // Male
                 else if (currentStudent.GenderId == 2)
                     cbGender.SelectedIndex = 0; // Female
                 else
                     cbGender.SelectedIndex = 2; // Other
+                
                 // Fill HealthRecord
                 if (currentStudent.HealthRecord != null)
                 {
@@ -102,6 +106,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
                     txtAllergies.Text = "";
                     txtNotes.Text = "";
                 }
+                
                 // Cập nhật header động
                 txtStudentName.Text = currentStudent.FullName ?? "";
                 string className = currentStudent.Class ?? "";
@@ -120,6 +125,9 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
                 }
                 txtStudentGradeAge.Text = $"{className} • {ageText}";
                 txtStudentClass.Text = $"Class {className} • Student ID: ST{currentStudent.StudentId:D6}";
+                
+                // Update avatar based on gender
+                txtStudentAvatar.Text = currentStudent.GenderId == 1 ? "👦" : "👧";
             }
         }
 
@@ -130,44 +138,56 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy dữ liệu từ các control nhập liệu
-            currentStudent.FullName = txtFullName.Text;
-            // GenderId: 1=Male, 2=Female, 3=Other (giả định)
-            if (cbGender.SelectedIndex == 1)
-                currentStudent.GenderId = 1;
-            else if (cbGender.SelectedIndex == 0)
-                currentStudent.GenderId = 2;
-            else
-                currentStudent.GenderId = 3;
-            currentStudent.DateOfBirth = dpDateOfBirth.SelectedDate.HasValue ? DateOnly.FromDateTime(dpDateOfBirth.SelectedDate.Value) : null;
-            currentStudent.ParentId = parentUser.UserId;
-            currentStudent.IsActive = true;
-
-            // Cập nhật HealthRecord
-            if (currentStudent.HealthRecord == null)
-                currentStudent.HealthRecord = new HealthRecord();
-
-            if (decimal.TryParse(txtHeight.Text, out decimal height))
-                currentStudent.HealthRecord.Height = height;
-            else
-                currentStudent.HealthRecord.Height = null;
-
-            if (decimal.TryParse(txtWeight.Text, out decimal weight))
-                currentStudent.HealthRecord.Weight = weight;
-            else
-                currentStudent.HealthRecord.Weight = null;
-
-            currentStudent.HealthRecord.ChronicDiseases = txtChronicDiseases.Text;
-            currentStudent.HealthRecord.Allergies = txtAllergies.Text;
-            currentStudent.HealthRecord.Notes = txtNotes.Text;
-            currentStudent.HealthRecord.LastUpdatedDate = DateTime.Now;
-            currentStudent.HealthRecord.IsActive = true;
-            currentStudent.HealthRecord.StudentId = currentStudent.StudentId;
-
             try
             {
+                // Cập nhật thông tin Student
+                currentStudent.FullName = txtFullName.Text;
+                currentStudent.Class = txtClass.Text;
+                
+                // GenderId: 1=Male, 2=Female, 3=Other
+                if (cbGender.SelectedIndex == 1)
+                    currentStudent.GenderId = 1;
+                else if (cbGender.SelectedIndex == 0)
+                    currentStudent.GenderId = 2;
+                else
+                    currentStudent.GenderId = 3;
+                    
+                currentStudent.DateOfBirth = dpDateOfBirth.SelectedDate.HasValue ? DateOnly.FromDateTime(dpDateOfBirth.SelectedDate.Value) : null;
+                currentStudent.ParentId = parentUser.UserId;
+                currentStudent.IsActive = true;
+
+                // Cập nhật Student trước
                 studentService.UpdateStudent(currentStudent);
+
+                // Cập nhật HealthRecord
+                if (currentStudent.HealthRecord == null)
+                    currentStudent.HealthRecord = new HealthRecord();
+
+                currentStudent.HealthRecord.StudentId = currentStudent.StudentId;
+                
+                if (decimal.TryParse(txtHeight.Text, out decimal height))
+                    currentStudent.HealthRecord.Height = height;
+                else
+                    currentStudent.HealthRecord.Height = null;
+
+                if (decimal.TryParse(txtWeight.Text, out decimal weight))
+                    currentStudent.HealthRecord.Weight = weight;
+                else
+                    currentStudent.HealthRecord.Weight = null;
+
+                currentStudent.HealthRecord.ChronicDiseases = txtChronicDiseases.Text;
+                currentStudent.HealthRecord.Allergies = txtAllergies.Text;
+                currentStudent.HealthRecord.Notes = txtNotes.Text;
+                currentStudent.HealthRecord.LastUpdatedDate = DateTime.Now;
+                currentStudent.HealthRecord.IsActive = true;
+
+                // Sử dụng HealthRecordService để cập nhật/tạo mới health record
+                healthRecordService.UpdateHealthRecord(currentStudent.HealthRecord);
+
                 MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+                // Refresh data
+                LoadStudentData();
             }
             catch (Exception ex)
             {

@@ -178,7 +178,7 @@
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.10" Color="#4285F4" />
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="8" Opacity="0.2" Color="#4285F4" />
                 </Setter.Value>
             </Setter>
             <Setter Property="Template">
@@ -187,6 +187,19 @@
                         <Border Background="{TemplateBinding Background}" CornerRadius="8">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1A73E8"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="2" BlurRadius="12" Opacity="0.3" Color="#4285F4" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#0D47A1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -330,7 +343,6 @@
                 <Grid x:Name="StudentDetailsGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -338,7 +350,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Student Profile Card -->
-                    <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" 
+                    <Border Grid.Column="0" Grid.Row="0"
                             Style="{StaticResource StudentProfileCardStyle}" 
                             Margin="0,0,0,25">
                         <Border.Background>
@@ -384,10 +396,10 @@
                         </Grid>
                     </Border>
 
-                    <!-- Personal Information Card (khôi phục dạng cũ) -->
-                    <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource ModernCardStyle}" Margin="0,0,15,0">
+                    <!-- Combined Student and Health Record Information Card -->
+                    <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource ModernCardStyle}" Margin="0">
                         <StackPanel>
-                            <TextBlock Text="📋 Personal Information" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="📋 Student Information" Style="{StaticResource SectionTitleStyle}" />
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -395,6 +407,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -413,8 +426,8 @@
                                 <StackPanel Grid.Column="1" Grid.Row="0" Margin="15,0,0,0">
                                     <TextBlock Text="Gender" Style="{StaticResource InfoLabelStyle}" />
                                     <ComboBox x:Name="cbGender" Style="{StaticResource ModernComboBoxStyle}">
-                                        <ComboBoxItem Content="Male" />
                                         <ComboBoxItem Content="Female" />
+                                        <ComboBoxItem Content="Male" />
                                         <ComboBoxItem Content="Other" />
                                     </ComboBox>
                                 </StackPanel>
@@ -425,128 +438,50 @@
                                     <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource ModernDatePickerStyle}" />
                                 </StackPanel>
 
-                                <!-- Blood Type -->
+                                <!-- Class -->
                                 <StackPanel Grid.Column="1" Grid.Row="1" Margin="15,0,0,0">
-                                    <TextBlock Text="Blood Type" Style="{StaticResource InfoLabelStyle}" />
-                                    <TextBox x:Name="txtBloodType" Style="{StaticResource ModernTextBoxStyle}" />
+                                    <TextBlock Text="Class" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBox x:Name="txtClass" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
 
-                                <!-- Phone Number -->
-                                <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,0,15,0">
-                                    <TextBlock Text="Phone Number" Style="{StaticResource InfoLabelStyle}" />
-                                    <TextBox x:Name="txtPhoneNumber" Style="{StaticResource ModernTextBoxStyle}" />
-                                </StackPanel>
-
-                                <!-- Emergency Contact -->
-                                <StackPanel Grid.Column="1" Grid.Row="2" Margin="15,0,0,0">
-                                    <TextBlock Text="Emergency Contact" Style="{StaticResource InfoLabelStyle}" />
-                                    <TextBox x:Name="txtEmergencyContact" Style="{StaticResource ModernTextBoxStyle}" />
-                                </StackPanel>
-
-                                <!-- Address (Full Width) -->
-                                <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,10,0,0">
-                                    <TextBlock Text="Home Address" Style="{StaticResource InfoLabelStyle}" />
-                                    <TextBox x:Name="txtAddress" Style="{StaticResource ModernTextBoxStyle}" TextWrapping="Wrap" />
-                                </StackPanel>
-                            </Grid>
-
-                            <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-                                <Button x:Name="btnUpdate" Content="Cập nhật" Width="120" Height="38" Style="{StaticResource ModernButtonStyle}" Click="btnUpdate_Click" />
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Medical Information Card -->
-                    <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource ModernCardStyle}" 
-                            Margin="15,0,0,0">
-                        <StackPanel>
-                            <TextBlock Text="🏥 Medical Information" Style="{StaticResource SectionTitleStyle}" />
-
-                            <!-- Allergies Section -->
-                            <StackPanel Margin="0,0,0,25">
-                                <TextBlock Text="Known Allergies" Style="{StaticResource InfoLabelStyle}" />
-                                <Border Background="#FFEBEE" CornerRadius="8" Padding="12" Margin="0,5,0,0">
-                                    <StackPanel x:Name="AllergiesList">
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Text="🥜" FontSize="12" Margin="0,0,8,0"/>
-                                            <TextBlock Text="Peanuts (Severe)" FontSize="13" Foreground="#C62828"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Text="🥛" FontSize="12" Margin="0,0,8,0"/>
-                                            <TextBlock Text="Dairy Products (Mild)" FontSize="13" Foreground="#F57C00"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                            </StackPanel>
-
-                            <!-- Medical Conditions -->
-                            <StackPanel Margin="0,0,0,25">
-                                <TextBlock Text="Medical Conditions" Style="{StaticResource InfoLabelStyle}" />
-                                <Border Background="#E8F5E8" CornerRadius="8" Padding="12" Margin="0,5,0,0">
-                                    <TextBlock x:Name="txtMedicalConditions" Text="Asthma (Well-controlled with inhaler)" 
-                                               FontSize="13" Foreground="#2E7D32" TextWrapping="Wrap"/>
-                                </Border>
-                            </StackPanel>
-
-                            <!-- Current Medications -->
-                            <StackPanel Margin="0,0,0,25">
-                                <TextBlock Text="Current Medications" Style="{StaticResource InfoLabelStyle}" />
-                                <Border Background="#E3F2FD" CornerRadius="8" Padding="12" Margin="0,5,0,0">
-                                    <StackPanel x:Name="MedicationsList">
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Text="💨" FontSize="12" Margin="0,0,8,0"/>
-                                            <TextBlock Text="Albuterol Inhaler - As needed for asthma" 
-                                                       FontSize="13" Foreground="#1565C0" TextWrapping="Wrap"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                            </StackPanel>
-
-                            <!-- Family Doctor -->
-                            <StackPanel>
-                                <TextBlock Text="Family Doctor" Style="{StaticResource InfoLabelStyle}" />
-                                <Border Background="#FFF3E0" CornerRadius="8" Padding="12" Margin="0,5,0,0">
-                                    <StackPanel>
-                                        <TextBlock x:Name="txtDoctorName" Text="Dr. Sarah Wilson" 
-                                                   FontSize="14" FontWeight="SemiBold" Foreground="#E65100"/>
-                                        <TextBlock x:Name="txtDoctorContact" Text="Springfield Medical Center" 
-                                                   FontSize="12" Foreground="#5F6368" Margin="0,2,0,0"/>
-                                        <TextBlock x:Name="txtDoctorPhone" Text="+1 (555) MEDICAL" 
-                                                   FontSize="12" Foreground="#5F6368"/>
-                                    </StackPanel>
-                                </Border>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Health Record Information Card (sửa lỗi Width="50%") -->
-                    <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource ModernCardStyle}" Margin="15,0,0,0">
-                        <StackPanel>
-                            <TextBlock Text="🩺 Health Record" Style="{StaticResource SectionTitleStyle}" />
-
-                            <Grid Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
+                                <!-- Height -->
+                                <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,10,15,0">
                                     <TextBlock Text="Height (cm)" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtHeight" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
-                                <StackPanel Grid.Column="1" Margin="15,0,0,0">
+
+                                <!-- Weight -->
+                                <StackPanel Grid.Column="1" Grid.Row="2" Margin="15,10,0,0">
                                     <TextBlock Text="Weight (kg)" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtWeight" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
+
+                                <!-- Chronic Diseases -->
+                                <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,10,0,0">
+                                    <TextBlock Text="Chronic Diseases" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBox x:Name="txtChronicDiseases" Style="{StaticResource ModernTextBoxStyle}" />
+                                </StackPanel>
+                                
+                                <!-- Allergies -->
+                                <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,10,0,0">
+                                    <TextBlock Text="Allergies" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBox x:Name="txtAllergies" Style="{StaticResource ModernTextBoxStyle}" />
+                                </StackPanel>
+
+                                <!-- Notes -->
+                                <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,10,0,20">
+                                    <TextBlock Text="Notes" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBox x:Name="txtNotes" Style="{StaticResource ModernTextBoxStyle}" TextWrapping="Wrap" Height="100"/>
+                                </StackPanel>
                             </Grid>
-
-                            <TextBlock Text="Chronic Diseases" Style="{StaticResource InfoLabelStyle}" />
-                            <TextBox x:Name="txtChronicDiseases" Style="{StaticResource ModernTextBoxStyle}" />
-
-                            <TextBlock Text="Allergies" Style="{StaticResource InfoLabelStyle}" />
-                            <TextBox x:Name="txtAllergies" Style="{StaticResource ModernTextBoxStyle}" />
-
-                            <TextBlock Text="Notes" Style="{StaticResource InfoLabelStyle}" />
-                            <TextBox x:Name="txtNotes" Style="{StaticResource ModernTextBoxStyle}" TextWrapping="Wrap" Height="60"/>
+                            
+                            <!-- Separate container for the button -->
+                            <Border BorderBrush="#E8EAED" BorderThickness="0,1,0,0" Padding="0,20,0,10" Margin="0,15,0,0">
+                                <Button x:Name="btnUpdate" 
+                                        Content="Cập nhật" Width="120" Height="38" 
+                                        Style="{StaticResource ModernButtonStyle}" Click="btnUpdate_Click"
+                                        HorizontalAlignment="Right" />
+                            </Border>
                         </StackPanel>
                     </Border>
                 </Grid>
