@@ -22,6 +22,8 @@ namespace Repositories.Interfaces
 
         //Lấy danh sách người dùng theo role
         List<User> GetUsersByRole(int roleId);
-
+        
+        // Lấy user theo username (bỏ qua mật khẩu và trạng thái)
+        User? GetUserByUsername(string username);
     }
 }

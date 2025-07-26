@@ -152,17 +152,28 @@
                 <Button x:Name="btnManageHealthCheckups" 
                         Content="🩺 Health Checkups" 
                         Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageHealthCheckups_Click" />
+                        Background="#E8F0FE"
+                        Foreground="#1A73E8" Click="btnManageHealthCheckups_Click_1" />
 
                 <Button x:Name="btnManageVaccinations" 
                         Content="💉 Vaccinations" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageVaccinations_Click" />
 
+                <Button x:Name="btnManageVaccinationRecords" 
+                        Content="📝 Vaccination Records" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageVaccinationRecords_Click" />
+
                 <Button x:Name="btnManageIncidents" 
                         Content="🚨 Medical Incidents" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageIncidents_Click" />
+
+                <Button x:Name="btnManageHealthRecords" 
+                        Content="📋 Health Records" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageHealthRecords_Click" />
             </StackPanel>
         </Border>
 

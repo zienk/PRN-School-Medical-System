@@ -1,11 +1,11 @@
-<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.VaccinationCampaignDialog"
+<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.VaccinationRecordDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Chiến dịch tiêm chủng" SizeToContent="Height" Width="600"
+        Title="Ghi nhận tiêm chủng" SizeToContent="Height" Width="600"
         WindowStartupLocation="CenterScreen"
         Background="White">
     <Window.Resources>
@@ -61,14 +61,41 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Style cho ComboBox -->
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Style cho DatePicker -->
+        <Style x:Key="ModernDatePicker" TargetType="DatePicker">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
         
         <!-- Style cho Label -->
         <Style x:Key="ModernLabel" TargetType="Label">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="Foreground" Value="#333333"/>
-            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Style cho Label bắt buộc -->
+        <Style x:Key="RequiredLabel" TargetType="Label" BasedOn="{StaticResource ModernLabel}">
+            <Setter Property="Foreground" Value="#DC3545"/>
         </Style>
         
         <!-- Style cho TextBlock (readonly info) -->
@@ -96,7 +123,7 @@
         <!-- Tiêu đề -->
         <TextBlock Grid.Row="0" 
                    x:Name="txtHeader"
-                   Text="THÊM CHIẾN DỊCH TIÊM CHỦNG MỚI" 
+                   Text="GHI NHẬN TIÊM CHỦNG MỚI" 
                    Style="{StaticResource HeaderStyle}"/>
         
         <!-- Form nhập liệu -->
@@ -108,49 +135,85 @@
                 Padding="24">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <!-- Tên chiến dịch -->
+                    <!-- Chiến dịch tiêm chủng -->
                     <StackPanel>
-                        <Label Content="Tên chiến dịch:" Style="{StaticResource ModernLabel}"/>
-                        <TextBox x:Name="txtCampaignName" Style="{StaticResource ModernTextBox}"/>
+                        <Label Content="Chiến dịch tiêm chủng: *" Style="{StaticResource RequiredLabel}"/>
+                        <ComboBox x:Name="cmbCampaign" 
+                                  Style="{StaticResource ModernComboBox}"
+                                  DisplayMemberPath="VaccineName"
+                                  SelectedValuePath="CampaignId"
+                                  SelectionChanged="CmbCampaign_SelectionChanged"/>
                     </StackPanel>
                     
-                    <!-- Loại vaccine -->
-                    <StackPanel>
+                    <!-- Thông tin vaccine (readonly) -->
+                    <StackPanel x:Name="pnlVaccineInfo" Visibility="Collapsed">
                         <Label Content="Loại vaccine:" Style="{StaticResource ModernLabel}"/>
-                        <ComboBox x:Name="cmbVaccineType" Height="40" Padding="10">
-                            <ComboBoxItem Content="COVID-19"/>
-                            <ComboBoxItem Content="Hepatitis B"/>
-                            <ComboBoxItem Content="MMR (Measles, Mumps, Rubella)"/>
-                            <ComboBoxItem Content="Polio"/>
-                            <ComboBoxItem Content="DPT (Diphtheria, Pertussis, Tetanus)"/>
-                            <ComboBoxItem Content="Influenza"/>
-                            <ComboBoxItem Content="HPV"/>
-                            <ComboBoxItem Content="Other"/>
-                        </ComboBox>
-                    </StackPanel>
-                    
-                    <!-- Ngày -->
-                    <StackPanel>
-                        <Label Content="Ngày thực hiện:" Style="{StaticResource ModernLabel}"/>
-                        <DatePicker x:Name="dpDate" Height="40" Padding="10"/>
-                    </StackPanel>
-                    
-                    <!-- Trạng thái -->
-                    <StackPanel>
-                        <Label Content="Trạng thái:" Style="{StaticResource ModernLabel}"/>
-                        <ComboBox x:Name="cmbStatus" Height="40" Padding="10"/>
-                    </StackPanel>
-                    
-                    <!-- Mô tả -->
-                    <StackPanel>
-                        <Label Content="Mô tả:" Style="{StaticResource ModernLabel}"/>
-                        <TextBox x:Name="txtDescription" 
+                        <TextBox x:Name="txtVaccineType" 
                                  Style="{StaticResource ModernTextBox}" 
-                                 Height="100" 
-                                 TextWrapping="Wrap" 
-                                 AcceptsReturn="True" 
+                                 IsReadOnly="True"
+                                 Background="#F8F9FA"/>
+                        
+                        <Label Content="Mô tả chiến dịch:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtCampaignDescription" 
+                                 Style="{StaticResource ModernTextBox}" 
+                                 Height="60"
+                                 TextWrapping="Wrap"
+                                 IsReadOnly="True"
+                                 Background="#F8F9FA"
                                  VerticalScrollBarVisibility="Auto"/>
                     </StackPanel>
+                    
+                    <!-- Học sinh -->
+                    <StackPanel>
+                        <Label Content="Học sinh: *" Style="{StaticResource RequiredLabel}"/>
+                        <ComboBox x:Name="cmbStudent" 
+                                  Style="{StaticResource ModernComboBox}"
+                                  DisplayMemberPath="FullName"
+                                  SelectedValuePath="StudentId"
+                                  SelectionChanged="CmbStudent_SelectionChanged"/>
+                    </StackPanel>
+
+                    <!-- Thông tin học sinh (readonly) -->
+                    <StackPanel x:Name="pnlStudentInfo" Visibility="Collapsed">
+                        <Label Content="Lớp:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtStudentClass" 
+                                 Style="{StaticResource ModernTextBox}" 
+                                 IsReadOnly="True"
+                                 Background="#F8F9FA"/>
+                        
+                        <Label Content="Ngày sinh:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtStudentDOB" 
+                                 Style="{StaticResource ModernTextBox}" 
+                                 IsReadOnly="True"
+                                 Background="#F8F9FA"/>
+                    </StackPanel>
+                    
+                    <!-- Ngày tiêm -->
+                    <StackPanel>
+                        <Label Content="Ngày tiêm: *" Style="{StaticResource RequiredLabel}"/>
+                        <DatePicker x:Name="dpVaccinationDate" 
+                                    Style="{StaticResource ModernDatePicker}"/>
+                    </StackPanel>
+                    
+                    <!-- Ghi chú -->
+                    <StackPanel>
+                        <Label Content="Ghi chú:" Style="{StaticResource ModernLabel}"/>
+                        <TextBox x:Name="txtNotes" 
+                                 Style="{StaticResource ModernTextBox}" 
+                                 Height="80" 
+                                 TextWrapping="Wrap" 
+                                 AcceptsReturn="True" 
+                                 VerticalScrollBarVisibility="Auto"
+                                 VerticalContentAlignment="Top"/>
+                    </StackPanel>
+
+                    <!-- Thông báo lỗi -->
+                    <TextBlock x:Name="txtErrorMessage" 
+                               Foreground="#DC3545" 
+                               FontWeight="Medium"
+                               Margin="0,10,0,0"
+                               TextWrapping="Wrap"
+                               Visibility="Collapsed"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>
@@ -172,4 +235,4 @@
                     Click="BtnCancel_Click"/>
         </StackPanel>
     </Grid>
-</Window> 
+</Window>

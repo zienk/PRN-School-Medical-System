@@ -231,13 +231,13 @@
             <StackPanel Orientation="Vertical" Margin="20">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,20,0,40">
-                    <TextBlock Text="🏫" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="School Management" 
+                    <TextBlock Text="🏥" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="Medical System" 
                                FontSize="18" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
                                HorizontalAlignment="Center" />
-                    <TextBlock Text="Manager Portal" 
+                    <TextBlock Text="Nurse Portal" 
                                FontSize="14" 
                                Foreground="#5F6368" 
                                HorizontalAlignment="Center" />
@@ -255,26 +255,26 @@
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnDashboard_Click" />
 
-                <Button x:Name="btnManageUsers" 
-                        Content="👥 Manage Users" 
+                <Button x:Name="btnHealthCheckups" 
+                        Content="🩺 Health Checkups" 
                         Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageUsers_Click" />
+                        Background="#E8F0FE"
+                        Foreground="#1A73E8" />
 
-                <Button x:Name="btnManageStudents" 
-                        Content="👨‍🎓 Manage Students" 
+                <Button x:Name="btnManageVaccinations" 
+                        Content="💉 Vaccinations" 
                         Style="{StaticResource SidebarButtonStyle}"
-                        Click="btnManageStudents_Click" />
+                        Click="btnManageVaccinations_Click" />
+
+                <Button x:Name="btnManageIncidents" 
+                        Content="🚨 Medical Incidents" 
+                        Style="{StaticResource SidebarButtonStyle}"
+                        Click="btnManageIncidents_Click" />
 
                 <Button x:Name="btnManageHealthRecords" 
                         Content="📋 Health Records" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageHealthRecords_Click" />
-
-                <Button x:Name="btnHealthCheckups" 
-                        Content="🔍 Health Checkups" 
-                        Style="{StaticResource SidebarButtonStyle}"
-                        Background="#E8F0FE"
-                        Foreground="#1A73E8" />
             </StackPanel>
         </Border>
 
@@ -358,7 +358,8 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <Button Content="✏️ Edit Result"  
                                                         Click="btnEditResultCheckup_Click"
-                                                        Tag="{Binding .}">
+                                                        Tag="{Binding .}"
+                                                        Margin="2">
                                                     <Button.Style>
                                                         <Style TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
                                                             <Setter Property="IsEnabled" Value="False"/>
@@ -373,7 +374,8 @@
                                                 </Button>
                                                 <Button Content="✏️ Create Result" 
                                                         Click="btnCreateResultCheckup_Click" 
-                                                        Tag="{Binding .}">
+                                                        Tag="{Binding .}"
+                                                        Margin="2">
                                                     <Button.Style>
                                                         <Style TargetType="Button" BasedOn="{StaticResource SuccessButtonStyle}">
                                                             <Style.Triggers>
@@ -391,7 +393,8 @@
                                                 </Button>
                                                 <Button Content="✏️ Edit" 
                                                         Click="btnEditCheckup_Click" 
-                                                        Tag="{Binding .}">
+                                                        Tag="{Binding .}"
+                                                        Margin="2">
                                                     <Button.Style>
                                                         <Style TargetType="Button" BasedOn="{StaticResource WarningButtonStyle}">
                                                             <Style.Triggers>
@@ -409,7 +412,8 @@
                                                 </Button>
                                                 <Button Content="🗑️ Delete"
                                                     Click="btnDeleteCheckup_Click"
-                                                    Tag="{Binding .}">
+                                                    Tag="{Binding .}"
+                                                    Margin="2">
                                                     <Button.Style>
                                                         <Style TargetType="Button" BasedOn="{StaticResource DangerButtonStyle}">
                                                             <Style.Triggers>
@@ -436,52 +440,82 @@
 
                 <!-- Create Results Tab -->
                 <TabItem Header="📝 Create Results" Style="{StaticResource CustomTabStyle}" x:Name="tabCreateResults">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <Grid Margin="20">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBox Grid.Row="0" x:Name="txtSearchHealthResults"
-             Text=""
-             Foreground="Gray"
-             Margin="201,7,408,4"
-             TextChanged="TxtSearchHealthResults_TextChanged" DataContextChanged="txtSearchHealthResults_DataContextChanged"/>
+                        <!-- Search Section -->
+                        <Border Grid.Row="0" 
+                                Background="#F8F9FA" 
+                                CornerRadius="8" 
+                                Padding="15" 
+                                Margin="0,0,0,15">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Search Student:" 
+                                           Grid.Column="0"
+                                           FontSize="14" 
+                                           FontWeight="Medium" 
+                                           VerticalAlignment="Center" 
+                                           Margin="0,0,15,0"/>
+                                <TextBox x:Name="txtSearchHealthResults" 
+                                         Grid.Column="1"
+                                         Style="{StaticResource InputFieldStyle}"
+                                         TextChanged="TxtSearchHealthResults_TextChanged"/>
+                            </Grid>
+                        </Border>
 
-                        <DataGrid Grid.Row="1" x:Name="dgHealthResults"
-                                    AutoGenerateColumns="False"
-                                    IsReadOnly="False"
-                                    Margin="5,5,5,0">
+                        <!-- Results DataGrid Header -->
+                        <TextBlock Grid.Row="1" 
+                                   Text="Student Health Checkup Results" 
+                                   FontSize="18" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,10"/>
+
+                        <!-- Results DataGrid -->
+                        <DataGrid Grid.Row="2" 
+                                  x:Name="dgHealthResults"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="False"
+                                  GridLinesVisibility="Horizontal"
+                                  HorizontalGridLinesBrush="#EEEEEE"
+                                  Background="White"
+                                  AlternatingRowBackground="#F9F9F9"
+                                  BorderThickness="1"
+                                  BorderBrush="#CCCCCC"
+                                  RowHeight="40"
+                                  Margin="0,0,0,15">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã số HS" Binding="{Binding StudentId}" Width="Auto" IsReadOnly="True" />
-                                <DataGridTextColumn Header="Tên HS" Binding="{Binding Student.FullName}" Width="Auto" IsReadOnly="True" />
-                                <DataGridTextColumn Header="Chiều cao (cm)" Binding="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
-                                <DataGridTextColumn Header="Cân nặng (kg)" Binding="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
-                                <DataGridTextColumn Header="Thị lực" Binding="{Binding Vision, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
-                                <DataGridTextColumn Header="Tình trạng răng miệng" Binding="{Binding DentalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                                <DataGridTextColumn Header="Huyết áp" Binding="{Binding BloodPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
-                                <DataGridTextColumn Header="Nhịp tim" Binding="{Binding HeartRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
-                                <DataGridTextColumn Header="Tình trạng chung" Binding="{Binding GeneralCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                <DataGridTextColumn Header="Student ID" Binding="{Binding StudentId}" Width="90" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Student Name" Binding="{Binding Student.FullName}" Width="150" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Height (cm)" Binding="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" />
+                                <DataGridTextColumn Header="Weight (kg)" Binding="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" />
+                                <DataGridTextColumn Header="Vision" Binding="{Binding Vision, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                                <DataGridTextColumn Header="Dental Status" Binding="{Binding DentalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120" />
+                                <DataGridTextColumn Header="Blood Pressure" Binding="{Binding BloodPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="110"/>
+                                <DataGridTextColumn Header="Heart Rate" Binding="{Binding HeartRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+                                <DataGridTextColumn Header="General Condition" Binding="{Binding GeneralCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                <DataGridTextColumn Header="Notes" Binding="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <Button Grid.Row="2"
-        Content="💾 Save"
-        HorizontalAlignment="Left"
-        Margin="768,10,0,10"
-        Width="120"
-        Height="40"
-        Style="{StaticResource PrimaryButtonStyle}" 
-        Click="btnSaveResult_Click"/>
-                        <Label Content="Nhập id hoặc tên học sinh " HorizontalAlignment="Left" Margin="19,3,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Width="177"/>
-
-
+                        <!-- Action Buttons -->
+                        <StackPanel Grid.Row="3" 
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Right">
+                            <Button x:Name="btnSaveResult" 
+                                    Content="💾 Save Results" 
+                                    Style="{StaticResource PrimaryButtonStyle}" 
+                                    Width="150"
+                                    Click="btnSaveResult_Click"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -491,8 +525,7 @@
         <Grid x:Name="popupOverlay" 
               Grid.ColumnSpan="2" 
               Background="#80000000" 
-              Visibility="Collapsed"
-              >
+              Visibility="Collapsed">
             <Border Background="White" 
                     CornerRadius="12" 
                     Width="500" 
@@ -511,24 +544,31 @@
                     </Grid.RowDefinitions>
 
                     <!-- Header -->
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
                         <TextBlock x:Name="popupTitle" 
-                                   Text="Add Checkup Program" 
-                                   FontSize="20" 
-                                   FontWeight="SemiBold" 
-                                   Foreground="#202124" />
+                               Grid.Column="0"
+                               Text="Add Checkup Program" 
+                               FontSize="20" 
+                               FontWeight="SemiBold" 
+                               Foreground="#202124"
+                               Margin="0,0,0,20"/>
+                               
                         <Button x:Name="btnClosePopup" 
+                                Grid.Column="1"
                                 Content="✕" 
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Top" 
                                 Background="Transparent" 
                                 BorderThickness="0" 
                                 FontSize="16" 
                                 Foreground="#5F6368" 
                                 Cursor="Hand"
                                 Click="btnClosePopup_Click" 
-                                Margin="0,-10,-220,0" />
-                    </StackPanel>
+                                Margin="0,-10,0,0" />
+                    </Grid>
 
                     <!-- Form Fields -->
                     <StackPanel Grid.Row="1">
@@ -565,67 +605,6 @@
                                 Style="{StaticResource DangerButtonStyle}"
                                 Click="btnPopupCancel_Click" />
                     </StackPanel>
-                </Grid>
-            </Border>
-        </Grid>
-
-        <!-- Student Selection Popup -->
-        <Grid x:Name="studentPopupOverlay" 
-              Grid.ColumnSpan="2" 
-              Background="#80000000" 
-              Visibility="Collapsed">
-            <Border Background="White" 
-                    CornerRadius="12" 
-                    Width="600" 
-                    Height="500" 
-                    BorderBrush="#E8EAED" 
-                    BorderThickness="1">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="30" Opacity="0.3" Color="#000000" />
-                </Border.Effect>
-
-                <Grid Margin="30">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <!-- Header -->
-
-
-                    <!-- Search Box -->
-                    <StackPanel Grid.Row="1" Margin="0,0,0,15">
-                        <TextBlock Text="Search Student" FontWeight="Medium" Margin="0,0,0,5" />
-                        <TextBox x:Name="txtSearchStudent" 
-                                 Style="{StaticResource InputFieldStyle}" 
-                                 TextChanged="txtSearchStudent_TextChanged" 
-                                 />
-                    </StackPanel>
-
-                    <!-- Students DataGrid -->
-                    <DataGrid Grid.Row="2" 
-                              x:Name="dgStudents" 
-                              AutoGenerateColumns="False" 
-                              CanUserAddRows="False" 
-                              GridLinesVisibility="None" 
-                              HeadersVisibility="Column" 
-                              Background="White" 
-                              BorderThickness="0" 
-                              RowHeight="40"
-                              AlternatingRowBackground="#F8F9FA"
-                              SelectionMode="Single">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Student ID" Binding="{Binding StudentId}" Width="100" />
-                            <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="*"  />
-                            <DataGridTextColumn Header="Class" Binding="{Binding Class}" Width="100" />
-                            <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="60" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <!-- Action Buttons -->
-
                 </Grid>
             </Border>
         </Grid>

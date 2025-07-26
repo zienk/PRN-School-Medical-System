@@ -49,6 +49,10 @@ namespace Repositories.Implementations
                 .Include(u => u.Role)
                 .FirstOrDefault(u => u.Username == username && u.Password == password && u.IsActive == true);
         
+        public User? GetUserByUsername(string username)
+            => _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefault(u => u.Username == username);
 
         public User? GetUserById(Guid userId)
             => _context.Users

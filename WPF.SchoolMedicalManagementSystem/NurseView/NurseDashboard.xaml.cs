@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessObjects.Entities;
 
 namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
@@ -26,13 +25,19 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         {
             InitializeComponent();
             currentUser = user;
+            
+            // Initialize UI values
+            if (currentUser != null)
+            {
+                // Set welcome message if needed
+            }
+            
+            LoadData();
         }
-
-        private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
+        
+        private void LoadData()
         {
-            HealthCheckupManagement healthCheckupManagement = new HealthCheckupManagement(currentUser);
-            healthCheckupManagement.Show();
-            this.Close();
+            // Load dashboard statistics if needed
         }
 
         private void btnManageVaccinations_Click(object sender, RoutedEventArgs e)
@@ -44,8 +49,35 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void btnManageIncidents_Click(object sender, RoutedEventArgs e)
         {
-            var medicalEventWindow = new MedicalEvent();
+            var medicalEventWindow = new MedicalEvent(currentUser);
             medicalEventWindow.Show();
+            this.Close();
+        }
+
+        private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)
+        {
+            var healthRecordsWindow = new StudentRecordManagement(currentUser);
+            healthRecordsWindow.Show();
+            this.Close();
+        }
+        private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
+        {
+            var healthCheckupWindow = new HealthCheckupManagement(currentUser);
+            healthCheckupWindow.Show();
+            this.Close();
+        }
+
+        private void btnManageHealthCheckups_Click_1(object sender, RoutedEventArgs e)
+        {
+            var healthCheckupWindow = new HealthCheckupManagement(currentUser);
+            healthCheckupWindow.Show();
+            this.Close();
+        }
+
+        private void btnManageVaccinationRecords_Click(object sender, RoutedEventArgs e)
+        {
+            var vaccinationRecordsWindow = new VaccinationRecordManagement(currentUser);
+            vaccinationRecordsWindow.Show();
             this.Close();
         }
     }
