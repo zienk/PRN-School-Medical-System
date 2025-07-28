@@ -115,21 +115,6 @@
                         <TextBox x:Name="txtCampaignName" Style="{StaticResource ModernTextBox}"/>
                     </StackPanel>
                     
-                    <!-- Loại vaccine -->
-                    <StackPanel>
-                        <Label Content="Loại vaccine:" Style="{StaticResource ModernLabel}"/>
-                        <ComboBox x:Name="cmbVaccineType" Height="40" Padding="10">
-                            <ComboBoxItem Content="COVID-19"/>
-                            <ComboBoxItem Content="Hepatitis B"/>
-                            <ComboBoxItem Content="MMR (Measles, Mumps, Rubella)"/>
-                            <ComboBoxItem Content="Polio"/>
-                            <ComboBoxItem Content="DPT (Diphtheria, Pertussis, Tetanus)"/>
-                            <ComboBoxItem Content="Influenza"/>
-                            <ComboBoxItem Content="HPV"/>
-                            <ComboBoxItem Content="Other"/>
-                        </ComboBox>
-                    </StackPanel>
-                    
                     <!-- Ngày -->
                     <StackPanel>
                         <Label Content="Ngày thực hiện:" Style="{StaticResource ModernLabel}"/>
