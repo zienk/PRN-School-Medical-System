@@ -146,7 +146,7 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 │         Repository Layer            │
 │       (Data Access Logic)           │
 ├─────────────────────────────────────┤
-│       Data Access Layer            │
+│       Data Access Layer             │
 │      (Entity Framework)             │
 ├─────────────────────────────────────┤
 │        Business Objects             │
