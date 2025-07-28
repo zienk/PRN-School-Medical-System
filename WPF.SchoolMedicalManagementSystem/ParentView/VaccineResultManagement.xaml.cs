@@ -64,6 +64,13 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             this.Close();
         }
 
+        private void btnParentDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            ParentDashboard parentDashboard = new ParentDashboard(currentUser);
+            parentDashboard.Show();
+            this.Close();
+        }
+
         private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
         {
             var studentService = new Services.Implementations.StudentService();

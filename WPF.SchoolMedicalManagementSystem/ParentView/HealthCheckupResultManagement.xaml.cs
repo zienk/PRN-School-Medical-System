@@ -301,8 +301,8 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
         private void btnIncidents_Click(object sender, RoutedEventArgs e)
         {
-            HealthCheckupResultManagement healthCheckupManagement = new HealthCheckupResultManagement(currentUser);
-            healthCheckupManagement.Show();
+            MedicalIncidentsManagement medicalIncidentsManagement = new MedicalIncidentsManagement(currentUser);
+            medicalIncidentsManagement.Show();
             this.Close();
         }
 
