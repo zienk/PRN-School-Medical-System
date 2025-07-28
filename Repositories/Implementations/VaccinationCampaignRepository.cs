@@ -36,6 +36,7 @@ namespace Repositories.Implementations
         public List<VaccinationCampaign> GetAllVaccinationCampaigns()
         {
             return _context.VaccinationCampaigns
+                .Include(c => c.Status)
                 .Where(c => c.IsActive == true)
                 .ToList();
         }

@@ -141,22 +141,8 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var selectedCampaign = cmbCampaigns.SelectedItem as VaccinationCampaign;
-                var addDialog = new VaccinationRecordDialog(selectedCampaign);
-                
-                if (addDialog.ShowDialog() == true)
-                {
-                    LoadData();
-                    StatusLabel.Text = "Đã thêm bản ghi tiêm chủng thành công";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi mở dialog thêm mới: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                StatusLabel.Text = "Lỗi khi thêm bản ghi";
-            }
+            MessageBox.Show("Để thêm học sinh vào đợt tiêm chủng, vui lòng sử dụng trang 'Quản lý đợt tiêm' từ Dashboard.", 
+                          "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -165,12 +151,12 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             {
                 if (dgVaccinationRecords.SelectedItem is VaccinationRecord selectedRecord)
                 {
-                    var editDialog = new VaccinationRecordDialog(selectedRecord);
+                    var editDialog = new VaccinationSimpleResultDialog(selectedRecord);
                     
                     if (editDialog.ShowDialog() == true)
                     {
                         LoadData();
-                        StatusLabel.Text = "Đã cập nhật bản ghi tiêm chủng thành công";
+                        StatusLabel.Text = "Đã cập nhật kết quả tiêm chủng thành công";
                     }
                 }
                 else

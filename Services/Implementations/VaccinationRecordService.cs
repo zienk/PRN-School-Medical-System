@@ -155,5 +155,73 @@ namespace Services.Implementations
 
             return _vaccinationRecordRepository.UpdateVaccinationRecord(vaccinationRecord);
         }
+
+        public bool CreateVaccinationRecordsForCampaign(int campaignId, List<int> studentIds)
+        {
+            if (studentIds == null || !studentIds.Any())
+            {
+                throw new ArgumentException("Danh sách học sinh không được để trống");
+            }
+
+            // Validate campaign exists and is active
+            var campaignService = new VaccinationCampaignService();
+            var campaign = campaignService.GetVaccinationCampaignById(campaignId);
+            if (campaign == null || campaign.IsActive != true)
+            {
+                throw new InvalidOperationException("Chiến dịch tiêm chủng không tồn tại hoặc không còn hoạt động");
+            }
+
+            // Get existing records for this campaign to avoid duplicates
+            var existingRecords = _vaccinationRecordRepository.GetVaccinationRecordsByCampaignId(campaignId);
+            var existingStudentIds = existingRecords.Where(r => r.IsActive == true).Select(r => r.StudentId).ToList();
+
+            int createdCount = 0;
+            foreach (var studentId in studentIds)
+            {
+                // Skip if record already exists for this student in this campaign
+                if (existingStudentIds.Contains(studentId))
+                    continue;
+
+                var vaccinationRecord = new VaccinationRecord
+                {
+                    StudentId = studentId,
+                    CampaignId = campaignId,
+                    VaccinationDate = null, // Chưa tiêm, sẽ cập nhật sau
+                    Result = null, // Chưa có kết quả
+                    Notes = "Đã lên danh sách - chưa tiêm",
+                    IsActive = true
+                };
+
+                try
+                {
+                    _vaccinationRecordRepository.AddVaccinationRecord(vaccinationRecord);
+                    createdCount++;
+                }
+                catch (Exception ex)
+                {
+                    // Log error but continue with other students
+                    Console.WriteLine($"Error creating vaccination record for student {studentId}: {ex.Message}");
+                }
+            }
+
+            return createdCount > 0;
+        }
+
+        public bool UpdateVaccinationResult(int vaccinationRecordId, string result, string notes = null)
+        {
+            var existingRecord = _vaccinationRecordRepository.GetVaccinationRecordById(vaccinationRecordId);
+            if (existingRecord == null || existingRecord.IsActive != true)
+            {
+                throw new InvalidOperationException("Không tìm thấy bản ghi tiêm chủng để cập nhật.");
+            }
+
+            // Update the record with vaccination result
+            existingRecord.VaccinationDate = DateTime.Now;
+            existingRecord.Result = result;
+            existingRecord.Notes = notes ?? existingRecord.Notes;
+
+            var updatedRecord = _vaccinationRecordRepository.UpdateVaccinationRecord(existingRecord);
+            return updatedRecord != null;
+        }
     }
 }

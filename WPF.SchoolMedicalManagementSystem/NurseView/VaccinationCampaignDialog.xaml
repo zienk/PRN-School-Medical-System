@@ -99,6 +99,14 @@
                    x:Name="txtHeader"
                    Text="THÊM CHIẾN DỊCH TIÊM CHỦNG MỚI" 
                    Style="{StaticResource HeaderStyle}"/>
+        <!-- Thông báo hướng dẫn -->
+        <TextBlock Grid.Row="0"
+                   Margin="0,40,0,0"
+                   Text="* Sau khi tạo chiến dịch, bạn sẽ lên danh sách học sinh và chỉ khi đó mới ghi nhận tiêm chủng."
+                   Foreground="#D35400"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap"/>
         
         <!-- Form nhập liệu -->
         <Border Grid.Row="1" 
