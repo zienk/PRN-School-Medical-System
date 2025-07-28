@@ -173,40 +173,40 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 
 ## 📅 Kế Hoạch Triển Khai
 
-### Phase 1: Khởi Tạo và Phân Tích (Tuần 1-2)
+### Phase 1: Khởi Tạo và Phân Tích (Tuần 1 - 2)
 - **Milestone 1.1:** Hoàn thành Project Proposal Report
 - **Milestone 1.2:** Phân tích yêu cầu chi tiết và thiết kế database
 - **Milestone 1.3:** Thiết kế UI/UX mockups và wireframes
 - **Trách nhiệm:** Toàn bộ team tham gia phân tích và thiết kế
 
-### Phase 2: Thiết Kế và Chuẩn Bị (Tuần 3-4)
+### Phase 2: Thiết Kế và Chuẩn Bị (Tuần 3 - 4)
 - **Milestone 2.1:** Hoàn thành thiết kế database và tạo ERD
 - **Milestone 2.2:** Setup môi trường phát triển WPF và repository
 - **Milestone 2.3:** Tạo WPF project structure và MVVM base classes
 - **Trách nhiệm:** Database Developer, WPF UI Developer
 
-### Phase 3: Phát Triển Core Features (Tuần 5-8)
+### Phase 3: Phát Triển Core Features (Tuần 5 - 6)
 - **Milestone 3.1:** Implement Authentication & User Management với WPF
 - **Milestone 3.2:** Phát triển Student Management WPF Views và ViewModels
 - **Milestone 3.3:** Xây dựng Health Checkup WPF Module
 - **Trách nhiệm:** WPF UI Developer, Business Logic Developer
 
-### Phase 4: Phát Triển Advanced Features (Tuần 9-12)
+### Phase 4: Phát Triển Advanced Features (Tuần 7 - 8)
 - **Milestone 4.1:** Implement Vaccination Management WPF Interface
 - **Milestone 4.2:** Phát triển Incident Management WPF System
 - **Milestone 4.3:** Xây dựng Reporting & Analytics WPF Dashboard
 - **Trách nhiệm:** Toàn bộ team WPF development
 
-### Phase 5: Testing và Tối Ưu (Tuần 13-14)
+### Phase 5: Testing và Tối Ưu (Tuần 9 - 10)
 - **Milestone 5.1:** Unit Testing cho ViewModels và Business Logic
 - **Milestone 5.2:** WPF UI Testing và User Acceptance Testing
 - **Milestone 5.3:** Performance optimization và WPF bug fixes
 - **Trách nhiệm:** Toàn bộ team
 
-### Phase 6: Triển Khai và Bàn Giao (Tuần 15-16)
+### Phase 6: Triển Khai và Bàn Giao (Tuần 11)
 - **Milestone 6.1:** WPF Application deployment và configuration
 - **Milestone 6.2:** User training và WPF documentation
-- **Milestone 6.3:** Final presentation và project handover
+- **Milestone 6.3:** Final presentation và Project Report Document
 - **Trách nhiệm:** Team Leader, Documentation
 
 ## 🛠️ Tài Nguyên và Công Cụ
@@ -215,8 +215,8 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 - **IDE:** Visual Studio 2022 Community/Professional
 - **Database Management:** SQL Server Management Studio (SSMS)
 - **Version Control:** Git + GitHub
-- **Project Management:** GitHub Projects / Trello
-- **Communication:** Microsoft Teams / Discord
+- **Project Management:** GitHub Issues / Excel
+- **Communication:** Google Meet / Discord
 
 ### Frameworks và Libraries
 - **.NET Framework:** .NET 8
@@ -231,15 +231,14 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 ### Môi Trường và Infrastructure
 - **Development Environment:** Windows 10/11 (64-bit)
 - **Database Server:** SQL Server LocalDB (development), SQL Server Express (testing)
-- **CI/CD:** GitHub Actions
-- **Documentation:** Markdown, GitHub Wiki
+- **Documentation:** Markdown, GitHub Wiki, Google Docs, Microsoft Word
 - **Design Tools:** Figma (UI/UX), Draw.io (diagrams)
 
 ### Yêu Cầu Hệ Thống
 
 #### Phần Mềm
 - **OS:** Windows 10/11 (64-bit)
-- **Runtime:** .NET 9.0 Runtime
+- **Runtime:** .NET 8.0 Runtime
 - **Database:** SQL Server 2019 hoặc mới hơn
 - **Development:** Visual Studio 2022 (để phát triển)
 
@@ -253,8 +252,7 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 1. **GitHub Repository:** Tạo private repository với branch protection
 2. **Project Structure:** Setup solution với multiple projects
 3. **Database:** Tạo database schema và seed data
-4. **CI/CD Pipeline:** GitHub Actions cho automated testing
-5. **Documentation:** Wiki setup và README templates
+4. **Documentation:** Wiki setup và README templates
 
 ## ⚠️ Đánh Giá Rủi Ro
 
@@ -330,9 +328,9 @@ Cập nhật connection string trong file `appsettings.json`:
 ```
 
 ### Tài Khoản Mặc Định
-- **Quản lý:** admin / admin123
-- **Y tá:** nurse / nurse123
-- **Phụ huynh:** parent / parent123
+- **Quản lý:** manager1 / 123
+- **Y tá:** nurse1 / 123
+- **Phụ huynh:** parent01 / 123
 
 ## 🎮 Sử Dụng
 
