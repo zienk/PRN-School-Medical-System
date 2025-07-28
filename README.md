@@ -107,22 +107,22 @@ Trong bối cảnh giáo dục hiện đại, sức khỏe và phúc lợi của
 
 ## ✨ Tính Năng Chính
 
-### � Quản Lý Sự  Cố Y Tế
+###  Quản Lý Sự  Cố Y Tế
 - Ghi nhận các sự cố như chấn thương học sinh, bệnh tật hoặc ngất xỉu xảy ra trong khuôn viên trường
 - Bao gồm các trường như thời gian, triệu chứng, hành động được thực hiện và nhân viên liên quan
 - Theo dõi và xử lý kịp thời các tình huống khẩn cấp
 
-### � Qnuản Lý Hồ Sơ Tiêm Chủng
+###  Quản Lý Hồ Sơ Tiêm Chủng
 - Theo dõi lịch sử tiêm chủng của từng học sinh
 - Hỗ trợ tên vaccine, ngày tiêm, nhà cung cấp và theo dõi phản ứng
 - Tạo chương trình tiêm chủng, lập danh sách học sinh, ghi nhận kết quả tiêm chủng và theo dõi học sinh sau tiêm chủng
 
-### � Qluản Lý Hồ Sơ Sức Khỏe Học Sinh
+###  Quản Lý Hồ Sơ Sức Khỏe Học Sinh
 - Duy trì dữ liệu như chiều cao, cân nặng, BMI, dị ứng, bệnh mãn tính
 - Hỗ trợ cập nhật và xem xét hồ sơ sức khỏe định kỳ
 - Quản lý thông tin nhân khẩu học, tiền sử bệnh, dị ứng đã biết và thông tin liên hệ khẩn cấp
 
-### � mDashboard Quản Trị
+### Dashboard Quản Trị
 - Hiển thị báo cáo chi tiết và phân tích dữ liệu
 - Cung cấp thông tin hữu ích về các sự cố sức khỏe, tỷ lệ tiêm chủng và kết quả kiểm tra sức khỏe
 - Biểu đồ dễ đọc và trực quan
@@ -381,7 +381,7 @@ SchoolMedicalSystem/
 └── README.md
 ```
 
-## � Kết Quảu Đạt Được
+##  Kết Quả Đạt Được
 
 ### Đánh Giá Hệ Thống
 
@@ -441,9 +441,9 @@ Chúng tôi hoan nghênh mọi đóng góp cho dự án! Để đóng góp:
 ## 📞 Liên Hệ và Hỗ Trợ
 
 ### Thông Tin Liên Hệ
-- **Project Repository:** [GitHub Repository Link]
-- **Team Email:** [team-email@example.com]
-- **Project Manager:** [PM Name] - [pm-email@example.com]
+- **Project Repository:** [[GitHub Repository Link]](https://github.com/zienk/PRN-School-Medical-System)
+- **Team Email:** zienkdev@gmail.com
+- **Project Manager:** ZienK - zienkdev@gmail.com
 
 ### Báo Cáo Lỗi và Yêu Cầu Tính Năng
 - **GitHub Issues:** [Link to issues page]
