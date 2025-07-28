@@ -213,15 +213,12 @@
 
             <!-- Các nút thao tác -->
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Content="Ghi nhận tiêm" 
-                        Background="#28A745" 
-                        Style="{StaticResource ModernButton}"
-                        Click="AddButton_Click"/>
+                
                 <Button Content="Xem chi tiết" 
                         Background="#007BFF" 
                         Style="{StaticResource ModernButton}"
                         Click="ViewDetailButton_Click"/>
-                <Button Content="Sửa" 
+                <Button Content="Cập nhật kết quả tiêm" 
                         Background="#FFC107" 
                         Style="{StaticResource ModernButton}"
                         Click="EditButton_Click"/>
@@ -229,6 +226,10 @@
                         Background="#DC3545" 
                         Style="{StaticResource ModernButton}"
                         Click="DeleteButton_Click"/>
+                <Button Content="Làm mới" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                        Click="RefreshButton_Click"/>
                 <Button Content="Quay lại" 
                         Background="#6C757D" 
                         Style="{StaticResource ModernButton}"
@@ -250,6 +251,7 @@
                     <DataGridTextColumn Header="Lớp" Binding="{Binding Student.Class}" Width="80"/>
                     <DataGridTextColumn Header="Chiến dịch" Binding="{Binding Campaign.VaccineName}" Width="200"/>
                     <DataGridTextColumn Header="Ngày tiêm" Binding="{Binding VaccinationDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
+                    <DataGridTextColumn Header="Kết quả" Binding="{Binding Result}" Width="120"/>
                     <DataGridTextColumn Header="Ghi chú" Binding="{Binding Notes}" Width="*"/>
                     <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding IsActive}" Width="80"/>
                 </DataGrid.Columns>

@@ -135,7 +135,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             try
             {
                 // Mở dialog chỉnh sửa
-                var editDialog = new VaccinationRecordDialog(_vaccinationRecord);
+                var editDialog = new VaccinationSimpleResultDialog(_vaccinationRecord);
                 if (editDialog.ShowDialog() == true)
                 {
                     // Refresh parent window if available

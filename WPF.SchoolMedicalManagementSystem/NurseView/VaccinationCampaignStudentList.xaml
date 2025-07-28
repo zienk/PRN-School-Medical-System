@@ -1,0 +1,302 @@
+<Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.VaccinationCampaignStudentList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Danh Sách Học Sinh Tiêm Chủng" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+
+    <Window.Resources>
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}" Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Header Style -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0078D4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <!-- DataGrid Style -->
+        <Style TargetType="DataGrid">
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#EEEEEE"/>
+            <Setter Property="AlternatingRowBackground" Value="#F9F9F9"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="RowHeight" Value="48"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- DataGrid Header Style -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="Padding" Value="12,0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" 
+                   x:Name="txtHeader"
+                   Style="{StaticResource HeaderStyle}"/>
+
+        <!-- Campaign Info -->
+        <Border Grid.Row="1" 
+                Background="#E3F2FD" 
+                CornerRadius="8" 
+                Padding="16" 
+                Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Tên vaccine:" FontWeight="Bold" FontSize="12" Foreground="#666"/>
+                    <TextBlock x:Name="txtVaccineName" FontSize="14" FontWeight="Medium"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Ngày thực hiện:" FontWeight="Bold" FontSize="12" Foreground="#666"/>
+                    <TextBlock x:Name="txtCampaignDate" FontSize="14" FontWeight="Medium"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Trạng thái:" FontWeight="Bold" FontSize="12" Foreground="#666"/>
+                    <TextBlock x:Name="txtStatus" FontSize="14" FontWeight="Medium"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="3">
+                    <TextBlock Text="Thống kê:" FontWeight="Bold" FontSize="12" Foreground="#666"/>
+                    <TextBlock x:Name="txtStatistics" FontSize="14" FontWeight="Medium"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Toolbar -->
+        <Grid Grid.Row="2" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Search -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Tìm kiếm:" 
+                           FontSize="14" 
+                           FontWeight="Medium" 
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,0"
+                           Foreground="#333333"/>
+                <TextBox x:Name="txtSearch" 
+                         Width="250" 
+                         Height="40"
+                         Padding="10"
+                         FontSize="14"
+                         KeyUp="TxtSearch_KeyUp"/>
+                <Button Content="🔍" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                        Click="SearchButton_Click"
+                        Width="48"/>
+            </StackPanel>
+
+            <!-- Action Buttons -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Thêm học sinh" 
+                        Background="#28A745" 
+                        Style="{StaticResource ModernButton}"
+                        Click="AddStudentButton_Click"/>
+                <Button Content="Ghi nhận kết quả" 
+                        Background="#FF6B35" 
+                        Style="{StaticResource ModernButton}"
+                        Click="RecordResultButton_Click"/>
+                <Button Content="Làm mới" 
+                        Background="#17A2B8" 
+                        Style="{StaticResource ModernButton}"
+                        Click="RefreshButton_Click"/>
+                <Button Content="Quay lại" 
+                        Background="#6C757D" 
+                        Style="{StaticResource ModernButton}"
+                        Click="BackButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid -->
+        <Border Grid.Row="3" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#CCCCCC"
+                BorderThickness="1"
+                Padding="8">
+            <DataGrid x:Name="dgStudents" MouseDoubleClick="DgStudents_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Student.StudentId}" Width="60"/>
+                    <DataGridTextColumn Header="Tên học sinh" Binding="{Binding Student.FullName}" Width="200"/>
+                    <DataGridTextColumn Header="Lớp" Binding="{Binding Student.Class}" Width="80"/>
+                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding Student.DateOfBirth, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
+                    <DataGridTextColumn Header="Ngày tiêm" Binding="{Binding VaccinationDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
+                    <DataGridTemplateColumn Header="Kết quả" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="4" Padding="8,4" HorizontalAlignment="Center">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Result}" Value="Success">
+                                                    <Setter Property="Background" Value="#D4EDDA"/>
+                                                    <Setter Property="BorderBrush" Value="#C3E6CB"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Result}" Value="Failed">
+                                                    <Setter Property="Background" Value="#F8D7DA"/>
+                                                    <Setter Property="BorderBrush" Value="#F5C6CB"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Result}" Value="{x:Null}">
+                                                    <Setter Property="Background" Value="#FFF3CD"/>
+                                                    <Setter Property="BorderBrush" Value="#FFEAA7"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                        </Style>
+                                    </Border.Style>
+                                    <TextBlock FontWeight="Medium" HorizontalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Result}" Value="Success">
+                                                        <Setter Property="Text" Value="Thành công"/>
+                                                        <Setter Property="Foreground" Value="#155724"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Result}" Value="Failed">
+                                                        <Setter Property="Text" Value="Thất bại"/>
+                                                        <Setter Property="Foreground" Value="#721C24"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Result}" Value="{x:Null}">
+                                                        <Setter Property="Text" Value="Chưa tiêm"/>
+                                                        <Setter Property="Foreground" Value="#856404"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Ghi chú" Binding="{Binding Notes}" Width="*"/>
+                    <DataGridTemplateColumn Header="Thao tác" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="Ghi nhận" 
+                                            Background="#FF6B35" 
+                                            Foreground="White"
+                                            Padding="8,4" 
+                                            Margin="2"
+                                            BorderThickness="0"
+                                            Cursor="Hand"
+                                            Click="RecordResultRowButton_Click"
+                                            Tag="{Binding}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Result}" Value="{x:Null}">
+                                                        <Setter Property="Content" Value="Ghi nhận"/>
+                                                        <Setter Property="Background" Value="#FF6B35"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Result}" Value="Success">
+                                                        <Setter Property="Content" Value="Sửa"/>
+                                                        <Setter Property="Background" Value="#FFC107"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Result}" Value="Failed">
+                                                        <Setter Property="Content" Value="Sửa"/>
+                                                        <Setter Property="Background" Value="#FFC107"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Status Bar -->
+        <StatusBar Grid.Row="4" 
+                   Background="#F8F9FA" 
+                   Height="32"
+                   Padding="8,0">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusLabel" 
+                           Text="Sẵn sàng" 
+                           FontSize="12"
+                           Foreground="#333333"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="💡 Mẹo: Double-click vào học sinh để ghi nhận kết quả tiêm" 
+                           FontSize="11" 
+                           Foreground="#007BFF" 
+                           FontStyle="Italic"
+                           Margin="20,0,0,0"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="RecordCountLabel" 
+                           Text="Tổng: 0 học sinh" 
+                           FontSize="12"
+                           Foreground="#333333"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

@@ -42,8 +42,8 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
 
         private void btnManageVaccinations_Click(object sender, RoutedEventArgs e)
         {
-            var vaccinationWindow = new Vaccination(currentUser.UserId);
-            vaccinationWindow.Show();
+            var vaccinationCampaignManagement = new VaccinationCampaignManagement(currentUser);
+            vaccinationCampaignManagement.Show();
             this.Close();
         }
 

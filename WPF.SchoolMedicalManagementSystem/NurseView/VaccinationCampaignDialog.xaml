@@ -99,6 +99,14 @@
                    x:Name="txtHeader"
                    Text="THÊM CHIẾN DỊCH TIÊM CHỦNG MỚI" 
                    Style="{StaticResource HeaderStyle}"/>
+        <!-- Thông báo hướng dẫn -->
+        <TextBlock Grid.Row="0"
+                   Margin="0,40,0,0"
+                   Text="* Sau khi tạo chiến dịch, bạn sẽ lên danh sách học sinh và chỉ khi đó mới ghi nhận tiêm chủng."
+                   Foreground="#D35400"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap"/>
         
         <!-- Form nhập liệu -->
         <Border Grid.Row="1" 
@@ -113,21 +121,6 @@
                     <StackPanel>
                         <Label Content="Tên chiến dịch:" Style="{StaticResource ModernLabel}"/>
                         <TextBox x:Name="txtCampaignName" Style="{StaticResource ModernTextBox}"/>
-                    </StackPanel>
-                    
-                    <!-- Loại vaccine -->
-                    <StackPanel>
-                        <Label Content="Loại vaccine:" Style="{StaticResource ModernLabel}"/>
-                        <ComboBox x:Name="cmbVaccineType" Height="40" Padding="10">
-                            <ComboBoxItem Content="COVID-19"/>
-                            <ComboBoxItem Content="Hepatitis B"/>
-                            <ComboBoxItem Content="MMR (Measles, Mumps, Rubella)"/>
-                            <ComboBoxItem Content="Polio"/>
-                            <ComboBoxItem Content="DPT (Diphtheria, Pertussis, Tetanus)"/>
-                            <ComboBoxItem Content="Influenza"/>
-                            <ComboBoxItem Content="HPV"/>
-                            <ComboBoxItem Content="Other"/>
-                        </ComboBox>
                     </StackPanel>
                     
                     <!-- Ngày -->

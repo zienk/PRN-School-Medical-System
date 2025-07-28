@@ -61,36 +61,9 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         {
             if (_campaign != null)
             {
-                // Parse the vaccine name to separate type and name
-                string vaccineName = _campaign.VaccineName;
-                string vaccineType = string.Empty;
-                string campaignName = vaccineName;
-
-                if (vaccineName.Contains(" - "))
-                {
-                    var parts = vaccineName.Split(new[] { " - " }, StringSplitOptions.None);
-                    vaccineType = parts[0];
-                    campaignName = parts[1];
-                }
-
-                // Populate form fields
-                txtCampaignName.Text = campaignName;
-                
-                // Try to select the vaccine type in the combobox
-                foreach (var item in cmbVaccineType.Items)
-                {
-                    if (item is System.Windows.Controls.ComboBoxItem comboItem && 
-                        comboItem.Content.ToString() == vaccineType)
-                    {
-                        cmbVaccineType.SelectedItem = comboItem;
-                        break;
-                    }
-                }
-
+                txtCampaignName.Text = _campaign.VaccineName;
                 dpDate.SelectedDate = _campaign.Date?.ToDateTime(TimeOnly.MinValue);
                 txtDescription.Text = _campaign.Description;
-                
-                // Set status
                 cmbStatus.SelectedValue = _campaign.StatusId;
             }
         }
@@ -127,46 +100,30 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
                 MessageBox.Show("Campaign name is required!", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
-
-            if (cmbVaccineType.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a vaccine type!", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
             if (!dpDate.SelectedDate.HasValue)
             {
                 MessageBox.Show("Date is required!", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
-
             if (cmbStatus.SelectedItem == null)
             {
                 MessageBox.Show("Please select a status!", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
-
             return true;
         }
 
         private void SaveNewCampaign()
         {
-            if (cmbVaccineType.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a vaccine type!", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            var vaccineType = ((System.Windows.Controls.ComboBoxItem)cmbVaccineType.SelectedItem).Content.ToString();
             var campaign = new VaccinationCampaign
             {
-                VaccineName = $"{vaccineType} - {txtCampaignName.Text}",
+                VaccineName = txtCampaignName.Text,
                 Date = DateOnly.FromDateTime(dpDate.SelectedDate.Value),
                 Description = txtDescription.Text,
                 CreatedBy = _currentUserId,
                 StatusId = (int)cmbStatus.SelectedValue,
                 IsActive = true
             };
-
             _campaignService.AddVaccinationCampaign(campaign);
             MessageBox.Show("Campaign added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -175,17 +132,10 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
         {
             if (_campaign != null)
             {
-                if (cmbVaccineType.SelectedItem == null)
-                {
-                    MessageBox.Show("Vaccine type is not selected. Please select a vaccine type before updating.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                var vaccineType = ((System.Windows.Controls.ComboBoxItem)cmbVaccineType.SelectedItem).Content.ToString();
-                _campaign.VaccineName = $"{vaccineType} - {txtCampaignName.Text}";
+                _campaign.VaccineName = txtCampaignName.Text;
                 _campaign.Date = DateOnly.FromDateTime(dpDate.SelectedDate.Value);
                 _campaign.Description = txtDescription.Text;
                 _campaign.StatusId = (int)cmbStatus.SelectedValue;
-
                 _campaignService.UpdateVaccinationCampaign(_campaign);
                 MessageBox.Show("Campaign updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }

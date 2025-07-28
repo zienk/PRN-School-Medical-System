@@ -31,5 +31,11 @@ namespace Services.Interfaces
         List<VaccinationRecord> GetAllVaccinationRecords();
 
         //Thống kê số lượng bản ghi tiêm chủng thành công | thất bại (Todo)
+        
+        // Tạo danh sách VaccinationRecord cho các học sinh được chọn trong chiến dịch
+        bool CreateVaccinationRecordsForCampaign(int campaignId, List<int> studentIds);
+        
+        // Cập nhật kết quả tiêm chủng (khi thực sự tiêm)
+        bool UpdateVaccinationResult(int vaccinationRecordId, string result, string notes = null);
     }
 }
