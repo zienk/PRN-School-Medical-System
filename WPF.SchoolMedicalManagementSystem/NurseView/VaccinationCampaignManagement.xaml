@@ -145,7 +145,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding CampaignId}" Width="60"/>
                     <DataGridTextColumn Header="Tên vaccine" Binding="{Binding VaccineName}" Width="200"/>
-                    <DataGridTextColumn Header="Ngày thực hiện" Binding="{Binding CampaignDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
+                    <DataGridTextColumn Header="Ngày thực hiện" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
                     <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="*"/>
                     <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status.StatusName}" Width="100"/>
                     <DataGridTextColumn Header="Người tạo" Binding="{Binding CreatedByNavigation.FullName}" Width="150"/>

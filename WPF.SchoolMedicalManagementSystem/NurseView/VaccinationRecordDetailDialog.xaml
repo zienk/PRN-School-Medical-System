@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Chi tiết bản ghi tiêm chủng" SizeToContent="WidthAndHeight"
+        Title="Chi tiết bản ghi tiêm chủng" SizeToContent="Height" Width="600"
         WindowStartupLocation="CenterScreen"
         Background="White"
         ResizeMode="NoResize">

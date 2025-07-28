@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WPF.SchoolMedicalManagementSystem.ParentView.IncidentDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Incident Details" SizeToContent="WidthAndHeight"
+        Title="Incident Details" SizeToContent="Height" Width="700"
         WindowStartupLocation="CenterOwner"
         Background="Transparent"
         AllowsTransparency="True"
