@@ -15,21 +15,23 @@ using System.Windows.Shapes;
 
 namespace WPF.SchoolMedicalManagementSystem.ManagerView
 {
-    /// <summary>
-    /// Interaction logic for ManagerDashboard.xaml
-    /// </summary>
+    // Bảng điều khiển quản lý chính
     public partial class ManagerDashboard : Window
     {
         private User currentUser;
+        
         public ManagerDashboard(User user)
         {
             InitializeComponent();
             currentUser = user;
         }
+        
         public ManagerDashboard()
         {
             InitializeComponent(); 
         }
+        
+        // Xử lý sự kiện click nút quản lý người dùng
         private void btnManageUsers_Click(object sender, RoutedEventArgs e)
         {
             UserManagement userManagement = new UserManagement();
@@ -37,12 +39,12 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             this.Close();
         }
 
+        // Xử lý sự kiện click nút quản lý học sinh
         private void btnManageStudents_Click(object sender, RoutedEventArgs e)
         {
             StudentManagement student = new StudentManagement();
             student.Show();
             this.Close();
         }
-
     }
 }

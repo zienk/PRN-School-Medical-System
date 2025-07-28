@@ -12,6 +12,7 @@ using Services.Implementations;
 
 namespace WPF.SchoolMedicalManagementSystem.ParentView
 {
+    // Giao diện quản lý kết quả khám sức khỏe cho phụ huynh
     public partial class HealthCheckupResultManagement : Window
     {
         private List<Student> students;
@@ -28,31 +29,32 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             LoadStudents();
         }
 
+        // Tải danh sách học sinh của phụ huynh hiện tại
         private void LoadStudents()
         {
             students = _studentService.GetAllStudentsByUserId(currentUser.UserId);
 
             foreach (Student student in students)
             {
-                //student.Gender.GenderName = student.GenderId == 1 ? "1" : "2";
+                // Thiết lập hiển thị giới tính bằng text thay vì icon
                 if (student.GenderId == 1)
                 {
-                    student.Gender.GenderName = "👦";
+                    student.Gender.GenderName = "Nam";
                 }
                 else
                 {
-                    student.Gender.GenderName = "👧";
+                    student.Gender.GenderName = "Nữ";
                 }
                 cmbStudents.Items.Add(student);
             }
         }
 
 
+        // Xử lý sự kiện thay đổi lựa chọn học sinh
         private void cmbStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbStudents.SelectedItem is Student selectedStudent)
             {
-                //MessageBox.Show($"Selected Student: {selectedStudent.FullName}");
                 healthCheckupResults = _healthCheckupResultService.getAllHealthCheckupResultByStudentId(selectedStudent.StudentId);
                 DisplayCheckupResults(healthCheckupResults);
 
@@ -60,11 +62,10 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             }
         }
 
+        // Hiển thị kết quả khám sức khỏe
         private void DisplayCheckupResults(List<HealthCheckupResult> healthCheckupResults)
         {
             stackCheckupResults.Children.Clear();
-
-            //healthCheckupResults = _healthCheckupResultService.getAllHealthCheckupResultByStudentId(studentId);
 
             if (healthCheckupResults.Any())
             {
@@ -76,23 +77,23 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             }
             else
             {
-                txtNoResults.Text = "No health checkup results found for this student.";
+                txtNoResults.Text = "Không tìm thấy kết quả khám sức khỏe cho học sinh này.";
                 txtNoResults.Visibility = Visibility.Visible;
                 stackCheckupResults.Children.Add(txtNoResults);
             }
         }
 
+        // Xử lý sự kiện lọc kết quả theo tên chương trình
         private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
             string filterText = txtTenChuongTrinh.Text.Trim().ToLower();
             if (!string.IsNullOrEmpty(filterText))
             {
-                // If filter is empty, show all results
+                // Lọc kết quả theo tên chương trình khám
                 healthCheckupResults = healthCheckupResults.Where(x => x.Checkup.CheckupName.ToLower().Contains(filterText)).ToList();
                 DisplayCheckupResults(healthCheckupResults);
                 return;
             }
-            //DisplayCheckupResults(healthCheckupResults);
         }
 
         private Border CreateCheckupCard(HealthCheckupResult checkup)
@@ -115,7 +116,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
             var titleStack = new StackPanel();
             var titleText = new TextBlock
             {
-                Text = $"🩺 {checkup.Checkup.CheckupName}",
+                Text = $"Khám: {checkup.Checkup.CheckupName}",
                 FontSize = 18,
                 FontWeight = FontWeights.SemiBold,
                 Foreground = new SolidColorBrush(Color.FromRgb(32, 33, 36)),
@@ -171,20 +172,20 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
             // Column 1
             var column1 = new StackPanel { Margin = new Thickness(0, 0, 15, 0) };
-            column1.Children.Add(CreateDetailCard("📏 Height", checkup.Height.ToString()));
-            column1.Children.Add(CreateDetailCard("⚖️ Weight", checkup.Weight.ToString()));
-            column1.Children.Add(CreateDetailCard("📊 BMI", checkup.Bmi.ToString()));
+            column1.Children.Add(CreateDetailCard("Chiều Cao", checkup.Height.ToString()));
+            column1.Children.Add(CreateDetailCard("Cân Nặng", checkup.Weight.ToString()));
+            column1.Children.Add(CreateDetailCard("BMI", checkup.Bmi.ToString()));
 
             // Column 2
             var column2 = new StackPanel { Margin = new Thickness(0, 0, 15, 0) };
-            column2.Children.Add(CreateDetailCard("👁️ Vision", checkup.Vision));
-            column2.Children.Add(CreateDetailCard("🦷 Dental Status", checkup.DentalStatus));
-            column2.Children.Add(CreateDetailCard("💗 Heart Rate", checkup.HeartRate.ToString()));
+            column2.Children.Add(CreateDetailCard("Thị Lực", checkup.Vision));
+            column2.Children.Add(CreateDetailCard("Tình Trạng Răng", checkup.DentalStatus));
+            column2.Children.Add(CreateDetailCard("Nhịp Tim", checkup.HeartRate.ToString()));
 
             // Column 3
             var column3 = new StackPanel();
-            column3.Children.Add(CreateDetailCard("🩸 Blood Pressure", checkup.BloodPressure));
-            column3.Children.Add(CreateDetailCard("🏥 General Condition", checkup.GeneralCondition));
+            column3.Children.Add(CreateDetailCard("Huyết Áp", checkup.BloodPressure));
+            column3.Children.Add(CreateDetailCard("Tình Trạng Chung", checkup.GeneralCondition));
 
             Grid.SetColumn(column1, 0);
             Grid.SetColumn(column2, 1);
@@ -208,7 +209,7 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
                 var notesStack = new StackPanel();
                 var notesHeader = new TextBlock
                 {
-                    Text = "📝 Doctor's Notes",
+                    Text = "Ghi Chú Của Bác Sĩ",
                     FontSize = 14,
                     FontWeight = FontWeights.SemiBold,
                     Foreground = new SolidColorBrush(Color.FromRgb(229, 81, 0)),

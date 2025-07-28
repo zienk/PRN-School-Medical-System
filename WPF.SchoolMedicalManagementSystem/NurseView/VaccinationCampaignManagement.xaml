@@ -106,11 +106,11 @@
                          Padding="10"
                          FontSize="14"
                          KeyUp="TxtSearch_KeyUp"/>
-                <Button Content="🔍" 
+                <Button Content="Tìm" 
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
                         Click="SearchButton_Click"
-                        Width="48"/>
+                        Width="60"/>
             </StackPanel>
 
             <!-- Action Buttons -->
@@ -191,7 +191,7 @@
                            Foreground="#333333"/>
             </StatusBarItem>
             <StatusBarItem>
-                <TextBlock Text="💡 Mẹo: Double-click vào đợt tiêm để xem danh sách học sinh" 
+                <TextBlock Text="Mẹo: Double-click vào đợt tiêm để xem danh sách học sinh" 
                            FontSize="11" 
                            Foreground="#007BFF" 
                            FontStyle="Italic"

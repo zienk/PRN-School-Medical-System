@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ManagerView"
         mc:Ignorable="d"
-        Title="Manager Dashboard - School Medical System" Height="700" Width="1200"
+        Title="Bảng Điều Khiển Quản Lý - Hệ Thống Y Tế Học Đường" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="White">
@@ -131,32 +131,31 @@
             <StackPanel Orientation="Vertical" Margin="20">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,20,0,40">
-                    <TextBlock Text="🏫" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="School Management" 
+                    <TextBlock Text="Quản Lý Trường Học" 
                                FontSize="18" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
                                HorizontalAlignment="Center" />
-                    <TextBlock Text="Manager Portal" 
+                    <TextBlock Text="Cổng Quản Trị" 
                                FontSize="14" 
                                Foreground="#5F6368" 
                                HorizontalAlignment="Center" />
                 </StackPanel>
 
                 <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
+                <TextBlock Text="ĐIỀU HƯỚNG" 
                            FontSize="12" 
                            FontWeight="SemiBold" 
                            Foreground="#9AA0A6" 
                            Margin="20,0,0,15" />
 
                 <Button x:Name="btnManageUsers" 
-                        Content="👥 Manage Users" 
+                        Content="Quản Lý Người Dùng" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageUsers_Click" />
 
                 <Button x:Name="btnManageStudents" 
-                        Content="👨‍🎓 Manage Students" 
+                        Content="Quản Lý Học Sinh" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageStudents_Click" />
             </StackPanel>
@@ -172,8 +171,8 @@
 
             <!-- Header Section -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="Dashboard" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="Welcome back! Here's an overview of your school management system." 
+                <TextBlock Text="Bảng Điều Khiển" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Chào mừng trở lại! Đây là tổng quan về hệ thống quản lý trường học của bạn." 
                            Style="{StaticResource WelcomeStyle}" />
             </StackPanel>
 
@@ -194,11 +193,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="👥" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                         <TextBlock x:Name="txtTotalUsers" 
                                    Text="{Binding TotalUsers, FallbackValue=150}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Total Users" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Tổng Người Dùng" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
 
@@ -211,11 +209,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="👨‍👩‍👧‍👦" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                         <TextBlock x:Name="txtParentUsers" 
                                    Text="{Binding ParentUsers, FallbackValue=85}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Parent Users" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Phụ Huynh" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
 
@@ -228,11 +225,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="👩‍⚕️" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                         <TextBlock x:Name="txtNurseUsers" 
                                    Text="{Binding NurseUsers, FallbackValue=12}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Nurse Users" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Y Tá" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
             </Grid>
@@ -240,7 +236,7 @@
             <!-- Recent Activity Section -->
             <Border Grid.Row="2" Style="{StaticResource ModernCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="System Overview" 
+                    <TextBlock Text="Tổng Quan Hệ Thống" 
                                FontSize="20" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
@@ -254,35 +250,35 @@
 
                         <!-- Management Actions -->
                         <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                            <TextBlock Text="Quick Actions" 
+                            <TextBlock Text="Thao Tác Nhanh" 
                                        FontSize="16" 
                                        FontWeight="Medium" 
                                        Foreground="#5F6368" 
                                        Margin="0,0,0,15" />
 
                             <Border Background="#F8F9FA" CornerRadius="8" Padding="15" Margin="0,0,0,10">
-                                <TextBlock Text="👥 Add New User" 
+                                <TextBlock Text="Thêm Người Dùng Mới" 
                                            FontSize="14" 
                                            Foreground="#1A73E8" 
                                            Cursor="Hand" />
                             </Border>
 
                             <Border Background="#F8F9FA" CornerRadius="8" Padding="15" Margin="0,0,0,10">
-                                <TextBlock Text="👨‍🎓 Enroll Student" 
+                                <TextBlock Text="Đăng Ký Học Sinh" 
                                            FontSize="14" 
                                            Foreground="#1A73E8" 
                                            Cursor="Hand" />
                             </Border>
 
                             <Border Background="#F8F9FA" CornerRadius="8" Padding="15" Margin="0,0,0,10">
-                                <TextBlock Text="📊 Generate Report" 
+                                <TextBlock Text="Tạo Báo Cáo" 
                                            FontSize="14" 
                                            Foreground="#1A73E8" 
                                            Cursor="Hand" />
                             </Border>
 
                             <Border Background="#F8F9FA" CornerRadius="8" Padding="15">
-                                <TextBlock Text="📋 View Health Records" 
+                                <TextBlock Text="Xem Hồ Sơ Sức Khỏe" 
                                            FontSize="14" 
                                            Foreground="#1A73E8" 
                                            Cursor="Hand" />
@@ -291,7 +287,7 @@
 
                         <!-- System Status -->
                         <StackPanel Grid.Column="1">
-                            <TextBlock Text="System Status" 
+                            <TextBlock Text="Trạng Thái Hệ Thống" 
                                        FontSize="16" 
                                        FontWeight="Medium" 
                                        Foreground="#5F6368" 
@@ -299,22 +295,22 @@
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <Ellipse Width="8" Height="8" Fill="#34A853" Margin="0,0,10,0"/>
-                                <TextBlock Text="User Management: Online" FontSize="14" Foreground="#202124"/>
+                                <TextBlock Text="Quản Lý Người Dùng: Trực Tuyến" FontSize="14" Foreground="#202124"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <Ellipse Width="8" Height="8" Fill="#34A853" Margin="0,0,10,0"/>
-                                <TextBlock Text="Student Records: Synced" FontSize="14" Foreground="#202124"/>
+                                <TextBlock Text="Hồ Sơ Học Sinh: Đã Đồng Bộ" FontSize="14" Foreground="#202124"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <Ellipse Width="8" Height="8" Fill="#34A853" Margin="0,0,10,0"/>
-                                <TextBlock Text="Health System: Active" FontSize="14" Foreground="#202124"/>
+                                <TextBlock Text="Hệ Thống Y Tế: Hoạt Động" FontSize="14" Foreground="#202124"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Width="8" Height="8" Fill="#FBBC04" Margin="0,0,10,0"/>
-                                <TextBlock Text="Backup: Scheduled" FontSize="14" Foreground="#202124"/>
+                                <TextBlock Text="Sao Lưu: Đã Lên Lịch" FontSize="14" Foreground="#202124"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

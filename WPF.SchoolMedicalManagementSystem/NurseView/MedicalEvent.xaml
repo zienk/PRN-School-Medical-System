@@ -167,11 +167,11 @@
                 <TextBox x:Name="SearchTextBox" 
                          Style="{StaticResource ModernTextBox}"
                          Width="250"/>
-                <Button Content="🔍" 
+                <Button Content="Tìm" 
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
                         Click="SearchButton_Click"
-                        Width="48"/>
+                        Width="60"/>
                 
             </StackPanel>
 
@@ -209,16 +209,16 @@
                 Padding="8">
             <DataGrid Grid.Row="2" x:Name="dgMedicalEvents">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="IncidentId" Binding="{Binding IncidentId}" Width="60"/>
-                    <DataGridTextColumn Header="FullName" Binding="{Binding Student.FullName}" Width="120"/>
-                    <DataGridTextColumn Header="Class" Binding="{Binding Student.Class}" Width="80"/>
-                    <DataGridTextColumn Header="EventType" Binding="{Binding IncidentType.EventTypeName}" Width="120"/>
-                    <DataGridTextColumn Header="EventDate" Binding="{Binding IncidentDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
-                    <DataGridTextColumn Header="ActionsTaken" Binding="{Binding ActionsTaken}" Width="*"/>
-                    <DataGridTextColumn Header="ReportedBy" Binding="{Binding ReportedByNavigation.FullName}" Width="150"/>
-                    <DataGridTextColumn Header="SeverityId" Binding="{Binding Severity.SeverityName}" Width="120"/>
-                    <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="120"/>
+                    <DataGridTextColumn Header="Mã sự cố" Binding="{Binding IncidentId}" Width="80"/>
+                    <DataGridTextColumn Header="Họ và tên" Binding="{Binding Student.FullName}" Width="150"/>
+                    <DataGridTextColumn Header="Lớp" Binding="{Binding Student.Class}" Width="80"/>
+                    <DataGridTextColumn Header="Loại sự kiện" Binding="{Binding IncidentType.EventTypeName}" Width="120"/>
+                    <DataGridTextColumn Header="Ngày xảy ra" Binding="{Binding IncidentDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="100"/>
+                    <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="*"/>
+                    <DataGridTextColumn Header="Hành động đã thực hiện" Binding="{Binding ActionsTaken}" Width="*"/>
+                    <DataGridTextColumn Header="Người báo cáo" Binding="{Binding ReportedByNavigation.FullName}" Width="150"/>
+                    <DataGridTextColumn Header="Mức độ nghiêm trọng" Binding="{Binding Severity.SeverityName}" Width="140"/>
+                    <DataGridTextColumn Header="Địa điểm" Binding="{Binding Location}" Width="120"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

@@ -1,8 +1,9 @@
 <Window x:Class="WPF.SchoolMedicalManagementSystem.NurseView.VaccinationSimpleResultDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Ghi Nhận Kết Quả Tiêm Chủng" SizeToContent="Height" Width="500"
-        WindowStartupLocation="CenterScreen" Background="White">
+        Title="Ghi Nhận Kết Quả Tiêm Chủng" SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen" Background="White"
+        ResizeMode="NoResize">
     
     <Window.Resources>
         <!-- Modern Label Style -->

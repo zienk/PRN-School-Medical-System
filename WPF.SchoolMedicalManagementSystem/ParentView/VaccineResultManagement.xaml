@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ParentView"
         mc:Ignorable="d"
-        Title="Vaccination Results - School Medical System" Height="750" Width="1300"
+        Title="Kết Quả Tiêm Chủng - Hệ Thống Y Tế Học Đường" Height="750" Width="1300"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="White">
@@ -275,48 +275,46 @@
             <StackPanel Orientation="Vertical" Margin="25">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,25,0,40">
-                    <TextBlock Text="👨‍👩‍👧‍👦" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,12"/>
-                    <TextBlock Text="Parent Portal" 
+                    <TextBlock Text="Cổng Phụ Huynh" 
                                FontSize="20" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
                                HorizontalAlignment="Center" />
-                    <TextBlock Text="School Medical System" 
+                    <TextBlock Text="Hệ Thống Y Tế Học Đường" 
                                FontSize="14" 
                                Foreground="#5F6368" 
                                HorizontalAlignment="Center" />
                 </StackPanel>
 
                 <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
+                <TextBlock Text="ĐIỀU HƯỚNG" 
                            FontSize="12" 
                            FontWeight="SemiBold" 
                            Foreground="#9AA0A6" 
                            Margin="20,0,0,20" />
 
                 <Button x:Name="btnDashboard" 
-                        Content="🏠 Dashboard" 
+                        Content="Bảng Điều Khiển" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnDashboard_Click" />
 
                 <Button x:Name="btnHealthRecord" 
-                        Content="🎓 Student Info" 
+                        Content="Thông Tin Học Sinh" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnHealthRecord_Click" />
 
-
                 <Button x:Name="btnHealthCheckups" 
-                        Content="🩺 Health Checkups" 
+                        Content="Khám Sức Khỏe" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnHealthCheckups_Click"/>
 
                 <Button x:Name="btnVaccinations" 
-                        Content="💉 Vaccinations" 
+                        Content="Tiêm Chủng" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Background="#FEF7E0" 
                         Foreground="#F57C00" />
 
                 <Button x:Name="btnIncidents" 
-                        Content="🚨 Medical Incidents" 
+                        Content="Sự Cố Y Tế" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnIncidents_Click"/>
             </StackPanel>
@@ -332,8 +330,8 @@
 
             <!-- Header Section -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="💉 Vaccination Results" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="View and monitor your children's vaccination records and results." 
+                <TextBlock Text="Kết Quả Tiêm Chủng" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Xem và theo dõi hồ sơ tiêm chủng và kết quả của con em bạn." 
                            Style="{StaticResource WelcomeStyle}" />
             </StackPanel>
 
@@ -346,7 +344,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Select Student:" 
+                    <TextBlock Text="Chọn Học Sinh:" 
                                FontSize="16" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
@@ -390,7 +388,7 @@
 
                 <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock x:Name="txtVaccinationSummary" 
-                               Text="Total Vaccinations: 0" 
+                               Text="Tổng Số Lần Tiêm: 0" 
                                FontSize="14" 
                                FontWeight="Medium" 
                                Foreground="#5F6368" 
@@ -398,7 +396,7 @@
                                Margin="0,0,20,0" />
 
                     <Button x:Name="btnRefresh" 
-                            Content="🔄 Refresh" 
+                            Content="Làm Mới" 
                             Background="#4285F4" 
                             Foreground="White" 
                             FontSize="14" 
@@ -446,7 +444,7 @@
 
                     <!-- Section Header -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,25">
-                        <TextBlock Text="📊 Vaccination Records" 
+                        <TextBlock Text="Hồ Sơ Tiêm Chủng" 
                                    FontSize="22" 
                                    FontWeight="SemiBold" 
                                    Foreground="#202124" 
@@ -468,7 +466,7 @@
                               CellStyle="{StaticResource DataGridCellStyle}">
                         <DataGrid.Columns>
                             <!-- Vaccine Name Column -->
-                            <DataGridTextColumn Header="💉 Vaccine Name" 
+                            <DataGridTextColumn Header="Tên Vaccine" 
                                                 Binding="{Binding Campaign.VaccineName}" 
                                                 Width="400">
                                 <DataGridTextColumn.ElementStyle>
@@ -481,11 +479,9 @@
                             </DataGridTextColumn>
 
                             <!-- Vaccination Date Column -->
-                            <DataGridTextColumn Header="📅 Vaccination Date" 
+                            <DataGridTextColumn Header="Ngày Tiêm" 
                                                 Binding="{Binding VaccinationDate, StringFormat=dd/MM/yyyy}" 
-                                                Width="160"
-                                                
-                                                >
+                                                Width="160">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Foreground" Value="#5F6368" />
@@ -495,7 +491,7 @@
                             </DataGridTextColumn>
 
                             <!-- Result Column -->
-                            <DataGridTemplateColumn Header="📋 Result" Width="350">
+                            <DataGridTemplateColumn Header="Kết Quả" Width="350">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Border CornerRadius="15" Padding="10,5" HorizontalAlignment="Center">

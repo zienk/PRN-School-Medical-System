@@ -17,17 +17,13 @@ using System.Windows.Shapes;
 
 namespace WPF.SchoolMedicalManagementSystem.ManagerView
 {
-    /// <summary>
-    /// Interaction logic for UserAddAndEdit.xaml
-    /// </summary>
+    // Form thêm mới và chỉnh sửa người dùng
     public partial class UserAddAndEdit : Window
     {
-
         private bool isEditMode;
         private User currentUser;
         private IRoleService _roleService;
         private IUserService _userService;
-
 
         public UserAddAndEdit(bool isEdit, User user)
         {
@@ -40,26 +36,25 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             currentUser = user;
             LoadRoles();
 
-
             if (isEditMode)
             {
                 HeaderTitle.Text = "CẬP NHẬT THÔNG TIN NGƯỜI DÙNG";
                 btnSave.Content = "Cập nhật";
 
-                // Ẩn các ô text box và lable chỉ dành cho thêm mới
+                // Ẩn các ô text box và label chỉ dành cho thêm mới
                 UsernamePanel.Visibility = Visibility.Collapsed;
                 PasswordPanel.Visibility = Visibility.Collapsed;
                 ConfirmPasswordPanel.Visibility = Visibility.Collapsed;
-                LoadUserData(); // Hàm này lấy dữ liệu đối tượng cần update fill lên sẵn
+                LoadUserData(); // Tải dữ liệu người dùng cần cập nhật
             }
             else
             {
                 HeaderTitle.Text = "THÊM NGƯỜI DÙNG MỚI";
                 btnSave.Content = "Thêm mới";
             }
-           
         }
 
+        // Tải danh sách vai trò vào ComboBox
         private void LoadRoles()
         {
             var roles = _roleService.GetAllRoles();
@@ -69,6 +64,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             cmbRole.SelectedValuePath = "RoleId";
         }
 
+        // Tải dữ liệu người dùng vào form (chế độ chỉnh sửa)
         private void LoadUserData()
         {
             if (currentUser != null)
@@ -80,17 +76,17 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
 
                 // Chọn vai trò hiện tại
                 cmbRole.SelectedValue = currentUser.RoleId;
-
             }
         }
 
+        // Xử lý sự kiện lưu dữ liệu
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (isEditMode)
                 {
-                    // Validate
+                    // Kiểm tra dữ liệu đầu vào cho chế độ chỉnh sửa
                     if (string.IsNullOrWhiteSpace(txtFullName.Text))
                     {
                         MessageBox.Show("Vui lòng nhập họ và tên!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -103,7 +99,8 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                         cmbRole.Focus();
                         return;
                     }
-                    // Update user
+                    
+                    // Cập nhật thông tin người dùng
                     currentUser.FullName = txtFullName.Text.Trim();
                     currentUser.Email = txtEmail.Text.Trim();
                     currentUser.Phone = txtPhone.Text.Trim();
@@ -116,7 +113,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                 }
                 else
                 {
-                    // Validate
+                    // Kiểm tra dữ liệu đầu vào cho chế độ thêm mới
                     if (string.IsNullOrWhiteSpace(txtUsername.Text))
                     {
                         MessageBox.Show("Vui lòng nhập tên đăng nhập!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -147,7 +144,8 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
                         cmbRole.Focus();
                         return;
                     }
-                    // Tạo user mới
+                    
+                    // Tạo người dùng mới
                     var newUser = new User
                     {
                         Username = txtUsername.Text.Trim(),
@@ -171,6 +169,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             }
         }
 
+        // Xử lý sự kiện hủy
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

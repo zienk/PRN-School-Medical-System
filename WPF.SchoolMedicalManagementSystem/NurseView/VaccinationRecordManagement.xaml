@@ -203,11 +203,11 @@
                          Style="{StaticResource ModernTextBox}"
                          Width="250" 
                          KeyUp="TxtSearch_KeyUp"/>
-                <Button Content="🔍" 
+                <Button Content="Tìm" 
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
                         Click="SearchButton_Click"
-                        Width="48"/>
+                        Width="60"/>
                 
             </StackPanel>
 
@@ -271,7 +271,7 @@
                            Foreground="#333333"/>
             </StatusBarItem>
             <StatusBarItem>
-                <TextBlock Text="💡 Mẹo: Double-click vào bản ghi để xem chi tiết" 
+                <TextBlock Text="Mẹo: Double-click vào bản ghi để xem chi tiết" 
                            FontSize="11" 
                            Foreground="#007BFF" 
                            FontStyle="Italic"

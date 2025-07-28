@@ -18,9 +18,7 @@ using BusinessObjects.Entities;
 
 namespace WPF.SchoolMedicalManagementSystem.ManagerView
 {
-    /// <summary>
-    /// Interaction logic for UserManagement.xaml
-    /// </summary>
+    // Giao diện quản lý người dùng
     public partial class UserManagement : Window
     {
         private readonly IUserService _userService;
@@ -33,12 +31,14 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             UpdateRecordCount();
         }
 
+        // Tải dữ liệu người dùng vào DataGrid
         private void LoadUserData()
         {
             dgUsers.ItemsSource = null;
             dgUsers.ItemsSource = _userService.GetAllUsers();
         }
 
+        // Xử lý sự kiện tìm kiếm
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchText = SearchTextBox.Text.Trim();
@@ -52,6 +52,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             }
         }
 
+        // Xử lý sự kiện thêm người dùng mới
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -77,12 +78,14 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             }
         }
 
+        // Cập nhật số lượng bản ghi
         private void UpdateRecordCount()
         {
             var userCount = dgUsers.Items.Count;
             RecordCountLabel.Text = $"Tổng: {userCount} người dùng";
         }
 
+        // Xử lý sự kiện sửa người dùng
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -117,6 +120,7 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             }
         }
 
+        // Xử lý sự kiện xóa người dùng
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedUser = dgUsers.SelectedItem as User;
@@ -148,11 +152,13 @@ namespace WPF.SchoolMedicalManagementSystem.ManagerView
             }
         }
 
+        // Xử lý sự kiện nhấn phím trong ô tìm kiếm
         private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-       
+            // Có thể thêm tìm kiếm tự động khi gõ
         }
 
+        // Quay lại dashboard
         private void BackToDashboard_Click(object sender, RoutedEventArgs e)
         {
             ManagerDashboard managerDashboard = new ManagerDashboard();

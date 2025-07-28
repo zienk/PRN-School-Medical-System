@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ParentView"
         mc:Ignorable="d"
-        Title="Parent Dashboard - School Medical System" Height="750" Width="1300"
+        Title="Bảng Điều Khiển Phụ Huynh - Hệ Thống Y Tế Học Đường" Height="750" Width="1300"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="White">
@@ -147,43 +147,39 @@
             <StackPanel Orientation="Vertical" Margin="25">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,25,0,40">
-                    <TextBlock Text="👨‍👩‍👧‍👦" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,12"/>
-                    <TextBlock Text="Parent Portal" 
+                    <TextBlock Text="Cổng Phụ Huynh" 
                                FontSize="20" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
                                HorizontalAlignment="Center" />
-                    <TextBlock Text="School Medical System" 
+                    <TextBlock Text="Hệ Thống Y Tế Học Đường" 
                                FontSize="14" 
                                Foreground="#5F6368" 
                                HorizontalAlignment="Center" />
                 </StackPanel>
 
                 <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
+                <TextBlock Text="ĐIỀU HƯỚNG" 
                            FontSize="12" 
                            FontWeight="SemiBold" 
                            Foreground="#9AA0A6" 
                            Margin="20,0,0,20" />
 
                 <Button x:Name="btnHealthRecord" 
-                        Content="🎓 Student Info" 
+                        Content="Thông Tin Học Sinh" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnHealthRecord_Click" />
 
-
-
-
                 <Button x:Name="btnHealthCheckups" 
-                        Content="🩺 Health Checkups" 
+                        Content="Khám Sức Khỏe" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnHealthCheckups_Click"/>
 
                 <Button x:Name="btnVaccinations" 
-                        Content="💉 Vaccinations" 
+                        Content="Tiêm Chủng" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnVaccinations_Click"/>
 
                 <Button x:Name="btnIncidents" 
-                        Content="🚨 Medical Incidents" 
+                        Content="Sự Cố Y Tế" 
                         Style="{StaticResource ParentSidebarButtonStyle}" Click="btnIncidents_Click"/>
             </StackPanel>
         </Border>
@@ -198,8 +194,8 @@
 
             <!-- Header Section -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="My Children's Health" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="Monitor your children's health records and stay updated on their medical care." 
+                <TextBlock Text="Sức Khỏe Con Em" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Theo dõi hồ sơ sức khỏe của con em và cập nhật thông tin chăm sóc y tế." 
                            Style="{StaticResource WelcomeStyle}" />
             </StackPanel>
 
@@ -220,11 +216,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="👧👦" FontSize="28" HorizontalAlignment="Center" Margin="0,0,0,12"/>
                         <TextBlock x:Name="txtLinkedStudents" 
                                    Text="{Binding LinkedStudents, FallbackValue=2}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="My Children" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Con Em" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
 
@@ -237,11 +232,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="🩺" FontSize="28" HorizontalAlignment="Center" Margin="0,0,0,12"/>
                         <TextBlock x:Name="txtHealthCheckups" 
                                    Text="{Binding HealthCheckupsAttended, FallbackValue=12}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Health Checkups" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Khám Sức Khỏe" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
 
@@ -254,11 +248,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="💉" FontSize="28" HorizontalAlignment="Center" Margin="0,0,0,12"/>
                         <TextBlock x:Name="txtVaccinations" 
                                    Text="{Binding VaccinationsCompleted, FallbackValue=18}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Vaccinations" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Tiêm Chủng" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
             </Grid>
@@ -273,7 +266,7 @@
                 <!-- My Children Section -->
                 <Border Grid.Column="0" Style="{StaticResource ModernCardStyle}" Margin="0,0,15,0">
                     <StackPanel>
-                        <TextBlock Text="My Children" 
+                        <TextBlock Text="Con Em" 
                                    FontSize="22" 
                                    FontWeight="SemiBold" 
                                    Foreground="#202124" 
@@ -289,17 +282,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Column="0" Background="#FFE0B2" CornerRadius="20" Width="40" Height="40" Margin="0,0,15,0">
-                                    <TextBlock Text="👧" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="HS" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
 
                                 <StackPanel Grid.Column="1">
-                                    <TextBlock Text="Emma Johnson" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
-                                    <TextBlock Text="Grade 5 • Age 10" FontSize="12" Foreground="#5F6368"/>
+                                    <TextBlock Text="Nguyễn Thị Lan" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
+                                    <TextBlock Text="Lớp 5A • 10 tuổi" FontSize="12" Foreground="#5F6368"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                                     <Ellipse Width="8" Height="8" Fill="#4CAF50" Margin="0,0,5,0"/>
-                                    <TextBlock Text="Healthy" FontSize="12" Foreground="#4CAF50" FontWeight="Medium"/>
+                                    <TextBlock Text="Khỏe mạnh" FontSize="12" Foreground="#4CAF50" FontWeight="Medium"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
@@ -314,17 +307,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Column="0" Background="#E1F5FE" CornerRadius="20" Width="40" Height="40" Margin="0,0,15,0">
-                                    <TextBlock Text="👦" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="HS" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
 
                                 <StackPanel Grid.Column="1">
-                                    <TextBlock Text="Michael Johnson" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
-                                    <TextBlock Text="Grade 3 • Age 8" FontSize="12" Foreground="#5F6368"/>
+                                    <TextBlock Text="Nguyễn Văn Nam" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
+                                    <TextBlock Text="Lớp 3B • 8 tuổi" FontSize="12" Foreground="#5F6368"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                                     <Ellipse Width="8" Height="8" Fill="#4CAF50" Margin="0,0,5,0"/>
-                                    <TextBlock Text="Healthy" FontSize="12" Foreground="#4CAF50" FontWeight="Medium"/>
+                                    <TextBlock Text="Khỏe mạnh" FontSize="12" Foreground="#4CAF50" FontWeight="Medium"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
@@ -334,7 +327,7 @@
                 <!-- Recent Updates Section -->
                 <Border Grid.Column="1" Style="{StaticResource ModernCardStyle}" Margin="15,0,0,0">
                     <StackPanel>
-                        <TextBlock Text="📢 Recent Updates" 
+                        <TextBlock Text="Cập Nhật Gần Đây" 
                                    FontSize="22" 
                                    FontWeight="SemiBold" 
                                    Foreground="#202124" 
@@ -344,14 +337,13 @@
                         <Border Background="#E8F5E8" CornerRadius="10" Padding="15" Margin="0,0,0,15">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                    <TextBlock Text="✅" FontSize="14" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Vaccination Complete" FontSize="14" FontWeight="SemiBold" Foreground="#2E7D32"/>
+                                    <TextBlock Text="Tiêm Chủng Hoàn Thành" FontSize="14" FontWeight="SemiBold" Foreground="#2E7D32"/>
                                 </StackPanel>
-                                <TextBlock Text="Emma completed her annual flu vaccination." 
+                                <TextBlock Text="Lan đã hoàn thành tiêm vaccine cúm hàng năm." 
                                            FontSize="12" 
                                            Foreground="#5F6368" 
                                            TextWrapping="Wrap"/>
-                                <TextBlock Text="2 days ago" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
+                                <TextBlock Text="2 ngày trước" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
                             </StackPanel>
                         </Border>
 
@@ -359,14 +351,13 @@
                         <Border Background="#E3F2FD" CornerRadius="10" Padding="15" Margin="0,0,0,15">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                    <TextBlock Text="🩺" FontSize="14" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Health Checkup Scheduled" FontSize="14" FontWeight="SemiBold" Foreground="#1565C0"/>
+                                    <TextBlock Text="Lịch Khám Sức Khỏe" FontSize="14" FontWeight="SemiBold" Foreground="#1565C0"/>
                                 </StackPanel>
-                                <TextBlock Text="Michael's annual health checkup is scheduled for next week." 
+                                <TextBlock Text="Khám sức khỏe định kỳ hàng năm của Nam được lên lịch vào tuần tới." 
                                            FontSize="12" 
                                            Foreground="#5F6368" 
                                            TextWrapping="Wrap"/>
-                                <TextBlock Text="5 days ago" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
+                                <TextBlock Text="5 ngày trước" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
                             </StackPanel>
                         </Border>
 
@@ -374,14 +365,13 @@
                         <Border Background="#FFF3E0" CornerRadius="10" Padding="15">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                    <TextBlock Text="📋" FontSize="14" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Health Record Updated" FontSize="14" FontWeight="SemiBold" Foreground="#E65100"/>
+                                    <TextBlock Text="Cập Nhật Hồ Sơ Sức Khỏe" FontSize="14" FontWeight="SemiBold" Foreground="#E65100"/>
                                 </StackPanel>
-                                <TextBlock Text="New allergy information added to Emma's health record." 
+                                <TextBlock Text="Thông tin dị ứng mới đã được thêm vào hồ sơ sức khỏe của Lan." 
                                            FontSize="12" 
                                            Foreground="#5F6368" 
                                            TextWrapping="Wrap"/>
-                                <TextBlock Text="1 week ago" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
+                                <TextBlock Text="1 tuần trước" FontSize="11" Foreground="#9AA0A6" Margin="0,5,0,0"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>

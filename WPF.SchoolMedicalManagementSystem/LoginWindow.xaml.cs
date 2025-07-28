@@ -30,14 +30,14 @@ namespace WPF.SchoolMedicalManagementSystem
     {
         private readonly IUserService _userService;
 
-        // Constants for Role IDs
+        // Hằng số cho ID vai trò
         private const int ADMIN_ROLE_ID = 1;
         private const int NURSE_ROLE_ID = 2;
         private const int PARENT_ROLE_ID = 3;
 
-        // Constants for Message Box titles
-        private const string LOGIN_SUCCESS_TITLE = "Login Successful";
-        private const string LOGIN_FAILED_TITLE = "Login Failed";
+        // Hằng số cho tiêu đề Message Box
+        private const string LOGIN_SUCCESS_TITLE = "Đăng Nhập Thành Công";
+        private const string LOGIN_FAILED_TITLE = "Đăng Nhập Thất Bại";
 
         public LoginWindow()
         {
@@ -76,7 +76,7 @@ namespace WPF.SchoolMedicalManagementSystem
                     
                     if (user != null)
                     {
-                        string welcomeMessage = $"Welcome {user.FullName} with {user.Role.RoleName}";
+                        string welcomeMessage = $"Chào mừng {user.FullName} với vai trò {user.Role.RoleName}";
 
                         // Lưu thông tin đăng nhập nếu người dùng chọn "Remember me"
                         SaveLoginInfo(user, chkRememberMe.IsChecked.Value);
@@ -87,14 +87,14 @@ namespace WPF.SchoolMedicalManagementSystem
                                 ManagerDashboard managerDashboard = new ManagerDashboard(user);
                                 managerDashboard.Show();
                                 this.Close();
-                                MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                                MessageBox.Show(welcomeMessage, "Đăng Nhập Thành Công", MessageBoxButton.OK, MessageBoxImage.Information);
                                 break;
 
                             case NURSE_ROLE_ID:
                                 NurseDashboard nurseDashboard = new NurseDashboard(user);
                                 nurseDashboard.Show();
                                 this.Close();
-                                MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                                MessageBox.Show(welcomeMessage, "Đăng Nhập Thành Công", MessageBoxButton.OK, MessageBoxImage.Information);
                                 break;
 
                             case PARENT_ROLE_ID:
@@ -112,28 +112,28 @@ namespace WPF.SchoolMedicalManagementSystem
                                     ParentDashboard parentDashboard = new ParentDashboard(user);
                                     parentDashboard.Show();
                                     this.Close();
-                                    MessageBox.Show(welcomeMessage, LOGIN_SUCCESS_TITLE, MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show(welcomeMessage, "Đăng Nhập Thành Công", MessageBoxButton.OK, MessageBoxImage.Information);
                                 }
                                 break;
 
                             default:
-                                MessageBox.Show("Unknown role type.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("Loại vai trò không xác định.", "Đăng Nhập Thất Bại", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 break;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Mật khẩu không chính xác.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Mật khẩu không chính xác.", "Đăng Nhập Thất Bại", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Tài khoản không tồn tại.", LOGIN_FAILED_TITLE, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Tài khoản không tồn tại.", "Đăng Nhập Thất Bại", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred at login: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Đã xảy ra lỗi khi đăng nhập: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

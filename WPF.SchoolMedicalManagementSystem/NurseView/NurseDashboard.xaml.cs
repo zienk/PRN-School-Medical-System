@@ -15,31 +15,32 @@ using System.Windows.Shapes;
 
 namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
-    /// <summary>
-    /// Interaction logic for NurseDashboard.xaml
-    /// </summary>
+    // Bảng điều khiển chính cho y tá
     public partial class NurseDashboard : Window
     {
         private User currentUser;
+        
         public NurseDashboard(User user)
         {
             InitializeComponent();
             currentUser = user;
             
-            // Initialize UI values
+            // Khởi tạo giá trị giao diện
             if (currentUser != null)
             {
-                // Set welcome message if needed
+                // Có thể thiết lập thông báo chào mừng nếu cần
             }
             
             LoadData();
         }
         
+        // Tải dữ liệu dashboard
         private void LoadData()
         {
-            // Load dashboard statistics if needed
+            // Tải thống kê dashboard nếu cần
         }
 
+        // Xử lý sự kiện quản lý đợt tiêm chủng
         private void btnManageVaccinations_Click(object sender, RoutedEventArgs e)
         {
             var vaccinationCampaignManagement = new VaccinationCampaignManagement(currentUser);
@@ -47,6 +48,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             this.Close();
         }
 
+        // Xử lý sự kiện quản lý sự cố y tế
         private void btnManageIncidents_Click(object sender, RoutedEventArgs e)
         {
             var medicalEventWindow = new MedicalEvent(currentUser);
@@ -54,12 +56,15 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             this.Close();
         }
 
+        // Xử lý sự kiện quản lý hồ sơ sức khỏe
         private void btnManageHealthRecords_Click(object sender, RoutedEventArgs e)
         {
             var healthRecordsWindow = new StudentRecordManagement(currentUser);
             healthRecordsWindow.Show();
             this.Close();
         }
+        
+        // Xử lý sự kiện quản lý khám sức khỏe
         private void btnManageHealthCheckups_Click(object sender, RoutedEventArgs e)
         {
             var healthCheckupWindow = new HealthCheckupManagement(currentUser);
@@ -67,6 +72,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             this.Close();
         }
 
+        // Xử lý sự kiện quản lý khám sức khỏe (phương thức thay thế)
         private void btnManageHealthCheckups_Click_1(object sender, RoutedEventArgs e)
         {
             var healthCheckupWindow = new HealthCheckupManagement(currentUser);
@@ -74,6 +80,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             this.Close();
         }
 
+        // Xử lý sự kiện quản lý báo cáo tiêm chủng
         private void btnManageVaccinationRecords_Click(object sender, RoutedEventArgs e)
         {
             var vaccinationRecordsWindow = new VaccinationRecordManagement(currentUser);
