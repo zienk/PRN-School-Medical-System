@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem"
         mc:Ignorable="d"
-        Title="Thông Tin Người Dùng" SizeToContent="WidthAndHeight"
+        Title="Thông Tin Người Dùng" SizeToContent="Height" Width="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
 
