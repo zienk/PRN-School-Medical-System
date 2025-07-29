@@ -106,11 +106,11 @@
                          Padding="10"
                          FontSize="14"
                          KeyUp="TxtSearch_KeyUp"/>
-                <Button Content="🔍" 
+                <Button Content="Tìm" 
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
                         Click="SearchButton_Click"
-                        Width="48"/>
+                        Width="60"/>
             </StackPanel>
 
             <!-- Action Buttons -->
@@ -145,7 +145,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding CampaignId}" Width="60"/>
                     <DataGridTextColumn Header="Tên vaccine" Binding="{Binding VaccineName}" Width="200"/>
-                    <DataGridTextColumn Header="Ngày thực hiện" Binding="{Binding CampaignDate, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
+                    <DataGridTextColumn Header="Ngày thực hiện" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
                     <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="*"/>
                     <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status.StatusName}" Width="100"/>
                     <DataGridTextColumn Header="Người tạo" Binding="{Binding CreatedByNavigation.FullName}" Width="150"/>
@@ -191,7 +191,7 @@
                            Foreground="#333333"/>
             </StatusBarItem>
             <StatusBarItem>
-                <TextBlock Text="💡 Mẹo: Double-click vào đợt tiêm để xem danh sách học sinh" 
+                <TextBlock Text="Mẹo: Double-click vào đợt tiêm để xem danh sách học sinh" 
                            FontSize="11" 
                            Foreground="#007BFF" 
                            FontStyle="Italic"

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Chiến dịch tiêm chủng" SizeToContent="Height" Width="600"
+        Title="Chiến dịch tiêm chủng" SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
+        ResizeMode="NoResize"
         Background="White">
     <Window.Resources>
         <!-- Style cho Button -->

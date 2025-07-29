@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Đăng Nhập - Hệ Thống Quản Lý Y Tế Học Đường" 
-        Height="600" Width="1000"
+        Height="700" Width="1000"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Background="White">

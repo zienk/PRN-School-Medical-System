@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ParentView"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Student Information - School Medical System" Height="750" Width="1300"
+        Title="Thông Tin Học Sinh - Hệ Thống Y Tế Học Đường" Height="750" Width="1300"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="White">
@@ -257,58 +257,57 @@
             <StackPanel Orientation="Vertical" Margin="25">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,25,0,40">
-                    <TextBlock Text="👨‍👩‍👧‍👦" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,12"/>
-                    <TextBlock Text="Parent Portal" 
+                    <TextBlock Text="Cổng Phụ Huynh" 
                                FontSize="20" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
                                HorizontalAlignment="Center" />
-                    <TextBlock Text="School Medical System" 
+                    <TextBlock Text="Hệ Thống Y Tế Học Đường" 
                                FontSize="14" 
                                Foreground="#5F6368" 
                                HorizontalAlignment="Center" />
                 </StackPanel>
 
                 <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
+                <TextBlock Text="ĐIỀU HƯỚNG" 
                            FontSize="12" 
                            FontWeight="SemiBold" 
                            Foreground="#9AA0A6" 
                            Margin="20,0,0,20" />
 
                 <Button x:Name="btnDashboard" 
-                        Content="🏠 Dashboard" 
+                        Content="Bảng Điều Khiển" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Click="btnDashboard_Click" />
 
                 <Button x:Name="btnHealthRecord" 
-                        Content="📋 Health Record" 
+                        Content="Hồ Sơ Sức Khỏe" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                          />
 
                 <Button x:Name="btnAccountInfo" 
-                        Content="👤 Account Info" 
+                        Content="Thông Tin Tài Khoản" 
                         Style="{StaticResource ParentSidebarButtonStyle}"/>
 
                 <Button x:Name="btnStudentInfo" 
-                        Content="🎓 Student Info" 
+                        Content="Thông Tin Học Sinh" 
                         Style="{StaticResource ParentSidebarButtonStyle}"
                         Tag="Selected"
                         Background="#FEF7E0"
                         Foreground="#F57C00"/>
 
                 <Button x:Name="btnHealthCheckups" 
-                        Content="🩺 Health Checkups" 
+                        Content="Khám Sức Khỏe" 
                         Style="{StaticResource ParentSidebarButtonStyle}" 
                         />
 
                 <Button x:Name="btnVaccinations" 
-                        Content="💉 Vaccinations" 
+                        Content="Tiêm Chủng" 
                         Style="{StaticResource ParentSidebarButtonStyle}" 
                         />
 
                 <Button x:Name="btnIncidents" 
-                        Content="🚨 Medical Incidents" 
+                        Content="Sự Cố Y Tế" 
                         Style="{StaticResource ParentSidebarButtonStyle}" 
                        />
             </StackPanel>
@@ -324,8 +323,8 @@
 
             <!-- Header Section -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="Student Information" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="View and manage detailed information about your children." 
+                <TextBlock Text="Thông Tin Học Sinh" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Xem và quản lý thông tin chi tiết về con em của bạn." 
                            Style="{StaticResource WelcomeStyle}" />
             </StackPanel>
 
@@ -369,17 +368,17 @@
                             <!-- Student Avatar -->
                             <Border Grid.Column="0" Background="White" CornerRadius="35" 
                                     Width="70" Height="70" Margin="0,0,25,0">
-                                <TextBlock x:Name="txtStudentAvatar" Text="👧" FontSize="35" 
+                                <TextBlock x:Name="txtStudentAvatar" Text="HS" FontSize="20" FontWeight="Bold"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
 
                             <!-- Student Basic Info -->
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock x:Name="txtStudentName" Text="Emma Johnson" 
+                                <TextBlock x:Name="txtStudentName" Text="Nguyễn Thị Lan" 
                                            FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,5"/>
-                                <TextBlock x:Name="txtStudentGradeAge" Text="Grade 5 • Age 10 years old" 
+                                <TextBlock x:Name="txtStudentGradeAge" Text="Lớp 5 • 10 tuổi" 
                                            FontSize="16" Foreground="White" Opacity="0.9" Margin="0,0,0,5"/>
-                                <TextBlock x:Name="txtStudentClass" Text="Class 5A • Student ID: ST001234" 
+                                <TextBlock x:Name="txtStudentClass" Text="Lớp 5A • Mã HS: HS001234" 
                                            FontSize="14" Foreground="White" Opacity="0.8"/>
                             </StackPanel>
 
@@ -388,7 +387,7 @@
                                 <Border Background="White" CornerRadius="20" Padding="15,8">
                                     <StackPanel Orientation="Horizontal">
                                         <Ellipse Width="10" Height="10" Fill="#4CAF50" Margin="0,0,8,0"/>
-                                        <TextBlock x:Name="txtHealthStatus" Text="Healthy" 
+                                        <TextBlock x:Name="txtHealthStatus" Text="Khỏe mạnh" 
                                                    FontSize="14" FontWeight="SemiBold" Foreground="#4CAF50"/>
                                     </StackPanel>
                                 </Border>
@@ -399,7 +398,7 @@
                     <!-- Combined Student and Health Record Information Card -->
                     <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource ModernCardStyle}" Margin="0">
                         <StackPanel>
-                            <TextBlock Text="📋 Student Information" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="Thông Tin Học Sinh" Style="{StaticResource SectionTitleStyle}" />
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -418,59 +417,59 @@
 
                                 <!-- Full Name -->
                                 <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,0,15,0">
-                                    <TextBlock Text="Full Name" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Họ và Tên" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtFullName" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
 
                                 <!-- Gender -->
                                 <StackPanel Grid.Column="1" Grid.Row="0" Margin="15,0,0,0">
-                                    <TextBlock Text="Gender" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Giới Tính" Style="{StaticResource InfoLabelStyle}" />
                                     <ComboBox x:Name="cbGender" Style="{StaticResource ModernComboBoxStyle}">
-                                        <ComboBoxItem Content="Female" />
-                                        <ComboBoxItem Content="Male" />
-                                        <ComboBoxItem Content="Other" />
+                                        <ComboBoxItem Content="Nữ" />
+                                        <ComboBoxItem Content="Nam" />
+                                        <ComboBoxItem Content="Khác" />
                                     </ComboBox>
                                 </StackPanel>
 
                                 <!-- Date of Birth -->
                                 <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,15,0">
-                                    <TextBlock Text="Date of Birth" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Ngày Sinh" Style="{StaticResource InfoLabelStyle}" />
                                     <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource ModernDatePickerStyle}" />
                                 </StackPanel>
 
                                 <!-- Class -->
                                 <StackPanel Grid.Column="1" Grid.Row="1" Margin="15,0,0,0">
-                                    <TextBlock Text="Class" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Lớp" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtClass" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
 
                                 <!-- Height -->
                                 <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,10,15,0">
-                                    <TextBlock Text="Height (cm)" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Chiều Cao (cm)" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtHeight" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
 
                                 <!-- Weight -->
                                 <StackPanel Grid.Column="1" Grid.Row="2" Margin="15,10,0,0">
-                                    <TextBlock Text="Weight (kg)" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Cân Nặng (kg)" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtWeight" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
 
                                 <!-- Chronic Diseases -->
                                 <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,10,0,0">
-                                    <TextBlock Text="Chronic Diseases" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Bệnh Mãn Tính" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtChronicDiseases" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
                                 
                                 <!-- Allergies -->
                                 <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,10,0,0">
-                                    <TextBlock Text="Allergies" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Dị Ứng" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtAllergies" Style="{StaticResource ModernTextBoxStyle}" />
                                 </StackPanel>
 
                                 <!-- Notes -->
                                 <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,10,0,20">
-                                    <TextBlock Text="Notes" Style="{StaticResource InfoLabelStyle}" />
+                                    <TextBlock Text="Ghi Chú" Style="{StaticResource InfoLabelStyle}" />
                                     <TextBox x:Name="txtNotes" Style="{StaticResource ModernTextBoxStyle}" TextWrapping="Wrap" Height="100"/>
                                 </StackPanel>
                             </Grid>

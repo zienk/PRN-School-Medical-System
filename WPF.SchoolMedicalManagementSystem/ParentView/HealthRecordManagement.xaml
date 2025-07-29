@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ParentView"
         mc:Ignorable="d"
-        Title="Health Record Management - School Medical System" Height="800" Width="1400"
+        Title="Quản Lý Hồ Sơ Sức Khỏe - Hệ Thống Y Tế Học Đường" Height="800" Width="1400"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="White">
@@ -190,14 +190,14 @@
 
             <!-- Tiêu đề và mô tả -->
             <StackPanel Grid.Column="0" Margin="0,39,0,-39">
-                <TextBlock Text="📋 Health Record Management" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="Manage and update your children's health records." 
+                <TextBlock Text="Quản Lý Hồ Sơ Sức Khỏe" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Quản lý và cập nhật hồ sơ sức khỏe của con em bạn." 
                    Style="{StaticResource SubtitleStyle}" />
             </StackPanel>
 
             <!-- Nút Back căn phải -->
             <Button x:Name="btnBack" 
-            Content="← Back to Dashboard" 
+            Content="Quay Lại Dashboard" 
             Style="{StaticResource SecondaryButtonStyle}"
             Margin="0,83,0,0"
             VerticalAlignment="Top"
@@ -217,7 +217,7 @@
             <!-- Student Selection Panel -->
             <Border Grid.Column="0" Style="{StaticResource ModernCardStyle}" Margin="5,-29,10,0">
                 <StackPanel>
-                    <TextBlock Text="👨‍👩‍👧‍👦 Select Student" Style="{StaticResource SectionHeaderStyle}" />
+                    <TextBlock Text="Chọn Học Sinh" Style="{StaticResource SectionHeaderStyle}" />
 
                     <!-- Student List -->
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="900">
@@ -250,7 +250,7 @@
                                             <StackPanel Grid.Column="1">
                                                 <TextBlock Text="{Binding FullName}" FontSize="16" FontWeight="SemiBold" Foreground="#202124"/>
                                                 <TextBlock Text="{Binding Class}" FontSize="12" Foreground="#5F6368"/>
-                                                <TextBlock Text="{Binding StudentId, StringFormat='Student ID: {0}'}" FontSize="11" Foreground="#9AA0A6"/>
+                                                <TextBlock Text="{Binding StudentId, StringFormat='Mã HS: {0}'}" FontSize="11" Foreground="#9AA0A6"/>
                                             </StackPanel>
 
 
@@ -269,7 +269,7 @@
                 <StackPanel>
                     <!-- Selected Student Info -->
                     <StackPanel x:Name="SelectedStudentInfo" Visibility="Collapsed">
-                        <TextBlock Text="🩺 Health Record" Style="{StaticResource SectionHeaderStyle}" />
+                        <TextBlock Text="Hồ Sơ Sức Khỏe" Style="{StaticResource SectionHeaderStyle}" />
 
                         <!-- Student Info Header -->
                         <Border Background="#F8F9FA" CornerRadius="12" Padding="20" Margin="0,0,0,25">
@@ -285,8 +285,8 @@
                                 </Border>
 
                                 <StackPanel Grid.Column="1">
-                                    <TextBlock x:Name="SelectedStudentName" Text="Emma Johnson" FontSize="18" FontWeight="SemiBold" Foreground="#202124"/>
-                                    <TextBlock x:Name="SelectedStudentInfo_Details" Text="Student ID: ST001" FontSize="14" Foreground="#5F6368"/>
+                                    <TextBlock x:Name="SelectedStudentName" Text="Nguyễn Thị Lan" FontSize="18" FontWeight="SemiBold" Foreground="#202124"/>
+                                    <TextBlock x:Name="SelectedStudentInfo_Details" Text="Mã HS: HS001" FontSize="14" Foreground="#5F6368"/>
                                 </StackPanel>
 
 
@@ -297,7 +297,7 @@
                         <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="700">
                             <StackPanel>
                                 <!-- Physical Measurements -->
-                                <TextBlock Text="📏 Physical Measurements" FontSize="16" FontWeight="SemiBold" Foreground="#202124" Margin="0,0,0,15"/>
+                                <TextBlock Text="Chỉ Số Cơ Thể" FontSize="16" FontWeight="SemiBold" Foreground="#202124" Margin="0,0,0,15"/>
 
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
@@ -307,43 +307,43 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel  Grid.Column="0">
-                                        <TextBlock Text="Height (cm)" Style="{StaticResource FormLabelStyle}"/>
+                                        <TextBlock Text="Chiều Cao (cm)" Style="{StaticResource FormLabelStyle}"/>
                                         <TextBox x:Name="txtHeight" Height="50" Style="{StaticResource FormInputStyle}" />
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="2">
-                                        <TextBlock Text="Weight (kg)" Foreground="#202124" Style="{StaticResource FormLabelStyle}"/>
+                                        <TextBlock Text="Cân Nặng (kg)" Foreground="#202124" Style="{StaticResource FormLabelStyle}"/>
                                         <TextBox x:Name="txtWeight" Height="50" Foreground="#202124" Style="{StaticResource FormInputStyle}" />
                                     </StackPanel>
                                 </Grid>
 
                                 <!-- Medical Information -->
-                                <TextBlock Text="🏥 Medical Information" FontSize="16" FontWeight="SemiBold" Foreground="#202124" Margin="0,0,0,15"/>
+                                <TextBlock Text="Thông Tin Y Tế" FontSize="16" FontWeight="SemiBold" Foreground="#202124" Margin="0,0,0,15"/>
 
                                 <StackPanel Margin="0,0,0,20">
-                                    <TextBlock Text="Chronic Diseases" Style="{StaticResource FormLabelStyle}"/>
+                                    <TextBlock Text="Bệnh Mãn Tính" Style="{StaticResource FormLabelStyle}"/>
                                     <TextBox x:Name="txtChronicDiseases" Style="{StaticResource FormTextAreaStyle}" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,0,20">
-                                    <TextBlock Text="Allergies" Style="{StaticResource FormLabelStyle}"/>
+                                    <TextBlock Text="Dị Ứng" Style="{StaticResource FormLabelStyle}"/>
                                     <TextBox x:Name="txtAllergies" Style="{StaticResource FormTextAreaStyle}" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,0,30">
-                                    <TextBlock Text="Additional Notes" Style="{StaticResource FormLabelStyle}"/>
+                                    <TextBlock Text="Ghi Chú Bổ Sung" Style="{StaticResource FormLabelStyle}"/>
                                     <TextBox x:Name="txtNotes" Style="{StaticResource FormTextAreaStyle}" />
                                 </StackPanel>
 
                                 <!-- Action Buttons -->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Button x:Name="btnClear" 
-                                            Content="Clear Form" 
+                                            Content="Xóa Form" 
                                             Style="{StaticResource SecondaryButtonStyle}"
                                             Margin="0,0,15,0"
                                             Click="btnClear_Click" />
                                     <Button x:Name="btnSave" 
-                                            Content="Save Record" 
+                                            Content="Lưu Hồ Sơ" 
                                             Style="{StaticResource PrimaryButtonStyle}"
                                             Click="btnSave_Click" />
                                 </StackPanel>
@@ -353,8 +353,7 @@
 
                     <!-- No Student Selected Message -->
                     <StackPanel x:Name="NoStudentSelectedMessage" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="👈" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,20" Opacity="0.3"/>
-                        <TextBlock Text="Select a student to view or edit their health record" 
+                        <TextBlock Text="Chọn một học sinh để xem hoặc chỉnh sửa hồ sơ sức khỏe của họ" 
                                    FontSize="16" 
                                    Foreground="#5F6368" 
                                    HorizontalAlignment="Center" 

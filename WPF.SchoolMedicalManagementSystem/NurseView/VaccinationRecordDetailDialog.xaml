@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Chi tiết bản ghi tiêm chủng" SizeToContent="Height" Width="700"
+        Title="Chi tiết bản ghi tiêm chủng" SizeToContent="Height" Width="600"
         WindowStartupLocation="CenterScreen"
         Background="White"
         ResizeMode="NoResize">
@@ -114,7 +114,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel>
                     <!-- Thông tin bản ghi -->
-                    <TextBlock Text="📋 Thông tin bản ghi" Style="{StaticResource SectionHeaderStyle}"/>
+                    <TextBlock Text="Thông tin bản ghi" Style="{StaticResource SectionHeaderStyle}"/>
                     
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -141,7 +141,7 @@
                     </Grid>
 
                     <!-- Thông tin học sinh -->
-                    <TextBlock Text="👨‍🎓 Thông tin học sinh" Style="{StaticResource SectionHeaderStyle}"/>
+                    <TextBlock Text="Thông tin học sinh" Style="{StaticResource SectionHeaderStyle}"/>
                     
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -168,7 +168,7 @@
                     </Grid>
 
                     <!-- Thông tin chiến dịch -->
-                    <TextBlock Text="💉 Thông tin chiến dịch tiêm chủng" Style="{StaticResource SectionHeaderStyle}"/>
+                    <TextBlock Text="Thông tin chiến dịch tiêm chủng" Style="{StaticResource SectionHeaderStyle}"/>
                     
                     <StackPanel>
                         <Label Content="Tên chiến dịch:" Style="{StaticResource ModernLabel}"/>
@@ -202,7 +202,7 @@
                     </StackPanel>
 
                     <!-- Ghi chú -->
-                    <TextBlock Text="📝 Ghi chú" Style="{StaticResource SectionHeaderStyle}"/>
+                    <TextBlock Text="Ghi chú" Style="{StaticResource SectionHeaderStyle}"/>
                     
                     <StackPanel>
                         <TextBox x:Name="txtNotes" 
@@ -222,12 +222,12 @@
                     HorizontalAlignment="Center"
                     Margin="0,20,0,0">
             <Button x:Name="btnEdit"
-                    Content="✏️ Chỉnh sửa" 
+                    Content="Chỉnh sửa" 
                     Background="#FFC107" 
                     Style="{StaticResource ModernButton}"
                     Click="BtnEdit_Click"/>
             <Button x:Name="btnClose" 
-                    Content="❌ Đóng" 
+                    Content="Đóng" 
                     Background="#6C757D" 
                     Style="{StaticResource ModernButton}"
                     Click="BtnClose_Click"/>

@@ -133,7 +133,30 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
         {
+            ParentDashboard parentDashboard = new ParentDashboard(parentUser);
+            parentDashboard.Show();
+            this.Close();
+        }
 
+        private void btnHealthCheckups_Click(object sender, RoutedEventArgs e)
+        {
+            HealthCheckupResultManagement healthCheckupResultManagement = new HealthCheckupResultManagement(parentUser);
+            healthCheckupResultManagement.Show();
+            this.Close();
+        }
+
+        private void btnVaccinations_Click(object sender, RoutedEventArgs e)
+        {
+            VaccineResultManagement vaccineResultManagement = new VaccineResultManagement(parentUser);
+            vaccineResultManagement.Show();
+            this.Close();
+        }
+
+        private void btnIncidents_Click(object sender, RoutedEventArgs e)
+        {
+            MedicalIncidentsManagement medicalIncidentsManagement = new MedicalIncidentsManagement(parentUser);
+            medicalIncidentsManagement.Show();
+            this.Close();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)

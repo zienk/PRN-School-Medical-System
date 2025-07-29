@@ -165,11 +165,11 @@
                          FontSize="15"
                          Width="250"
                          KeyUp="SearchTextBox_KeyUp" Text=""/>
-                <Button Content="🔍" 
+                <Button Content="Tìm" 
                         Background="#17A2B8" 
                         Style="{StaticResource ModernButton}"
                         Click="SearchButton_Click"
-                        Width="48"/>
+                        Width="60"/>
             </StackPanel>
 
             <!-- Các nút thao tác -->

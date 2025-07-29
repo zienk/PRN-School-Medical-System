@@ -17,9 +17,7 @@ using Services.Interfaces;
 
 namespace WPF.SchoolMedicalManagementSystem.NurseView
 {
-    /// <summary>
-    /// Interaction logic for MedicalEvent.xaml
-    /// </summary>
+    // Giao diện quản lý sự kiện y tế
     public partial class MedicalEvent : Window
     {
         IIncidentService _incidentService;
@@ -32,6 +30,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             LoadData();
         }
 
+        // Tải dữ liệu sự kiện y tế
         public void LoadData()
         {
             _incidentService = new IncidentService();
@@ -39,6 +38,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             dgMedicalEvents.ItemsSource = _incidentService.GetAllIncidents();
         }
 
+        // Xử lý sự kiện thêm sự kiện y tế mới
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             var addWindow = new MedicalEventAddAndEdit();
@@ -48,6 +48,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             }
         }
 
+        // Xử lý sự kiện sửa sự kiện y tế
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             if (dgMedicalEvents.SelectedItem is Incident selectedIncident)
@@ -64,6 +65,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             }
         }
 
+        // Xử lý sự kiện xóa sự kiện y tế
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (dgMedicalEvents.SelectedItem is Incident selectedIncident)
@@ -84,16 +86,19 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             }
         }
 
+        // Xử lý sự kiện xuất Excel
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // Chức năng xuất Excel sẽ được triển khai sau
         }
 
+        // Xử lý sự kiện làm mới dữ liệu
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
         }
 
+        // Xử lý sự kiện tìm kiếm
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string keyword = SearchTextBox.Text.Trim();
@@ -103,7 +108,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
                 return;
             }
             var service = new IncidentService();
-            // Vì không có hàm search, filter tạm thời trên client
+            // Lọc dữ liệu theo từ khóa tìm kiếm
             var all = service.GetAllIncidents();
             var filtered = all.FindAll(i =>
                 (i.Student?.FullName != null && i.Student.FullName.ToLower().Contains(keyword.ToLower())) ||
@@ -117,6 +122,7 @@ namespace WPF.SchoolMedicalManagementSystem.NurseView
             RecordCountLabel.Text = $"Tổng: {filtered.Count} sự kiện";
         }
 
+        // Quay lại dashboard
         private void BackToDashboard_Click(object sender, RoutedEventArgs e)
         {
             NurseDashboard dashboard = new NurseDashboard(currentUser);

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ParentView"
         mc:Ignorable="d"
-        Title="Medical Incidents - School Medical System" Height="800" Width="1400"
+        Title="Sự Cố Y Tế - Hệ Thống Y Tế Học Đường" Height="800" Width="1400"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="White">
@@ -200,43 +200,41 @@
             <StackPanel Orientation="Vertical" Margin="20">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,20,0,40">
-                    <TextBlock Text="👨‍👩‍👧‍👦" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="Parent Portal" 
+                    <TextBlock Text="Cổng Phụ Huynh" 
                                FontSize="18" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
                                HorizontalAlignment="Center" />
-                    <TextBlock Text="School Medical System" 
+                    <TextBlock Text="Hệ Thống Y Tế Học Đường" 
                                FontSize="14" 
                                Foreground="#5F6368" 
                                HorizontalAlignment="Center" />
                 </StackPanel>
 
                 <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
+                <TextBlock Text="ĐIỀU HƯỚNG" 
                            FontSize="12" 
                            FontWeight="SemiBold" 
                            Foreground="#9AA0A6" 
                            Margin="20,0,0,15" />
                 <Button x:Name="btnParentDashboard" 
-                Content="🏠 Dashboard" 
+                Content="Bảng Điều Khiển" 
                 Style="{StaticResource SidebarButtonStyle}" Click="btnParentDashboard_Click" />
 
                 <Button x:Name="btnHealthRecord" 
-                        Content="🎓 Student Info" 
+                        Content="Thông Tin Học Sinh" 
                         Style="{StaticResource SidebarButtonStyle}" Click="btnHealthRecord_Click_1" />
 
-
                 <Button x:Name="btnHealthCheckups" 
-                        Content="🏥 Health Checkups" 
+                        Content="Khám Sức Khỏe" 
                         Style="{StaticResource SidebarButtonStyle}" Click="btnHealthCheckups_Click_1" />
 
                 <Button x:Name="btnVaccinations" 
-                        Content="💉 Vaccinations" 
+                        Content="Tiêm Chủng" 
                         Style="{StaticResource SidebarButtonStyle}" Click="btnVaccinations_Click_1" />
 
                 <Button x:Name="btnMedicalIncidents" 
-                        Content="🚨 Medical Incidents" 
+                        Content="Sự Cố Y Tế" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Background="#FEF7E0" 
                         Foreground="#F57C00" />
@@ -255,15 +253,15 @@
 
             <!-- Header Section -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="Medical Incidents" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="View and track medical incidents for your children." 
+                <TextBlock Text="Sự Cố Y Tế" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Xem và theo dõi các sự cố y tế của con em bạn." 
                            Style="{StaticResource SubtitleStyle}" />
             </StackPanel>
 
             <!-- Filter Section -->
             <Border Grid.Row="1" Style="{StaticResource ModernCardStyle}" Margin="0,0,0,20">
                 <StackPanel>
-                    <TextBlock Text="Filter Incidents" 
+                    <TextBlock Text="Lọc Sự Cố" 
                                FontSize="16" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
@@ -278,28 +276,28 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Margin="0,0,15,0">
-                            <TextBlock Text="Student" FontSize="14" FontWeight="Medium" Foreground="#5F6368" Margin="0,0,0,5"/>
+                            <TextBlock Text="Học Sinh" FontSize="14" FontWeight="Medium" Foreground="#5F6368" Margin="0,0,0,5"/>
                             <ComboBox x:Name="cmbStudentFilter" Height="35" FontSize="14" />
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Margin="0,0,15,0">
-                            <TextBlock Text="Severity" FontSize="14" FontWeight="Medium" Foreground="#5F6368" Margin="0,0,0,5"/>
+                            <TextBlock Text="Mức Độ" FontSize="14" FontWeight="Medium" Foreground="#5F6368" Margin="0,0,0,5"/>
                             <ComboBox x:Name="cmbSeverityFilter" Height="35" FontSize="14" />
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Margin="0,0,15,0">
-                            <TextBlock Text="Date Range" FontSize="14" FontWeight="Medium" Foreground="#5F6368" Margin="0,0,0,5"/>
+                            <TextBlock Text="Khoảng Thời Gian" FontSize="14" FontWeight="Medium" Foreground="#5F6368" Margin="0,0,0,5"/>
                             <DatePicker x:Name="dpDateFilter" Height="35" FontSize="14" />
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" VerticalAlignment="Bottom" Orientation="Horizontal">
                             <Button x:Name="btnApplyFilter" 
-                                    Content="Apply Filter" 
+                                    Content="Áp Dụng Lọc" 
                                     Style="{StaticResource ActionButtonStyle}" 
                                     Height="35" 
                                     Click="btnApplyFilter_Click" />
                             <Button x:Name="btnResetFilter"
-                                    Content="Reset Filter"
+                                    Content="Đặt Lại Lọc"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Height="35"
                                     Margin="8,0,0,0"
@@ -321,13 +319,13 @@
 
                     <!-- Header -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
-                        <TextBlock Text="Medical Incidents List" 
+                        <TextBlock Text="Danh Sách Sự Cố Y Tế" 
                                    FontSize="20" 
                                    FontWeight="SemiBold" 
                                    Foreground="#202124" 
                                    VerticalAlignment="Center" />
                         <TextBlock x:Name="txtRecordCount" 
-                                   Text="(0 records)" 
+                                   Text="(0 bản ghi)" 
                                    FontSize="14" 
                                    Foreground="#5F6368" 
                                    VerticalAlignment="Center" 
@@ -345,28 +343,27 @@
 
 
                             <!-- Student Name -->
-                            <DataGridTextColumn Header="Student" 
+                            <DataGridTextColumn Header="Học Sinh" 
                                                 Binding="{Binding Student.FullName}" 
                                                 Width="180" />
 
                             <!-- Incident Type -->
-                            <DataGridTextColumn Header="Mô tả ngắn" 
+                            <DataGridTextColumn Header="Loại Sự Cố" 
                                                 Binding="{Binding IncidentType.EventTypeName}" 
                                                 Width="150" />
 
                             <!-- Incident Date -->
-                            <DataGridTextColumn Header="Ngày" 
+                            <DataGridTextColumn Header="Ngày Xảy Ra" 
                                                 Binding="{Binding IncidentDate, StringFormat=dd/MM/yyyy}" 
                                                 Width="120" />
 
-
                             <!-- Reported By -->
-                            <DataGridTextColumn Header="Y tá tiếp nhận" 
+                            <DataGridTextColumn Header="Y Tá Tiếp Nhận" 
                                                 Binding="{Binding ReportedByNavigation.FullName}" 
                                                 Width="150" />
 
                             <!-- Severity -->
-                            <DataGridTemplateColumn Header="Mức độ" Width="120">
+                            <DataGridTemplateColumn Header="Mức Độ" Width="120">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Border x:Name="SeverityBorder" 
@@ -396,16 +393,16 @@
                             </DataGridTemplateColumn>
 
                             <!-- Location -->
-                            <DataGridTextColumn Header="Địa điểm" 
+                            <DataGridTextColumn Header="Địa Điểm" 
                                                 Binding="{Binding Location}" 
                                                 Width="*" />
 
                             <!-- Actions -->
-                            <DataGridTemplateColumn Header="Actions" Width="70">
+                            <DataGridTemplateColumn Header="Thao Tác" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <Button Content="Details" 
+                                            <Button Content="Chi Tiết" 
                                                     Style="{StaticResource ActionButtonStyle}" 
                                                     Background="#34A853" 
                                                     Click="btnIncidentDetails_Click" 
@@ -419,24 +416,24 @@
 
                     <!-- Footer with Pagination -->
                     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-                        <TextBlock Text="Page:" 
+                        <TextBlock Text="Trang:" 
                                    FontSize="14" 
                                    Foreground="#5F6368" 
                                    VerticalAlignment="Center" 
                                    Margin="0,0,10,0" />
                         <Button x:Name="btnPrevious" 
-                                Content="Previous" 
+                                Content="Trước" 
                                 Style="{StaticResource ActionButtonStyle}" 
                                 Background="#5F6368" 
                                 Click="btnPrevious_Click" />
                         <TextBlock x:Name="txtPageInfo" 
-                                   Text="1 of 1" 
+                                   Text="1 / 1" 
                                    FontSize="14" 
                                    Foreground="#202124" 
                                    VerticalAlignment="Center" 
                                    Margin="10,0,10,0" />
                         <Button x:Name="btnNext" 
-                                Content="Next" 
+                                Content="Sau" 
                                 Style="{StaticResource ActionButtonStyle}" 
                                 Background="#5F6368" 
                                 Click="btnNext_Click" />

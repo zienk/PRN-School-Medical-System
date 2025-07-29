@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.NurseView"
         mc:Ignorable="d"
-        Title="Nurse Dashboard - School Medical System" Height="700" Width="1200"
+        Title="Bảng Điều Khiển Y Tá - Hệ Thống Y Tế Học Đường" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="White">
@@ -131,48 +131,47 @@
             <StackPanel Orientation="Vertical" Margin="20">
                 <!-- Logo/Title Section -->
                 <StackPanel Margin="0,20,0,40">
-                    <TextBlock Text="🏥" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="Medical System" 
+                    <TextBlock Text="Hệ Thống Y Tế" 
                                FontSize="18" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
                                HorizontalAlignment="Center" />
-                    <TextBlock Text="Nurse Portal" 
+                    <TextBlock Text="Cổng Y Tá" 
                                FontSize="14" 
                                Foreground="#5F6368" 
                                HorizontalAlignment="Center" />
                 </StackPanel>
 
                 <!-- Navigation Section -->
-                <TextBlock Text="NAVIGATION" 
+                <TextBlock Text="ĐIỀU HƯỚNG" 
                            FontSize="12" 
                            FontWeight="SemiBold" 
                            Foreground="#9AA0A6" 
                            Margin="20,0,0,15" />
 
                 <Button x:Name="btnManageHealthCheckups" 
-                        Content="🩺 Health Checkups" 
+                        Content="Khám Sức Khỏe" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Background="#E8F0FE"
                         Foreground="#1A73E8" Click="btnManageHealthCheckups_Click_1" />
 
                 <Button x:Name="btnManageVaccinations" 
-                        Content="💉 Quản lý đợt tiêm" 
+                        Content="Quản Lý Đợt Tiêm" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageVaccinations_Click" />
 
                 <Button x:Name="btnManageVaccinationRecords" 
-                        Content="📝 Báo cáo tiêm chủng" 
+                        Content="Báo Cáo Tiêm Chủng" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageVaccinationRecords_Click" />
 
                 <Button x:Name="btnManageIncidents" 
-                        Content="🚨 Medical Incidents" 
+                        Content="Sự Cố Y Tế" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageIncidents_Click" />
 
                 <Button x:Name="btnManageHealthRecords" 
-                        Content="📋 Health Records" 
+                        Content="Hồ Sơ Sức Khỏe" 
                         Style="{StaticResource SidebarButtonStyle}"
                         Click="btnManageHealthRecords_Click" />
             </StackPanel>
@@ -188,8 +187,8 @@
 
             <!-- Header Section -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="Dashboard" Style="{StaticResource HeaderStyle}" />
-                <TextBlock Text="Welcome back! Here's what's happening in your medical system today." 
+                <TextBlock Text="Bảng Điều Khiển" Style="{StaticResource HeaderStyle}" />
+                <TextBlock Text="Chào mừng trở lại! Đây là những gì đang diễn ra trong hệ thống y tế của bạn hôm nay." 
                            Style="{StaticResource WelcomeStyle}" />
             </StackPanel>
 
@@ -210,11 +209,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="🩺" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                         <TextBlock x:Name="txtHealthCheckups" 
                                    Text="{Binding TotalHealthCheckups, FallbackValue=125}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Health Checkups" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Khám Sức Khỏe" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
 
@@ -227,11 +225,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="💉" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                         <TextBlock x:Name="txtVaccinationCampaigns" 
                                    Text="{Binding TotalVaccinationCampaigns, FallbackValue=45}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Vaccination Campaigns" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Chiến Dịch Tiêm Chủng" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
 
@@ -244,11 +241,10 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Text="🚨" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                         <TextBlock x:Name="txtMedicalIncidents" 
                                    Text="{Binding TotalMedicalIncidents, FallbackValue=8}" 
                                    Style="{StaticResource StatNumberStyle}" />
-                        <TextBlock Text="Medical Incidents" Style="{StaticResource StatLabelStyle}" />
+                        <TextBlock Text="Sự Cố Y Tế" Style="{StaticResource StatLabelStyle}" />
                     </StackPanel>
                 </Border>
             </Grid>
@@ -256,7 +252,7 @@
             <!-- Recent Activity Section -->
             <Border Grid.Row="2" Style="{StaticResource ModernCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="Recent Activity" 
+                    <TextBlock Text="Hoạt Động Gần Đây" 
                                FontSize="20" 
                                FontWeight="SemiBold" 
                                Foreground="#202124" 
@@ -270,28 +266,28 @@
 
                         <!-- Quick Actions -->
                         <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                            <TextBlock Text="Quick Actions" 
+                            <TextBlock Text="Thao Tác Nhanh" 
                                        FontSize="16" 
                                        FontWeight="Medium" 
                                        Foreground="#5F6368" 
                                        Margin="0,0,0,15" />
 
                             <Border Background="#F8F9FA" CornerRadius="8" Padding="15" Margin="0,0,0,10">
-                                <TextBlock Text="📊 Generate Health Report" 
+                                <TextBlock Text="Tạo Báo Cáo Sức Khỏe" 
                                            FontSize="14" 
                                            Foreground="#1A73E8" 
                                            Cursor="Hand" />
                             </Border>
 
                             <Border Background="#F8F9FA" CornerRadius="8" Padding="15" Margin="0,0,0,10">
-                                <TextBlock Text="📝 Schedule Checkup" 
+                                <TextBlock Text="Lên Lịch Khám" 
                                            FontSize="14" 
                                            Foreground="#1A73E8" 
                                            Cursor="Hand" />
                             </Border>
 
                             <Border Background="#F8F9FA" CornerRadius="8" Padding="15">
-                                <TextBlock Text="📋 View Patient Records" 
+                                <TextBlock Text="Xem Hồ Sơ Bệnh Nhân" 
                                            FontSize="14" 
                                            Foreground="#1A73E8" 
                                            Cursor="Hand" />
@@ -300,7 +296,7 @@
 
                         <!-- System Status -->
                         <StackPanel Grid.Column="1">
-                            <TextBlock Text="System Status" 
+                            <TextBlock Text="Trạng Thái Hệ Thống" 
                                        FontSize="16" 
                                        FontWeight="Medium" 
                                        Foreground="#5F6368" 
@@ -308,17 +304,17 @@
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <Ellipse Width="8" Height="8" Fill="#34A853" Margin="0,0,10,0"/>
-                                <TextBlock Text="Database: Online" FontSize="14" Foreground="#202124"/>
+                                <TextBlock Text="Cơ Sở Dữ Liệu: Trực Tuyến" FontSize="14" Foreground="#202124"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <Ellipse Width="8" Height="8" Fill="#34A853" Margin="0,0,10,0"/>
-                                <TextBlock Text="Backup: Complete" FontSize="14" Foreground="#202124"/>
+                                <TextBlock Text="Sao Lưu: Hoàn Thành" FontSize="14" Foreground="#202124"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Width="8" Height="8" Fill="#FBBC04" Margin="0,0,10,0"/>
-                                <TextBlock Text="Maintenance: Scheduled" FontSize="14" Foreground="#202124"/>
+                                <TextBlock Text="Bảo Trì: Đã Lên Lịch" FontSize="14" Foreground="#202124"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

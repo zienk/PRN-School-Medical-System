@@ -238,7 +238,18 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         /// <param name="e"></param>
         private void btnHealthRecord_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Navigate to Health Record window
+            var studentService = new Services.Implementations.StudentService();
+            var students = studentService.GetAllStudentsByUserId(user.UserId);
+
+            if (students == null || students.Count == 0)
+            {
+                MessageBox.Show("Phụ huynh này chưa có học sinh nào!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var studentInfoWindow = new StudentInfo(students, user);
+            studentInfoWindow.Show();
+            this.Close();
         }
 
         /// <summary>
@@ -248,7 +259,8 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         /// <param name="e"></param>
         private void btnAccountInfo_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Navigate to Account Info window
+            // TODO: Navigate to Account Info window - not implemented yet
+            MessageBox.Show("Tính năng này chưa được triển khai!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -258,7 +270,18 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         /// <param name="e"></param>
         private void btnStudentInfo_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Navigate to Student Info window
+            var studentService = new Services.Implementations.StudentService();
+            var students = studentService.GetAllStudentsByUserId(user.UserId);
+
+            if (students == null || students.Count == 0)
+            {
+                MessageBox.Show("Phụ huynh này chưa có học sinh nào!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var studentInfoWindow = new StudentInfo(students, user);
+            studentInfoWindow.Show();
+            this.Close();
         }
 
         /// <summary>
@@ -268,7 +291,9 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         /// <param name="e"></param>
         private void btnHealthCheckups_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Navigate to Health Checkups window
+            HealthCheckupResultManagement healthCheckupResultManagement = new HealthCheckupResultManagement(user);
+            healthCheckupResultManagement.Show();
+            this.Close();
         }
 
         /// <summary>
@@ -278,7 +303,9 @@ namespace WPF.SchoolMedicalManagementSystem.ParentView
         /// <param name="e"></param>
         private void btnVaccinations_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Navigate to Vaccinations window
+            VaccineResultManagement vaccineResultManagement = new VaccineResultManagement(user);
+            vaccineResultManagement.Show();
+            this.Close();
         }
 
         #endregion

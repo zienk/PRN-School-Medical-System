@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.SchoolMedicalManagementSystem.ManagerView"
         mc:Ignorable="d"
-        Title="Thông Tin Học Sinh" Height="700" Width="500"
+        Title="Thông Tin Học Sinh" 
+        SizeToContent="Height" Width="500"
         WindowStartupLocation="CenterScreen"
-        
         ResizeMode="NoResize">
 
     <Window.Resources>
