@@ -66,7 +66,7 @@ Trong bối cảnh giáo dục hiện đại, sức khỏe và phúc lợi của
 - ✅ **Giao diện người dùng:** UI/UX thân thiện, dễ sử dụng cho các vai trò khác nhau
 - ✅ **Báo cáo và thống kê:** Hệ thống báo cáo chi tiết và trực quan
 - ✅ **Tài liệu kỹ thuật:** Documentation đầy đủ cho việc triển khai và bảo trì
-- ✅ **Kiểm thử:** Test cases và quality assurance đảm bảo chất lượng sản phẩm
+- ✅ **Kiểm thử:** Kiểm như người dùng cuối, tập trung đầu vào – đầu ra, không xét logic bên trong (Black-box Testing)
 
 ## 🔍 Phạm Vi và Yêu Cầu Kỹ Thuật
 
@@ -164,7 +164,6 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 - **Database:** SQL Server (bảng: Students, HealthRecords, Vaccines, MedicalEvents)
 - **ORM:** Entity Framework Core
 - **Architecture Pattern:** Repository Pattern, Dependency Injection
-- **Design Pattern:** MVVM (Model-View-ViewModel)
 - **Development Tools:**
   - Visual Studio 2022
   - SQL Server Management Studio
@@ -182,12 +181,12 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 ### Phase 2: Thiết Kế và Chuẩn Bị (Tuần 3 - 4)
 - **Milestone 2.1:** Hoàn thành thiết kế database và tạo ERD
 - **Milestone 2.2:** Setup môi trường phát triển WPF và repository
-- **Milestone 2.3:** Tạo WPF project structure và MVVM base classes
+- **Milestone 2.3:** Tạo WPF project structure 
 - **Trách nhiệm:** Database Developer, WPF UI Developer
 
 ### Phase 3: Phát Triển Core Features (Tuần 5 - 6)
 - **Milestone 3.1:** Implement Authentication & User Management với WPF
-- **Milestone 3.2:** Phát triển Student Management WPF Views và ViewModels
+- **Milestone 3.2:** Phát triển Student Management WPF Module
 - **Milestone 3.3:** Xây dựng Health Checkup WPF Module
 - **Trách nhiệm:** WPF UI Developer, Business Logic Developer
 
@@ -221,7 +220,6 @@ Hệ thống được thiết kế theo mô hình **N-Layer Architecture** với
 ### Frameworks và Libraries
 - **.NET Framework:** .NET 8
 - **UI Framework:** WPF (Windows Presentation Foundation)
-- **Design Pattern:** MVVM (Model-View-ViewModel)
 - **ORM:** Entity Framework Core
 - **Database:** Microsoft SQL Server
 - **Architecture:** Multiple-layer architecture với separation of concerns
